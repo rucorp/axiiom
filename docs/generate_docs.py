@@ -330,25 +330,7 @@ def page_template(title, desc, slug, content_html, breadcrumbs_extra=None):
         </div>
     </div>
 </article>
-<footer class="footer">
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-info reveal">
-                <p class="label">Контакты</p>
-                <h2>Готовы к диалогу?</h2>
-                <div class="contact-item">
-                    <span class="contact-label">Телефон</span>
-                    <a href="tel:+78129287478">+7 (812) 928-74-78</a>
-                </div>
-                <div class="contact-item">
-                    <span class="contact-label">Почта</span>
-                    <a href="mailto:hello@axiiom.ru">hello@axiiom.ru</a>
-                </div>
-            </div>
-        </div>
-        <div id="footerCopy"></div>
-    </div>
-</footer>
+<footer class="footer"><div class="container"><div id="footerCopy"></div></div></footer>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
 <script src="/metrika.js"></script>
@@ -356,7 +338,6 @@ def page_template(title, desc, slug, content_html, breadcrumbs_extra=None):
 <script src="/nav.js"></script>
 <script>Nav.init({{breadcrumbs:false}});</script>
 <script src="/theme.js"></script>
-<script src="/footer.js"></script>
 <script src="/preloader.js"></script>
 <script>
 (function(){{var r=document.querySelectorAll('.reveal');if(r.length){{var o=new IntersectionObserver(function(e){{e.forEach(function(e){{if(e.isIntersecting){{e.target.classList.add('visible')}}}})}},{{threshold:0.15}});for(var i=0;i<r.length;i++){{o.observe(r[i])}}}}}})();
@@ -472,25 +453,7 @@ INDEX_HEAD = '''<!doctype html>
 INDEX_TAIL = '''
     </div>
 </section>
-<footer class="footer">
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-info reveal">
-                <p class="label">Контакты</p>
-                <h2>Готовы к диалогу?</h2>
-                <div class="contact-item">
-                    <span class="contact-label">Телефон</span>
-                    <a href="tel:+78129287478">+7 (812) 928-74-78</a>
-                </div>
-                <div class="contact-item">
-                    <span class="contact-label">Почта</span>
-                    <a href="mailto:hello@axiiom.ru">hello@axiiom.ru</a>
-                </div>
-            </div>
-        </div>
-        <div id="footerCopy"></div>
-    </div>
-</footer>
+<footer class="footer"><div class="container"><div id="footerCopy"></div></div></footer>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
 <script src="/metrika.js"></script>
@@ -498,7 +461,6 @@ INDEX_TAIL = '''
 <script src="/nav.js"></script>
 <script>Nav.init({breadcrumbs:false});</script>
 <script src="/theme.js"></script>
-<script src="/footer.js"></script>
 <script src="/preloader.js"></script>
 <script>
 (function(){var r=document.querySelectorAll('.reveal');if(r.length){var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible')}})},{threshold:0.15});r.forEach(function(e){o.observe(e)})}})();
