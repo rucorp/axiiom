@@ -74,7 +74,15 @@ DOCS = [
         "source": "OTP_VIA_MESSENGERS.md",
         "tags": ["OTP", "messengers", "auth", "security"],
     },
-
+    {
+        "slug": "srs-docs",
+        "title": "SRS Docs — опубликованная документация",
+        "desc": "Полная SRS-документация в веб-формате: интерактивные визуализации, карта функций, mindmap, treemap и другие диаграммы требований.",
+        "category": "SRS / Техническая документация",
+        "url": "https://bestdeejay-design.github.io/srs-docs/",
+        "tags": ["SRS", "docs", "published", "visualization"],
+    },
+    
     # ── Проектная документация ──
     {
         "slug": "vitrina",
