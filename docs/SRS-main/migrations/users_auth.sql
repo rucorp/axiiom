@@ -1,0 +1,3 @@
+-- Users & Auth Schema
+-- Полные DDL-схемы хранятся в SRS-v2.md §3.4
+-- См. SRS-v2.md §3.4: Users & Auth Schema

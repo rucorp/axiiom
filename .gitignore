@@ -1,0 +1,6 @@
+# Ignore cloned repos in references (too heavy)
+docs/references/github/repos/
+__pycache__/
+.DS_Store
+docs/Проект_ИТ_Архитектуры_Шаблон.pdf
+docs/Юридическая_структура_платформы.docx

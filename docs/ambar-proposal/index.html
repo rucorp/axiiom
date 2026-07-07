@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+    <title>AMBAR — Фудтех-проект | Документация AXIIOM</title>
+    <meta name="description" content="Концепция фудтех-проекта: инфраструктура для фудкорта, ИТ-решения, кухня, инвестиции.">
+    <link rel="canonical" href="https://axiiom.ru/docs/ambar-proposal/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://axiiom.ru/docs/ambar-proposal/">
+    <meta property="og:title" content="AMBAR — Фудтех-проект | Документация AXIIOM">
+    <meta property="og:description" content="Концепция фудтех-проекта: инфраструктура для фудкорта, ИТ-решения, кухня, инвестиции.">
+    <meta property="og:image" content="https://axiiom.ru/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="AXIIOM">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://axiiom.ru/docs/ambar-proposal/">
+    <meta name="twitter:title" content="AMBAR — Фудтех-проект | Документация AXIIOM">
+    <meta name="twitter:description" content="Концепция фудтех-проекта: инфраструктура для фудкорта, ИТ-решения, кухня, инвестиции.">
+    <meta name="twitter:image" content="https://axiiom.ru/og-image.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"AMBAR — Фудтех-проект","description":"Концепция фудтех-проекта: инфраструктура для фудкорта, ИТ-решения, кухня, инвестиции.","url":"https://axiiom.ru/docs/ambar-proposal/","author":{"@type":"Organization","name":"AXIIOM"},"isPartOf":{"@type":"WebSite","name":"AXIIOM","url":"https://axiiom.ru"}}</script>
+    <style>*{margin:0;padding:0;box-sizing:border-box}html{font-size:16px;scroll-behavior:smooth}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1.0625rem;background:#0A0A0F;color:#C7C7CC;line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}.noise{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}.grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:60px 60px}.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}.reveal.visible{opacity:1;transform:translateY(0)}</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/docs/styles.css">
+</head>
+<body>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="30" height="30" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/></svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </div>
+</header>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"><ol itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/"><span itemprop="name">Главная</span></a>
+        <meta itemprop="position" content="1">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/docs/"><span itemprop="name">Документация</span></a>
+        <meta itemprop="position" content="2">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">AMBAR — Фудтех-проект</span>
+        <meta itemprop="position" content="3">
+      </li>
+    </ol></div></nav>
+<article class="docs-article">
+    <div class="container">
+        <div class="docs-content">
+            <div class="feature-page-hero"><h1>AMBAR — Фудтех-проект</h1><p>Концепция фудтех-проекта: инфраструктура для фудкорта, ИТ-решения, кухня, инвестиции.</p><div class="doc-actions"><a href="/docs/" class="btn btn-outline">← Все документы</a></div></div><h1 id="-">Инвестиционное предложение — фуд-хаб «Амбар» + цифровая платформа «Главный Двор»</h1>
+<p>Доброго дня,</p>
+<p>Приглашаю рассмотреть участие в запуске проекта <strong>«Амбар»</strong> — фуд-хаба и эксклюзивной цифровой платформы для нового общественного пространства <strong>«Главный Двор»</strong> на территории Гостинного Двора в центре Санкт-Петербурга.</p>
+<hr />
+<h2 id="_1">ЛОКАЦИЯ И СРОКИ</h2>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Адрес</td>
+<td>Невский пр., 35, двор универмага «Большой Гостиный Двор»</td>
+</tr>
+<tr>
+<td>Площадь площадки</td>
+<td>2 ГА</td>
+</tr>
+<tr>
+<td>Старт проекта</td>
+<td>1 июня 2026 (договор субаренды подписан 29.05.2026)</td>
+</tr>
+<tr>
+<td>Открытие площадки</td>
+<td>15 июня 2026</td>
+</tr>
+<tr>
+<td>Режим работы</td>
+<td>10:00–22:00 (возможно продление до 06:00)</td>
+</tr>
+<tr>
+<td>Прогноз трафика за лето</td>
+<td>100 000 – 350 000 гостей</td>
+</tr>
+<tr>
+<td>Партнёры площадки</td>
+<td>Газпром Медиа Холдинг, ФК «Зенит», ВК-Фест, Блог Фиеста, КудаGo</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_2">ЧТО БЕРЁТ НА СЕБЯ ООО «АТМОСФЕРА» (ВКЛАД В ПРОЕКТ)</h2>
+<h3 id="_3">ПОМЕЩЕНИЕ И АКТИВЫ</h3>
+<ul>
+<li>Помещение 249,5 кв.м с подписанным договором субаренды (отдельное здание с закрытым двориком)</li>
+<li>Полностью укомплектованное оборудование: пиццепечь, станция для запекания роллов, морозильное и холодильное оборудование, мебель для зала и корта, мойки, слайсер</li>
+<li>Закупка продуктов, расходных материалов и одноразовой посуды</li>
+</ul>
+<h3 id="_4">ФИНАНСОВЫЙ ВКЛАД НА ЭТАПЕ ПОДГОТОВКИ</h3>
+<ul>
+<li>Разработка и подготовка проекта: <strong>более 6 000 000 руб.</strong> (платформа, дизайн, юридическое сопровождение, согласования)</li>
+<li>Оборудование и мебель: <strong>около 900 000 руб.</strong> (в наличии, готово к эксплуатации)</li>
+<li>Закупка продуктов и расходников: <strong>400 000 руб.</strong> (складские запасы на старте)</li>
+<li><strong>Итого вложений на этапе подготовки: более 7 300 000 руб.</strong></li>
+</ul>
+<h3 id="_5">ОПЕРАЦИОННОЕ УПРАВЛЕНИЕ</h3>
+<ul>
+<li>Команда кухни: 3–5 человек в смену (повара, заготовщики, официанты), ФОТ фикс <strong>25 000 руб./день</strong></li>
+<li>Меню: согласовано с администрацией «Главного Двора», не дублирует ассортимент других резидентов:</li>
+<li>Гриль-меню</li>
+<li>Пицца 30/20 см, 8 позиций</li>
+<li>Роллы: Филадельфия, Калифорния, маки с 6 видами начинок</li>
+<li>Десерты и выпечка собственного производства</li>
+<li>Спонсорство и маркетинг: поиск рекламных партнёров на бартерной основе для оформления пространства и промо-активностей</li>
+</ul>
+<h3 id="it-">ТЕХНОЛОГИИ И IT-ИНФРАСТРУКТУРА</h3>
+<ul>
+<li><strong>Платформа «Амбар»</strong>: готовое веб-приложение для заказа еды по QR-коду (открывается мгновенно, без установки)</li>
+<li><strong>IT-команда проекта</strong>: 6 специалистов (разработка, поддержка, администрирование)</li>
+<li><strong>IT-инфраструктура</strong>: собственные серверы, программное обеспечение, техническая поддержка 24/7</li>
+</ul>
+<h3 id="_6">ФИНАНСЫ, ЭКВАЙРИНГ И ОТЧЁТНОСТЬ</h3>
+<ul>
+<li>Банковский партнёр: <strong>Банк Точка</strong> (интеграция платежей, расчётных счетов, эквайринг и автоматизация взаиморасчётов)</li>
+<li>Эквайринг и автоматизация расчётов со всеми участниками фуд-молла</li>
+<li>Контроль реестров, учёт всех платежей и сверка транзакций</li>
+<li>Фискализация: работа с ОФД, генерация и отправка чеков</li>
+<li>Регулярная отчётность для партнёров и администрации площадки</li>
+</ul>
+<hr />
+<h2 id="_7">ПОДТВЕРЖДЁННЫЕ МЕТРИКИ (из работающей пиццерии)</h2>
+<table>
+<thead>
+<tr>
+<th>Метрика</th>
+<th>Будни</th>
+<th>Акции</th>
+<th>Выходные/События</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Средний чек</td>
+<td>1 800 руб.</td>
+<td>2 200 руб.</td>
+<td>3 200 руб.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Food cost</strong>: до 30% (оптимизированное меню с общими ингредиентами)</li>
+<li><strong>Аренда</strong>: 0 руб. фикс, только 21% от выручки (нет продаж = нет аренды)</li>
+<li><strong>Уникальная фича</strong>: единая корзина — гость заказывает из 30+ точек ОДНИМ чеком, вы получаете 6% с каждого товара</li>
+</ul>
+<hr />
+<h2 id="_8">ПРОГНОЗ ТРАФИКА И ИСТОЧНИКИ ПОСЕТИТЕЛЕЙ</h2>
+<h3 id="2026">ОБЩИЙ ТРАФИК ПЛОЩАДКИ (июнь–август 2026)</h3>
+<ul>
+<li>Прогноз: <strong>100 000 – 350 000 гостей</strong> за сезон (90 дней)</li>
+<li>Среднедневной трафик: <strong>1 100 – 3 900 человек</strong></li>
+<li>Пиковые дни (фестивали, концерты): до <strong>7 000–10 000 человек</strong></li>
+</ul>
+<h3 id="_9">ИСТОЧНИКИ ТРАФИКА</h3>
+<ol>
+<li><strong>Туристы Невского проспекта</strong>: ~10% (Гостиный Двор — ключевая точка туристических маршрутов)</li>
+<li><strong>Горожане и шоперы</strong>: ~30% (покупатели ТРЦ, офисные сотрудники центра)</li>
+<li><strong>Целевая аудитория событий</strong>: ~50% (концерты, фестивали, спортивные трансляции)</li>
+<li><strong>Локальные жители и студенты</strong>: ~10% (район Садовой, метро «Гостиный Двор»)</li>
+</ol>
+<h3 id="_10">СПОНСОРЫ И ПАРТНЁРЫ ПЛОЩАДКИ (подтверждены)</h3>
+<ul>
+<li><strong>Газпром Медиа Холдинг</strong>: медиаподдержка, интеграция в федеральные эфиры, рекламные кампании</li>
+<li><strong>ФК «Зенит»</strong>: фан-зоны, трансляции матчей, мерч, привлечение болельщиков</li>
+<li><strong>ВК-Фест</strong>: цифровая интеграция, таргетированная реклама в соцсетях, коллаборации с блогерами</li>
+<li><strong>Блог Фиеста</strong>: привлечение инфлюенсеров, контент-поддержка, челленджи и активации</li>
+<li><strong>КудаGo</strong>: агрегация событий, продажа билетов, продвижение в туристических каналах</li>
+</ul>
+<h3 id="_11">ОЖИДАЕМЫЕ МЕРОПРИЯТИЯ (влияние на трафик)</h3>
+<ul>
+<li>Еженедельные концерты на главной сцене (пятница–воскресенье)</li>
+<li>Фестивали уличной еды и локальных брендов (ежемесячно)</li>
+<li>Спортивные трансляции на большом экране (ЧМ, Евро, РПЛ)</li>
+<li>Детские программы и мастер-классы (выходные дни)</li>
+<li>Корпоративные мероприятия и закрытые показы (по запросу партнёров)</li>
+</ul>
+<h3 id="_12">КОНВЕРСИЯ В ПОСЕТИТЕЛЕЙ «АМБАРА»</h3>
+<ul>
+<li>Проходящий трафик мимо отдельного здания: ~15–20% заходят посмотреть</li>
+<li>Конверсия в заказ (офлайн + приложение): ~5–8% от общего трафика площадки</li>
+<li>Повторные визиты за сезон: ~30–40% (за счёт лояльности, кэшбэка, событий)</li>
+</ul>
+<hr />
+<h2 id="_13">ПРОГНОЗ НА МЕСЯЦ (реалистичный сценарий)</h2>
+<h3 id="_14">ВЫРУЧКА КУХНИ</h3>
+<p><strong>13,85 млн руб.</strong> (пицца + роллы + десерты + напитки)</p>
+<h3 id="_15">РАСХОДЫ КУХНИ</h3>
+<table>
+<thead>
+<tr>
+<th>Статья расхода</th>
+<th>Сумма</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Комиссия Гостинки (21%)</td>
+<td>2,91 млн руб.</td>
+</tr>
+<tr>
+<td>Food cost (30%)</td>
+<td>4,16 млн руб.</td>
+</tr>
+<tr>
+<td>ФОТ (фикс)</td>
+<td>0,75 млн руб.</td>
+</tr>
+<tr>
+<td>Налоги (УСН 15%) + прочее</td>
+<td>менее 1,39 млн руб.</td>
+</tr>
+<tr>
+<td><strong>Итого расходы</strong></td>
+<td><strong>не более 9,20 млн руб.</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_16">ПРИБЫЛЬ</h3>
+<ul>
+<li><strong>Прибыль кухни</strong>: от <strong>4,65 млн руб./мес</strong> (рентабельность 33%)</li>
+<li><strong>Прибыль платформы</strong> (6% с заказов всех 30+ резидентов):</li>
+<li>Реалистичный сценарий: <strong>777 000 – 1 170 000 руб./мес</strong></li>
+<li>Оптимистичный сценарий (пиковые недели): до <strong>1 800 000 руб./мес</strong></li>
+<li><strong>Общая прибыль проекта</strong>: от <strong>5 млн руб./мес</strong></li>
+</ul>
+<hr />
+<h2 id="_17">ЗАПРОС К ПАРТНЁРУ</h2>
+<p><strong>Общий запрос на финансирование: 2 – 4 млн руб.</strong></p>
+<h3 id="_18">Структура вложений</h3>
+<h4 id="1-1-500-000">1. Обеспечительный платёж по договору субаренды: <strong>1 500 000 руб.</strong></h4>
+<ul>
+<li>Срок внесения: в течение 5 дней с подписания договора</li>
+<li>Условия: сумма засчитывается в счёт арендной платы за последний месяц аренды помещения. Фактически это рабочий капитал, который обеспечивает старт проекта и покрывает финальный платёж.</li>
+</ul>
+<h4 id="2-500-000-1-000-000">2. Первичная оборотка и ФОТ на июнь: <strong>500 000 – 1 000 000 руб.</strong></h4>
+<ul>
+<li>Назначение: закупка продуктов, расходных материалов, выплата зарплаты команде в первый месяц работы</li>
+<li>Покрытие: все расходы на оборотку после запуска покрываются из текущей выручки проекта</li>
+</ul>
+<h4 id="3-1-000-000">3. Стабфонд на непредвиденные обстоятельства: <strong>1 000 000 руб.</strong></h4>
+<ul>
+<li>Назначение: резерв на внештатные ситуации, ремонт оборудования, форс-мажор</li>
+<li>Использование: только по согласованию сторон, отчётность предоставляется ежемесячно</li>
+</ul>
+<h3 id="_19">Финансовая дисциплина</h3>
+<ul>
+<li>После запуска проекта все операционные расходы покрываются из текущей выручки</li>
+<li>Инвестор получает ежемесячное распределение прибыли с первого месяца работы</li>
+<li>Стабфонд не расходуется на операционные нужды, это страховка для минимизации рисков</li>
+</ul>
+<hr />
+<h2 id="_20">ВОЗВРАТ ИНВЕСТИЦИЙ</h2>
+<h3 id="-20">Формат ревеню-шеринг 20% от общей прибыли</h3>
+<ul>
+<li>Платёж партнёру/мес: <strong>от 1 млн руб.</strong></li>
+<li>Окупаемость вложений: <strong>от 55 до 130 дней</strong> (в зависимости от объёма участия)</li>
+</ul>
+<h3 id="25-12">Формат долевого участия 25% в проекте на 12 мес.</h3>
+<ul>
+<li>Платёж партнёру/мес: <strong>от 1,25 млн руб.</strong></li>
+<li>Окупаемость вложений: <strong>от 45 до 110 дней</strong></li>
+<li>После окупаемости: пассивный доход в том же объёме</li>
+</ul>
+<blockquote>
+<p><strong>Ключевой аргумент</strong>: проект генерирует прибыль с первого месяца. Обеспечительный платёж не сгорает, а закрывает финальный месяц аренды. Остальные средства идут на запуск и страховку. Инвестор получает ежемесячное распределение прибыли, а вложения учитываются в структуре проекта.</p>
+</blockquote>
+<hr />
+<h2 id="_21">УНИКАЛЬНОЕ ПРЕИМУЩЕСТВО: ПЛАТФОРМА «АМБАР»</h2>
+<h3 id="_22">Механика</h3>
+<p>Гость сканирует QR на столике, заказывает из любого заведения фуд-молла, оплачивает одним чеком и получает заказ за столик.</p>
+<h3 id="_23">Преимущества для партнёра</h3>
+<ul>
+<li>Доход 6% с каждого товара в чеке, даже если его произвёл другой резидент</li>
+<li>Веб-формат по QR: мгновенный доступ без установки приложений, высокая конверсия</li>
+<li>Эксклюзив на цифровую инфраструктуру всего фуд-молла (30+ заведений)</li>
+<li>Платформа верифицирована и согласована с администрацией «Главного Двора»</li>
+</ul>
+<hr />
+<h2 id="_24">БАНКОВСКИЙ ПАРТНЁР: БАНК ТОЧКА</h2>
+<ul>
+<li>Интеграция платёжных решений и расчётных счетов</li>
+<li>Автоматизация взаиморасчётов между резидентами фуд-молла</li>
+<li>Прозрачная отчётность и контроль реестров в реальном времени</li>
+<li>Поддержка эквайринга и фискализации в рамках 161-ФЗ</li>
+</ul>
+<hr />
+<h2 id="_25">МАСШТАБИРОВАНИЕ</h2>
+<ul>
+<li>Успешный пилот — готовый продукт для тиражирования на другие фуд-моллы и ТРЦ</li>
+<li>Интеграция в экосистему LOVII с ростом оценки актива</li>
+<li>Цифровой след пользователей для персонализации и кросс-продаж</li>
+</ul>
+<hr />
+<h2 id="_26">СЛЕДУЮЩИЕ ШАГИ</h2>
+<ol>
+<li>Подписать NDA (по запросу)</li>
+<li>Обмен документами: скан договора субаренды и информационного письма от АО «Большой Гостиный Двор»</li>
+<li>Встреча или звонок — демонстрация помещения, оборудования, прототипа платформы</li>
+<li>Внесение средств — старт проекта 1 июня 2026</li>
+</ol>
+<hr />
+<h2 id="_27">КОНТАКТЫ</h2>
+<p><strong>Кузюков Сергей Сергеевич</strong>
+Генеральный директор ООО «Атмосфера»</p>
+<ul>
+<li>Email: <a href="mailto:hello@arental.ru">hello@arental.ru</a></li>
+<li>Телефон: +7 (911) 928-74-78</li>
+<li>Площадка: Невский пр., 35, двор Большого Гостиного Двора, Санкт-Петербург</li>
+</ul>
+<hr />
+<blockquote>
+<p><em>«Это не просто инвестиция в общепит. Это вход в цифровую экосистему с гарантированным трафиком, подтверждёнными метриками и окупаемостью вложений от 1,5 до 4 месяцев в зависимости от объёма участия».</em></p>
+</blockquote>
+<p>Готов обсудить детали сегодня или завтра — удобное время?</p>
+<p>С уважением,
+<strong>Сергей Сергеевич Кузюков</strong>
+ООО «Атмосфера»</p>
+        </div>
+    </div>
+</article>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-info reveal">
+                <p class="label">Контакты</p>
+                <h2>Готовы к диалогу?</h2>
+                <div class="contact-item">
+                    <span class="contact-label">Телефон</span>
+                    <a href="tel:+78129287478">+7 (812) 928-74-78</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Почта</span>
+                    <a href="mailto:hello@axiiom.ru">hello@axiiom.ru</a>
+                </div>
+            </div>
+        </div>
+        <div id="footerCopy"></div>
+    </div>
+</footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
+<script src="/metrika.js"></script>
+<script src="/config.js"></script>
+<script src="/nav.js"></script>
+<script>Nav.init({breadcrumbs:false});</script>
+<script src="/theme.js"></script>
+<script src="/footer.js"></script>
+<script src="/preloader.js"></script>
+<script>
+(function(){var r=document.querySelectorAll('.reveal');if(r.length){var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible')}})},{threshold:0.15});for(var i=0;i<r.length;i++){o.observe(r[i])}}})();
+</script>
+<script>
+(function(){var t=document.getElementById('navToggle');var o=document.getElementById('navOverlay');if(!t||!o)return;t.addEventListener('click',function(e){e.stopPropagation();o.classList.toggle('open');t.classList.toggle('active');document.body.style.overflow=o.classList.contains('open')?'hidden':''})})();
+</script>
+</body>
+</html>

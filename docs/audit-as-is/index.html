@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+    <title>Аудит текущего состояния системы (AS IS) | Документация AXIIOM</title>
+    <meta name="description" content="Детальный анализ существующей системы: 178 таблиц PostgreSQL, 100 API endpoint'ов, технологический стек, алгоритмы.">
+    <link rel="canonical" href="https://axiiom.ru/docs/audit-as-is/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://axiiom.ru/docs/audit-as-is/">
+    <meta property="og:title" content="Аудит текущего состояния системы (AS IS) | Документация AXIIOM">
+    <meta property="og:description" content="Детальный анализ существующей системы: 178 таблиц PostgreSQL, 100 API endpoint'ов, технологический стек, алгоритмы.">
+    <meta property="og:image" content="https://axiiom.ru/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="AXIIOM">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://axiiom.ru/docs/audit-as-is/">
+    <meta name="twitter:title" content="Аудит текущего состояния системы (AS IS) | Документация AXIIOM">
+    <meta name="twitter:description" content="Детальный анализ существующей системы: 178 таблиц PostgreSQL, 100 API endpoint'ов, технологический стек, алгоритмы.">
+    <meta name="twitter:image" content="https://axiiom.ru/og-image.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Аудит текущего состояния системы (AS IS)","description":"Детальный анализ существующей системы: 178 таблиц PostgreSQL, 100 API endpoint'ов, технологический стек, алгоритмы.","url":"https://axiiom.ru/docs/audit-as-is/","author":{"@type":"Organization","name":"AXIIOM"},"isPartOf":{"@type":"WebSite","name":"AXIIOM","url":"https://axiiom.ru"}}</script>
+    <style>*{margin:0;padding:0;box-sizing:border-box}html{font-size:16px;scroll-behavior:smooth}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1.0625rem;background:#0A0A0F;color:#C7C7CC;line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}.noise{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}.grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:60px 60px}.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}.reveal.visible{opacity:1;transform:translateY(0)}</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/docs/styles.css">
+</head>
+<body>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="30" height="30" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/></svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </div>
+</header>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"><ol itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/"><span itemprop="name">Главная</span></a>
+        <meta itemprop="position" content="1">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/docs/"><span itemprop="name">Документация</span></a>
+        <meta itemprop="position" content="2">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">Аудит текущего состояния системы (AS IS)</span>
+        <meta itemprop="position" content="3">
+      </li>
+    </ol></div></nav>
+<article class="docs-article">
+    <div class="container">
+        <div class="docs-content">
+            <div class="feature-page-hero"><h1>Аудит текущего состояния системы (AS IS)</h1><p>Детальный анализ существующей системы: 178 таблиц PostgreSQL, 100 API endpoint'ов, технологический стек, алгоритмы.</p><div class="doc-actions"><a href="/docs/" class="btn btn-outline">← Все документы</a></div></div><h1 id="as-is">Текущее состояние системы (AS IS)</h1>
+<p><strong>Источник:</strong> §9.5 SRS-v2.md. Данные получены из <code>rewiew/schema.rb</code>, <code>rewiew/structure.sql</code> (PostgreSQL 16.6), <code>rewiew/swagger.json</code> (API V10), <code>references/github/</code> и опроса команды.</p>
+<h2 id="1">1. База данных</h2>
+<h3 id="_1">Общая характеристика</h3>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>СУБД</strong></td>
+<td>PostgreSQL 16.6</td>
+</tr>
+<tr>
+<td><strong>Количество таблиц</strong></td>
+<td>178</td>
+</tr>
+<tr>
+<td><strong>Количество enum-типов</strong></td>
+<td>51</td>
+</tr>
+<tr>
+<td><strong>Количество aasm_state (статусные машины)</strong></td>
+<td>25 (orders, items, payment_states, returned_orders, employees и др.)</td>
+</tr>
+<tr>
+<td><strong>Аудит изменений</strong></td>
+<td>logidze (триггеры) + PaperTrail (таблица <code>versions</code>)</td>
+</tr>
+<tr>
+<td><strong>Расширения PG</strong></td>
+<td><code>btree_gin</code>, <code>citext</code>, <code>hstore</code>, <code>intarray</code>, <code>ltree</code>, <code>pg_trgm</code>, <code>pgcrypto</code>, <code>plpgsql</code>, <code>pageinspect</code>, <code>pg_stat_statements</code></td>
+</tr>
+<tr>
+<td><strong>Geo-данные</strong></td>
+<td>Нет PostGIS (координаты хранятся как <code>float latitude</code>/<code>float longitude</code>)</td>
+</tr>
+<tr>
+<td><strong>Метод миграций</strong></td>
+<td>Rails schema.rb + structure.sql (логический дамп)</td>
+</tr>
+<tr>
+<td><strong>Схема</strong></td>
+<td>Единая БД (public), монолит</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_2">Архитектура каталога</h3>
+<p>Трёхуровневая модель с STI:</p>
+<p><strong>brands</strong> → <strong>models</strong> (type: 'piece'/'weight'/…) → <strong>products</strong> (shop_id + model_id + price)</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Бренд (производитель)</span>
+<span class="ss">brands</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="nb">name</span><span class="p">,</span><span class="w"> </span><span class="n">slug</span>
+
+<span class="c1"># Товарная позиция (абстрактная)</span>
+<span class="ss">models</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">category_id</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">(</span><span class="ss">STI</span><span class="p">:</span><span class="w"> </span><span class="n">piece</span><span class="o">/</span><span class="n">weight</span><span class="o">/</span><span class="err">…</span><span class="p">),</span><span class="w"> </span><span class="nb">name</span><span class="p">,</span><span class="w"> </span><span class="n">weight</span><span class="p">,</span><span class="w"> </span><span class="n">volume</span><span class="p">,</span>
+<span class="w">        </span><span class="n">calories</span><span class="p">,</span><span class="w"> </span><span class="n">proteins</span><span class="p">,</span><span class="w"> </span><span class="n">fats</span><span class="p">,</span><span class="w"> </span><span class="n">carbohydrates</span><span class="p">,</span><span class="w"> </span><span class="n">composition</span><span class="p">,</span><span class="w"> </span><span class="n">manufacturer</span><span class="p">,</span><span class="w"> </span><span class="n">expire_at</span>
+
+<span class="c1"># Товар в конкретном магазине</span>
+<span class="ss">products</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">shop_id</span><span class="p">,</span><span class="w"> </span><span class="n">model_id</span><span class="p">,</span><span class="w"> </span><span class="n">category_id</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="p">,</span><span class="w"> </span><span class="n">price_per_kg</span><span class="p">,</span><span class="w"> </span><span class="n">vat</span><span class="p">,</span>
+<span class="w">          </span><span class="n">available</span><span class="p">,</span><span class="w"> </span><span class="n">sale</span><span class="p">,</span><span class="w"> </span><span class="n">hidden</span><span class="p">,</span><span class="w"> </span><span class="n">missing_count</span><span class="p">,</span><span class="w"> </span><span class="n">orders_count</span>
+</code></pre></div>
+
+<h3 id="_3">Магазины</h3>
+<div class="codehilite"><pre><span></span><code><span class="ss">shops</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="nb">name</span><span class="p">,</span><span class="w"> </span><span class="n">street</span><span class="p">,</span><span class="w"> </span><span class="n">building</span><span class="p">,</span><span class="w"> </span><span class="n">latitude</span><span class="p">,</span><span class="w"> </span><span class="n">longitude</span><span class="p">,</span><span class="w"> </span><span class="n">phone</span><span class="p">,</span><span class="w"> </span><span class="n">inn</span><span class="p">,</span><span class="w"> </span><span class="n">okved</span><span class="p">,</span><span class="w"> </span><span class="n">okpo</span><span class="p">,</span><span class="w"> </span><span class="n">kpp</span><span class="p">,</span>
+<span class="w">       </span><span class="n">bank_name</span><span class="p">,</span><span class="w"> </span><span class="n">current_account</span><span class="p">,</span><span class="w"> </span><span class="n">account_number</span><span class="p">,</span><span class="w"> </span><span class="n">bik</span><span class="p">,</span><span class="w"> </span><span class="n">ogrn</span><span class="p">,</span><span class="w"> </span><span class="n">open_hour</span><span class="p">,</span><span class="w"> </span><span class="n">closing_hour</span><span class="p">,</span>
+<span class="w">       </span><span class="n">day_and_night</span><span class="p">,</span><span class="w"> </span><span class="nb">open</span>
+</code></pre></div>
+
+<p>Сети магазинов — поле <code>shop_group</code> (enum <code>shop_group_enum</code>):</p>
+<p><code>metro</code>, <code>lenta</code>, <code>karusel</code>, <code>prisma</code>, <code>spar</code>, <code>babylon</code>, <code>land</code>, <code>vkusvill</code>, <code>globus</code>, <code>selgros</code>, <code>magnit</code>, <code>azbukavkusa</code>, <code>auchan</code>, <code>okmarket</code>, <code>billa</code>, <code>dona</code></p>
+<h3 id="_4">Заказы</h3>
+<div class="codehilite"><pre><span></span><code><span class="ss">orders</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">shop_id</span><span class="p">,</span><span class="w"> </span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">place_id</span><span class="p">,</span><span class="w"> </span><span class="n">deliver_at</span><span class="p">,</span><span class="w"> </span><span class="n">phone</span><span class="p">,</span><span class="w"> </span><span class="n">payment_type</span><span class="p">,</span>
+<span class="w">        </span><span class="n">change_from</span><span class="p">,</span><span class="w"> </span><span class="n">behavior</span><span class="w"> </span><span class="p">(</span><span class="n">enum</span><span class="p">),</span><span class="w"> </span><span class="n">aasm_state</span><span class="p">,</span><span class="w"> </span><span class="n">picker_id</span><span class="p">,</span><span class="w"> </span><span class="n">picker_cell</span><span class="p">,</span>
+<span class="w">        </span><span class="n">courier_id</span><span class="p">,</span><span class="w"> </span><span class="n">courier_returning</span><span class="p">,</span><span class="w"> </span><span class="n">delivery_price</span><span class="p">,</span><span class="w"> </span><span class="n">user_email</span><span class="p">,</span><span class="w"> </span><span class="n">inviter_id</span><span class="p">,</span>
+<span class="w">        </span><span class="n">filled_at</span>
+</code></pre></div>
+
+<p>Статусы заказа (aasm_state, 25+ переходов): через <code>logidze</code> логируется вся история.</p>
+<h3 id="_5">Позиции заказа</h3>
+<div class="codehilite"><pre><span></span><code><span class="ss">items</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">product_id</span><span class="p">,</span><span class="w"> </span><span class="n">category_id</span><span class="p">,</span><span class="w"> </span><span class="n">root_category_id</span><span class="p">,</span><span class="w"> </span><span class="n">replacement_id</span><span class="p">,</span>
+<span class="w">       </span><span class="n">amount</span><span class="p">,</span><span class="w"> </span><span class="n">aasm_state</span><span class="p">,</span><span class="w"> </span><span class="n">added_at</span><span class="p">,</span><span class="w"> </span><span class="n">missing_at</span><span class="p">,</span><span class="w"> </span><span class="n">replacement_at</span>
+</code></pre></div>
+
+<h3 id="_6">Пользователи</h3>
+<div class="codehilite"><pre><span></span><code><span class="ss">users</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="n">last_name</span><span class="p">,</span><span class="w"> </span><span class="n">patronymic</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="p">(</span><span class="n">citext</span><span class="p">),</span>
+<span class="w">       </span><span class="n">encrypted_password</span><span class="p">,</span><span class="w"> </span><span class="n">reset_password_token</span><span class="p">,</span><span class="w"> </span><span class="n">confirmation_token</span><span class="p">,</span><span class="w"> </span><span class="n">phone</span><span class="p">,</span>
+<span class="w">       </span><span class="n">unconfirmed_phone</span><span class="p">,</span><span class="w"> </span><span class="n">confirmation_code</span><span class="p">,</span><span class="w"> </span><span class="n">behavior</span><span class="w"> </span><span class="p">(</span><span class="n">enum</span><span class="p">),</span><span class="w"> </span><span class="n">failed_attempts</span><span class="p">,</span>
+<span class="w">       </span><span class="n">locked_at</span><span class="p">,</span><span class="w"> </span><span class="n">unlock_token</span><span class="p">,</span><span class="w"> </span><span class="n">sign_in_count</span><span class="p">,</span><span class="w"> </span><span class="n">remember_created_at</span><span class="p">,</span><span class="w"> </span><span class="o">...</span>
+</code></pre></div>
+
+<p><strong>Аутентификация:</strong> Sorcery (Rails gem). Поля: <code>encrypted_password</code>, <code>confirmation_token</code>, <code>reset_password_token</code>, <code>failed_attempts</code>, <code>locked_at</code>. RBAC: access-granted.</p>
+<p>Типы пользователей (enum <code>user_type_enum</code>):</p>
+<p><code>User</code>, <code>JoomUser</code>, <code>AliexpressUser</code>, <code>ExternalUser</code>, <code>KomusUser</code></p>
+<h3 id="_7">Платежи</h3>
+<p>Платёжные провайдеры (enum <code>order_payment_provider</code>):</p>
+<p><code>tinkoff</code>, <code>pskb</code>, <code>joom</code>, <code>cloud_payments</code>, <code>aliexpress</code>, <code>yandex_eda</code></p>
+<div class="codehilite"><pre><span></span><code><span class="ss">payment_states</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">bank_card_id</span><span class="p">,</span><span class="w"> </span><span class="n">aasm_state</span><span class="p">,</span><span class="w"> </span><span class="n">custom_data</span><span class="w"> </span><span class="p">(</span><span class="no">JSONB</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Apple Pay / Google Pay — через CloudPayments (таблица <code>cloud_payments</code>).</p>
+<div class="codehilite"><pre><span></span><code><span class="ss">cloud_payments</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">order_id</span><span class="w"> </span><span class="p">(</span><span class="err">используется</span><span class="w"> </span><span class="err">для</span><span class="w"> </span><span class="no">ApplePay</span><span class="w"> </span><span class="err">и</span><span class="w"> </span><span class="no">GooglePay</span><span class="p">)</span>
+<span class="ss">bank_cards</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">provider</span><span class="w"> </span><span class="p">(</span><span class="ss">enum</span><span class="p">:</span><span class="w"> </span><span class="n">tinkoff</span><span class="o">/</span><span class="n">cloud_payments</span><span class="p">),</span><span class="w"> </span><span class="n">token</span>
+<span class="ss">billing_transactions</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="p">,</span><span class="w"> </span><span class="n">provider</span>
+</code></pre></div>
+
+<h3 id="_8">Возвраты</h3>
+<div class="codehilite"><pre><span></span><code><span class="ss">returned_orders</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">aasm_state</span><span class="w"> </span><span class="p">(</span><span class="n">returned_order_state_enum</span><span class="p">),</span>
+<span class="w">                 </span><span class="n">moderated_at</span><span class="p">,</span><span class="w"> </span><span class="n">moderated_employee_id</span><span class="p">,</span><span class="w"> </span><span class="n">comment</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">returned_real_price_kop</span><span class="p">,</span><span class="w"> </span><span class="n">box_number</span>
+<span class="ss">returned_receipts</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">returned_order_id</span><span class="p">,</span><span class="w"> </span><span class="n">photo</span><span class="p">,</span><span class="w"> </span><span class="n">total</span>
+<span class="ss">returned_items</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">returned_order_id</span><span class="p">,</span><span class="w"> </span><span class="n">item_id</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="p">,</span><span class="w"> </span><span class="n">aasm_state</span><span class="w"> </span><span class="p">(</span><span class="n">returned_item_state_enum</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Статусы возврата (<code>returned_order_state_enum</code>): <code>created</code>, <code>on_moderation</code>, <code>on_picker</code>, <code>on_courier</code>, <code>closed</code>, <code>waiting_for_picker</code></p>
+<h3 id="_9">Внешние интеграции</h3>
+<div class="codehilite"><pre><span></span><code><span class="ss">external_meta</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">source_id</span><span class="p">,</span><span class="w"> </span><span class="n">source_type</span><span class="w"> </span><span class="p">(</span><span class="ss">enum</span><span class="p">:</span><span class="w"> </span><span class="no">Order</span><span class="o">/</span><span class="no">Item</span><span class="o">/</span><span class="no">Product</span><span class="o">/</span><span class="no">Shop</span><span class="o">/</span><span class="no">Category</span><span class="o">/</span><span class="no">Model</span><span class="p">),</span>
+<span class="w">               </span><span class="n">provider</span><span class="w"> </span><span class="p">(</span><span class="ss">enum</span><span class="p">:</span><span class="w"> </span><span class="n">metro</span><span class="o">/</span><span class="n">aloe</span><span class="o">/</span><span class="n">yandex_eda</span><span class="o">/</span><span class="n">komus</span><span class="o">/</span><span class="n">vkusvill</span><span class="p">),</span><span class="w"> </span><span class="n">payload</span><span class="w"> </span><span class="p">(</span><span class="no">JSONB</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Розничные агрегаторы (enum <code>external_retailer_enum</code>): <code>aloe</code></p>
+<p>Источники внешних пользователей (enum <code>external_user_source_enum</code>): <code>yandex_eda</code></p>
+<h3 id="_10">Доставка</h3>
+<div class="codehilite"><pre><span></span><code><span class="ss">delivery_zones</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">shop_id</span><span class="p">,</span><span class="w"> </span><span class="nb">name</span><span class="p">,</span><span class="w"> </span><span class="n">polygon</span><span class="w"> </span><span class="p">(</span><span class="err">не</span><span class="w"> </span><span class="no">GEOGRAPHY</span><span class="w"> </span><span class="err">—</span><span class="w"> </span><span class="err">текстовое</span><span class="w"> </span><span class="err">или</span><span class="w"> </span><span class="no">JSON</span><span class="p">)</span>
+<span class="ss">delivery_plans</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">provider</span><span class="w"> </span><span class="p">(</span><span class="ss">enum</span><span class="p">:</span><span class="w"> </span><span class="n">vee_route</span><span class="o">/</span><span class="n">simple</span><span class="o">/</span><span class="n">yandex</span><span class="o">/</span><span class="n">manual</span><span class="p">),</span><span class="w"> </span><span class="n">shop_id</span><span class="p">,</span>
+<span class="w">                </span><span class="n">calculation_id</span><span class="p">,</span><span class="w"> </span><span class="n">is_finished</span><span class="p">,</span><span class="w"> </span><span class="n">plan_data</span><span class="w"> </span><span class="p">(</span><span class="no">JSONB</span><span class="p">)</span>
+<span class="ss">delivery_routes</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">delivery_plan_id</span><span class="p">,</span><span class="w"> </span><span class="n">courier_id</span><span class="p">,</span><span class="w"> </span><span class="n">route_data</span><span class="w"> </span><span class="p">(</span><span class="no">JSONB</span><span class="p">)</span>
+<span class="ss">delivery_eta_requests</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">eta_seconds</span><span class="p">,</span><span class="w"> </span><span class="n">requested_at</span>
+<span class="ss">courier_locations</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">latitude</span><span class="p">,</span><span class="w"> </span><span class="n">longitude</span><span class="p">,</span><span class="w"> </span><span class="n">distance</span>
+</code></pre></div>
+
+<p>Провайдеры планирования доставки (<code>delivery_planning_providers_enum</code>):</p>
+<p><code>vee_route</code>, <code>simple</code>, <code>yandex</code>, <code>manual</code></p>
+<h3 id="_11">Сотрудники (пикеры/курьеры)</h3>
+<div class="codehilite"><pre><span></span><code><span class="ss">employees</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="n">last_name</span><span class="p">,</span><span class="w"> </span><span class="n">role</span><span class="w"> </span><span class="p">(</span><span class="ss">enum</span><span class="p">:</span><span class="w"> </span><span class="n">courier</span><span class="o">/</span><span class="n">picker</span><span class="p">),</span>
+<span class="w">           </span><span class="n">gender</span><span class="w"> </span><span class="p">(</span><span class="n">enum</span><span class="p">),</span><span class="w"> </span><span class="n">position_id</span>
+<span class="ss">employee_positions</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="nb">name</span><span class="p">,</span><span class="w"> </span><span class="n">responsibilities</span>
+<span class="ss">employee_payments</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">employee_id</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="p">,</span><span class="w"> </span><span class="n">provider</span><span class="w"> </span><span class="p">(</span><span class="ss">enum</span><span class="p">:</span><span class="w"> </span><span class="n">manual</span><span class="o">/</span><span class="n">rocketwork</span><span class="o">/</span><span class="n">tinkoff</span><span class="p">)</span>
+<span class="ss">employee_contacts</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">employee_id</span><span class="p">,</span><span class="w"> </span><span class="n">phone</span><span class="p">,</span><span class="w"> </span><span class="n">email</span>
+<span class="ss">employee_notifications</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">employee_id</span><span class="p">,</span><span class="w"> </span><span class="n">domain</span><span class="w"> </span><span class="p">(</span><span class="ss">enum</span><span class="p">:</span><span class="w"> </span><span class="n">delivery</span><span class="o">/</span><span class="n">collect</span><span class="p">),</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">body</span>
+<span class="ss">breaks</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">employee_id</span><span class="p">,</span><span class="w"> </span><span class="n">start_at</span><span class="p">,</span><span class="w"> </span><span class="n">stop_at</span>
+<span class="ss">hours</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">employee_id</span><span class="p">,</span><span class="w"> </span><span class="n">start_at</span><span class="p">,</span><span class="w"> </span><span class="n">stop_at</span><span class="p">,</span><span class="w"> </span><span class="n">comment</span>
+</code></pre></div>
+
+<h3 id="_12">Честный знак (маркировка)</h3>
+<div class="codehilite"><pre><span></span><code><span class="ss">honest_label_types</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="nb">name</span>
+<span class="ss">honest_labels</span><span class="p">:</span><span class="w"> </span><span class="nb">id</span><span class="p">,</span><span class="w"> </span><span class="n">model_id</span><span class="p">,</span><span class="w"> </span><span class="n">honest_label_type_id</span><span class="p">,</span><span class="w"> </span><span class="n">shop_group</span><span class="w"> </span><span class="p">(</span><span class="n">enum</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="_13">Прочие значимые таблицы</h3>
+<table>
+<thead>
+<tr>
+<th>Таблица</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>carts</code></td>
+<td>Корзины пользователей</td>
+</tr>
+<tr>
+<td><code>coupons</code>, <code>coupon_redemptions</code></td>
+<td>Промокоды и их активации</td>
+</tr>
+<tr>
+<td><code>accruals</code>, <code>accrual_types</code></td>
+<td>Баллы лояльности</td>
+</tr>
+<tr>
+<td><code>claims</code>, <code>claim_sources</code>, <code>claim_pictures</code></td>
+<td>Претензии/споры</td>
+</tr>
+<tr>
+<td><code>feedbacks</code>, <code>desktop_feedbacks</code></td>
+<td>Обратная связь</td>
+</tr>
+<tr>
+<td><code>favorite_models</code></td>
+<td>Избранные товары</td>
+</tr>
+<tr>
+<td><code>ab_tests</code>, <code>ab_test_participations</code>, <code>ab_test_orders_histories</code></td>
+<td>A/B тестирование</td>
+</tr>
+<tr>
+<td><code>blacklisted_phones</code></td>
+<td>Заблокированные номера</td>
+</tr>
+<tr>
+<td><code>callback_requests</code></td>
+<td>Запросы обратного звонка</td>
+</tr>
+<tr>
+<td><code>aliexpress_users</code></td>
+<td>Пользователи с Aliexpress</td>
+</tr>
+<tr>
+<td><code>external_users</code></td>
+<td>Внешние пользователи (Yandex.Eda и др.)</td>
+</tr>
+<tr>
+<td><code>events</code></td>
+<td>Логи событий</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-api">2. API</h2>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Тип</strong></td>
+<td>Монолит Rails, REST JSON API</td>
+</tr>
+<tr>
+<td><strong>Версия</strong></td>
+<td>V10 (<code>/api/v10/</code>)</td>
+</tr>
+<tr>
+<td><strong>Эндпоинтов</strong></td>
+<td>100</td>
+</tr>
+<tr>
+<td><strong>Формат</strong></td>
+<td>JSON</td>
+</tr>
+<tr>
+<td><strong>Swagger</strong></td>
+<td><code>rewiew/swagger.json</code> (OpenAPI 3.0.3)</td>
+</tr>
+<tr>
+<td><strong>Servers</strong></td>
+<td><code>http://igooods.test</code> (dev), <code>https://master.jira.igooods.ru</code> (staging)</td>
+</tr>
+<tr>
+<td><strong>Аутентификация</strong></td>
+<td>Не видна из swagger (вероятно, cookie + Sorcery session)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="api">Разделы API</h3>
+<table>
+<thead>
+<tr>
+<th>Эндпоинтов</th>
+<th>Раздел</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>21</td>
+<td>Заказы (orders)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Корзина (cart)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Каталог (catalog/shops)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Пользователи (users)</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Подборки товаров</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Общая корзина</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Магазины</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Карты (банковские)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Товары в заказе</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Наборы товаров</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Города</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Адреса</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Избранные товары</td>
+</tr>
+<tr>
+<td>2</td>
+<td>A/B тестирование</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Обратная связь</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Регистрация</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Рефералы, Лендинги, Логирование, Метакаталог, Мобильные сборки, Новостные баннеры</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3">3. Технологический стек</h2>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Текущая версия</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Backend</strong></td>
+<td>Ruby on Rails 7.0 (монолит)</td>
+</tr>
+<tr>
+<td><strong>Ruby</strong></td>
+<td>3.x (предположительно, по совместимости с Rails 7.0)</td>
+</tr>
+<tr>
+<td><strong>База данных</strong></td>
+<td>PostgreSQL 16.6</td>
+</tr>
+<tr>
+<td><strong>Очереди</strong></td>
+<td>RabbitMQ</td>
+</tr>
+<tr>
+<td><strong>Кэш</strong></td>
+<td>Redis</td>
+</tr>
+<tr>
+<td><strong>Frontend</strong></td>
+<td>Next.js (версия неизвестна)</td>
+</tr>
+<tr>
+<td><strong>Mobile</strong></td>
+<td>Flutter (пикер/курьер), нативные? (клиент)</td>
+</tr>
+<tr>
+<td><strong>Аутентификация</strong></td>
+<td>Sorcery + access-granted (RBAC)</td>
+</tr>
+<tr>
+<td><strong>Загрузка файлов</strong></td>
+<td>Carrierwave + MiniMagick</td>
+</tr>
+<tr>
+<td><strong>Аудит</strong></td>
+<td>logidze (триггеры) + PaperTrail (таблица <code>versions</code>)</td>
+</tr>
+<tr>
+<td><strong>Инфраструктура</strong></td>
+<td>Docker Compose</td>
+</tr>
+<tr>
+<td><strong>Хостинг</strong></td>
+<td>Selectel</td>
+</tr>
+<tr>
+<td><strong>CI/CD</strong></td>
+<td>GitHub Actions</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-">4. Алгоритмы и бизнес-логика</h2>
+<h3 id="dispatch">Назначение курьеров (Dispatch)</h3>
+<p>Курьеры закреплены за конкретным гипермаркетом и зоной доставки. Ручная переброска между зонами при высокой загрузке или невыходе на смену.</p>
+<p>Планирование маршрутов: через <code>delivery_plans</code> с провайдерами <code>vee_route</code>, <code>simple</code>, <code>yandex</code> или <code>manual</code>.</p>
+<p>Плановый dispatch engine (multi-objective optimization) — на V3.</p>
+<h3 id="eta">Расчёт ETA</h3>
+<p><code>delivery_eta_requests</code> — таблица для запросов ETA.
+<code>courier_locations</code> — трекинг в реальном времени (координаты, дистанция).</p>
+<p>Согласно AUDIT: гибрид OSRM + XGBoost (13 признаков: погода, трафик, время суток, праздники, день недели, дистанция, кол-во стопов). Пересчёт каждые 5 мин.</p>
+<h3 id="_14">Обновление каталога и остатков</h3>
+<p>Два процесса:
+1. <strong>Обновление каталога</strong> — загрузка ассортимента, цен, акций от сети через <code>external_meta</code> (provider: metro/aloe/yandex_eda/komus/vkusvill)
+2. <strong>Остатки в конкретном магазине</strong> — запрос остатков по API магазина (если доступно), иначе сканер пикера на месте</p>
+<h3 id="_15">Замены товаров</h3>
+<p>Через <code>items.replacement_id</code> (ссылка на товар-замену). Пикер звонит клиенту (скрытый номер), предлагает альтернативы, клиент подтверждает устно, замена фиксируется.</p>
+<p>Статусы <code>items.aasm_state</code>: <code>added</code> → <code>missing</code> (нет в наличии) → <code>replaced</code> (согласована замена).</p>
+<h3 id="_16">Честный знак</h3>
+<p>Маркированные товары имеют запись в <code>honest_labels</code> (model_id + shop_group + honest_label_type_id). Не все сети поддерживают. В MVP не доставляются.</p>
+<h2 id="5">5. Платежи</h2>
+<table>
+<thead>
+<tr>
+<th>Провайдер</th>
+<th>Механизм</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tinkoff</strong></td>
+<td><code>bank_cards</code> (provider: tinkoff), <code>payment_states</code> с aasm_state</td>
+</tr>
+<tr>
+<td><strong>CloudPayments</strong></td>
+<td><code>cloud_payments</code> (ApplePay/GooglePay), <code>bank_cards</code> (provider: cloud_payments)</td>
+</tr>
+<tr>
+<td><strong>PSKB</strong></td>
+<td><code>order_payment_provider</code> enum</td>
+</tr>
+<tr>
+<td><strong>Joom</strong></td>
+<td><code>order_payment_provider</code> enum</td>
+</tr>
+<tr>
+<td><strong>Aliexpress</strong></td>
+<td><code>order_payment_provider</code> enum, <code>aliexpress_users</code></td>
+</tr>
+<tr>
+<td><strong>Yandex.Eda</strong></td>
+<td><code>order_payment_provider</code> enum, <code>external_users</code></td>
+</tr>
+</tbody>
+</table>
+<p>Двойная система: <code>payment_states</code> (aasm_state + custom_data JSONB) + <code>payment_events</code> (api/callback).</p>
+<h2 id="6">6. Состав команды</h2>
+<table>
+<thead>
+<tr>
+<th>Роль</th>
+<th>Количество</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Backend-разработчики</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Frontend-разработчики</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Mobile-разработчик</td>
+<td>1</td>
+</tr>
+<tr>
+<td>DevOps</td>
+<td>2</td>
+</tr>
+<tr>
+<td>QA</td>
+<td>Нет выделенного (покрывается командой)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7">7. Что требует уточнения</h2>
+<table>
+<thead>
+<tr>
+<th>Вопрос</th>
+<th>Почему не удалось установить</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ruby версия</td>
+<td>Нет Gemfile.lock, только Gemfile (Rails 5.1 из публичного репозитория). По Rails 7.0 — предполагается 3.x</td>
+</tr>
+<tr>
+<td>Точные регионы покрытия</td>
+<td>Нет данных о городах кроме очевидных (СПб, Мск по swagger)</td>
+</tr>
+<tr>
+<td>Бизнес-метрики</td>
+<td>Нет доступа к продакшену (заказов/день, выручка, средний чек)</td>
+</tr>
+<tr>
+<td>SLA</td>
+<td>Нет документов</td>
+</tr>
+<tr>
+<td>Инфраструктура (мощности серверов)</td>
+<td>Нет данных</td>
+</tr>
+<tr>
+<td>Версия Next.js / Flutter</td>
+<td>В rewiew/ только бэкенд-файлы</td>
+</tr>
+<tr>
+<td>Детали OSRM + XGBoost</td>
+<td>Алгоритм описан со слов команды, код не представлен</td>
+</tr>
+<tr>
+<td>Статус сетей selgros/magnit/azbukavkusa/auchan/okmarket/billa/dona</td>
+<td>Есть в enum <code>shop_group_enum</code>, но неизвестно, активны ли интеграции</td>
+</tr>
+</tbody>
+</table>
+        </div>
+    </div>
+</article>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-info reveal">
+                <p class="label">Контакты</p>
+                <h2>Готовы к диалогу?</h2>
+                <div class="contact-item">
+                    <span class="contact-label">Телефон</span>
+                    <a href="tel:+78129287478">+7 (812) 928-74-78</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Почта</span>
+                    <a href="mailto:hello@axiiom.ru">hello@axiiom.ru</a>
+                </div>
+            </div>
+        </div>
+        <div id="footerCopy"></div>
+    </div>
+</footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
+<script src="/metrika.js"></script>
+<script src="/config.js"></script>
+<script src="/nav.js"></script>
+<script>Nav.init({breadcrumbs:false});</script>
+<script src="/theme.js"></script>
+<script src="/footer.js"></script>
+<script src="/preloader.js"></script>
+<script>
+(function(){var r=document.querySelectorAll('.reveal');if(r.length){var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible')}})},{threshold:0.15});for(var i=0;i<r.length;i++){o.observe(r[i])}}})();
+</script>
+<script>
+(function(){var t=document.getElementById('navToggle');var o=document.getElementById('navOverlay');if(!t||!o)return;t.addEventListener('click',function(e){e.stopPropagation();o.classList.toggle('open');t.classList.toggle('active');document.body.style.overflow=o.classList.contains('open')?'hidden':''})})();
+</script>
+</body>
+</html>

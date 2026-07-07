@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+    <title>LOVII — Design System | Документация AXIIOM</title>
+    <meta name="description" content="Дизайн-система платформы лояльности LOVII: компоненты, стили, промпты для генерации интерфейсов.">
+    <link rel="canonical" href="https://axiiom.ru/docs/lovii-design-system/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://axiiom.ru/docs/lovii-design-system/">
+    <meta property="og:title" content="LOVII — Design System | Документация AXIIOM">
+    <meta property="og:description" content="Дизайн-система платформы лояльности LOVII: компоненты, стили, промпты для генерации интерфейсов.">
+    <meta property="og:image" content="https://axiiom.ru/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="AXIIOM">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://axiiom.ru/docs/lovii-design-system/">
+    <meta name="twitter:title" content="LOVII — Design System | Документация AXIIOM">
+    <meta name="twitter:description" content="Дизайн-система платформы лояльности LOVII: компоненты, стили, промпты для генерации интерфейсов.">
+    <meta name="twitter:image" content="https://axiiom.ru/og-image.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"LOVII — Design System","description":"Дизайн-система платформы лояльности LOVII: компоненты, стили, промпты для генерации интерфейсов.","url":"https://axiiom.ru/docs/lovii-design-system/","author":{"@type":"Organization","name":"AXIIOM"},"isPartOf":{"@type":"WebSite","name":"AXIIOM","url":"https://axiiom.ru"}}</script>
+    <style>*{margin:0;padding:0;box-sizing:border-box}html{font-size:16px;scroll-behavior:smooth}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1.0625rem;background:#0A0A0F;color:#C7C7CC;line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}.noise{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}.grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:60px 60px}.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}.reveal.visible{opacity:1;transform:translateY(0)}</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/docs/styles.css">
+</head>
+<body>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="30" height="30" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/></svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </div>
+</header>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"><ol itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/"><span itemprop="name">Главная</span></a>
+        <meta itemprop="position" content="1">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/docs/"><span itemprop="name">Документация</span></a>
+        <meta itemprop="position" content="2">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">LOVII — Design System</span>
+        <meta itemprop="position" content="3">
+      </li>
+    </ol></div></nav>
+<article class="docs-article">
+    <div class="container">
+        <div class="docs-content">
+            <div class="feature-page-hero"><h1>LOVII — Design System</h1><p>Дизайн-система платформы лояльности LOVII: компоненты, стили, промпты для генерации интерфейсов.</p><div class="doc-actions"><a href="/docs/" class="btn btn-outline">← Все документы</a></div></div><h1 id="design-system-documentation-for-project">Design System Documentation for "Лови" Project</h1>
+<h2 id="complete-prompt-for-ai-agents-to-recreate-similar-website">Complete Prompt for AI Agents to Recreate Similar Website</h2>
+<h3 id="1-project-overview">1. PROJECT OVERVIEW</h3>
+<p><strong>Project Name</strong>: Лови - цифровой оператор лояльности для микробизнеса
+<strong>Purpose</strong>: SaaS-платформа и оператор баллов лояльности для объединения микробизнеса в единую экосистему цифровой локальной экономики
+<strong>Target Audience</strong>: Микробизнес, франчайзи, инвесторы, клиенты</p>
+<h3 id="2-visual-design-system">2. VISUAL DESIGN SYSTEM</h3>
+<h4 id="21-color-themes">2.1 Color Themes</h4>
+<p>The website supports three distinct themes:</p>
+<p><strong>Dark Theme (default):</strong>
+- Background: #0A0F1F
+- Text: #FFFFFF
+- Accent: #FF6B35 (orange)
+- Card Background: #1A2238
+- Border: #2D3748
+- Icon Color: #FFFFFF
+- Shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
+- Gradient: linear-gradient(135deg, #FF6B35, #ff9a8b)</p>
+<p><strong>Light Theme:</strong>
+- Background: #FFFFFF
+- Text: #000000
+- Accent: #F97316 (orange)
+- Card Background: #F3F4F6
+- Border: #E5E7EB
+- Icon Color: #000000</p>
+<p><strong>Vibrant Theme:</strong>
+- Background: linear-gradient(135deg, #0f0c29, #302b63)
+- Text: #FFFFFF
+- Accent: #ff7e5f
+- Card Background: rgba(255, 255, 255, 0.1)
+- Border: rgba(255, 255, 255, 0.2)
+- Icon Color: #FFFFFF</p>
+<h4 id="22-typography">2.2 Typography</h4>
+<ul>
+<li><strong>Font Family</strong>: 'Inter', Roboto, system-ui, sans-serif</li>
+<li><strong>Font Weights</strong>: 300 (light), 400 (regular), 500 (medium), 600 (semibold), 700 (bold), 800 (extrabold)</li>
+<li><strong>Hero Title</strong>: 3.5rem (mobile), 4.5rem (desktop) - 800 weight</li>
+<li><strong>Section Title</strong>: 2.8rem (mobile), 3.5rem (desktop) - 700 weight</li>
+<li><strong>Card Title</strong>: 1.6rem - 700 weight</li>
+<li><strong>Body Text</strong>: 1rem - 400 weight</li>
+</ul>
+<h4 id="23-spacing-system">2.3 Spacing System</h4>
+<ul>
+<li><strong>Container</strong>: max-width 1200px, padding 0 20px</li>
+<li><strong>Section Padding</strong>: 100px 0</li>
+<li><strong>Grid Gap</strong>: 40px for cards, 30px for metrics</li>
+<li><strong>Button Padding</strong>: 18px 40px</li>
+<li><strong>Card Padding</strong>: 40px 30px</li>
+</ul>
+<h4 id="24-components-design">2.4 Components Design</h4>
+<p><strong>Cards:</strong>
+- Background: var(--card-bg)
+- Border-radius: 20px
+- Border: 1px solid var(--border-color)
+- Transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+- Hover: translateY(-10px), box-shadow 0 20px 40px rgba(0,0,0,0.2)
+- Min-height: 200px
+- Icon: 70x70px with drop-shadow(0 5px 10px rgba(255,107,53,0.2))</p>
+<p><strong>Buttons:</strong>
+- Primary: Full orange background, white text, 50px min-height
+- Secondary: Transparent with orange border, orange text
+- Border-radius: 50px
+- Hover: translateY(-5px), enhanced shadow
+- Transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)</p>
+<p><strong>Pricing Cards:</strong>
+- Background: var(--card-bg)
+- Border-radius: 20px
+- Border: 1px solid var(--border-color)
+- Popular card: 2px solid var(--accent-color), scale(1.03)
+- Hover: translateY(-10px) for all, extra scale for popular</p>
+<h3 id="3-layout-system">3. LAYOUT SYSTEM</h3>
+<h4 id="31-grid-system">3.1 Grid System</h4>
+<ul>
+<li><strong>Main Grid</strong>: CSS Grid with auto-fit and minmax(280px, 1fr)</li>
+<li><strong>Responsive Breakpoints</strong>: </li>
+<li>Desktop: 4 columns for some sections</li>
+<li>Tablet: 2 columns </li>
+<li>Mobile: 1 column</li>
+<li><strong>Special Layouts</strong>: </li>
+<li>Asymmetrical layout for business section (flex with content + cards)</li>
+<li>Staggered cards for "about" section with grid-row/column spans</li>
+</ul>
+<h4 id="32-section-structure">3.2 Section Structure</h4>
+<p>Each section follows this pattern:
+- Container wrapper with max-width
+- Section content with title and subtitle
+- Cards grid or specific layout
+- Decorative elements (circles, gradients)</p>
+<h3 id="4-navigation-system">4. NAVIGATION SYSTEM</h3>
+<h4 id="41-mobile-navigation-bottom-bar">4.1 Mobile Navigation (Bottom Bar)</h4>
+<ul>
+<li><strong>Position</strong>: Fixed at bottom of screen</li>
+<li><strong>Display</strong>: Flex with space-around</li>
+<li><strong>Items</strong>: 5 icons - home, catalog, business, about, more</li>
+<li><strong>Active State</strong>: Orange color for active item</li>
+<li><strong>Minimum Touch Target</strong>: 50px height for accessibility</li>
+<li><strong>Icons</strong>: 24x24px with labels below</li>
+</ul>
+<h4 id="42-full-menu-slide-up">4.2 Full Menu (Slide-up)</h4>
+<ul>
+<li><strong>Trigger</strong>: "More" icon opens slide-up menu</li>
+<li><strong>Position</strong>: Fixed, slides up from bottom</li>
+<li><strong>Content</strong>: Organized by categories with expandable sections</li>
+<li><strong>Behavior</strong>: Closes when clicking outside or on menu links</li>
+<li><strong>Theme Toggle</strong>: Included in full menu</li>
+</ul>
+<h4 id="43-desktop-navigation">4.3 Desktop Navigation</h4>
+<ul>
+<li><strong>Display</strong>: Hidden on desktop (media query min-width: 768px)</li>
+<li><strong>Smooth Scrolling</strong>: All navigation uses smooth scroll to sections</li>
+</ul>
+<h3 id="5-animation-system">5. ANIMATION SYSTEM</h3>
+<h4 id="51-gsap-animations">5.1 GSAP Animations</h4>
+<ul>
+<li><strong>Hero Elements</strong>: Fade in with slide up (duration 1s)</li>
+<li><strong>Buttons</strong>: Delayed animation with opacity and y movement</li>
+<li><strong>Cards</strong>: Intersection Observer triggered animations</li>
+<li><strong>Section Titles</strong>: Back easing with subtle bounce</li>
+<li><strong>Decorative Elements</strong>: Elastic scale animation</li>
+</ul>
+<h4 id="52-css-animations">5.2 CSS Animations</h4>
+<ul>
+<li><strong>Background Rotation</strong>: Continuous 360deg rotation for hero section</li>
+<li><strong>Button Hover</strong>: Gradient overlay with width transition</li>
+<li><strong>Card Hover</strong>: Background overlay with height transition</li>
+<li><strong>Reduced Motion Support</strong>: Prefers-reduced-motion media query disables animations</li>
+</ul>
+<h3 id="6-parallax-effects">6. PARALLAX EFFECTS</h3>
+<ul>
+<li><strong>Rellax Library</strong>: Used for parallax scrolling effects</li>
+<li><strong>Speed Variations</strong>: Different elements have different parallax speeds (data-rellax-speed)</li>
+<li><strong>Performance</strong>: Optimized for smooth scrolling</li>
+</ul>
+<h3 id="7-svg-icon-system">7. SVG ICON SYSTEM</h3>
+<h4 id="71-svg-sprite">7.1 SVG Sprite</h4>
+<ul>
+<li><strong>Location</strong>: Hidden SVG sprite at top of body</li>
+<li><strong>Icons</strong>: 10+ icons including home, catalog, business, about, more, email, web, features, cart, wishlist, profile</li>
+<li><strong>Theming</strong>: Uses CSS variables (fill: var(--icon-color)) for theme compatibility</li>
+<li><strong>Accessibility</strong>: Each icon has proper viewBox and semantic meaning</li>
+</ul>
+<h4 id="72-icon-usage">7.2 Icon Usage</h4>
+<ul>
+<li><strong>Implementation</strong>: <svg><use href="#icon-name"></use></svg></li>
+<li><strong>Sizing</strong>: Different sizes for different contexts (24x24 for nav, 70x70 for cards)</li>
+<li><strong>Color</strong>: Dynamically changes based on current theme</li>
+</ul>
+<h3 id="8-responsive-design">8. RESPONSIVE DESIGN</h3>
+<h4 id="81-breakpoints">8.1 Breakpoints</h4>
+<ul>
+<li><strong>Mobile</strong>: &lt; 768px (bottom navigation active)</li>
+<li><strong>Tablet</strong>: 768px - 1024px</li>
+<li><strong>Desktop</strong>: &gt; 1024px</li>
+</ul>
+<h4 id="82-mobile-optimizations">8.2 Mobile Optimizations</h4>
+<ul>
+<li><strong>Touch Targets</strong>: Minimum 50px height for buttons and navigation</li>
+<li><strong>Font Sizes</strong>: Scaled appropriately for readability</li>
+<li><strong>Grid Layouts</strong>: Converts to single column on small screens</li>
+<li><strong>Special Cases</strong>: </li>
+<li>About section complex grid simplified to single column</li>
+<li>Business section becomes vertical stack instead of horizontal split</li>
+<li>Pricing cards stack vertically</li>
+</ul>
+<h4 id="83-very-small-screens-480px">8.3 Very Small Screens (&lt; 480px)</h4>
+<ul>
+<li><strong>Reduced Padding</strong>: Smaller gaps and padding</li>
+<li><strong>Font Scaling</strong>: Smaller font sizes for better fit</li>
+<li><strong>Element Sizing</strong>: Adjusted icon and content sizes</li>
+</ul>
+<h3 id="9-accessibility-features">9. ACCESSIBILITY FEATURES</h3>
+<h4 id="91-reduced-motion">9.1 Reduced Motion</h4>
+<ul>
+<li><strong>Support</strong>: Full support for prefers-reduced-motion media query</li>
+<li><strong>Implementation</strong>: Disables all animations when requested</li>
+</ul>
+<h4 id="92-touch-targets">9.2 Touch Targets</h4>
+<ul>
+<li><strong>Minimum Size</strong>: 50px height for all interactive elements</li>
+<li><strong>Spacing</strong>: Adequate space between touch targets</li>
+</ul>
+<h4 id="93-semantic-html">9.3 Semantic HTML</h4>
+<ul>
+<li><strong>Structure</strong>: Proper heading hierarchy (h1, h2, h3)</li>
+<li><strong>Landmarks</strong>: Proper use of section, header, footer elements</li>
+<li><strong>Links</strong>: Descriptive link text where appropriate</li>
+</ul>
+<h3 id="10-performance-optimizations">10. PERFORMANCE OPTIMIZATIONS</h3>
+<h4 id="101-asset-loading">10.1 Asset Loading</h4>
+<ul>
+<li><strong>CSS</strong>: Critical CSS inlined, rest loaded async</li>
+<li><strong>JS</strong>: Modular approach with separate files for different functionality</li>
+<li><strong>Images</strong>: Not used (all SVG icons and CSS backgrounds)</li>
+</ul>
+<h4 id="102-animation-performance">10.2 Animation Performance</h4>
+<ul>
+<li><strong>GPU Acceleration</strong>: Used for transforms and opacity changes</li>
+<li><strong>Intersection Observer</strong>: For scroll-triggered animations</li>
+<li><strong>Throttling</strong>: Animation optimizations to prevent jank</li>
+</ul>
+<h3 id="11-functionality-requirements">11. FUNCTIONALITY REQUIREMENTS</h3>
+<h4 id="111-javascript-modules">11.1 JavaScript Modules</h4>
+<ul>
+<li><strong>navigation.js</strong>: Mobile menu, smooth scrolling, theme toggle</li>
+<li><strong>theme.js</strong>: Theme switching with localStorage persistence</li>
+<li><strong>animations.js</strong>: GSAP animations with intersection observers</li>
+<li><strong>parallax.js</strong>: Rellax parallax effects</li>
+<li><strong>validation.js</strong>: Form validation (template)</li>
+</ul>
+<h4 id="112-external-libraries">11.2 External Libraries</h4>
+<ul>
+<li><strong>GSAP</strong>: For advanced animations</li>
+<li><strong>Rellax</strong>: For parallax effects</li>
+<li><strong>Loaded via CDN</strong>: From trusted sources</li>
+</ul>
+<h4 id="113-local-storage">11.3 Local Storage</h4>
+<ul>
+<li><strong>Theme Persistence</strong>: Saves user's theme preference</li>
+<li><strong>Data Key</strong>: 'theme' with values 'dark', 'light', 'vibrant'</li>
+</ul>
+<h3 id="12-development-structure">12. DEVELOPMENT STRUCTURE</h3>
+<h4 id="121-file-organization">12.1 File Organization</h4>
+<div class="codehilite"><pre><span></span><code><span class="o">/</span><span class="n">workspace</span><span class="o">/</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">css</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">main</span><span class="o">.</span><span class="n">css</span><span class="w">        </span><span class="c1"># Core styles and variables</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">theme</span><span class="o">.</span><span class="n">css</span><span class="w">       </span><span class="c1"># Theme variables and system</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">sections</span><span class="o">.</span><span class="n">css</span><span class="w">    </span><span class="c1"># Section-specific styles</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">responsive</span><span class="o">.</span><span class="n">css</span><span class="w">  </span><span class="c1"># Mobile and responsive styles</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">animations</span><span class="o">.</span><span class="n">css</span><span class="w">  </span><span class="c1"># CSS animations</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">js</span><span class="o">/</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">main</span><span class="o">.</span><span class="n">js</span><span class="w">         </span><span class="c1"># Main initialization</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">navigation</span><span class="o">.</span><span class="n">js</span><span class="w">   </span><span class="c1"># Navigation functionality</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">theme</span><span class="o">.</span><span class="n">js</span><span class="w">        </span><span class="c1"># Theme management</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">animations</span><span class="o">.</span><span class="n">js</span><span class="w">   </span><span class="c1"># GSAP animations</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">parallax</span><span class="o">.</span><span class="n">js</span><span class="w">     </span><span class="c1"># Rellax effects</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="n">validation</span><span class="o">.</span><span class="n">js</span><span class="w">   </span><span class="c1"># Form validation</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">index</span><span class="o">.</span><span class="n">html</span><span class="w">          </span><span class="c1"># Main HTML file</span>
+</code></pre></div>
+
+<h4 id="122-html-structure-requirements">12.2 HTML Structure Requirements</h4>
+<ul>
+<li><strong>SVG Sprite</strong>: At the top of body, hidden</li>
+<li><strong>Mobile Navigation</strong>: Fixed bottom bar</li>
+<li><strong>Full Menu</strong>: Slide-up menu with categories</li>
+<li><strong>Sections</strong>: Proper IDs for smooth scrolling</li>
+<li><strong>Decorative Elements</strong>: Positioned absolutely with z-index management</li>
+</ul>
+<h3 id="13-customization-guidelines">13. CUSTOMIZATION GUIDELINES</h3>
+<h4 id="131-adding-new-sections">13.1 Adding New Sections</h4>
+<ul>
+<li>Create section with unique ID</li>
+<li>Add corresponding navigation item</li>
+<li>Ensure responsive behavior</li>
+<li>Include parallax elements if appropriate</li>
+<li>Add to mobile navigation if needed</li>
+</ul>
+<h4 id="132-adding-new-icons">13.2 Adding New Icons</h4>
+<ul>
+<li>Add to SVG sprite as new <symbol></li>
+<li>Use CSS variables for color theming</li>
+<li>Maintain consistent style</li>
+<li>Test across all themes</li>
+</ul>
+<h4 id="133-theme-modifications">13.3 Theme Modifications</h4>
+<ul>
+<li>Update CSS variables in theme.css</li>
+<li>Ensure contrast ratios meet accessibility standards</li>
+<li>Test all interactive elements</li>
+<li>Verify icon color changes</li>
+</ul>
+<h3 id="14-maintenance-requirements">14. MAINTENANCE REQUIREMENTS</h3>
+<h4 id="141-regular-testing">14.1 Regular Testing</h4>
+<ul>
+<li>Cross-browser compatibility</li>
+<li>Mobile device testing</li>
+<li>Accessibility compliance</li>
+<li>Performance monitoring</li>
+</ul>
+<h4 id="142-documentation-updates">14.2 Documentation Updates</h4>
+<ul>
+<li>Update README when making major changes</li>
+<li>Maintain AI agent instructions</li>
+<li>Keep file structure documentation current</li>
+</ul>
+<h3 id="15-ai-agent-implementation-instructions">15. AI AGENT IMPLEMENTATION INSTRUCTIONS</h3>
+<p>When implementing this design system:</p>
+<ol>
+<li><strong>Start with HTML structure</strong>: Create main sections with proper IDs</li>
+<li><strong>Implement theme system first</strong>: CSS variables and theme switching</li>
+<li><strong>Add mobile navigation</strong>: Bottom bar with 5 icons as specified</li>
+<li><strong>Create responsive grid</strong>: CSS Grid with appropriate breakpoints</li>
+<li><strong>Add animations</strong>: GSAP animations with scroll triggers</li>
+<li><strong>Implement parallax</strong>: Rellax library for depth effects</li>
+<li><strong>Test accessibility</strong>: Ensure all requirements are met</li>
+<li><strong>Optimize performance</strong>: Minimize render-blocking resources</li>
+</ol>
+<p><strong>What NOT to change:</strong>
+- Mobile navigation structure and functionality
+- Theme variable system
+- Core animation patterns
+- SVG sprite implementation
+- Z-index layering system</p>
+<p>This design system creates a modern, accessible, performant website with a strong visual identity that works across all devices and supports multiple themes while maintaining excellent user experience.</p>
+        </div>
+    </div>
+</article>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-info reveal">
+                <p class="label">Контакты</p>
+                <h2>Готовы к диалогу?</h2>
+                <div class="contact-item">
+                    <span class="contact-label">Телефон</span>
+                    <a href="tel:+78129287478">+7 (812) 928-74-78</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Почта</span>
+                    <a href="mailto:hello@axiiom.ru">hello@axiiom.ru</a>
+                </div>
+            </div>
+        </div>
+        <div id="footerCopy"></div>
+    </div>
+</footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
+<script src="/metrika.js"></script>
+<script src="/config.js"></script>
+<script src="/nav.js"></script>
+<script>Nav.init({breadcrumbs:false});</script>
+<script src="/theme.js"></script>
+<script src="/footer.js"></script>
+<script src="/preloader.js"></script>
+<script>
+(function(){var r=document.querySelectorAll('.reveal');if(r.length){var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible')}})},{threshold:0.15});for(var i=0;i<r.length;i++){o.observe(r[i])}}})();
+</script>
+<script>
+(function(){var t=document.getElementById('navToggle');var o=document.getElementById('navOverlay');if(!t||!o)return;t.addEventListener('click',function(e){e.stopPropagation();o.classList.toggle('open');t.classList.toggle('active');document.body.style.overflow=o.classList.contains('open')?'hidden':''})})();
+</script>
+</body>
+</html>

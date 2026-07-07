@@ -1,0 +1,2151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+    <title>LOVII — Стратегический план развития</title>    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="../css/theme.css?v=2">
+    <link rel="stylesheet" href="../css/core.css?v=2">
+    <link rel="stylesheet" href="../css/components.css?v=2">
+    <link rel="stylesheet" href="../css/strategy.css?v=2">
+    <link rel="stylesheet" href="../css/responsive.css?v=2">    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/theme.css?v=2">
+    <style>
+.main { padding-top: 80px; }
+
+        /* Header */
+        
+                .logo { display: flex; align-items: center; text-decoration: none; height: 40px; }
+        .logo img { height: 100%; width: auto; object-fit: contain; }
+        .theme-toggle {
+            width: 44px; height: 44px; border-radius: 50%;
+            border: 2px solid var(--border-color); background: var(--card-bg);
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+        }
+        .theme-icon { width: 20px; height: 20px; color: var(--text-color); }
+        /* Hero */
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 16px 36px; border-radius: 50px; font-weight: 600;
+            font-size: 1rem; text-decoration: none; transition: all 0.3s ease;
+            cursor: pointer; border: none;
+        }
+        /* Sections */
+        section { padding: 100px 20px; }
+        /* Cards */
+        .card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
+        /* Grids */
+        /* Callout */
+        /* Steps */
+        /* Compare Table */
+        /* Stats */
+        /* CTA */
+        section[id] {
+            scroll-margin-top: 110px;
+        }
+
+        /* Mobile Nav */
+        /* Header */
+        
+        
+
+        
+
+        
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-link {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0F172A;
+            --text-color: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --accent-color: #14B8A6;
+            --accent-secondary: #5EEAD4;
+            --card-bg: #1E293B;
+            --border-color: #334155;
+            --section-alt: #1E293B;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 8px 30px rgba(13, 148, 136, 0.2);
+        }
+
+        [data-theme="dark"] .about,
+        [data-theme="dark"] .investment {
+            background: var(--card-bg);
+        }
+
+        /* Hero Section */
+        
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        @media (max-width: 768px) {
+            .mobile-nav {
+                display: flex;
+                padding: 6px 0 10px;
+                width: 100%;
+                box-sizing: border-box;
+                bottom: 0;
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+            .mobile-nav a {
+                min-width: 0;
+                padding: 4px 4px;
+            }
+
+            .strategy-hero-metrics {
+                gap: 20px;
+            }
+            .shm-item {
+                padding: 14px 18px;
+            }
+            .shm-value {
+                font-size: 1.3rem;
+            }
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            min-width: 200px;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 10px 30px rgba(13, 148, 136, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(13, 148, 136, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* Key Metrics Banner — Issuer */
+        .issuer-section {
+            background: var(--bg-color);
+            padding: 80px 20px;
+        }
+
+        .issuer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .issuer-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .issuer-value {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+        }
+
+        /* Product Targets Section */
+        /* Roadmap */
+        /* FAQ */
+        /* Document Hub */
+        .doc-item:hover {
+            border-color: var(--accent-color);
+            background: rgba(13, 148, 136, 0.03);
+        }
+
+        /* Investor Onboarding */
+        /* Compliance Footer */
+        /* Enhanced Funds */
+        /* Sections */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px 30px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 12px 40px rgba(13, 148, 136, 0.08);
+        }
+
+        .card-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
+        /* About Section */
+        /* Team Section */
+        .team-card-full {
+            text-align: left;
+            padding: 35px 30px;
+        }
+
+        .team-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .team-achievements {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: var(--bg-color);
+            border-radius: 12px;
+        }
+
+        /* Investment Section */
+        .investment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .investment-card {
+            background: var(--bg-color);
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            border: 2px solid var(--accent-color);
+        }
+
+        .investment-value {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        /* Use of Funds — Table */
+        /* Product Case Cards */
+        /* Calculator */
+        /* Screenshots Carousel */
+        /* Partners Section */
+        /* Logo Showcase */
+        /* CTA Section */
+        /* Footer */
+footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Details Section */
+        /* === MOBILE ONLY (max 768px) === */
+        .mobile-nav a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 4px 6px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.65rem;
+            transition: all 0.3s ease;
+            min-width: 55px;
+        }
+
+        .mobile-nav a svg {
+            width: 20px;
+            height: 22px;
+            margin-bottom: 4px;
+            fill: var(--text-secondary);
+        }
+
+        .mobile-nav a.active,
+        .mobile-nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .mobile-nav a.active svg,
+        .mobile-nav a:hover svg {
+            fill: var(--accent-color);
+        }
+
+        /* Mobile Drawer */
+        .drawer-sheet {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 85vw;
+            max-width: 320px;
+            z-index: 2001;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-left: 1px solid rgba(13,148,136,0.12);
+            box-shadow: -8px 0 40px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: env(safe-area-inset-top) 20px calc(20px + env(safe-area-inset-bottom)) 20px;
+        }
+
+        .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .hero-buttons .btn {
+                width: 100%;
+                min-width: auto;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .team-card-full {
+                padding: 25px 20px;
+            }
+
+            .team-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .team-expertise {
+                justify-content: center;
+            }
+
+            .team-achievements {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .investment-grid {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                }
+
+            .issuer-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .issuer-value {
+                font-size: 2rem;
+            }
+
+            .roadmap::before {
+                left: 20px;
+            }
+
+            .roadmap-content h3 {
+                font-size: 1rem;
+            }
+
+body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+
+        
+.logo .logo-dark { display: none; }
+[data-theme="dark"] .logo .logo-light { display: none; }
+[data-theme="dark"] .logo .logo-dark { display: block; }
+        
+
+.theme-icon.sun { display: none; }
+.theme-icon.moon { display: block; }
+[data-theme="dark"] .theme-icon.sun { display: block; }
+[data-theme="dark"] .theme-icon.moon { display: none; }
+        .hero {
+            min-height: 50vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; padding: 100px 20px 80px;
+            background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
+        }
+
+[data-theme="dark"] .hero { background: linear-gradient(180deg, #0F172A 0%, #1E293B 100%); }
+.hero-content { max-width: 800px; }
+        .card {
+            background: var(--card-bg); border-radius: 20px; padding: 40px 30px;
+            border: 1px solid var(--border-color); transition: all 0.3s ease;
+        }
+
+.card-icon {
+            width: 60px; height: 60px; background: var(--gradient-primary);
+            border-radius: 15px; display: flex; align-items: center; justify-content: center;
+            margin-bottom: 20px;
+        }
+
+.card-icon svg { width: 30px; height: 30px; stroke: white; }
+.card-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 15px; }
+.card-text { color: var(--text-secondary); line-height: 1.6; }
+        .disclaimer { color: var(--text-secondary); font-size: 0.85rem; max-width: 700px; margin: 15px auto 0; }
+[data-theme="dark"] .mobile-nav { background: var(--card-bg); }
+.mobile-nav a { display: flex; flex-direction: column; align-items: center; padding: 4px 6px; color: var(--text-secondary); text-decoration: none; font-size: 0.6rem; transition: all 0.3s ease; min-width: 55px; }
+                .header-link:hover {
+            color: var(--accent-color);
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        .hero-outro {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 50px;
+            letter-spacing: 1px;
+        }
+
+        .hero-buttons .btn {
+            min-width: 160px;
+        }
+
+        .issuer-label {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .issuer-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .issuer-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            max-width: 700px;
+            margin: 30px auto 0;
+            padding: 15px 20px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .issuer-note svg {
+            flex-shrink: 0;
+            opacity: 0.6;
+        }
+
+        .targets-section {
+            background: var(--section-alt);
+            padding: 100px 20px;
+        }
+
+        .roadmap-section {
+            padding: 100px 20px;
+            background: var(--bg-color);
+        }
+
+        .roadmap {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .roadmap::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .roadmap-item {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .roadmap-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .roadmap-marker {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            z-index: 1;
+            border: 2px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-secondary);
+        }
+
+        .roadmap-item.completed .roadmap-marker {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            color: white;
+        }
+
+        .roadmap-item.active .roadmap-marker {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.2);
+        }
+
+        .roadmap-content {
+            padding-top: 8px;
+        }
+
+        .roadmap-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .roadmap-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .roadmap-item.active .roadmap-content h3 {
+            color: var(--accent-color);
+        }
+
+        .faq-section {
+            padding: 100px 20px;
+            background: var(--card-bg);
+        }
+
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .faq-item {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: var(--accent-color);
+        }
+
+        .faq-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .faq-item p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        @media (max-width: 768px) {
+            .strategy-hero-metrics {
+                gap: 20px;
+            }
+            .shm-item {
+                padding: 14px 18px;
+            }
+            .shm-value {
+                font-size: 1.3rem;
+            }
+        }
+
+        .doc-hub {
+            padding: 100px 20px;
+            background: var(--bg-color);
+        }
+
+        .doc-grid {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .doc-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 25px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.3s;
+        }
+
+        .doc-item:hover {
+            border-color: var(--accent-color);
+            transform: translateX(5px);
+        }
+
+        .doc-icon {
+            width: 44px;
+            height: 44px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 10px;
+        }
+
+        .doc-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: #EF4444;
+        }
+
+        .doc-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .doc-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .doc-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .doc-tag {
+            flex-shrink: 0;
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .doc-tag.required {
+            background: rgba(239, 68, 68, 0.1);
+            color: #EF4444;
+        }
+
+        .doc-tag.info {
+            background: rgba(13, 148, 136, 0.1);
+            color: var(--accent-color);
+        }
+
+        .doc-arrow {
+            flex-shrink: 0;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            opacity: 0.3;
+            transition: all 0.3s;
+            transform: rotate(-45deg);
+        }
+
+        .doc-item:hover .doc-arrow {
+            opacity: 1;
+            color: var(--accent-color);
+            transform: rotate(-45deg) translate(3px, -3px);
+        }
+
+        .onboarding {
+            padding: 100px 20px;
+            background: var(--section-alt);
+        }
+
+        .onboarding-steps {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            counter-reset: step;
+        }
+
+        .step-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            position: relative;
+            counter-increment: step;
+        }
+
+        .step-card::before {
+            content: counter(step);
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 28px;
+            height: 28px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 800;
+        }
+
+        .step-icon {
+            width: 48px;
+            height: 48px;
+            margin: 10px auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--accent-color);
+        }
+
+        .step-card h4 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .onboarding-note {
+            max-width: 600px;
+            margin: 30px auto 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            font-size: 0.85rem;
+        }
+
+        .fund-amount {
+            display: block;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-top: 4px;
+        }
+
+        .fund-breakdown {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            line-height: 1.4;
+        }
+
+        .about {
+            background: var(--section-alt);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            list-style: none;
+        }
+
+        .about-features li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: var(--bg-color);
+            border-radius: 10px;
+        }
+
+        .about-features li svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--accent-color);
+            flex-shrink: 0;
+        }
+
+        .team-avatar-large {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .team-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .team-info .team-name {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            word-wrap: break-word;
+        }
+
+        .team-info .team-role {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+
+        .team-expertise {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .expertise-tag {
+            padding: 6px 14px;
+            background: var(--accent-light);
+            color: var(--accent-color);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        [data-theme="dark"] .expertise-tag {
+            background: rgba(20, 184, 166, 0.15);
+        }
+
+        .achievement {
+            text-align: center;
+        }
+
+        .achievement-value {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-color);
+        }
+
+        .achievement-label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        .team-bio {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .investment {
+            background: #F8FAFC;
+        }
+
+        .investment-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .investment-label {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .investment-details {
+            text-align: left;
+        }
+
+        .investment-details div {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .investment-details div:last-child {
+            border-bottom: none;
+        }
+
+        .funds-table {
+            max-width: 900px;
+            margin: 0 auto;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .funds-row {
+            display: grid;
+            grid-template-columns: 80px 160px 1fr 1.5fr;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .funds-row:last-child {
+            border-bottom: none;
+        }
+
+        .funds-header {
+            background: var(--accent-color);
+            color: white;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .funds-col {
+            padding: 16px 15px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .col-pct.highlight {
+            color: var(--accent-color);
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .col-amount {
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .col-detail {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .funds-total {
+            background: var(--card-bg);
+            font-weight: 700;
+        }
+
+        .funds-total .col-pct {
+            color: var(--accent-color);
+        }
+
+        .funds-row:nth-child(even):not(.funds-header):not(.funds-total) {
+            background: var(--bg-color);
+        }
+
+        [data-theme="dark"] .funds-header {
+            background: #0D9488;
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .case-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .case-card:hover {
+            border-color: var(--accent-color);
+        }
+
+        .case-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .case-header h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .case-status {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .case-status.demo {
+            background: rgba(13, 148, 136, 0.1);
+            color: var(--accent-color);
+        }
+
+        .case-status.ready {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+
+        .case-status.dev {
+            background: rgba(251, 191, 36, 0.1);
+            color: #d97706;
+        }
+
+        .case-body {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .case-body p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .case-body .case-metrics {
+            margin-top: auto;
+        }
+
+        .case-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 16px;
+            background: var(--bg-color);
+            border-radius: 12px;
+            margin: 16px 0;
+        }
+
+        .case-metric {
+            text-align: center;
+        }
+
+        .case-metric .cm-value {
+            display: block;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .case-metric .cm-label {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .calc-section {
+            padding: 100px 20px;
+            background: var(--section-alt);
+        }
+
+        .calc-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        .calc-form {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 35px;
+        }
+
+        .calc-form label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .calc-form .input-group {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--bg-color);
+            margin-bottom: 20px;
+        }
+
+        .calc-form .input-group span {
+            padding: 0 16px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .calc-form .input-group input {
+            flex: 1;
+            padding: 14px 16px;
+            border: none;
+            background: transparent;
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            outline: none;
+        }
+
+        .calc-form .input-group input:focus {
+            box-shadow: inset 0 0 0 2px var(--accent-color);
+        }
+
+        .calc-results {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .calc-result-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .calc-result-item .crl-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .calc-result-item .crl-value {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--accent-color);
+        }
+
+        .calc-result-item.highlight {
+            border-color: var(--accent-color);
+            background: rgba(13, 148, 136, 0.05);
+        }
+
+        .calc-result-item.highlight .crl-value {
+            font-size: 1.6rem;
+        }
+
+        #screenshots {
+            background: var(--section-alt);
+        }
+
+        .screenshots-logo {
+            max-width: 360px;
+            margin: 0 auto 30px;
+        }
+
+        .screenshots-logo img {
+            width: 100%;
+            height: auto;
+        }
+
+        .screenshots-logo .logo-dark {
+            display: none;
+        }
+
+        [data-theme="dark"] .screenshots-logo .logo-light {
+            display: none;
+        }
+
+        [data-theme="dark"] .screenshots-logo .logo-dark {
+            display: block;
+        }
+
+        .carousel {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            display: block;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-btn svg {
+            width: 24px;
+            height: 24px;
+            color: var(--accent-color);
+        }
+
+.carousel-btn.prev { left: 15px; }
+.carousel-btn.next { right: 15px; }
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border-color);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: var(--accent-color);
+            transform: scale(1.2);
+        }
+
+        .partners {
+            background: var(--card-bg);
+        }
+
+        .logo-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .logo-light {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .logo-dark {
+            display: none;
+            width: 100%;
+            height: auto;
+        }
+
+        [data-theme="dark"] .logo-light {
+            display: none;
+        }
+
+        [data-theme="dark"] .logo-dark {
+            display: block;
+        }
+
+        .partners-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .partner-item {
+            padding: 30px 50px;
+            background: var(--bg-color);
+            border-radius: 15px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .cta {
+            background: var(--gradient-primary);
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+        }
+
+        .cta .btn {
+            background: white;
+            color: var(--accent-color);
+        }
+
+        .cta .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .details-section {
+            background: var(--card-bg);
+            padding: 80px 20px;
+        }
+
+        .details-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .details-row {
+            display: flex;
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .details-row:last-child {
+            border-bottom: none;
+        }
+
+        .details-row:nth-child(even) {
+            background: var(--card-bg);
+        }
+
+        .details-label {
+            width: 180px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+
+        .details-value {
+            color: var(--text-color);
+            word-break: break-word;
+        }
+
+        .drawer-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .drawer-overlay.open {
+            display: block;
+            opacity: 1;
+        }
+
+        [data-theme="dark"] .drawer-sheet {
+            background: rgba(30,41,59,0.92);
+            border-color: rgba(255,255,255,0.08);
+        }
+
+        .drawer-overlay.open .drawer-sheet {
+            transform: translateX(0);
+        }
+
+        .drawer-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: var(--card-bg);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+.drawer-section { margin-bottom: 24px; }
+        .drawer-section-title {
+            font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 1.5px; color: var(--text-secondary);
+            margin-bottom: 12px; padding: 0 4px;
+        }
+
+.drawer-items { display: flex; flex-direction: column; gap: 2px; }
+        .drawer-item {
+            display: flex; align-items: center; gap: 14px;
+            padding: 12px 14px; border-radius: 12px;
+            text-decoration: none; color: var(--text-color); font-size: 0.95rem;
+            font-weight: 500; transition: all 0.2s;
+        }
+
+.drawer-item:active { background: rgba(13,148,136,0.08); }
+        .drawer-item svg {
+            width: 20px; height: 20px; flex-shrink: 0;
+            stroke: currentColor; stroke-width: 1.8; fill: none;
+        }
+
+.drawer-item.active { color: var(--accent-color); }
+.floating-nav { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 900; display: flex; flex-direction: column; gap: 4px; padding: 12px 8px; background: rgba(255,255,255,0.65); backdrop-filter: blur(16px); border: 1px solid rgba(13,148,136,0.15); border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.08); width: 52px; transition: width 0.35s cubic-bezier(0.4,0,0.2,1); overflow: hidden; }
+        [data-theme="dark"] .floating-nav { background: rgba(30,41,59,0.7); border-color: rgba(255,255,255,0.08); }
+        .floating-nav:hover { width: 190px; }
+        .floating-nav a { display: flex; align-items: center; justify-content: center; gap: 0; padding: 10px 0; text-decoration: none; color: var(--text-secondary); border-radius: 10px; transition: all 0.25s; white-space: nowrap; position: relative; }
+        .floating-nav:hover a { justify-content: flex-start; gap: 12px; padding: 10px 12px; }
+        .floating-nav a svg { width: 20px; height: 20px; flex-shrink: 0; stroke: currentColor; stroke-width: 1.8; fill: none; }
+        .floating-nav a .nav-label { font-size: 0.85rem; font-weight: 500; opacity: 0; width: 0; overflow: hidden; transition: opacity 0.3s, width 0.3s; }
+        .floating-nav:hover a .nav-label { opacity: 1; width: auto; }
+        .floating-nav a:hover { background: rgba(13,148,136,0.08); color: var(--accent-color); }
+        .floating-nav a.active { color: var(--accent-color); }
+        .floating-nav a.active::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 3px; height: 20px; background: var(--accent-color); border-radius: 0 3px 3px 0; }
+        [data-theme="dark"] .floating-nav a:hover { background: rgba(20,184,166,0.12); }
+main, .main, .doc-wrapper {
+            animation: pageFadeIn 0.4s ease-out;
+        }
+
+        
+
+            
+
+            
+
+        /* Ultra-wide screens — anchor floating nav to content area */
+        .header-badge {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+    </style>
+
+    <!-- Mobile Fixes CSS - предотвращает выход контента за границы экрана -->
+    </head>
+<body>
+    <header class="header">
+        <div class="status-bar">
+            <span class="status-step">
+                <span class="step-dot"></span>
+                <span class="status-label">Анализ</span>
+            </span>
+            <span class="step-line"></span>
+            <span class="status-step active">
+                <span class="step-dot"></span>
+                <span class="status-label">Согласование</span>
+            </span>
+            <span class="step-line"></span>
+            <span class="status-step">
+                <span class="step-dot"></span>
+                <span class="status-label">Сбор заявок</span>
+            </span>
+            <span class="step-line"></span>
+            <span class="status-step">
+                <span class="step-dot"></span>
+                <span class="status-label">Выпуск</span>
+            </span>
+        </div>
+        <div class="header-inner">
+            <a href="../" class="logo">
+                <img src="../img/logos/lovii-logo.svg" alt="LOVII" class="logo-light">
+                <img src="../img/logos/lovii-logo_dark.svg" alt="LOVII" class="logo-dark">
+            </a>
+            <div class="header-actions">
+                <a href="../#docs" class="header-link">Документация</a>
+                <span class="header-badge">ЦФА 2026</span>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+                    <svg class="theme-icon sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                    </svg>
+                    <svg class="theme-icon moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">Стратегический план</div>
+                <h1 class="hero-title">LOVII</h1>
+                <p class="hero-subtitle">От локального MVP к федеральному SaaS-стандарту. Четыре столпа монетизации, самоподдерживающаяся экосистема баллов и полная гео-изоляция локаций — стратегия, построенная на 20-летнем опыте команды в IT.</p>
+                <div class="strategy-hero-metrics">
+                    <div class="shm-item">
+                        <span class="shm-value">8%</span>
+                        <span class="shm-label">комиссия</span>
+                    </div>
+                    <div class="shm-item">
+                        <span class="shm-value">2 990 ₽</span>
+                        <span class="shm-label">SaaS PRO</span>
+                    </div>
+                    <div class="shm-item">
+                        <span class="shm-value">B2B</span>
+                        <span class="shm-label">API-доход</span>
+                    </div>
+                    <div class="shm-item">
+                        <span class="shm-value">25 млн</span>
+                        <span class="shm-label">GMV цель</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Проблема -->
+        <section class="section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Проблема</h2>
+                    <p class="section-subtitle">Разрыв локальной экономики</p>
+                </div>
+                <div class="grid-2col">
+                    <div class="card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        </div>
+                        <h3 class="card-title">Проблема микробизнеса</h3>
+                        <ul class="list-accent">
+                            <li>Отсутствие доступа к массовой цифровой аудитории</li>
+                            <li>Высокие комиссии и сложный ERP при интеграции с агрегаторами</li>
+                            <li>Десятки разрозненных программ лояльности</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <h3 class="card-title">Проблема потребителя</h3>
+                        <ul class="list-accent">
+                            <li>Баллы «сгорают» или блокируются в рамках одной точки</li>
+                            <li>Низкая ликвидность накопленных бонусов</li>
+                            <li>Локальные товары остаются в слепой зоне</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="callout">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <span>Локальный капитал утекает в федеральные сети, а потенциал микробизнеса остаётся нереализованным.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Решение -->
+        <section>
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Решение LOVII</h2>
+                    <p class="section-subtitle">Синтез каталога и универсального актива</p>
+                </div>
+                <div class="grid-2col">
+                    <div class="card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        </div>
+                        <h3 class="card-title">Цифровая витрина</h3>
+                        <ul class="list-accent">
+                            <li>Единый каталог товаров и услуг от микробизнеса</li>
+                            <li>Отображение наравне с гипермаркетами</li>
+                            <li>Простая загрузка (QR, Excel, Web)</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        </div>
+                        <h3 class="card-title">Оператор лояльности</h3>
+                        <ul class="list-accent">
+                            <li>Единая программа для всей экосистемы</li>
+                            <li>Начисление за любую транзакцию</li>
+                            <li>Универсальный актив: баллы идут в оборот</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Маховик экосистемы -->
+        <section class="section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Маховик локальной экосистемы</h2>
+                    <p class="section-subtitle">Самоподдерживающаяся система обмена ценностью</p>
+                </div>
+                <div class="grid-3col">
+                    <div class="card card-trim">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                        </div>
+                        <h3 class="card-title">Микробизнес</h3>
+                        <p class="card-text">Поставщики размещают товары, эмитируют баллы. Выгода: рост выручки без товарных рисков.</p>
+                    </div>
+                    <div class="card card-trim">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        </div>
+                        <h3 class="card-title">Потребитель</h3>
+                        <p class="card-text">Генерация и трата баллов. Выгода: ликвидные бонусы и гибридная оплата.</p>
+                    </div>
+                    <div class="card card-trim">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <h3 class="card-title">Партнёры</h3>
+                        <p class="card-text">Логистика и финансы обеспечивают доставку и процессинг. Выгода: транзакционный доход.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Баллы как валюта -->
+        <section>
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Баллы как «Валюта доверия»</h2>
+                </div>
+                <div class="steps-3col">
+                    <div class="step-block">
+                        <div class="step-num">01</div>
+                        <h3>Генерация</h3>
+                        <p>Пользователь покупает товар → получает <span class="badge">5% баллами</span></p>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step-block">
+                        <div class="step-num">02</div>
+                        <h3>Циркуляция</h3>
+                        <p>Пользователь тратит баллы у другого партнёра или переводит соседу</p>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step-block">
+                        <div class="step-num">03</div>
+                        <h3>Монетизация</h3>
+                        <p>Баллы можно вывести на банковский счёт через СБП или использовать для гибридной оплаты</p>
+                    </div>
+                </div>
+                <div class="callout">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <span>1 балл = 1 рубль (фиксированная привязка). Удержание оборота внутри локальной экономики и кратный рост LTV.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Сравнение -->
+        <section class="section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">LOVII vs Маркетплейсы</h2>
+                    <p class="section-subtitle">Почему LOVII не конкурирует с агрегаторами</p>
+                </div>
+                <div class="compare-table">
+                    <div class="compare-row compare-header">
+                        <div class="compare-col">Критерий</div>
+                        <div class="compare-col accent">LOVII</div>
+                        <div class="compare-col muted">Агрегаторы</div>
+                    </div>
+                    <div class="compare-row">
+                        <div class="compare-col">Ликвидность баллов</div>
+                        <div class="compare-col accent">Универсальная (вывод в рубли)</div>
+                        <div class="compare-col muted">Замкнуты внутри гиганта</div>
+                    </div>
+                    <div class="compare-row">
+                        <div class="compare-col">Бизнес-модель</div>
+                        <div class="compare-col accent">Чистый агентский сервис</div>
+                        <div class="compare-col muted">Перепродажа, диктовка цен</div>
+                    </div>
+                    <div class="compare-row">
+                        <div class="compare-col">Конкуренция территорий</div>
+                        <div class="compare-col accent">Полная гео-изоляция</div>
+                        <div class="compare-col muted">Прямая конкуренция всех со всеми</div>
+                    </div>
+                    <div class="compare-row">
+                        <div class="compare-col">Порог входа</div>
+                        <div class="compare-col accent">За 5 минут (QR/Excel)</div>
+                        <div class="compare-col muted">Сложный ERP, жесткие требования</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Монетизация -->
+        <section>
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Юнит-экономика</h2>
+                    <p class="section-subtitle">Четыре столпа монетизации</p>
+                </div>
+                <div class="grid-4col">
+                    <div class="card card-trim">
+                        <div class="card-value">8%</div>
+                        <h3 class="card-title">Транзакционная комиссия</h3>
+                        <p class="card-text">Базовый тариф с денежной части оплаты. 0% для микробизнеса с оборотом до 30 000 ₽/мес.</p>
+                    </div>
+                    <div class="card card-trim">
+                        <div class="card-value">2 990 ₽</div>
+                        <h3 class="card-title">SaaS PRO</h3>
+                        <p class="card-text">Фиксированная плата в месяц. Снижает комиссию до 4–7%. Приоритет в логистике и аналитика.</p>
+                    </div>
+                    <div class="card card-trim">
+                        <div class="card-value">B2B</div>
+                        <h3 class="card-title">API и интеграции</h3>
+                        <p class="card-text">Открытые API для банков, телекомов и HR-систем. Долгосрочный инфраструктурный доход.</p>
+                    </div>
+                    <div class="card card-trim">
+                        <div class="card-value">Реклама</div>
+                        <h3 class="card-title">Продвижение</h3>
+                        <p class="card-text">Закреплённые позиции в «Витрине» и нативные тематические подборки.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Показатели -->
+        <section class="section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Показатели успеха</h2>
+                </div>
+                <div class="metrics-group">
+                    <h3 class="metrics-group-title">Цели MVP (6 месяцев)</h3>
+                    <div class="grid-4col">
+                        <div class="stat-box">
+                            <div class="stat-box-value">&gt;25 млн</div>
+                            <div class="stat-box-label">GMV</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-box-value">25 000</div>
+                            <div class="stat-box-label">Активных пользователей</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-box-value">250+</div>
+                            <div class="stat-box-label">Подключенных точек</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-box-value">&gt;3</div>
+                            <div class="stat-box-label">LTV/CAC</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="metrics-group">
+                    <h3 class="metrics-group-title">Цели зрелой локации (18 месяцев)</h3>
+                    <div class="grid-4col">
+                        <div class="stat-box">
+                            <div class="stat-box-value">&gt;20 млн</div>
+                            <div class="stat-box-label">EBITDA</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-box-value">2 000+</div>
+                            <div class="stat-box-label">Подключенных точек</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-box-value">&gt;30%</div>
+                            <div class="stat-box-label">PRO-тарифов</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-box-value">&gt;40</div>
+                            <div class="stat-box-label">NPS</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Контакты -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>Займите своё место на цифровой витрине</h2>
+                <p>Начните продавать больше с LOVII — без риска, без скрытых комиссий, среди своих.</p>
+                <div class="contact-row">
+                    <a href="tel:+79119287478" class="btn btn-secondary">+7 (911) 928-74-78</a>
+                    <a href="mailto:hello@lovii.ru" class="btn btn-secondary">hello@lovii.ru</a>
+                    <a href="https://aoplatforma.ru" target="_blank" class="btn btn-secondary">aoplatforma.ru</a>
+                </div>
+            </div>
+        </section>
+
+                <footer class="footer">
+            <p>© 2026 LOVII · <a href="../" style="color: var(--accent-color);">На главную</a></p>
+            <div class="footer-links">
+                <a href="../docs/privacy/" style="color: var(--accent-color);">Политика конфиденциальности</a>
+                <a href="../docs/terms/" style="color: var(--accent-color);">Пользовательское соглашение</a>
+                <a href="../../#docs" style="color: var(--accent-color);">Документация выпуска</a>
+            </div>
+            <p class="disclaimer">Информация, представленная на данном сайте, не является индивидуальной инвестиционной рекомендацией. ЦФА являются высокорискованным инструментом. Перед совершением сделок ознакомьтесь с рисками и документацией по выпуску цифровых финансовых активов.</p>
+            <p style="margin-top: 20px;">© 2026 LOVII. Все права защищены. Эмитент — ООО «Аксиома».</p>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const savedTheme = localStorage.getItem('lovii-theme') || 'light';
+            body.setAttribute('data-theme', savedTheme);
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = body.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('lovii-theme', newTheme);
+            });
+            // Drawer logic
+            const drawerOverlay = document.getElementById('drawerOverlay');
+            const drawerToggle = document.getElementById('drawerToggle');
+            const drawerClose = document.getElementById('drawerClose');
+
+            if (drawerToggle && drawerOverlay) {
+                drawerToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    drawerOverlay.classList.add('open');
+                    document.body.style.overflow = 'hidden';
+                });
+
+                function closeDrawer() {
+                    drawerOverlay.classList.remove('open');
+                    document.body.style.overflow = '';
+                }
+
+                if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
+                drawerOverlay.addEventListener('click', function(e) {
+                    if (e.target === drawerOverlay) closeDrawer();
+                });
+
+                drawerOverlay.querySelectorAll('.drawer-item').forEach(item => {
+                    item.addEventListener('click', function() {
+                        setTimeout(closeDrawer, 100);
+                    });
+                });
+            }
+
+        });
+    </script>
+
+    <!-- Mobile Navigation -->
+            <nav class="mobile-nav">
+        <a href="../">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Главная</span>
+        </a>
+        <a href="../strategy/">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+            <span>Стратегия</span>
+        </a>
+        <a href="../presentation/">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <span>Презентация</span>
+        </a>
+        <a href="../#docs">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span>Документы</span>
+        </a>
+        <a href="#" id="drawerToggle">
+            <svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            <span>Меню</span>
+        </a>
+    </nav>
+    <!-- Mobile Drawer -->
+    <div class="drawer-overlay" id="drawerOverlay">
+        <div class="drawer-sheet">
+            <button class="drawer-close" id="drawerClose">✕</button>
+
+            <div class="drawer-section">
+                <div class="drawer-section-title">Главное</div>
+                <div class="drawer-items">
+                    <a href="../" class="drawer-item active"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Главная</a>
+                    <a href="../strategy/" class="drawer-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg> Стратегия</a>
+                    <a href="../presentation/" class="drawer-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Презентация</a>
+                </div>
+            </div>
+
+            <div class="drawer-section">
+                <div class="drawer-section-title">О проекте</div>
+                <div class="drawer-items">
+                    <a href="../#issuer" class="drawer-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Эмитент</a>
+                    <a href="../#targets" class="drawer-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Условия</a>
+                    <a href="../#product" class="drawer-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Продукт</a>
+                    <a href="../#team" class="drawer-item"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg> Команда</a>
+                </div>
+            </div>
+
+            <div class="drawer-section">
+                <div class="drawer-section-title">Документация</div>
+                <div class="drawer-items">
+                    <a href="../docs/issue-terms/" class="drawer-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Решение о выпуске</a>
+                    <a href="../docs/whitepaper/" class="drawer-item"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> Whitepaper</a>
+                    <a href="../docs/risk-policy/" class="drawer-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Политика рисков</a>
+                </div>
+            </div>
+
+            <div class="drawer-section">
+                <div class="drawer-section-title">Связь</div>
+                <div class="drawer-items">
+                    <a href="mailto:invest@lovii.ru" class="drawer-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> invest@lovii.ru</a>
+                    <a href="../#details" class="drawer-item"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6z"/><path d="M16 2v6h6"/></svg> Реквизиты</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Navigation -->
+    <nav class="floating-nav">
+        <a href="../">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span class="nav-label">Главная</span>
+        </a>
+        <a href="../#issuer">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span class="nav-label">Эмитент</span>
+        </a>
+        <a href="../#targets">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            <span class="nav-label">Условия</span>
+        </a>
+        <a href="../#product">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <span class="nav-label">Продукт</span>
+        </a>
+        <a href="../#docs">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span class="nav-label">Документы</span>
+        </a>
+        <a href="../strategy/" class="active">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+            <span class="nav-label">Стратегия</span>
+        </a>
+        <a href="../presentation/">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <span class="nav-label">Презентация</span>
+        </a>
+    </nav>
+
+    <script>
+            // Nav Manager — active state from URL
+            (function() {
+                const path = window.location.pathname;
+                const navLinks = document.querySelectorAll('.floating-nav a, .mobile-nav a, .drawer-item');
+                navLinks.forEach(function(link) {
+                    const href = link.getAttribute('href');
+                    if (!href) return;
+                    // Match by path
+                    if (path.includes(href.replace('./', '').replace('../', '').replace('/', ''))) {
+                        link.classList.add('active');
+                    }
+                    // Handle root
+                    if ((path.endsWith('/index.html') || path.endsWith('/') || path.endsWith('lovii_presentation')) && 
+                        (href === './' || href === '#' || href === 'index.html' || href === '/')) {
+                        link.classList.add('active');
+                    }
+                });
+            })();
+    </script>
+    <script>
+    </script>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

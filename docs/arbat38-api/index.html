@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+    <title>API документация | Документация AXIIOM</title>
+    <meta name="description" content="API endpoints, PROJECT_SUMMARY, схема базы данных.">
+    <link rel="canonical" href="https://axiiom.ru/docs/arbat38-api/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://axiiom.ru/docs/arbat38-api/">
+    <meta property="og:title" content="API документация | Документация AXIIOM">
+    <meta property="og:description" content="API endpoints, PROJECT_SUMMARY, схема базы данных.">
+    <meta property="og:image" content="https://axiiom.ru/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="AXIIOM">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://axiiom.ru/docs/arbat38-api/">
+    <meta name="twitter:title" content="API документация | Документация AXIIOM">
+    <meta name="twitter:description" content="API endpoints, PROJECT_SUMMARY, схема базы данных.">
+    <meta name="twitter:image" content="https://axiiom.ru/og-image.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"API документация","description":"API endpoints, PROJECT_SUMMARY, схема базы данных.","url":"https://axiiom.ru/docs/arbat38-api/","author":{"@type":"Organization","name":"AXIIOM"},"isPartOf":{"@type":"WebSite","name":"AXIIOM","url":"https://axiiom.ru"}}</script>
+    <style>*{margin:0;padding:0;box-sizing:border-box}html{font-size:16px;scroll-behavior:smooth}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1.0625rem;background:#0A0A0F;color:#C7C7CC;line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}.noise{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}.grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:60px 60px}.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}.reveal.visible{opacity:1;transform:translateY(0)}</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/docs/styles.css">
+</head>
+<body>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="30" height="30" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/></svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </div>
+</header>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"><ol itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/"><span itemprop="name">Главная</span></a>
+        <meta itemprop="position" content="1">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/docs/"><span itemprop="name">Документация</span></a>
+        <meta itemprop="position" content="2">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">API документация</span>
+        <meta itemprop="position" content="3">
+      </li>
+    </ol></div></nav>
+<article class="docs-article">
+    <div class="container">
+        <div class="docs-content">
+            <div class="feature-page-hero"><h1>API документация</h1><p>API endpoints, PROJECT_SUMMARY, схема базы данных.</p><div class="doc-actions"><a href="/docs/" class="btn btn-outline">← Все документы</a></div></div><h2 id="base-url">Base URL</h2>
+<div class="codehilite"><pre><span></span><code>https://api.example.ru/v1
+</code></pre></div>
+
+<h2 id="authentication">Authentication</h2>
+<ul>
+<li><strong>JWT Token</strong> для сотрудников и менеджеров</li>
+<li><strong>Phone Session</strong> для пассажиров</li>
+</ul>
+<hr />
+<h2 id="authentication_1">AUTHENTICATION</h2>
+<h3 id="post-authlogin">POST /auth/login</h3>
+<p>Вход для сотрудников/менеджеров/админов</p>
+<p><strong>Request:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;staff@airport.ru&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;password123&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;airport_staff&quot;</span><span class="w">  </span><span class="c1">// airport_staff, restaurant_manager, admin</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;eyJhbGciOiJIUzI1NiIs...&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;staff@airport.ru&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Иван&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Иванов&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;staff&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;airport_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="post-authpassengerlogin">POST /auth/passenger/login</h3>
+<p>Вход пассажира по номеру телефона</p>
+<p><strong>Request:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;+79991234567&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;session_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SMS code sent&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="post-authpassengerverify">POST /auth/passenger/verify</h3>
+<p>Подтверждение SMS кода</p>
+<p><strong>Request:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;+79991234567&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123456&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;session_token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;passenger&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;+79991234567&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Михаил&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;bonus_balance&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3723</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;loyalty_level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gastrosset&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="vouchers">VOUCHERS (Ваучеры)</h2>
+<h3 id="post-voucherscreate">POST /vouchers/create</h3>
+<p>Создать ваучеры для рейса (только airport_staff)</p>
+<p><strong>Headers:</strong></p>
+<div class="codehilite"><pre><span></span><code>Authorization: Bearer &lt;token&gt;
+</code></pre></div>
+
+<p><strong>Request:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;flight_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SU 1234&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;destination&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Санкт-Петербург&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;passengers_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">180</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;voucher_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;food&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1">// water, food</span>
+<span class="w">  </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;valid_hours&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;delay_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;vouchers_created&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">180</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;qr_code_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://api.example.ru/qr/delay-uuid&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Vouchers created successfully&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="get-vouchersvoucher_code">GET /vouchers/:voucher_code</h3>
+<p>Получить информацию о ваучере</p>
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;voucher_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VCH-123456789&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;food&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1">// active, redeemed, expired</span>
+<span class="w">  </span><span class="nt">&quot;flight_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SU 1234&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;passenger_last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Иванов&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;valid_until&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-16T23:59:59Z&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;airport_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SVO&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="post-vouchersvoucher_coderedeem">POST /vouchers/:voucher_code/redeem</h3>
+<p>Погасить ваучер (только restaurant_manager)</p>
+<p><strong>Headers:</strong></p>
+<div class="codehilite"><pre><span></span><code>Authorization: Bearer &lt;token&gt;
+</code></pre></div>
+
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Voucher redeemed successfully&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;redeemed_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-15T14:30:00Z&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="get-voucherspassengerphone">GET /vouchers/passenger/:phone</h3>
+<p>Получить активные ваучеры пассажира</p>
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;vouchers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;voucher_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VCH-123456789&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;food&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;flight_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SU 1234&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;valid_until&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-16T23:59:59Z&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="flights">️ FLIGHTS (Рейсы)</h2>
+<h3 id="get-flightsdelaysactive">GET /flights/delays/active</h3>
+<p>Получить активные задержки рейсов</p>
+<p><strong>Query Parameters:</strong>
+- <code>airport_code</code> (optional): SVO, VKO, DME
+- <code>status</code> (optional): active, completed</p>
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;delays&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;flight_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SU 1234&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;destination&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Санкт-Петербург&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;delay_hours&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4.5</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;passengers_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">180</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;vouchers_issued&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">145</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;vouchers_redeemed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">98</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="post-flightsdelays">POST /flights/delays</h3>
+<p>Создать запись о задержке</p>
+<p><strong>Request:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;airport_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;flight_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SU 1234&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;destination&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Санкт-Петербург&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;scheduled_departure&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-15T10:00:00Z&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;delay_hours&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4.5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;passengers_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">180</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="restaurants">️ RESTAURANTS (Рестораны)</h2>
+<h3 id="get-restaurants">GET /restaurants</h3>
+<p>Получить список ресторанов</p>
+<p><strong>Query Parameters:</strong>
+- <code>airport_code</code>: SVO (required)
+- <code>terminal_code</code>: B, C (optional)
+- <code>cuisine_type</code>: Бургеры, Паб (optional)</p>
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;restaurants&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BLACK STAR BURGER&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;brand_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BLACK STAR BURGER&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;cuisine_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Бургеры&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;rating&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4.5</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;avg_delivery_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;terminal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;airport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SVO&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="get-restaurantsid">GET /restaurants/:id</h3>
+<p>Информация о ресторане</p>
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BLACK STAR BURGER&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;+7 (495) 123-45-67&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;rating&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4.5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;avg_delivery_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;terminal&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Терминал B&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;airport&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SVO&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Шереметьево&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="menu">MENU (Меню)</h2>
+<h3 id="get-restaurantsidmenu">GET /restaurants/:id/menu</h3>
+<p>Получить меню ресторана</p>
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;restaurant_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;categories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Бургеры&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Classic Burger&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Говядина, чеддер, салат, томат&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">690</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;image_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://...&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;is_available&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;is_alcohol&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="post-menuitems">POST /menu/items</h3>
+<p>Добавить позицию в меню (restaurant_manager)</p>
+<p><strong>Request:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;category_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;New Burger&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Описание&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">790</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;image_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://...&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;is_alcohol&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="put-menuitemsid">PUT /menu/items/:id</h3>
+<p>Обновить позицию меню</p>
+<h3 id="delete-menuitemsid">DELETE /menu/items/:id</h3>
+<p>Удалить позицию меню</p>
+<hr />
+<h2 id="orders">ORDERS (Заказы)</h2>
+<h3 id="post-orders">POST /orders</h3>
+<p>Создать заказ</p>
+<p><strong>Headers:</strong></p>
+<div class="codehilite"><pre><span></span><code>X-Session-Token: &lt;passenger_session&gt;
+</code></pre></div>
+
+<p><strong>Request:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;restaurant_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;menu_item_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;menu_item_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;pickup_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-15T15:00:00Z&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;voucher_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VCH-123456789&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1">// optional</span>
+<span class="w">  </span><span class="nt">&quot;use_bonuses&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">  </span><span class="c1">// optional</span>
+<span class="w">  </span><span class="nt">&quot;payment_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;card&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;order_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;order_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ORD-001&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;total_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1960</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;voucher_discount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;bonus_discount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;final_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1360</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;payment_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://yookassa.ru/pay/...&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pending_payment&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="get-orders">GET /orders</h3>
+<p>Получить заказы пассажира</p>
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;orders&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;order_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ORD-001&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;restaurant_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BLACK STAR BURGER&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;preparing&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1">// new, accepted, preparing, ready, completed</span>
+<span class="w">      </span><span class="nt">&quot;total_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1960</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;final_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1360</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;pickup_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-15T15:00:00Z&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-15T14:30:00Z&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="get-ordersid">GET /orders/:id</h3>
+<p>Детали заказа</p>
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;order_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ORD-001&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;restaurant&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BLACK STAR BURGER&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;terminal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;B&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Classic Burger&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">690</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1380</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;total_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1960</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;voucher_discount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;bonus_discount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;final_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1360</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;preparing&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;pickup_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-15T15:00:00Z&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="put-ordersidstatus">PUT /orders/:id/status</h3>
+<p>Обновить статус заказа (restaurant_manager)</p>
+<p><strong>Request:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;preparing&quot;</span><span class="w">  </span><span class="c1">// accepted, preparing, ready, completed</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="bonuses">BONUSES (Бонусы)</h2>
+<h3 id="get-passengerbonuses">GET /passenger/bonuses</h3>
+<p>Получить баланс и историю бонусов</p>
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;balance&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3723</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;loyalty_level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gastrosset&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;accrual_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;redemption_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;transactions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;earned&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1">// earned, spent, expired</span>
+<span class="w">      </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;balance_after&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3723</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Начислено за заказ ORD-001&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-15T14:30:00Z&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="passengers">PASSENGERS (Пассажиры)</h2>
+<h3 id="get-passengerprofile">GET /passenger/profile</h3>
+<p>Получить профиль пассажира</p>
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;+79991234567&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Михаил&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Иванов&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;bonus_balance&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3723</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;loyalty_level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gastrosset&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;orders_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;favorites_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="put-passengerprofile">PUT /passenger/profile</h3>
+<p>Обновить профиль</p>
+<h3 id="get-passengerfavorites">GET /passenger/favorites</h3>
+<p>Получить избранные рестораны</p>
+<h3 id="post-passengerfavoritesrestaurant_id">POST /passenger/favorites/:restaurant_id</h3>
+<p>Добавить в избранное</p>
+<h3 id="delete-passengerfavoritesrestaurant_id">DELETE /passenger/favorites/:restaurant_id</h3>
+<p>Удалить из избранного</p>
+<hr />
+<h2 id="statistics">STATISTICS (Статистика)</h2>
+<h3 id="get-adminstatisticsvouchers">GET /admin/statistics/vouchers</h3>
+<p>Статистика по ваучерам (admin)</p>
+<p><strong>Query Parameters:</strong>
+- <code>from</code>: 2026-04-01
+- <code>to</code>: 2026-04-30
+- <code>airport_code</code>: SVO (optional)</p>
+<p><strong>Response:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;total_created&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2847</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;total_redeemed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1923</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;redemption_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">67.5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;total_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">962000</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;by_airport&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;airport_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SVO&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;created&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;redeemed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">845</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">422500</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;by_day&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-15&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;created&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">147</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;redeemed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">98</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="get-adminstatisticsorders">GET /admin/statistics/orders</h3>
+<p>Статистика по заказам (admin)</p>
+<h3 id="get-adminstatisticsrestaurants">GET /admin/statistics/restaurants</h3>
+<p>Статистика по ресторанам</p>
+<hr />
+<h2 id="notifications">NOTIFICATIONS (Уведомления)</h2>
+<h3 id="post-notificationspush">POST /notifications/push</h3>
+<p>Отправить push-уведомление</p>
+<p><strong>Request:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;passenger_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Заказ готов&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ваш заказ ORD-001 готов к выдаче&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;order_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;order_ready&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="error-responses">ERROR RESPONSES</h2>
+<h3 id="400-bad-request">400 Bad Request</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;validation_error&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invalid phone number&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Must be in format +7XXXXXXXXXX&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="401-unauthorized">401 Unauthorized</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;unauthorized&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invalid token&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="403-forbidden">403 Forbidden</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;forbidden&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Insufficient permissions&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="404-not-found">404 Not Found</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;not_found&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Voucher not found&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="422-unprocessable-entity">422 Unprocessable Entity</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;unprocessable&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Voucher already redeemed&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="500-internal-server-error">500 Internal Server Error</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;internal_error&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Something went wrong&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="rate-limiting">RATE LIMITING</h2>
+<ul>
+<li><strong>Public endpoints:</strong> 100 requests per minute</li>
+<li><strong>Authenticated endpoints:</strong> 500 requests per minute</li>
+<li><strong>Payment endpoints:</strong> 10 requests per minute</li>
+</ul>
+<hr />
+<h2 id="notes">NOTES</h2>
+<ol>
+<li>
+<p><strong>Voucher Rules:</strong>
+   - One voucher per flight per type per passenger
+   - Cannot be used for alcohol
+   - Valid for 24 hours or until flight departure
+   - Airport-specific</p>
+</li>
+<li>
+<p><strong>Bonus Rules:</strong>
+   - Earned only on card payment portion
+   - 7% accrual rate
+   - 50% redemption rate
+   - Cannot be used to pay for vouchers</p>
+</li>
+<li>
+<p><strong>Order Flow:</strong>
+   <code>new → accepted → preparing → ready → completed</code></p>
+</li>
+<li>
+<p><strong>Payment Integration:</strong>
+   - YooKassa or T-Bank
+   - Support for Apple Pay, Google Pay
+   - Webhook for payment confirmation</p>
+</li>
+</ol>
+        </div>
+    </div>
+</article>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-info reveal">
+                <p class="label">Контакты</p>
+                <h2>Готовы к диалогу?</h2>
+                <div class="contact-item">
+                    <span class="contact-label">Телефон</span>
+                    <a href="tel:+78129287478">+7 (812) 928-74-78</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Почта</span>
+                    <a href="mailto:hello@axiiom.ru">hello@axiiom.ru</a>
+                </div>
+            </div>
+        </div>
+        <div id="footerCopy"></div>
+    </div>
+</footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
+<script src="/metrika.js"></script>
+<script src="/config.js"></script>
+<script src="/nav.js"></script>
+<script>Nav.init({breadcrumbs:false});</script>
+<script src="/theme.js"></script>
+<script src="/footer.js"></script>
+<script src="/preloader.js"></script>
+<script>
+(function(){var r=document.querySelectorAll('.reveal');if(r.length){var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible')}})},{threshold:0.15});for(var i=0;i<r.length;i++){o.observe(r[i])}}})();
+</script>
+<script>
+(function(){var t=document.getElementById('navToggle');var o=document.getElementById('navOverlay');if(!t||!o)return;t.addEventListener('click',function(e){e.stopPropagation();o.classList.toggle('open');t.classList.toggle('active');document.body.style.overflow=o.classList.contains('open')?'hidden':''})})();
+</script>
+</body>
+</html>

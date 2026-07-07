@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+    <title>План реализации «Витрина» (W1–W12) | Документация AXIIOM</title>
+    <meta name="description" content="Поэтапный план реализации платформы: 12 недель, 4 этапа, команда, бюджет, метрики успеха.">
+    <link rel="canonical" href="https://axiiom.ru/docs/vitrina-plan/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://axiiom.ru/docs/vitrina-plan/">
+    <meta property="og:title" content="План реализации «Витрина» (W1–W12) | Документация AXIIOM">
+    <meta property="og:description" content="Поэтапный план реализации платформы: 12 недель, 4 этапа, команда, бюджет, метрики успеха.">
+    <meta property="og:image" content="https://axiiom.ru/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="AXIIOM">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://axiiom.ru/docs/vitrina-plan/">
+    <meta name="twitter:title" content="План реализации «Витрина» (W1–W12) | Документация AXIIOM">
+    <meta name="twitter:description" content="Поэтапный план реализации платформы: 12 недель, 4 этапа, команда, бюджет, метрики успеха.">
+    <meta name="twitter:image" content="https://axiiom.ru/og-image.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"План реализации «Витрина» (W1–W12)","description":"Поэтапный план реализации платформы: 12 недель, 4 этапа, команда, бюджет, метрики успеха.","url":"https://axiiom.ru/docs/vitrina-plan/","author":{"@type":"Organization","name":"AXIIOM"},"isPartOf":{"@type":"WebSite","name":"AXIIOM","url":"https://axiiom.ru"}}</script>
+    <style>*{margin:0;padding:0;box-sizing:border-box}html{font-size:16px;scroll-behavior:smooth}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1.0625rem;background:#0A0A0F;color:#C7C7CC;line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}.noise{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}.grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:60px 60px}.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}.reveal.visible{opacity:1;transform:translateY(0)}</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/docs/styles.css">
+</head>
+<body>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="30" height="30" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/></svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </div>
+</header>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"><ol itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/"><span itemprop="name">Главная</span></a>
+        <meta itemprop="position" content="1">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/docs/"><span itemprop="name">Документация</span></a>
+        <meta itemprop="position" content="2">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">План реализации «Витрина» (W1–W12)</span>
+        <meta itemprop="position" content="3">
+      </li>
+    </ol></div></nav>
+<article class="docs-article">
+    <div class="container">
+        <div class="docs-content">
+            <div class="feature-page-hero"><h1>План реализации «Витрина» (W1–W12)</h1><p>Поэтапный план реализации платформы: 12 недель, 4 этапа, команда, бюджет, метрики успеха.</p><div class="doc-actions"><a href="/docs/" class="btn btn-outline">← Все документы</a></div></div><h1 id="_1">«ДОРОЖНАЯ КАРТА» ПРОЕКТА «ВИТРИНА»</h1>
+<p>Исполнитель: ООО «АКСИОМА» / Продуктовая команда «Витрина»
+Заказчик: ГК (инвестор)
+Период реализации: 12 месяцев (W1–W12)</p>
+<hr />
+<h2 id="w1-">ЭТАП W1: ФУНДАМЕНТ — РЕВЕРС-ИНЖИНИРИНГ И АРХИТЕКТУРА</h2>
+<p><strong>Сроки</strong>: Месяц 1 (недели 1–4)</p>
+<table>
+<thead>
+<tr>
+<th>№</th>
+<th>Наименование работ</th>
+<th>Сроки</th>
+<th>Результат / Зависимости</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.1</td>
+<td>Аудит исходного кода legacy-системы, трассировка критичных транзакционных потоков (корзина, расчёт стоимости, валидация остатков, процессинг оплаты, передача на сборку)</td>
+<td>01.04 – 07.04</td>
+<td>Полный отчёт по legacy-коду, выявленные бизнес-правила</td>
+</tr>
+<tr>
+<td>1.2</td>
+<td>Выявление и документирование скрытых бизнес-правил ценообразования, логики синхронизации с гипермаркетами, алгоритмов расчёта зон доставки, правил начисления комиссий</td>
+<td>01.04 – 10.04</td>
+<td>Журнал бизнес-правил с подтверждением от владельцев процессов</td>
+</tr>
+<tr>
+<td>1.3</td>
+<td>Определение границ ответственности между PHP (бизнес-логика, администрирование, каталог) и Go (высоконагруженные операции, роутинг, интеграции)</td>
+<td>05.04 – 12.04</td>
+<td>Техническое задание v1.0 с детализацией доменных границ</td>
+</tr>
+<tr>
+<td>1.4</td>
+<td>Проектирование схем горячего и холодного хранения данных (PostgreSQL, Redis, ClickHouse)</td>
+<td>08.04 – 15.04</td>
+<td>Архитектура БД, схемы таблиц, стратегия партиционирования</td>
+</tr>
+<tr>
+<td>1.5</td>
+<td>Развёртывание Kubernetes-кластера, настройка Terraform, построение GitLab CI/CD</td>
+<td>10.04 – 20.04</td>
+<td>Рабочий кластер, GitLab CI/CD пайплайн</td>
+</tr>
+<tr>
+<td>1.6</td>
+<td>Развёртывание стека наблюдаемости (Prometheus, Grafana, ELK, Sentry)</td>
+<td>15.04 – 22.04</td>
+<td>Базовый мониторинг и логирование</td>
+</tr>
+<tr>
+<td>1.7</td>
+<td>Разработка стратегии миграции с двойной записью, механизмами сверки и безопасного отката</td>
+<td>18.04 – 28.04</td>
+<td>План миграции данных с пошаговыми инструкциями</td>
+</tr>
+<tr>
+<td>1.8</td>
+<td>Создание пакета архитектурных решений ADR</td>
+<td>20.04 – 28.04</td>
+<td>ADR-пакет в репозитории</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Команда W1</strong>: Технический лидер, старший разработчик Go, старший разработчик PHP, DevOps-инженер, бизнес-аналитик, QA-автоматизатор</p>
+<p><strong>Milestone W1</strong>: 28.04 — Техническое задание и план миграции утверждены</p>
+<hr />
+<h2 id="w2">ЭТАП W2: КЛИЕНТСКИЙ КАНАЛ И ЯДРО ЗАКАЗОВ</h2>
+<p><strong>Сроки</strong>: Месяц 2 (недели 5–8)</p>
+<table>
+<thead>
+<tr>
+<th>№</th>
+<th>Наименование работ</th>
+<th>Сроки</th>
+<th>Результат / Зависимости</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.1</td>
+<td>Разработка нового клиентского приложения (Vue.js 3, TypeScript, Vite, Pinia)</td>
+<td>29.04 – 20.05</td>
+<td>Клиентское приложение с UI-компонентами</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td>Реализация REST API ядра заказов (PHP 8.x)</td>
+<td>29.04 – 20.05</td>
+<td>API endpoints для создания, изменения, отмены заказов</td>
+</tr>
+<tr>
+<td>2.3</td>
+<td>Интеграция с API гипермаркетов (получение каталога, остатков, цен)</td>
+<td>06.05 – 20.05</td>
+<td>Интеграционный слой, синхронизация данных</td>
+</tr>
+<tr>
+<td>2.4</td>
+<td>Разработка модуля корзины и формирования заказа</td>
+<td>06.05 – 20.05</td>
+<td>Логика добавления товаров, расчёта стоимости</td>
+</tr>
+<tr>
+<td>2.5</td>
+<td>Интеграция с платёжными шлюзами</td>
+<td>13.05 – 27.05</td>
+<td>Оплата картами, обработка платежей</td>
+</tr>
+<tr>
+<td>2.6</td>
+<td>Модуль валидации остатков и резервирования товаров</td>
+<td>13.05 – 27.05</td>
+<td>Проверка доступности, блокировка при оформлении</td>
+</tr>
+<tr>
+<td>2.7</td>
+<td>Настройка событийной шины Kafka для асинхронного взаимодействия сервисов</td>
+<td>20.05 – 03.06</td>
+<td>Настроенная шина, обработка событий</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Milestone W2</strong>: 03.06 — Клиент и ядро заказов готовы к интеграционному тестированию</p>
+<hr />
+<h2 id="w3-v10-">ЭТАП W3: РЕЛИЗ V1.0, ЗАПУСК В САНКТ-ПЕТЕРБУРГЕ</h2>
+<p><strong>Сроки</strong>: Месяц 3 (недели 9–12)</p>
+<table>
+<thead>
+<tr>
+<th>№</th>
+<th>Наименование работ</th>
+<th>Сроки</th>
+<th>Результат / Зависимости</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3.1</td>
+<td>Миграция данных с двойной записью (new + legacy)</td>
+<td>04.06 – 11.06</td>
+<td>Синхронизированные данные, механизм сверки</td>
+</tr>
+<tr>
+<td>3.2</td>
+<td>Интеграционное тестирование (new ↔ legacy)</td>
+<td>04.06 – 18.06</td>
+<td>Протокол интеграционных тестов</td>
+</tr>
+<tr>
+<td>3.3</td>
+<td>Нагрузочное тестирование (цель: 10 000 RPS)</td>
+<td>11.06 – 18.06</td>
+<td>Отчёт о нагрузочных тестах</td>
+</tr>
+<tr>
+<td>3.4</td>
+<td>Пользовательское тестирование (UAT)</td>
+<td>15.06 – 22.06</td>
+<td>Протокол UAT</td>
+</tr>
+<tr>
+<td>3.5</td>
+<td>Развёртывание в production (Canary/Blue-Green)</td>
+<td>22.06 – 25.06</td>
+<td>Production-окружение</td>
+</tr>
+<tr>
+<td>3.6</td>
+<td>Запуск пилота в Санкт-Петербурге</td>
+<td>25.06 – 28.06</td>
+<td>Пилотная эксплуатация</td>
+</tr>
+<tr>
+<td>3.7</td>
+<td>Мониторинг и стабилизация</td>
+<td>25.06 – 30.06</td>
+<td>Дашборды, алерты, SLO 99,5%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Milestone W3</strong>: 30.06 — Релиз v1.0, старт пилота в СПб</p>
+<hr />
+<h2 id="w4">ЭТАП W4: ВИТРИНА МАЛЫХ МАГАЗИНОВ И ПРОИЗВОДИТЕЛЕЙ</h2>
+<p><strong>Сроки</strong>: Месяц 4 (недели 13–16)</p>
+<table>
+<thead>
+<tr>
+<th>№</th>
+<th>Наименование работ</th>
+<th>Сроки</th>
+<th>Результат / Зависимости</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4.1</td>
+<td>Проектирование маркетплейс-модуля</td>
+<td>01.07 – 07.07</td>
+<td>Архитектура маркетплейса</td>
+</tr>
+<tr>
+<td>4.2</td>
+<td>Разработка кабинета продавца (регистрация, добавление товаров, управление заказами)</td>
+<td>01.07 – 28.07</td>
+<td>Личный кабинет продавца</td>
+</tr>
+<tr>
+<td>4.3</td>
+<td>Создание карточек товаров, каталога, поиска, фильтров</td>
+<td>08.07 – 21.07</td>
+<td>Каталог товаров</td>
+</tr>
+<tr>
+<td>4.4</td>
+<td>Система рейтингов и отзывов продавцов</td>
+<td>15.07 – 28.07</td>
+<td>Модуль отзывов</td>
+</tr>
+<tr>
+<td>4.5</td>
+<td>Управление заказами для продавцов</td>
+<td>22.07 – 04.08</td>
+<td>Обработка заказов продавцами</td>
+</tr>
+<tr>
+<td>4.6</td>
+<td>Интеграция с системами малых магазинов</td>
+<td>29.07 – 11.08</td>
+<td>API-адаптеры для магазинов</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Milestone W4</strong>: 11.08 — Маркетплейс-витрина готова к запуску</p>
+<hr />
+<h2 id="w5">ЭТАП W5: ПРОДВИНУТЫЙ МОДУЛЬ ДОСТАВКИ И ЛОГИСТИКА</h2>
+<p><strong>Сроки</strong>: Месяц 5 (недели 17–20)</p>
+<table>
+<thead>
+<tr>
+<th>№</th>
+<th>Наименование работ</th>
+<th>Сроки</th>
+<th>Результат / Зависимости</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5.1</td>
+<td>Разработка алгоритмов роутинга и ETA (Go)</td>
+<td>12.08 – 25.08</td>
+<td>Алгоритмы маршрутизации</td>
+</tr>
+<tr>
+<td>5.2</td>
+<td>Интеграция с курьерскими службами и такси</td>
+<td>19.08 – 01.09</td>
+<td>Интеграция с внешними службами</td>
+</tr>
+<tr>
+<td>5.3</td>
+<td>Интеграция с пунктами выдачи заказов (ПВЗ)</td>
+<td>26.08 – 08.09</td>
+<td>Модуль ПВЗ</td>
+</tr>
+<tr>
+<td>5.4</td>
+<td>Модуль сборки заказов (сборщики, маршруты)</td>
+<td>02.09 – 15.09</td>
+<td>Система сборки</td>
+</tr>
+<tr>
+<td>5.5</td>
+<td>Трекинг доставки в реальном времени</td>
+<td>09.09 – 22.09</td>
+<td>Отслеживание заказов</td>
+</tr>
+<tr>
+<td>5.6</td>
+<td>Оптимизация last-mile логистики</td>
+<td>16.09 – 29.09</td>
+<td>Снижение стоимости доставки</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Milestone W5</strong>: 29.09 — Модуль доставки с точностью ETA &gt;95% готов</p>
+<hr />
+<h2 id="w6">ЭТАП W6: СТАБИЛИЗАЦИЯ, АУДИТ БЕЗОПАСНОСТИ, ПОДГОТОВКА ИНТЕГРАЦИЙ</h2>
+<p><strong>Сроки</strong>: Месяц 6 (недели 21–24)</p>
+<table>
+<thead>
+<tr>
+<th>№</th>
+<th>Наименование работ</th>
+<th>Сроки</th>
+<th>Результат / Зависимости</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6.1</td>
+<td>Стабилизация и оптимизация производительности</td>
+<td>30.09 – 07.10</td>
+<td>Оптимизация &lt;200 мс</td>
+</tr>
+<tr>
+<td>6.2</td>
+<td>Настройка SLO 99,5%, SLI, error budget</td>
+<td>07.10 – 14.10</td>
+<td>Мониторинг SLO</td>
+</tr>
+<tr>
+<td>6.3</td>
+<td>Внешний аудит безопасности (pentest)</td>
+<td>07.10 – 21.10</td>
+<td>Отчёт по безопасности</td>
+</tr>
+<tr>
+<td>6.4</td>
+<td>Внедрение circuit-breaker для внешних интеграций</td>
+<td>14.10 – 21.10</td>
+<td>Защита от каскадных отказов</td>
+</tr>
+<tr>
+<td>6.5</td>
+<td>Разработка шаблонов интеграций для ритейлеров</td>
+<td>21.10 – 28.10</td>
+<td>Шаблоны адаптеров</td>
+</tr>
+<tr>
+<td>6.6</td>
+<td>Подготовка документации для интеграторов</td>
+<td>21.10 – 04.11</td>
+<td>Документация API</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Milestone W6</strong>: 04.11 — Стабильная платформа, аудит пройден, готовность к интеграциям</p>
+<hr />
+<h2 id="w7-dbs-">ЭТАП W7: АРХИТЕКТУРА DBS-ИНТЕГРАЦИЙ, МОК-АДАПТЕРЫ</h2>
+<p><strong>Сроки</strong>: Месяц 7 (недели 25–28)</p>
+<table>
+<thead>
+<tr>
+<th>№</th>
+<th>Наименование работ</th>
+<th>Сроки</th>
+<th>Результат / Зависимости</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7.1</td>
+<td>Проектирование интеграционного слоя (изоляция доменов)</td>
+<td>05.11 – 11.11</td>
+<td>Архитектура интеграций</td>
+</tr>
+<tr>
+<td>7.2</td>
+<td>Разработка мок-адаптеров для ритейлеров (симуляторы API)</td>
+<td>05.11 – 18.11</td>
+<td>Мок-сервисы</td>
+</tr>
+<tr>
+<td>7.3</td>
+<td>Создание контрактных тестов</td>
+<td>12.11 – 25.11</td>
+<td>Тесты API-контрактов</td>
+</tr>
+<tr>
+<td>7.4</td>
+<td>Реализация circuit-breaker и retry-механизмов</td>
+<td>19.11 – 02.12</td>
+<td>Устойчивость к отказам</td>
+</tr>
+<tr>
+<td>7.5</td>
+<td>Документирование API-контрактов</td>
+<td>26.11 – 03.12</td>
+<td>Спецификация API</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Milestone W7</strong>: 03.12 — Архитектура интеграций готова</p>
+<hr />
+<h2 id="w8">ЭТАП W8: СИНХРОНИЗАЦИЯ ДАННЫХ, НАГРУЗОЧНОЕ ТЕСТИРОВАНИЕ</h2>
+<p><strong>Сроки</strong>: Месяц 8 (недели 29–32)</p>
+<table>
+<thead>
+<tr>
+<th>№</th>
+<th>Наименование работ</th>
+<th>Сроки</th>
+<th>Результат / Зависимости</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8.1</td>
+<td>Синхронизация каталогов с ритейлерами (товары, цены, остатки)</td>
+<td>04.12 – 11.12</td>
+<td>Синхронизированные каталоги</td>
+</tr>
+<tr>
+<td>8.2</td>
+<td>Синхронизация заказов и статусов</td>
+<td>11.12 – 18.12</td>
+<td>Обмен заказами</td>
+</tr>
+<tr>
+<td>8.3</td>
+<td>Нагрузочное тестирование интеграционного слоя (10 000 RPS)</td>
+<td>11.12 – 25.12</td>
+<td>Протокол нагрузки</td>
+</tr>
+<tr>
+<td>8.4</td>
+<td>Stress-тесты и тесты отказоустойчивости</td>
+<td>18.12 – 25.12</td>
+<td>Отчёт о стресс-тестах</td>
+</tr>
+<tr>
+<td>8.5</td>
+<td>Оптимизация производительности интеграций</td>
+<td>25.12 – 31.12</td>
+<td>Оптимизированные адаптеры</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Milestone W8</strong>: 31.12 — Нагрузочные тесты пройдены, готовность к реальным интеграциям</p>
+<hr />
+<h2 id="w9-sla">ЭТАП W9: ПОДКЛЮЧЕНИЕ РЕАЛЬНЫХ БРЕНДОВ, ВАЛИДАЦИЯ SLA</h2>
+<p><strong>Сроки</strong>: Месяц 9 (недели 33–36)</p>
+<table>
+<thead>
+<tr>
+<th>№</th>
+<th>Наименование работ</th>
+<th>Сроки</th>
+<th>Результат / Зависимости</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9.1</td>
+<td>Подключение 2–3 ритейл-партнёров по модели DBS</td>
+<td>02.01 – 16.01.2027</td>
+<td>Интеграция с ритейлерами</td>
+</tr>
+<tr>
+<td>9.2</td>
+<td>Мониторинг SLA (доступность, время отклика)</td>
+<td>09.01 – 23.01</td>
+<td>Дашборды SLA</td>
+</tr>
+<tr>
+<td>9.3</td>
+<td>Обработка edge-cases и проблемных сценариев</td>
+<td>16.01 – 30.01</td>
+<td>Исправления</td>
+</tr>
+<tr>
+<td>9.4</td>
+<td>Финальная настройка интеграций на основе данных</td>
+<td>23.01 – 06.02</td>
+<td>Готовые интеграции</td>
+</tr>
+<tr>
+<td>9.5</td>
+<td>UAT с ритейл-партнёрами</td>
+<td>30.01 – 06.02</td>
+<td>Протокол UAT</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Milestone W9</strong>: 06.02 — Пилот DBS с реальными партнёрами, подтверждённые SLA</p>
+<hr />
+<h2 id="w10-">ЭТАП W10: МАСШТАБИРОВАНИЕ НА ГОРОДА-МИЛЛИОННИКИ</h2>
+<p><strong>Сроки</strong>: Месяц 10 (недели 37–40)</p>
+<table>
+<thead>
+<tr>
+<th>№</th>
+<th>Наименование работ</th>
+<th>Сроки</th>
+<th>Результат / Зависимости</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10.1</td>
+<td>Подготовка конфигурационных профилей для новых городов</td>
+<td>07.02 – 14.02</td>
+<td>Профили городов</td>
+</tr>
+<tr>
+<td>10.2</td>
+<td>Развёртывание через готовые Helm-чарты</td>
+<td>14.02 – 21.02</td>
+<td>Развёрнутые окружения</td>
+</tr>
+<tr>
+<td>10.3</td>
+<td>Интеграция локальных логистических партнёров</td>
+<td>14.02 – 28.02</td>
+<td>Логистика в городах</td>
+</tr>
+<tr>
+<td>10.4</td>
+<td>Запуск в 3–5 городах-миллионниках</td>
+<td>21.02 – 07.03</td>
+<td>Работающие города</td>
+</tr>
+<tr>
+<td>10.5</td>
+<td>Мониторинг и адаптация под региональные особенности</td>
+<td>28.02 – 07.03</td>
+<td>Стабильные запуски</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Milestone W10</strong>: 07.03 — 3–5 городов запущено</p>
+<hr />
+<h2 id="w11-">ЭТАП W11: АНАЛИТИКА БИЗНЕС-МЕТРИК И ОПТИМИЗАЦИЯ</h2>
+<p><strong>Сроки</strong>: Месяц 11 (недели 41–44)</p>
+<table>
+<thead>
+<tr>
+<th>№</th>
+<th>Наименование работ</th>
+<th>Сроки</th>
+<th>Результат / Зависимости</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>11.1</td>
+<td>Внедрение аналитических дашбордов (бизнес-метрики)</td>
+<td>08.03 – 15.03</td>
+<td>Дашборды</td>
+</tr>
+<tr>
+<td>11.2</td>
+<td>Сбор и анализ метрик использования</td>
+<td>15.03 – 22.03</td>
+<td>Аналитика</td>
+</tr>
+<tr>
+<td>11.3</td>
+<td>Оптимизация процессов на основе данных</td>
+<td>22.03 – 29.03</td>
+<td>Оптимизированные процессы</td>
+</tr>
+<tr>
+<td>11.4</td>
+<td>A/B тестирование UX</td>
+<td>22.03 – 05.04</td>
+<td>Улучшенный UX</td>
+</tr>
+<tr>
+<td>11.5</td>
+<td>Рост конверсии и retention</td>
+<td>29.03 – 05.04</td>
+<td>Метрики роста</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Milestone W11</strong>: 05.04 — Аналитика и оптимизация завершены</p>
+<hr />
+<h2 id="w12-api">ЭТАП W12: ПАРТНЁРСКИЙ API, ПОДГОТОВКА К ФЕДЕРАЛЬНОМУ ЗАПУСКУ</h2>
+<p><strong>Сроки</strong>: Месяц 12 (недели 45–48)</p>
+<table>
+<thead>
+<tr>
+<th>№</th>
+<th>Наименование работ</th>
+<th>Сроки</th>
+<th>Результат / Зависимости</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12.1</td>
+<td>Разработка публичного API для партнёров</td>
+<td>06.04 – 13.04</td>
+<td>Партнёрский API</td>
+</tr>
+<tr>
+<td>12.2</td>
+<td>Документирование API (Swagger/OpenAPI)</td>
+<td>13.04 – 20.04</td>
+<td>Документация</td>
+</tr>
+<tr>
+<td>12.3</td>
+<td>Финальный аудит безопасности и производительности</td>
+<td>13.04 – 27.04</td>
+<td>Итоговый аудит</td>
+</tr>
+<tr>
+<td>12.4</td>
+<td>Подготовка к федеральному тиражированию (playbook)</td>
+<td>20.04 – 04.05</td>
+<td>Playbook масштабирования</td>
+</tr>
+<tr>
+<td>12.5</td>
+<td>Итоговое тестирование всей платформы</td>
+<td>27.04 – 04.05</td>
+<td>Итоговый отчёт</td>
+</tr>
+<tr>
+<td>12.6</td>
+<td>Подготовка финальной документации</td>
+<td>04.05 – 11.05</td>
+<td>Полная документация</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Milestone W12</strong>: 11.05 — Федеральный запуск готов</p>
+<hr />
+<h2 id="milestones">КЛЮЧЕВЫЕ ВЕХИ (MILESTONES)</h2>
+<table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Дата</th>
+<th>Результат</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>М1</td>
+<td>Конец W1 (28.04)</td>
+<td>Архитектура и план миграции утверждены</td>
+</tr>
+<tr>
+<td>М2</td>
+<td>Конец W2 (03.06)</td>
+<td>Клиент и ядро готовы к интеграции</td>
+</tr>
+<tr>
+<td>М3</td>
+<td>Конец W3 (30.06)</td>
+<td>Релиз v1.0, старт пилота в СПб</td>
+</tr>
+<tr>
+<td>М4</td>
+<td>Конец W4 (11.08)</td>
+<td>Маркетплейс запущен</td>
+</tr>
+<tr>
+<td>М5</td>
+<td>Конец W5 (29.09)</td>
+<td>Модуль доставки готов</td>
+</tr>
+<tr>
+<td>М6</td>
+<td>Конец W6 (04.11)</td>
+<td>Стабильная платформа, аудит пройден</td>
+</tr>
+<tr>
+<td>М7</td>
+<td>Конец W7 (03.12)</td>
+<td>Архитектура интеграций готова</td>
+</tr>
+<tr>
+<td>М8</td>
+<td>Конец W8 (31.12)</td>
+<td>Нагрузочные тесты пройдены</td>
+</tr>
+<tr>
+<td>М9</td>
+<td>Конец W9 (06.02)</td>
+<td>Пилот DBS с партнёрами</td>
+</tr>
+<tr>
+<td>М10</td>
+<td>Конец W10 (07.03)</td>
+<td>3–5 городов запущено</td>
+</tr>
+<tr>
+<td>М11</td>
+<td>Конец W11 (05.04)</td>
+<td>Аналитика и оптимизация завершены</td>
+</tr>
+<tr>
+<td>М12</td>
+<td>Конец W12 (11.05)</td>
+<td>Федеральный запуск готов</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_2">ДОПУЩЕНИЯ И РИСКИ</h2>
+<ol>
+<li>Заказчик предоставляет доступы к тестовым контурам и API гипермаркетов до начала W2.</li>
+<li>Команда Аксиома обеспечивает поддержку legacy-системы на протяжении всей миграции.</li>
+<li>Согласование макетов и требований осуществляется в течение 1 рабочего дня.</li>
+<li>При задержке согласования более 2 рабочих дней срок сдачи может быть сдвинут.</li>
+<li>Зависимость от внешних API ритейлеров — риск задержек при недоступности.</li>
+<li>Нагрузка при пиковых значениях — риск деградации, митигируется нагрузочным тестированием.</li>
+</ol>
+<hr />
+<h2 id="_3">БЮДЖЕТ</h2>
+<p>52 000 000 рублей (фиксированный CAPEX)</p>
+<table>
+<thead>
+<tr>
+<th>Статья</th>
+<th>Доля</th>
+<th>Сумма</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Команда разработки</td>
+<td>61,8%</td>
+<td>32 136 000 ₽</td>
+</tr>
+<tr>
+<td>Инфраструктура и лицензии</td>
+<td>10,0%</td>
+<td>5 200 000 ₽</td>
+</tr>
+<tr>
+<td>Интеграции и адаптеры</td>
+<td>8,2%</td>
+<td>4 264 000 ₽</td>
+</tr>
+<tr>
+<td>QA, безопасность, аудит</td>
+<td>5,9%</td>
+<td>3 068 000 ₽</td>
+</tr>
+<tr>
+<td>UX, документация</td>
+<td>4,7%</td>
+<td>2 444 000 ₽</td>
+</tr>
+<tr>
+<td>Резерв на риски</td>
+<td>9,4%</td>
+<td>4 888 000 ₽</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_4">ПОДПИСИ СТОРОН</h2>
+<p>ЗАКАЗЧИК                                     ИСПОЛНИТЕЛЬ
+<strong><em>_</em></strong><strong><em>_</em></strong><strong><em>                            </em></strong><strong><em>_</em></strong><strong><em>_</em></strong>
+(подпись)                                     (подпись)
+М.П.                                          М.П.</p>
+        </div>
+    </div>
+</article>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-info reveal">
+                <p class="label">Контакты</p>
+                <h2>Готовы к диалогу?</h2>
+                <div class="contact-item">
+                    <span class="contact-label">Телефон</span>
+                    <a href="tel:+78129287478">+7 (812) 928-74-78</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Почта</span>
+                    <a href="mailto:hello@axiiom.ru">hello@axiiom.ru</a>
+                </div>
+            </div>
+        </div>
+        <div id="footerCopy"></div>
+    </div>
+</footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
+<script src="/metrika.js"></script>
+<script src="/config.js"></script>
+<script src="/nav.js"></script>
+<script>Nav.init({breadcrumbs:false});</script>
+<script src="/theme.js"></script>
+<script src="/footer.js"></script>
+<script src="/preloader.js"></script>
+<script>
+(function(){var r=document.querySelectorAll('.reveal');if(r.length){var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible')}})},{threshold:0.15});for(var i=0;i<r.length;i++){o.observe(r[i])}}})();
+</script>
+<script>
+(function(){var t=document.getElementById('navToggle');var o=document.getElementById('navOverlay');if(!t||!o)return;t.addEventListener('click',function(e){e.stopPropagation();o.classList.toggle('open');t.classList.toggle('active');document.body.style.overflow=o.classList.contains('open')?'hidden':''})})();
+</script>
+</body>
+</html>

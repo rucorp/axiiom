@@ -11,6 +11,27 @@ base_html = Template('''<!DOCTYPE html>
 <title>${title} — AXIIOM</title>
 <meta name="description" content="${desc}">
 <link rel="canonical" href="https://axiiom.ru/industries/${slug}.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "${title}",
+      "description": "${desc}",
+      "url": "https://axiiom.ru/industries/${slug}.html",
+      "isPartOf": { "@type": "WebSite", "name": "AXIIOM", "url": "https://axiiom.ru/" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://axiiom.ru/" },
+        { "@type": "ListItem", "position": 2, "name": "${title}", "item": "https://axiiom.ru/industries/${slug}.html" }
+      ]
+    }
+  ]
+}
+</script>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,35 +42,51 @@ base_html = Template('''<!DOCTYPE html>
 <meta property="og:title" content="${title} — AXIIOM">
 <meta property="og:description" content="${desc}">
 <meta property="og:image" content="https://axiiom.ru/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="AXIIOM">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://axiiom.ru/industries/${slug}.html">
 <meta name="twitter:title" content="${title} — AXIIOM">
 <meta name="twitter:description" content="${desc}">
 <meta name="twitter:image" content="https://axiiom.ru/og-image.png">
 <link rel="stylesheet" href="/styles.css">
-<style>.breadcrumbs{padding:16px 0 0;border-bottom:1px solid var(--clr-border);background:var(--clr-bg)}.breadcrumbs ol{list-style:none;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:0;margin:0}.breadcrumbs li{font-size:.8125rem;color:var(--clr-faint)}.breadcrumbs li+li:before{content:"›";margin-right:8px;color:var(--clr-faint);opacity:.5}.breadcrumbs a{color:var(--clr-accent);text-decoration:none}.breadcrumbs a:hover{text-decoration:underline}}</style>
+<link rel="stylesheet" href="/preloader.css">
 </head>
 <body>
-<div class="noise"></div><div class="grid-overlay"></div>
-<header class="header" id="header">
-<div class="container">
-<nav class="nav">
-<a href="/" class="logo"><svg width="30" height="30" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/></svg><span>AXIIOM</span></a>
-<ul class="nav-links nav-links--desktop industries-nav-links" id="industriesNav"></ul>
-<div class="nav-actions">
-<button class="theme-btn" id="themeToggle" aria-label="Сменить тему"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button>
-<button class="nav-toggle industries-nav-toggle" id="navToggle" aria-label="Меню"><span></span><span></span><span></span></button>
+<div id="preloader">
+<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<2000){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},2000-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})()</script>
+<svg class="preloader-svg" viewBox="0 0 36 36" width="80" height="80"><rect class="pr1" x="2" y="2" width="14" height="14" rx="2"/><rect class="pr2" x="20" y="2" width="14" height="14" rx="2"/><rect class="pr3" x="2" y="20" width="14" height="14" rx="2"/><rect class="pr4" x="20" y="20" width="14" height="14" rx="2"/><circle class="pc" cx="27" cy="27" r="3"/></svg>
 </div>
-</nav></div></header>
-<nav class="breadcrumbs" aria-label="Breadcrumb">
-<div class="container">
-<ol itemscope itemtype="https://schema.org/BreadcrumbList">
-<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">Главная</span></a><meta itemprop="position" content="1"></li>
-<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="/industries/"><span itemprop="name">Отраслевые решения</span></a><meta itemprop="position" content="2"></li>
-<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">${title}</span><meta itemprop="position" content="3"></li>
-</ol></div></nav>
-<div class="nav-overlay" id="navOverlay"><ul class="nav-links" id="industriesNavMobile"></ul></div>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/></svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"></div>
+</nav>
 <section class="hero industries-hero">
 <div class="container"><div class="hero-content">
 <div class="hero-bg-svg"><svg width="800" height="600" viewBox="0 0 800 600" fill="none"><circle cx="400" cy="300" r="280" stroke="rgba(255,255,255,0.03)" stroke-width="1"/><circle cx="400" cy="300" r="200" stroke="rgba(255,255,255,0.04)" stroke-width="1"/><circle cx="400" cy="300" r="120" stroke="rgba(255,255,255,0.06)" stroke-width="1"/><line x1="50" y1="300" x2="750" y2="300" stroke="rgba(255,255,255,0.03)" stroke-width="1"/><line x1="400" y1="20" x2="400" y2="580" stroke="rgba(255,255,255,0.03)" stroke-width="1"/><path d="M200 300 L400 100 L600 300 L400 500 Z" stroke="rgba(255,255,255,0.04)" stroke-width="1" fill="none"/><circle cx="400" cy="300" r="4" fill="rgba(255,255,255,0.1)"/></svg></div>
@@ -57,14 +94,32 @@ base_html = Template('''<!DOCTYPE html>
 <h1>${h1}</h1>
 <p class="hero-desc">${hero}</p></div></div></section>
 <section class="section"><div class="container"><h2>Решения</h2><p class="content-wrapper">${desc}</p><div style="text-align:center;margin-top:40px"><a href="/industries/" class="btn btn-outline">Все отрасли</a></div></div></section>
-<footer class="footer"><div class="container"><div id="footerCopy"></div></div></footer>
-<script>const header=document.getElementById("header");window.addEventListener("scroll",()=>{ header.classList.toggle("scrolled",window.scrollY>40); },{passive:true});</script>
-<script src="/industries/nav.js"></script>
-<script>initIndustriesNav("${slug}.html");</script>
+<footer class="footer">
+    <div class="container">
+        <div id="footerCopy"></div>
+    </div>
+</footer>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-HFS4BDGTV4");</script>
+<script src="/metrika.js"></script>
+<script src="/config.js"></script>
+<script src="/nav.js"></script>
+<script>Nav.init({ cta: true, breadcrumbs: true });</script>
 <script src="/theme.js"></script>
-<script src="/footer.js"></script>
+<script src="/preloader.js"></script>
+<script>
+(function() {
+  var t = document.getElementById('navToggle');
+  var o = document.getElementById('navOverlay');
+  if (!t || !o) return;
+  t.addEventListener('click', function(e) {
+    e.stopPropagation();
+    o.classList.toggle('open');
+    t.classList.toggle('active');
+    document.body.style.overflow = o.classList.contains('open') ? 'hidden' : '';
+  });
+})();
+</script>
 </body>
 </html>''')
 

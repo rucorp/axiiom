@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """Generate 14 fintech demo pages with code examples and SEO metadata."""
 
 import os

@@ -1,0 +1,1170 @@
+#!/usr/bin/env python3
+"""
+test_site.py — AXIIOM site validator
+
+Discovers all HTML pages in the project, validates common elements,
+checks for inconsistencies, and generates a visual HTML report.
+
+Usage:
+    python3 test_site.py                          # validate local build
+    python3 test_site.py --serve                  # validate against live nginx
+    python3 test_site.py --dir /path/to/site      # custom path
+    python3 test_site.py --output report.html      # custom output file
+"""
+
+import argparse
+import json
+import os
+import re
+import sys
+import urllib.request
+import urllib.error
+from datetime import datetime
+from pathlib import Path
+
+# ——————————————————————————————————————————————————————
+# Configuration
+# ——————————————————————————————————————————————————————
+SITE_ROOT = Path(__file__).resolve().parent
+DEFAULT_DIR = SITE_ROOT
+DEFAULT_OUTPUT = SITE_ROOT / "test-report.html"
+LIVE_URL = "http://axiiom-dev.orb.local"
+
+MINIMAL_TYPES = {"archive", "viz"}
+
+PAGE_TYPES_DEF = {
+    "landing":    {"paths": ["/index.html", "/index.htm"], "slug": "landing"},
+    "industry":   {"prefix": "/industries/", "slug": "industry"},
+    "tool":       {"prefix": "/tools/", "slug": "tool"},
+    "tool-index": {"paths": ["/tools/index.html"], "slug": "tool-index"},
+    "blog":       {"prefix": "/blog/", "slug": "blog"},
+    "blog-index": {"paths": ["/blog/index.html"], "slug": "blog-index"},
+    "docs":       {"prefix": "/docs/", "slug": "docs"},
+    "demo-index": {"paths": ["/demo/app/index.html"], "slug": "demo-index"},
+    "demo-sub":   {"prefix": "/demo/app/", "slug": "demo-sub"},
+    "calculator": {"paths": ["/calculator/index.html"], "slug": "calculator"},
+    "legal":      {"paths": ["/privacy/index.html", "/terms/index.html"], "slug": "legal"},
+    "404":        {"paths": ["/404.html"], "slug": "404"},
+    "archive":     {"prefix": "/archive/", "slug": "archive"},
+    "archive-additional": {"prefix": "/docs/additional/", "slug": "archive"},
+    "archive-docs": {"prefix": "/docs/archive/", "slug": "archive"},
+    "archive-refs": {"prefix": "/docs/references/", "slug": "archive"},
+    "viz":         {"paths": ["/docs/feature-map-viz/03-mindmap.html"], "slug": "viz"},
+    "viz-index":   {"paths": ["/docs/feature-map-viz/index.html"], "slug": "viz"},
+    "viz-old":     {"paths": ["/docs/feature-map.html"], "slug": "viz"},
+    "viz-vis":     {"prefix": "/docs/visualizations/", "slug": "viz"},
+}
+
+# ——————————————————————————————————————————————————————
+# Helpers
+# ——————————————————————————————————————————————————————
+def classify_page(rel_path):
+    """Return page type slug based on relative path."""
+    raw = "/" + rel_path.replace(os.sep, "/")
+    for slug, defn in PAGE_TYPES_DEF.items():
+        if "paths" in defn:
+            for candidate in defn["paths"]:
+                if raw == candidate:
+                    return defn.get("slug", slug)
+    # Strip index.html for prefix matching
+    p = raw
+    if p.endswith("/index.html"):
+        p = p[: -len("index.html")]
+    elif p.endswith(".html"):
+        p = p.rsplit(".", 1)[0]
+    prefix_defs = [(slug, defn) for slug, defn in PAGE_TYPES_DEF.items() if "prefix" in defn]
+    prefix_defs.sort(key=lambda x: len(x[1]["prefix"]), reverse=True)
+    for slug, defn in prefix_defs:
+        if slug in ("demo-sub",) and p == defn["prefix"].rstrip("/"):
+            continue
+        if p.startswith(defn["prefix"]):
+            return defn.get("slug", slug)
+    return "other"
+
+
+def read_file(path):
+    try:
+        with open(path, "rb") as f:
+            return f.read().decode("utf-8", errors="replace")
+    except Exception as e:
+        return None
+
+
+def fetch_url(url):
+    try:
+        resp = urllib.request.urlopen(url, timeout=10)
+        return resp.read().decode("utf-8", errors="replace")
+    except Exception:
+        return None
+
+
+def normalize_path(path):
+    p = path.strip()
+    if p.endswith("/index.html"):
+        p = p[: -len("index.html")]
+    if p.endswith("/"):
+        p = p[:-1]
+    if not p.startswith("/"):
+        p = "/" + p
+    return p if p != "" else "/"
+
+
+# ——————————————————————————————————————————————————————
+# Page discovery
+# ——————————————————————————————————————————————————————
+def discover_pages(directory, base_url=None):
+    pages = []
+    html_files = sorted(directory.rglob("*.html"))
+    for fpath in html_files:
+        if fpath.name == "test-report.html":
+            continue
+        rel = fpath.relative_to(directory).as_posix()
+        content = read_file(str(fpath))
+        if content is None:
+            continue
+        pages.append({
+            "path": fpath,
+            "rel": rel,
+            "url": normalize_path(rel),
+            "type": classify_page(rel),
+            "content": content,
+        })
+    return pages
+
+
+# ——————————————————————————————————————————————————————
+# Check result types
+# ——————————————————————————————————————————————————————
+class Check:
+    PASS = "pass"
+    FAIL = "fail"
+    WARN = "warn"
+    INFO = "info"
+
+    def __init__(self, status, name, detail=""):
+        self.status = status
+        self.name = name
+        self.detail = detail
+
+    def __repr__(self):
+        return f"[{self.status}] {self.name}: {self.detail}"
+
+
+# ——————————————————————————————————————————————————————
+# Checker base
+# ——————————————————————————————————————————————————————
+class BaseChecker:
+    """Base class for page checkers."""
+    name = "base"
+    description = ""
+
+    def check(self, page, page_type, all_pages=None):
+        """Return list of Check objects."""
+        return []
+
+
+# ——————————————————————————————————————————————————————
+# HTML Structure checks
+# ——————————————————————————————————————————————————————
+class DocTypeChecker(BaseChecker):
+    name = "DOCTYPE"
+    description = "DOCTYPE declaration should be uppercase <!DOCTYPE html>"
+
+    def check(self, page, page_type, all_pages=None):
+        content = page["content"]
+        if page_type in MINIMAL_TYPES:
+            return [Check(Check.PASS, "DOCTYPE: skipped for this page type")]
+        results = []
+        if re.search(r"<!DOCTYPE\s+html\s*>", content, re.IGNORECASE):
+            if "<!DOCTYPE html>" in content:
+                results.append(Check(Check.PASS, "DOCTYPE is correct"))
+            else:
+                m = re.search(r'<!DOCTYPE[^>]*>', content)
+                results.append(Check(Check.PASS, f"DOCTYPE present: {m.group() if m else 'ok'} (lowercase is valid HTML5)"))
+        else:
+            results.append(Check(Check.FAIL, "DOCTYPE declaration missing"))
+        return results
+
+
+class HtmlLangChecker(BaseChecker):
+    name = "html-lang"
+    description = "<html> tag should have lang='ru'"
+
+    def check(self, page, page_type, all_pages=None):
+        content = page["content"]
+        if page_type in MINIMAL_TYPES:
+            return [Check(Check.PASS, "html-lang: skipped for this page type")]
+        m = re.search(r'<html\s[^>]*>', content, re.IGNORECASE)
+        if not m:
+            return [Check(Check.FAIL, "<html> tag not found")]
+        tag = m.group()
+        if 'lang="ru"' in tag:
+            return [Check(Check.PASS, 'lang="ru" present')]
+        m2 = re.search(r'lang="([^"]+)"', tag)
+        if m2:
+            return [Check(Check.FAIL, f'lang="{m2.group(1)}" — expected "ru"')]
+        return [Check(Check.FAIL, "lang attribute missing on <html>")]
+
+
+class CharsetChecker(BaseChecker):
+    name = "charset"
+    description = "Meta charset should be UTF-8"
+
+    def check(self, page, page_type, all_pages=None):
+        content = page["content"]
+        if page_type in MINIMAL_TYPES:
+            return [Check(Check.PASS, "charset: skipped for this page type")]
+        if re.search(r'<meta\s+charset\s*=\s*["\']?\s*UTF-8\s*["\']?\s*/?\s*>', content, re.IGNORECASE):
+            return [Check(Check.PASS, "charset=UTF-8")]
+        if re.search(r'<meta\s+charset\s*=', content, re.IGNORECASE):
+            m = re.search(r'<meta\s+charset\s*=\s*["\']?([^"\'>\s]+)', content, re.IGNORECASE)
+            return [Check(Check.FAIL, f'charset={m.group(1) if m else "found but not UTF-8"}')]
+        return [Check(Check.FAIL, "charset meta tag missing")]
+
+
+class ViewportChecker(BaseChecker):
+    name = "viewport"
+    description = "Viewport meta should be present"
+
+    def check(self, page, page_type, all_pages=None):
+        content = page["content"]
+        if page_type in MINIMAL_TYPES:
+            return [Check(Check.PASS, "viewport: skipped for this page type")]
+        m = re.search(r'<meta\s+name\s*=\s*["\']viewport["\'][^>]*>', content, re.IGNORECASE)
+        if m:
+            if 'user-scalable=no' in m.group():
+                return [Check(Check.WARN, "viewport has user-scalable=no (demo sub-page only)")]
+            return [Check(Check.PASS, "viewport meta present")]
+        return [Check(Check.FAIL, "viewport meta missing")]
+
+
+# ——————————————————————————————————————————————————————
+# Meta / SEO checks
+# ——————————————————————————————————————————————————————
+class MetaChecker(BaseChecker):
+    name = "meta-tags"
+    description = "Essential meta tags"
+
+    def check(self, page, page_type, all_pages=None):
+        content = page["content"]
+        if page_type in MINIMAL_TYPES:
+            return [Check(Check.PASS, "meta tags: skipped for this page type")]
+        results = []
+        checks = {
+            "theme-color": r'<meta\s+name\s*=\s*["\']theme-color["\'][^>]*>',
+            "description": r'<meta\s+name\s*=\s*["\']description["\'][^>]*>',
+        }
+        for tag, pattern in checks.items():
+            if re.search(pattern, content, re.IGNORECASE):
+                results.append(Check(Check.PASS, f"meta {tag} present"))
+            else:
+                results.append(Check(Check.WARN, f"meta {tag} missing"))
+        return results
+
+
+class TitleChecker(BaseChecker):
+    name = "title"
+    description = "Page title should be present and meaningful"
+
+    def check(self, page, page_type, all_pages=None):
+        content = page["content"]
+        if page_type in MINIMAL_TYPES:
+            return [Check(Check.PASS, "title: skipped for this page type")]
+        m = re.search(r'<title>(.*?)</title>', content, re.DOTALL | re.IGNORECASE)
+        if not m:
+            return [Check(Check.FAIL, "<title> missing")]
+        title = m.group(1).strip()
+        if not title:
+            return [Check(Check.FAIL, "<title> is empty")]
+        if title == "AXIIOM" or title == "AXIIOM | AXIIOM":
+            return [Check(Check.WARN, f"title seems generic: '{title}'")]
+        return [Check(Check.PASS, f"title: {title[:80]}...")]
+
+
+class CanonicalChecker(BaseChecker):
+    name = "canonical"
+    description = "Canonical link should be present and match page URL"
+
+    def check(self, page, page_type, all_pages=None):
+        content = page["content"]
+        if page_type in MINIMAL_TYPES:
+            return [Check(Check.PASS, "canonical: skipped for this page type")]
+        m = re.search(r'<link\s+rel\s*=\s*["\']canonical["\'][^>]*href\s*=\s*["\']([^"\']+)["\']', content, re.IGNORECASE)
+        if not m:
+            return [Check(Check.FAIL, "canonical link missing")]
+        href = m.group(1).rstrip("/")
+        expected = f"https://axiiom.ru{page['url']}".rstrip("/")
+        if href == expected:
+            return [Check(Check.PASS, f"canonical: {m.group(1)}")]
+        return [Check(Check.WARN, f"canonical: {m.group(1)} (expected {expected})")]
+
+
+class RobotsChecker(BaseChecker):
+    name = "robots"
+    description = "noindex should only be on privacy/terms/404 pages"
+
+    def check(self, page, page_type, all_pages=None):
+        content = page["content"]
+        if page_type in MINIMAL_TYPES:
+            return [Check(Check.PASS, "robots: skipped for this page type")]
+        m = re.search(r'<meta\s+name\s*=\s*["\']robots["\'][^>]*content\s*=\s*["\']([^"\']+)["\']', content, re.IGNORECASE)
+        noindex = m and "noindex" in m.group(1)
+        should_noindex = page_type in ("legal", "404")
+        if noindex and not should_noindex:
+            return [Check(Check.FAIL, f"noindex on non-legal/404 page ({page_type})")]
+        if should_noindex and not noindex:
+            return [Check(Check.WARN, "noindex expected on this page type but missing")]
+        if noindex:
+            return [Check(Check.PASS, "noindex present (expected)")]
+        return [Check(Check.PASS, "noindex not needed")]
+
+
+class OGTagsChecker(BaseChecker):
+    name = "og-tags"
+    description = "Open Graph tags"
+
+    def check(self, page, page_type, all_pages=None):
+        content = page["content"]
+        if page_type in MINIMAL_TYPES:
+            return [Check(Check.PASS, "OG tags: skipped for this page type")]
+        required = ["og:title", "og:description", "og:url", "og:type", "og:image"]
+        optional = ["og:locale", "og:site_name", "og:image:width", "og:image:height"]
+        results = []
+        for tag in required:
+            pattern = rf'<meta\s+property\s*=\s*["\']{tag}["\'][^>]*>'
+            if re.search(pattern, content, re.IGNORECASE):
+                results.append(Check(Check.PASS, f"{tag} present"))
+            else:
+                results.append(Check(Check.FAIL, f"{tag} missing"))
+        for tag in optional:
+            if re.search(rf'<meta\s+property\s*=\s*["\']{tag}["\'][^>]*>', content, re.IGNORECASE):
+                results.append(Check(Check.PASS, f"{tag} present"))
+        return results
+
+
+class TwitterTagsChecker(BaseChecker):
+    name = "twitter-tags"
+    description = "Twitter Card meta tags"
+
+    def check(self, page, page_type, all_pages=None):
+        content = page["content"]
+        if page_type in MINIMAL_TYPES:
+            return [Check(Check.PASS, "Twitter tags: skipped for this page type")]
+        required = ["twitter:card", "twitter:title", "twitter:description", "twitter:image"]
+        results = []
+        for tag in required:
+            if re.search(rf'<meta\s+name\s*=\s*["\']{tag}["\'][^>]*>', content, re.IGNORECASE):
+                results.append(Check(Check.PASS, f"{tag} present"))
+            else:
+                results.append(Check(Check.FAIL, f"{tag} missing"))
+        return results
+
+
+class JsonLdChecker(BaseChecker):
+    name = "json-ld"
+    description = "JSON-LD structured data"
+
+    def check(self, page, page_type, all_pages=None):
+        content = page["content"]
+        if page_type in ("legal", "404", "demo-sub", "other") or page_type in MINIMAL_TYPES:
+            return [Check(Check.PASS, "JSON-LD not required for this page type (skipped)")]
+        if '<script type="application/ld+json">' in content:
+            m = re.search(r'<script\s+type="application/ld\+json">(.*?)</script>', content, re.DOTALL)
+            if m:
+                try:
+                    data = json.loads(m.group(1))
+                    if "@graph" in data:
+                        types = [item.get("@type", "") for item in data["@graph"]]
+                        return [Check(Check.PASS, f"JSON-LD present: {', '.join(types)}")]
+                    elif "@type" in data:
+                        return [Check(Check.PASS, f"JSON-LD present: {data['@type']}")]
+                    else:
+                        return [Check(Check.PASS, "JSON-LD present")]
+                except json.JSONDecodeError:
+                    return [Check(Check.FAIL, "JSON-LD has invalid JSON")]
+            return [Check(Check.PASS, "JSON-LD present")]
+        return [Check(Check.WARN, "JSON-LD missing")]
+
+
+# ——————————————————————————————————————————————————————
+# Styles checks
+# ——————————————————————————————————————————————————————
+class FontsChecker(BaseChecker):
+    name = "google-fonts"
+    description = "Google Fonts preconnect/preload"
+
+    def check(self, page, page_type, all_pages=None):
+        content = page["content"]
+        results = []
+        if page_type in ("demo-sub",) or page_type in MINIMAL_TYPES:
+            return [Check(Check.PASS, "Google Fonts not required for this page type (skipped)")]
+        if 'fonts.googleapis.com' in content:
+            checks = [
+                ("preconnect to fonts.googleapis.com", r'<link[^>]*rel\s*=\s*["\']preconnect["\'][^>]*fonts\.googleapis\.com'),
+                ("preconnect to fonts.gstatic.com",  r'<link[^>]*rel\s*=\s*["\']preconnect["\'][^>]*fonts\.gstatic\.com'),
+                ("preload Inter font",               r'<link[^>]*rel\s*=\s*["\']preload["\'][^>]*Inter'),
+                ("Inter stylesheet",                  r'fonts\.googleapis\.com[^"\']*Inter[^"\']*display=swap'),
+            ]
+            for label, pattern in checks:
+                if re.search(pattern, content, re.IGNORECASE):
+                    results.append(Check(Check.PASS, label))
+                else:
+                    results.append(Check(Check.WARN, f"{label} missing"))
+        else:
+            results.append(Check(Check.WARN, "Google Fonts not referenced at all"))
+        return results
+
+
+class CssChecker(BaseChecker):
+    name = "stylesheets"
+    description = "Required stylesheets"
+
+    def check(self, page, page_type, all_pages=None):
+        content = page["content"]
+        results = []
+
+        main_css = re.search(r'<link[^>]*rel\s*=\s*["\']stylesheet["\'][^>]*styles\.css', content, re.IGNORECASE)
+        if main_css:
+            if '/styles.css' in main_css.group() or 'href="styles.css"' in main_css.group():
+                results.append(Check(Check.PASS, "styles.css linked"))
+            else:
+                results.append(Check(Check.PASS, "styles.css linked (relative path check)"))
+        else:
+            if page_type in ("demo-sub",) or page_type in MINIMAL_TYPES:
+                results.append(Check(Check.PASS, "styles.css not required for this page type"))
+            else:
+                results.append(Check(Check.FAIL, "styles.css NOT linked"))
+
+        if page_type in MINIMAL_TYPES:
+            results.append(Check(Check.PASS, "preloader.css: skipped for this page type"))
+            return results
+
+        preloader_css = re.search(r'<link[^>]*rel\s*=\s*["\']stylesheet["\'][^>]*preloader\.css', content, re.IGNORECASE)
+        has_preloader = '<div id="preloader"' in content
+        if preloader_css:
+            if has_preloader:
+                results.append(Check(Check.PASS, "preloader.css linked"))
+            else:
+                results.append(Check(Check.WARN, "preloader.css linked but no preloader div"))
+        else:
+            if has_preloader:
+                results.append(Check(Check.WARN, "preloader.css NOT linked but preloader div exists"))
+            elif page_type == "docs":
+                results.append(Check(Check.PASS, "preloader.css not needed (no preloader on docs pages)"))
+            else:
+                results.append(Check(Check.WARN, "preloader.css not linked"))
+
+        # Page-specific stylesheets
+        extra_css_map = {
+            "docs": ("docs/styles.css", "/docs/styles.css"),
+            "tool": ("tools/styles.css", "/tools/styles.css"),
+            "tool-index": ("tools/index.css", "/tools/index.css"),
+            "industry": None,
+        }
+        for ptype, css_refs in extra_css_map.items():
+            if page_type == ptype and css_refs:
+                found = any(re.search(rf'href=["\']/?{re.escape(css)}["\']', content) for css in (css_refs if isinstance(css_refs, tuple) else (css_refs,)))
+                css_name = css_refs[0] if isinstance(css_refs, tuple) else css_refs
+                if found:
+                    results.append(Check(Check.PASS, f"{css_name} linked"))
+                else:
+                    results.append(Check(Check.WARN, f"{css_name} NOT linked"))
+
+        return results
+
+
+class FaviconChecker(BaseChecker):
+    name = "favicon"
+    description = "Favicon should be linked"
+
+    def check(self, page, page_type, all_pages=None):
+        content = page["content"]
+        if page_type in ("demo-sub",) or page_type in MINIMAL_TYPES:
+            return [Check(Check.PASS, "favicon not required for this page type (skipped)")]
+        if re.search(r'<link[^>]*rel\s*=\s*["\'](?:icon|shortcut icon)["\'][^>]*>', content, re.IGNORECASE):
+            return [Check(Check.PASS, "favicon linked")]
+        return [Check(Check.WARN, "favicon not linked")]
+
+
+# ——————————————————————————————————————————————————————
+# UI Component checks
+# ——————————————————————————————————————————————————————
+class UiComponentsChecker(BaseChecker):
+    name = "ui-components"
+    description = "Common UI components should be present"
+
+    def check(self, page, page_type, all_pages=None):
+        content = page["content"]
+        results = []
+        components = {
+            "preloader":     r'<div\s+id\s*=\s*["\']preloader["\']',
+            "noise overlay": r'<div\s+class\s*=\s*["\']noise["\']',
+            "grid overlay":  r'<div\s+class\s*=\s*["\']grid-overlay["\']',
+            "nav overlay":   r'<div\s+class\s*=\s*["\'].*?["\']\s+id\s*=\s*["\']navOverlay["\']',
+            "mobile nav":    r'id\s*=\s*["\']mobileNav["\']',
+            "header":        r'<header[^>]*id\s*=\s*["\']header["\']',
+            "desktop nav":   r'id\s*=\s*["\']desktopNav["\']',
+            "nav toggle":    r'id\s*=\s*["\']navToggle["\']',
+            "footer":        r'<footer[^>]*class\s*=\s*["\'][^"\']*\bfooter\b[^"\']*["\']',
+            "footer copy":   r'id\s*=\s*["\']footerCopy["\']',
+            "breadcrumbs":   r'<nav[^>]*id\s*=\s*["\']breadcrumbs["\']',
+            "CTA button":    r'id\s*=\s*["\']ctaBtn["\']',
+        }
+
+        skip_map = {
+            "demo-sub": ["preloader", "noise overlay", "grid overlay", "nav overlay", "mobile nav",
+                         "header", "desktop nav", "nav toggle", "footer", "footer copy", "breadcrumbs", "CTA button"],
+            "docs": ["preloader"],
+            "landing": ["breadcrumbs"],
+            "404": ["footer", "footer copy", "breadcrumbs"],
+        }
+        for mt in MINIMAL_TYPES:
+            skip_map[mt] = ["preloader", "noise overlay", "grid overlay", "nav overlay", "mobile nav",
+                            "header", "desktop nav", "nav toggle", "footer", "footer copy", "breadcrumbs", "CTA button"]
+
+        skipped = skip_map.get(page_type, [])
+
+        for name, pattern in components.items():
+            if name in skipped:
+                results.append(Check(Check.PASS, f"{name}: skipped for {page_type}"))
+                continue
+            has = bool(re.search(pattern, content, re.IGNORECASE))
+            if has:
+                results.append(Check(Check.PASS, f"{name} present"))
+            else:
+                if name == "CTA button":
+                    results.append(Check(Check.INFO, f"{name} not present (may be intentional)"))
+                else:
+                    results.append(Check(Check.FAIL, f"{name} MISSING"))
+
+        return results
+
+
+# ——————————————————————————————————————————————————————
+# Script checks
+# ——————————————————————————————————————————————————————
+class ScriptsChecker(BaseChecker):
+    name = "scripts"
+    description = "Required JavaScript files should be loaded"
+
+    def check(self, page, page_type, all_pages=None):
+        content = page["content"]
+        results = []
+
+        script_checks = {
+            "/nav.js":      r'<script[^>]*src\s*=\s*["\']/?nav\.js["\'][^>]*>',
+            "/theme.js":    r'<script[^>]*src\s*=\s*["\']/?theme\.js["\'][^>]*>',
+            "/config.js":   r'<script[^>]*src\s*=\s*["\']/?config\.js["\'][^>]*>',
+            "/preloader.js": r'<script[^>]*src\s*=\s*["\']/?preloader\.js["\'][^>]*>',
+        }
+
+        skip_map = {
+            "demo-sub": ["/nav.js", "/theme.js", "/config.js"],
+        }
+        for mt in MINIMAL_TYPES:
+            skip_map[mt] = ["/nav.js", "/theme.js", "/config.js", "/preloader.js"]
+
+        skipped = skip_map.get(page_type, [])
+
+        for script, pattern in script_checks.items():
+            if script in skipped:
+                results.append(Check(Check.PASS, f"{script}: skipped for {page_type}"))
+                continue
+            if re.search(pattern, content, re.IGNORECASE):
+                results.append(Check(Check.PASS, f"{script} loaded"))
+            else:
+                results.append(Check(Check.WARN, f"{script} NOT loaded"))
+
+        # Nav.init() call
+        if page_type in ("demo-sub", "docs") or page_type in MINIMAL_TYPES:
+            results.append(Check(Check.PASS, "Nav.init(): skipped for this page type"))
+        else:
+            nav_init = re.search(r'Nav\.init\(\s*\{([^}]*)\}\s*\)', content)
+            if nav_init:
+                params = "{" + nav_init.group(1) + "}"
+                results.append(Check(Check.PASS, f"Nav.init() called with {params}"))
+            else:
+                results.append(Check(Check.FAIL, "Nav.init() NOT called"))
+
+        return results
+
+
+class AnalyticsChecker(BaseChecker):
+    name = "analytics"
+    description = "Analytics scripts should be present on most pages"
+
+    def check(self, page, page_type, all_pages=None):
+        content = page["content"]
+        results = []
+
+        if page_type in ("demo-sub", "docs") or page_type in MINIMAL_TYPES:
+            results.append(Check(Check.PASS, "analytics: skipped for this page type"))
+        else:
+            gtag_js = 'googletagmanager.com/gtag/js' in content
+            gtag_call = 'gtag(' in content or 'gtagjs' in content
+            if gtag_js:
+                results.append(Check(Check.PASS, "Google Analytics (gtag.js) loaded"))
+            else:
+                results.append(Check(Check.WARN, "Google Analytics NOT loaded"))
+
+            ym = 'mc.yandex.ru/metrika' in content
+            if ym:
+                results.append(Check(Check.PASS, "Yandex Metrika loaded"))
+            else:
+                results.append(Check(Check.WARN, "Yandex Metrika NOT loaded"))
+
+        return results
+
+
+# ——————————————————————————————————————————————————————
+# Page-specific content checks
+# ——————————————————————————————————————————————————————
+class PageContentChecker(BaseChecker):
+    name = "page-content"
+    description = "Page-type-specific content sections"
+
+    def check(self, page, page_type, all_pages=None):
+        content = page["content"]
+        if page_type in MINIMAL_TYPES:
+            return [Check(Check.PASS, "content: skipped for this page type")]
+        results = []
+        type_checks = {
+            "landing":    [("hero section",        r'<header[^>]*class\s*=\s*["\']hero["\']'),
+                           ("services section",    r'id\s*=\s*["\']services["\']'),
+                           ("cases section",       r'id\s*=\s*["\']cases["\']'),
+                           ("process section",     r'id\s*=\s*["\']process["\']'),
+                           ("faq section",         r'id\s*=\s*["\']faq["\']')],
+            "industry":   [("industries-hero",     r'industries-hero'),
+                           ("main content",        r'<section\s+class\s*=\s*["\']section["\']')],
+            "tool":       [("tool page",           r'tools-hero|tool-page')],
+            "tool-index": [("tools-hero",          r'tools-hero')],
+            "blog":       [("article-page",        r'article-page')],
+            "blog-index": [("blog listing",        r'blog')],
+            "other":      [("main content",        r'<main|<article|<section')],
+            "docs":       [("docs content",       r'docs-article|<section')],
+            "demo-index": [("demo catalog",        r'demo')],
+            "demo-sub":   [("demo app wrapper",    r'app-content|app-header|bottom-nav|demo-page-hero|hero-content')],
+            "calculator": [("calc-section",        r'calc-section')],
+            "legal":      [("legal content",       r'class\s*=\s*["\']legal["\']')],
+            "404":        [("error section",       r'class\s*=\s*["\']err["\']')],
+        }
+
+        checks = type_checks.get(page_type, [("main content", r'<main|<article|<section')])
+        for label, pattern in checks:
+            if re.search(pattern, content, re.IGNORECASE):
+                results.append(Check(Check.PASS, f"content: {label}"))
+            else:
+                results.append(Check(Check.FAIL, f"missing: {label}"))
+
+        return results
+
+
+# ——————————————————————————————————————————————————————
+# Breadcrumb checks
+# ——————————————————————————————————————————————————————
+class BreadcrumbChecker(BaseChecker):
+    name = "breadcrumbs"
+    description = "Breadcrumbs should be present or absent correctly"
+
+    def check(self, page, page_type, all_pages=None):
+        content = page["content"]
+        results = []
+        has_bc = '<nav class="breadcrumbs"' in content or 'id="breadcrumbs"' in content
+        nav_init = re.search(r'Nav\.init\(\s*\{([^}]*)\}\s*\)', content)
+
+        bc_setting = None
+        if nav_init:
+            m = re.search(r'breadcrumbs\s*:\s*(true|false)', nav_init.group(1))
+            if m:
+                bc_setting = m.group(1) == "true"
+
+        should_have_bc = page_type not in ("landing", "404", "demo-sub", "other") and page_type not in MINIMAL_TYPES
+
+        if has_bc and bc_setting is False:
+            results.append(Check(Check.WARN, "breadcrumbs in HTML but Nav.init says breadcrumbs:false"))
+        elif not has_bc and bc_setting is True:
+            results.append(Check(Check.WARN, "breadcrumbs expected but not found in HTML"))
+        elif not has_bc and should_have_bc and page_type != "landing":
+            results.append(Check(Check.WARN, "no breadcrumbs for page type that typically has them"))
+        else:
+            results.append(Check(Check.PASS, "breadcrumbs state consistent"))
+
+        # JSON-LD breadcrumbs
+        if '<nav class="breadcrumbs" id="breadcrumbs"' in content:
+            js_bc = re.search(r'<script\s+type="application/ld\+json">(.*?)</script>', content, re.DOTALL)
+            if js_bc:
+                try:
+                    data = json.loads(js_bc.group(1))
+                    if isinstance(data, dict):
+                        graph = data.get("@graph", [data])
+                        for item in graph:
+                            if item.get("@type") == "BreadcrumbList":
+                                items = item.get("itemListElement", [])
+                                names = [i.get("name", "?") for i in items]
+                                results.append(Check(Check.PASS, f"JSON-LD breadcrumbs: {' › '.join(names)}"))
+                                break
+                        else:
+                            results.append(Check(Check.WARN, "JSON-LD present but no BreadcrumbList"))
+                except (json.JSONDecodeError, KeyError):
+                    results.append(Check(Check.WARN, "JSON-LD breadcrumb parse error"))
+
+        return results
+
+
+# ——————————————————————————————————————————————————————
+# Internal link checker
+# ——————————————————————————————————————————————————————
+class LinkChecker(BaseChecker):
+    name = "links"
+    description = "Internal links should be valid"
+
+    def check(self, page, page_type, all_pages=None):
+        if all_pages is None or page_type in MINIMAL_TYPES:
+            return []
+        content = page["content"]
+        results = []
+        known_html = set()
+        for p in all_pages:
+            known_html.add(p["url"])
+            if p["rel"].endswith("/index.html"):
+                known_html.add(normalize_path(p["rel"][:-len("/index.html")]))
+        known_html.add("/")
+        known_html.update(["/privacy/", "/terms/", "/calculator/"])
+
+        internal_links = set()
+        for m in re.finditer(r'href\s*=\s*["\']([^"\']+)["\']', content):
+            href = m.group(1)
+            # Skip full URLs (external or canonical self-references)
+            if re.match(r'https?://', href):
+                continue
+            if href.startswith("mailto:") or href.startswith("tel:") or href.startswith("javascript:"):
+                continue
+            # Skip pure hash links, data URIs
+            if href.startswith("#") or href.startswith("data:"):
+                continue
+            internal_links.add(href)
+
+        site_root = SITE_ROOT
+
+        broken = []
+        for link in sorted(internal_links):
+            link_clean = link.split("#")[0].split("?")[0]
+            if link_clean.startswith("//"):
+                continue
+            if link_clean.startswith("/"):
+                lk = normalize_path(link_clean)
+                if lk in known_html:
+                    continue
+                rel_path = link_clean.lstrip("/")
+                resolved = site_root / rel_path
+                if resolved.exists():
+                    continue
+                try:
+                    from urllib.parse import unquote
+                    decoded = unquote(rel_path)
+                    if (site_root / decoded).exists():
+                        continue
+                except Exception:
+                    pass
+                broken.append(link)
+            elif link_clean.startswith(".."):
+                resolved = (Path(page["path"]).resolve().parent / link_clean).resolve()
+                if resolved.exists():
+                    continue
+                try:
+                    from urllib.parse import unquote
+                    decoded = unquote(str(resolved))
+                    if Path(decoded).exists():
+                        continue
+                except Exception:
+                    pass
+                broken.append(link)
+            else:
+                ext = Path(link_clean).suffix.lower()
+                if ext not in (".html", ".css", ".js", ".svg", ".png", ".jpg",
+                               ".jpeg", ".ico", ".json", ".xml", ".webp", ".webm", ".mp4", ""):
+                    continue
+                resolved = Path(page["path"]).resolve().parent / link_clean
+                if not resolved.exists():
+                    try:
+                        from urllib.parse import unquote
+                        decoded = unquote(str(resolved))
+                        if Path(decoded).exists():
+                            continue
+                    except Exception:
+                        pass
+                    broken.append(link)
+
+        if broken:
+            detail = "; ".join(broken[:5])
+            if len(broken) > 5:
+                detail += f" ... +{len(broken) - 5} more"
+            results.append(Check(Check.FAIL, f"{len(broken)} broken link(s): {detail}"))
+        else:
+            results.append(Check(Check.PASS, "no broken internal links found"))
+
+        return results
+
+
+# ——————————————————————————————————————————————————————
+# Report generation
+# ——————————————————————————————————————————————————————
+REPORT_CSS = """
+:root {
+    --bg: #0a0a0f;
+    --bg-card: #14141c;
+    --bg-hover: #1c1c28;
+    --border: #2a2a3a;
+    --text: #e8e8ed;
+    --text-dim: #8888a0;
+    --green: #22c55e;
+    --yellow: #eab308;
+    --red: #ef4444;
+    --blue: #3b82f6;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+       background: var(--bg); color: var(--text); line-height: 1.6; padding: 24px; }
+h1 { font-size: 1.8rem; margin-bottom: 4px; }
+h2 { font-size: 1.2rem; margin: 24px 0 12px; color: var(--text-dim); }
+.subtitle { color: var(--text-dim); margin-bottom: 24px; font-size: 0.9rem; }
+.summary { display: flex; gap: 16px; margin: 20px 0 28px; flex-wrap: wrap; }
+.stat { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+        padding: 16px 24px; min-width: 100px; text-align: center; }
+.stat .num { font-size: 2rem; font-weight: 700; display: block; }
+.stat .lbl { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: .05em; }
+.stat.pass .num { color: var(--green); }
+.stat.fail .num { color: var(--red); }
+.stat.warn .num { color: var(--yellow); }
+.stat.total .num { color: var(--blue); }
+
+.filters { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.filter-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text);
+              padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
+.filter-btn:hover { background: var(--bg-hover); }
+.filter-btn.active { border-color: var(--blue); background: rgba(59,130,246,.15); }
+
+.page-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+             gap: 16px; }
+.page-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+             padding: 16px; transition: border-color .2s; }
+.page-card:hover { border-color: var(--text-dim); }
+.page-card.passed { border-left: 3px solid var(--green); }
+.page-card.failed { border-left: 3px solid var(--red); }
+.page-card.warned { border-left: 3px solid var(--yellow); }
+.card-header { display: flex; justify-content: space-between; align-items: flex-start;
+               margin-bottom: 8px; }
+.card-path { font-size: 0.85rem; word-break: break-all; color: var(--blue); }
+.card-title { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 8px; }
+.card-type { font-size: 0.7rem; background: rgba(59,130,246,.15); color: var(--blue);
+             padding: 2px 8px; border-radius: 4px; }
+.card-stats { display: flex; gap: 8px; margin: 8px 0; }
+.card-stat { font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; }
+.card-stat.pass { background: rgba(34,197,94,.12); color: var(--green); }
+.card-stat.fail { background: rgba(239,68,68,.12); color: var(--red); }
+.card-stat.warn { background: rgba(234,179,8,.12); color: var(--yellow); }
+.card-stat.omit { background: rgba(136,136,160,.12); color: var(--text-dim); }
+.card-checks { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+.card-checks.open { max-height: 2000px; }
+.check-toggle { background: none; border: none; color: var(--text-dim); cursor: pointer;
+                font-size: 0.75rem; padding: 4px 0; }
+.check-toggle:hover { color: var(--text); }
+.check-item { font-size: 0.78rem; padding: 3px 8px; margin: 2px 0; border-radius: 4px;
+              display: flex; gap: 6px; align-items: center; }
+.check-item.pass { background: rgba(34,197,94,.06); }
+.check-item.fail { background: rgba(239,68,68,.06); }
+.check-item.warn { background: rgba(234,179,8,.06); }
+.check-item.omit { opacity: .5; }
+.check-icon { flex-shrink: 0; width: 18px; text-align: center; }
+.check-name  { font-weight: 500; }
+.check-detail { color: var(--text-dim); }
+
+.site-map { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+            padding: 20px; margin: 24px 0; }
+.site-map h3 { margin-bottom: 12px; font-size: 1rem; }
+.map-tree { font-family: monospace; font-size: 0.8rem; line-height: 1.8; }
+.map-tree .node { display: flex; align-items: center; gap: 6px; }
+.map-tree .indent { display: inline-block; width: 20px; }
+.icon-pass { color: var(--green); }
+.icon-fail { color: var(--red); }
+.icon-warn { color: var(--yellow); }
+.icon-none { color: var(--text-dim); }
+
+footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border);
+         font-size: 0.75rem; color: var(--text-dim); }
+"""
+
+
+def generate_report(all_pages, results_map, timestamp=None):
+    if timestamp is None:
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    total = len(all_pages)
+    all_checks = []
+    for page in all_pages:
+        all_checks.extend(results_map.get(page["rel"], []))
+    passed = sum(1 for c in all_checks if c.status == Check.PASS)
+    failed = sum(1 for c in all_checks if c.status == Check.FAIL)
+    warned = sum(1 for c in all_checks if c.status == Check.WARN)
+
+    cards_html = ""
+    sitemap_html = ""
+    sitemap_items = []
+
+    for page in all_pages:
+        checks = results_map.get(page["rel"], [])
+        n_pass = sum(1 for c in checks if c.status == Check.PASS)
+        n_fail = sum(1 for c in checks if c.status == Check.FAIL)
+        n_warn = sum(1 for c in checks if c.status == Check.WARN)
+
+        if n_fail > 0:
+            card_class = "failed"
+            worst = "fail"
+        elif n_warn > 0:
+            card_class = "warned"
+            worst = "warn"
+        else:
+            card_class = "passed"
+            worst = "pass"
+
+        card_type = page["type"]
+        checks_html = ""
+        for c in checks:
+            icon = {"pass": "✓", "fail": "✗", "warn": "△", "info": "i"}.get(c.status, "?")
+            cls = c.status if c.status != "info" else "omit"
+            detail = f'<span class="check-detail">— {c.detail[:120]}</span>' if c.detail else ""
+            checks_html += f'<div class="check-item {cls}"><span class="check-icon">{icon}</span><span class="check-name">{c.name}</span> {detail}</div>'
+
+        checks_block = f'<div class="card-checks" id="checks-{page["rel"].replace("/", "-").replace(".", "-")}">{checks_html}</div>'
+        toggle = f'<button class="check-toggle" onclick="document.getElementById(\'checks-{page["rel"].replace("/", "-").replace(".", "-")}\').classList.toggle(\'open\')">▼ Details</button>'
+
+        cards_html += f"""
+        <div class="page-card {card_class}" data-type="{card_type}" data-status="{worst}">
+            <div class="card-header">
+                <div>
+                    <div class="card-path">{page["url"]}</div>
+                    <div class="card-title">{page.get("title", "")}</div>
+                </div>
+                <span class="card-type">{card_type}</span>
+            </div>
+            <div class="card-stats">
+                <span class="card-stat pass">✓ {n_pass}</span>
+                <span class="card-stat fail">✗ {n_fail}</span>
+                <span class="card-stat warn">△ {n_warn}</span>
+            </div>
+            {toggle}
+            {checks_block}
+        </div>"""
+
+        # Determine status for sitemap
+        status_icon = {"pass": "●", "fail": "●", "warn": "●"}.get(worst, "○")
+        status_class = {"pass": "icon-pass", "fail": "icon-fail", "warn": "icon-warn"}.get(worst, "icon-none")
+        sitemap_items.append({
+            "url": page["url"],
+            "type": page["type"],
+            "status": worst,
+            "icon": status_icon,
+            "cls": status_class,
+        })
+
+    # Build sitemap tree
+    tree_groups = {}
+    for item in sitemap_items:
+        prefix = item["url"].rsplit("/", 1)[0] + "/" if "/" in item["url"].strip("/") else "/"
+        if prefix not in tree_groups:
+            tree_groups[prefix] = []
+        tree_groups[prefix].append(item)
+
+    for prefix in sorted(tree_groups.keys()):
+        label = prefix if prefix != "/" else "root"
+        items = tree_groups[prefix]
+        sitemap_html += f'<div class="node"><span class="icon-none">▸</span> {label}</div>'
+        for item in items:
+            depth = item["url"].count("/")
+            indent = "&nbsp;" * 4 * (depth - 1)
+            name = item["url"].rsplit("/", 1)[-1] if "/" in item["url"].strip("/") else item["url"]
+            sitemap_html += f'<div class="node"><span class="indent"></span><span class="{item["cls"]}">{item["icon"]}</span> {item["url"]} <span class="card-type">{item["type"]}</span></div>'
+
+    filter_buttons = ""
+    types = sorted(set(p["type"] for p in all_pages))
+    filter_buttons += '<button class="filter-btn active" onclick="filterAll()">All</button>'
+    for t in types:
+        filter_buttons += f'<button class="filter-btn" onclick="filterType(\'{t}\')">{t}</button>'
+
+    report = f"""<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AXIIOM Site Test Report</title>
+<style>{REPORT_CSS}</style>
+<script>
+function filterType(type) {{
+    document.querySelectorAll('.page-card').forEach(c => {{
+        c.style.display = c.getAttribute('data-type') === type ? '' : 'none';
+    }});
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}}
+function filterAll() {{
+    document.querySelectorAll('.page-card').forEach(c => c.style.display = '');
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.filter-btn').classList.add('active');
+}}
+function filterStatus(status) {{
+    document.querySelectorAll('.page-card').forEach(c => {{
+        c.style.display = c.getAttribute('data-status') === status ? '' : 'none';
+    }});
+}}
+</script>
+</head>
+<body>
+<h1>AXIIOM Site Test Report</h1>
+<p class="subtitle">Generated {timestamp} — {total} pages, {len(all_checks)} checks</p>
+
+<div class="summary">
+    <div class="stat total"><span class="num">{total}</span><span class="lbl">Pages</span></div>
+    <div class="stat pass"><span class="num">{passed}</span><span class="lbl">Passed</span></div>
+    <div class="stat fail"><span class="num">{failed}</span><span class="lbl">Failed</span></div>
+    <div class="stat warn"><span class="num">{warned}</span><span class="lbl">Warnings</span></div>
+</div>
+
+<h2>Filters</h2>
+<div class="filters">{filter_buttons}</div>
+<div class="filters" style="margin-top:-12px">
+    <button class="filter-btn" onclick="filterStatus('fail')">🔴 Failed only</button>
+    <button class="filter-btn" onclick="filterStatus('warn')">🟡 Warnings only</button>
+    <button class="filter-btn" onclick="filterAll()">🟢 All pages</button>
+</div>
+
+<h2>Site Map</h2>
+<div class="site-map"><div class="map-tree">{sitemap_html}</div></div>
+
+<h2>Page Checks</h2>
+<div class="page-grid">{cards_html}</div>
+
+<footer>
+    AXIIOM Site Validator — {timestamp}
+</footer>
+</body>
+</html>"""
+    return report
+
+
+# ——————————————————————————————————————————————————————
+# Main
+# ——————————————————————————————————————————————————————
+CHECKERS = [
+    DocTypeChecker(),
+    HtmlLangChecker(),
+    CharsetChecker(),
+    ViewportChecker(),
+    MetaChecker(),
+    TitleChecker(),
+    CanonicalChecker(),
+    RobotsChecker(),
+    OGTagsChecker(),
+    TwitterTagsChecker(),
+    JsonLdChecker(),
+    FontsChecker(),
+    CssChecker(),
+    FaviconChecker(),
+    UiComponentsChecker(),
+    ScriptsChecker(),
+    AnalyticsChecker(),
+    PageContentChecker(),
+    BreadcrumbChecker(),
+    LinkChecker(),
+]
+
+
+def run_checks(pages):
+    results = {}
+    for page in pages:
+        page_checks = []
+        for checker in CHECKERS:
+            try:
+                checks = checker.check(page, page["type"], all_pages=pages)
+                page_checks.extend(checks)
+            except Exception as e:
+                page_checks.append(Check(Check.FAIL, f"{checker.name} threw: {e}"))
+        results[page["rel"]] = page_checks
+        # Extract title for display
+        m = re.search(r'<title>(.*?)</title>', page["content"], re.DOTALL | re.IGNORECASE)
+        page["title"] = m.group(1).strip() if m else ""
+    return results
+
+
+def main():
+    parser = argparse.ArgumentParser(description="AXIIOM Site Validator")
+    parser.add_argument("--dir", default=str(DEFAULT_DIR), help="Site root directory")
+    parser.add_argument("--output", default=str(DEFAULT_OUTPUT), help="Output report path")
+    parser.add_argument("--serve", action="store_true", help="Validate against live server")
+    parser.add_argument("--exit-code", action="store_true", help="Exit with code 1 if any failures found")
+    args = parser.parse_args()
+
+    site_dir = Path(args.dir)
+    if not site_dir.is_dir():
+        print(f"Error: {site_dir} is not a directory", file=sys.stderr)
+        sys.exit(1)
+
+    print(f"🔍 Discovering pages in {site_dir}...")
+    pages = discover_pages(site_dir)
+    print(f"📄 Found {len(pages)} HTML pages")
+
+    # Validate against live server if requested
+    if args.serve:
+        print(f"🌐 Fetching from {LIVE_URL}...")
+        live_pages = []
+        for page in pages:
+            url = f"{LIVE_URL}{page['url']}"
+            content = fetch_url(url)
+            if content:
+                page["content"] = content
+                live_pages.append(page)
+        print(f"🌐 Fetched {len(live_pages)} pages from live server")
+        pages = live_pages
+
+    print("✅ Running checks...")
+    results = run_checks(pages)
+
+    print("📊 Generating report...")
+    report = generate_report(pages, results)
+    output_path = Path(args.output)
+    with open(output_path, "w") as f:
+        f.write(report)
+    print(f"📄 Report written to {output_path}")
+
+    # Print summary
+    all_checks = []
+    for page in pages:
+        all_checks.extend(results.get(page["rel"], []))
+    passed = sum(1 for c in all_checks if c.status == Check.PASS)
+    failed = sum(1 for c in all_checks if c.status == Check.FAIL)
+    warned = sum(1 for c in all_checks if c.status == Check.WARN)
+    print(f"\nSummary: {len(pages)} pages, {len(all_checks)} checks")
+    print(f"  ✅ Passed: {passed}")
+    print(f"  ❌ Failed: {failed}")
+    print(f"  ⚠️  Warnings: {warned}")
+
+    # Print failed checks
+    if failed > 0:
+        print("\n❌ Failures:")
+        for page in pages:
+            for c in results.get(page["rel"], []):
+                if c.status == Check.FAIL:
+                    print(f"  [{page['type']}] {page['url']}: {c.name} — {c.detail[:120]}")
+
+    if warned > 0:
+        print("\n⚠️ Warnings:")
+        for page in pages:
+            for c in results.get(page["rel"], []):
+                if c.status == Check.WARN:
+                    print(f"  [{page['type']}] {page['url']}: {c.name} — {c.detail[:120]}")
+
+    if args.exit_code and failed > 0:
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

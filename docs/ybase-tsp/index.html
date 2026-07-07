@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+    <title>Ybase TSP — документация | Документация AXIIOM</title>
+    <meta name="description" content="Схема базы данных, парсеры, руководство по экспорту, PROJECT_OVERVIEW, PROJECT_STRUCTURE.">
+    <link rel="canonical" href="https://axiiom.ru/docs/ybase-tsp/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://axiiom.ru/docs/ybase-tsp/">
+    <meta property="og:title" content="Ybase TSP — документация | Документация AXIIOM">
+    <meta property="og:description" content="Схема базы данных, парсеры, руководство по экспорту, PROJECT_OVERVIEW, PROJECT_STRUCTURE.">
+    <meta property="og:image" content="https://axiiom.ru/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="AXIIOM">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://axiiom.ru/docs/ybase-tsp/">
+    <meta name="twitter:title" content="Ybase TSP — документация | Документация AXIIOM">
+    <meta name="twitter:description" content="Схема базы данных, парсеры, руководство по экспорту, PROJECT_OVERVIEW, PROJECT_STRUCTURE.">
+    <meta name="twitter:image" content="https://axiiom.ru/og-image.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Ybase TSP — документация","description":"Схема базы данных, парсеры, руководство по экспорту, PROJECT_OVERVIEW, PROJECT_STRUCTURE.","url":"https://axiiom.ru/docs/ybase-tsp/","author":{"@type":"Organization","name":"AXIIOM"},"isPartOf":{"@type":"WebSite","name":"AXIIOM","url":"https://axiiom.ru"}}</script>
+    <style>*{margin:0;padding:0;box-sizing:border-box}html{font-size:16px;scroll-behavior:smooth}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1.0625rem;background:#0A0A0F;color:#C7C7CC;line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}.noise{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}.grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:60px 60px}.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}.reveal.visible{opacity:1;transform:translateY(0)}</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/docs/styles.css">
+</head>
+<body>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="30" height="30" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/></svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </div>
+</header>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"><ol itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/"><span itemprop="name">Главная</span></a>
+        <meta itemprop="position" content="1">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/docs/"><span itemprop="name">Документация</span></a>
+        <meta itemprop="position" content="2">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">Ybase TSP — документация</span>
+        <meta itemprop="position" content="3">
+      </li>
+    </ol></div></nav>
+<article class="docs-article">
+    <div class="container">
+        <div class="docs-content">
+            <div class="feature-page-hero"><h1>Ybase TSP — документация</h1><p>Схема базы данных, парсеры, руководство по экспорту, PROJECT_OVERVIEW, PROJECT_STRUCTURE.</p><div class="doc-actions"><a href="/docs/" class="btn btn-outline">← Все документы</a></div></div><h1 id="_1">Обзор проекта Каталог Заведений</h1>
+<h2 id="_2">Назначение</h2>
+<p>Автоматизированная система сбора, нормализации и каталогизации данных о заведениях (рестораны, кафе, магазины, услуги) из различных источников.</p>
+<h2 id="_3">Архитектура</h2>
+<h3 id="_4">Компоненты системы</h3>
+<ol>
+<li><strong>Парсеры</strong> - сбор данных из внешних источников</li>
+<li><strong>Нормализаторы</strong> - очистка и стандартизация данных</li>
+<li><strong>База данных</strong> - хранение структурированных данных</li>
+<li><strong>Web-интерфейс</strong> - просмотр и управление каталогом</li>
+</ol>
+<h3 id="_5">Технологический стек</h3>
+<ul>
+<li><strong>Backend</strong>: PHP 8.2, Node.js 20</li>
+<li><strong>Database</strong>: PostgreSQL 16</li>
+<li><strong>Scraping</strong>: Puppeteer, Guzzle HTTP</li>
+<li><strong>Containerization</strong>: Docker Compose</li>
+<li><strong>Frontend</strong>: HTML, CSS, JavaScript</li>
+</ul>
+<h2 id="_6">Источники данных</h2>
+<h3 id="yellru">Основной: Yell.ru</h3>
+<ul>
+<li><strong>Покрытие</strong>: 83 города России</li>
+<li><strong>Данные</strong>: название, адрес, телефон, рейтинг, отзывы, часы работы</li>
+<li><strong>Особенности</strong>: стабильный API, хорошая защита от ботов</li>
+<li><strong>Статус</strong>:  Полностью собрано</li>
+</ul>
+<h3 id="_7">Дополнительные (в разработке)</h3>
+<ul>
+<li><strong>2GIS</strong>: Полные телефоны, но неполные адреса и редиректы на сайтах</li>
+<li><strong>YP.RU</strong>: DDoS-Guard блокирует автоматический парсинг</li>
+<li><strong>Zoon.ru</strong>: Таймауты и блокировки</li>
+</ul>
+<h2 id="_8">Структура каталога</h2>
+<h3 id="12">12 основных категорий</h3>
+<ol>
+<li>Рестораны и кафе</li>
+<li>Бары и клубы</li>
+<li>Магазины</li>
+<li>Красота</li>
+<li>Медицина</li>
+<li>Спорт</li>
+<li>Образование</li>
+<li>Развлечения</li>
+<li>Услуги для бизнеса</li>
+<li>Услуги для дома</li>
+<li>Недвижимость</li>
+<li>Транспорт</li>
+</ol>
+<h3 id="_9">Система тегов</h3>
+<ul>
+<li>Каждое заведение может иметь multiple tags</li>
+<li>Tags маппятся на основные категории через category-mapping.php</li>
+</ul>
+<h2 id="_10">Методы парсинга</h2>
+<h3 id="yellru-parser-php">Yell.ru Parser (PHP)</h3>
+<ul>
+<li><strong>Файл</strong>: <code>src/Parser.php</code></li>
+<li><strong>Методы</strong>:</li>
+<li><code>parseListPage()</code> - парсинг списка заведений</li>
+<li><code>parseDetailPage()</code> - детальная информация</li>
+<li><code>saveEstablishment()</code> - сохранение в БД</li>
+<li><code>isAdultContent()</code> - фильтрация нежелательного контента</li>
+</ul>
+<h3 id="ypru-parser-php">YP.RU Parser (PHP)</h3>
+<ul>
+<li><strong>Файл</strong>: <code>src/YpRuParser.php</code></li>
+<li><strong>Статус</strong>: ️ Заблокирован DDoS-Guard</li>
+</ul>
+<h3 id="2gis-parser-nodejs-puppeteer">2GIS Parser (Node.js + Puppeteer)</h3>
+<ul>
+<li><strong>Файл</strong>: <code>puppeteer-parser/parse-2gis-city.js</code></li>
+<li><strong>Статус</strong>: ️ Неполные данные (нет адресов, редиректы)</li>
+</ul>
+<h2 id="_11">Нормализация данных</h2>
+<h3 id="descriptionnormalizer">DescriptionNormalizer</h3>
+<ul>
+<li>Очистка HTML-тегов</li>
+<li>Удаление социальных ссылок и футеров</li>
+<li>Разбиение на семантические параграфы</li>
+<li>Форматирование текста</li>
+</ul>
+<h3 id="phoneextractor">PhoneExtractor</h3>
+<ul>
+<li>Нормализация телефонных номеров</li>
+<li>Поддержка российских форматов</li>
+</ul>
+<h2 id="_12">База данных</h2>
+<h3 id="_13">Основные таблицы</h3>
+<ul>
+<li><code>cities</code> - города</li>
+<li><code>categories</code> - категории</li>
+<li><code>companies</code> - заведения</li>
+<li><code>company_categories</code> - связь many-to-many</li>
+<li><code>parsing_progress</code> - отслеживание прогресса</li>
+</ul>
+<h3 id="companies">Поля companies</h3>
+<div class="codehilite"><pre><span></span><code><span class="o">-</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">address</span><span class="p">,</span><span class="w"> </span><span class="n">phone</span><span class="p">,</span><span class="w"> </span><span class="n">website</span>
+<span class="o">-</span><span class="w"> </span><span class="n">description</span><span class="p">,</span><span class="w"> </span><span class="n">rating</span><span class="p">,</span><span class="w"> </span><span class="n">reviews_count</span>
+<span class="o">-</span><span class="w"> </span><span class="n">city_id</span><span class="p">,</span><span class="w"> </span><span class="k">source</span><span class="p">,</span><span class="w"> </span><span class="n">source_url</span>
+<span class="o">-</span><span class="w"> </span><span class="n">created_at</span><span class="p">,</span><span class="w"> </span><span class="n">updated_at</span>
+</code></pre></div>
+
+<h2 id="_14">Статистика</h2>
+<h3 id="yellru_1">Собрано данных (Yell.ru)</h3>
+<ul>
+<li><strong>Городов</strong>: 83</li>
+<li><strong>Всего заведений</strong>: ~3000+</li>
+<li><strong>По категориям</strong>: от 100 до 500 на категорию</li>
+</ul>
+<h3 id="_15">Покрытие по городам</h3>
+<ul>
+<li>Крупные (Москва, СПб): 200+ заведений</li>
+<li>Средние: 50-150 заведений</li>
+<li>Малые: 10-50 заведений</li>
+</ul>
+<h2 id="_16">Выгрузка данных</h2>
+<h3 id="_17">Форматы</h3>
+<ul>
+<li>SQL dump</li>
+<li>JSON</li>
+<li>CSV</li>
+</ul>
+<h3 id="_18">Инструкция по выгрузке</h3>
+<p>См. <code>docs/EXPORT_GUIDE.md</code></p>
+<h2 id="_19">Развертывание</h2>
+<h3 id="_20">Требования</h3>
+<ul>
+<li>Docker 20+</li>
+<li>Docker Compose 2+</li>
+<li>4GB RAM минимум</li>
+</ul>
+<h3 id="_21">Запуск</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+
+<h3 id="_22">Доступ</h3>
+<ul>
+<li>Web: http://localhost:3000</li>
+<li>Adminer: http://localhost:8080</li>
+</ul>
+        </div>
+    </div>
+</article>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-info reveal">
+                <p class="label">Контакты</p>
+                <h2>Готовы к диалогу?</h2>
+                <div class="contact-item">
+                    <span class="contact-label">Телефон</span>
+                    <a href="tel:+78129287478">+7 (812) 928-74-78</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Почта</span>
+                    <a href="mailto:hello@axiiom.ru">hello@axiiom.ru</a>
+                </div>
+            </div>
+        </div>
+        <div id="footerCopy"></div>
+    </div>
+</footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
+<script src="/metrika.js"></script>
+<script src="/config.js"></script>
+<script src="/nav.js"></script>
+<script>Nav.init({breadcrumbs:false});</script>
+<script src="/theme.js"></script>
+<script src="/footer.js"></script>
+<script src="/preloader.js"></script>
+<script>
+(function(){var r=document.querySelectorAll('.reveal');if(r.length){var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible')}})},{threshold:0.15});for(var i=0;i<r.length;i++){o.observe(r[i])}}})();
+</script>
+<script>
+(function(){var t=document.getElementById('navToggle');var o=document.getElementById('navOverlay');if(!t||!o)return;t.addEventListener('click',function(e){e.stopPropagation();o.classList.toggle('open');t.classList.toggle('active');document.body.style.overflow=o.classList.contains('open')?'hidden':''})})();
+</script>
+</body>
+</html>

@@ -17,7 +17,7 @@
       ]
     },
     {
-      name: 'Отраслевые решения',
+      name: 'Решения',
       path: '/industries/',
       children: [
         { name: 'Автоматизация ресторанов', path: '/industries/avtomatizaciya-restoranov.html' },
@@ -45,19 +45,6 @@
       ]
     },
     {
-      name: 'Блог',
-      path: '/blog/',
-      children: [
-        { name: 'Архитектура highload-систем', path: '/blog/highload-architecture/' },
-        { name: 'PCI DSS Compliance', path: '/blog/pci-dss-compliance/' },
-        { name: 'Тренды финтеха 2026', path: '/blog/fintech-trends-2026/' },
-        { name: 'ROI платформы лояльности', path: '/blog/loyalty-program-roi/' },
-        { name: '161-ФЗ: руководство для стартапов', path: '/blog/161-fz-guideline/' },
-        { name: 'UX платёжных мобильных приложений', path: '/blog/mobile-payment-ux/' },
-        { name: 'Платформа лояльности — необходимость', path: '/blog/loyalty-platform-not-option-necessity/' }
-      ]
-    },
-    {
       name: 'Инструменты',
       path: '/tools/',
       children: [
@@ -75,9 +62,44 @@
         { name: 'Чек-листы', path: '/tools/checklist/' }
       ]
     },
+    {
+      name: 'Документация',
+      path: '/docs/',
+      children: [
+        { header: true, name: 'SRS / Техническая документация' },
+        { name: 'SRS v2 — Спецификация', path: '/docs/srs-v2/' },
+        { name: 'Аудит системы (AS IS)', path: '/docs/audit-as-is/' },
+        { name: 'Бизнес-модель', path: '/docs/business-model/' },
+        { name: 'Оценка сроков', path: '/docs/estimation/' },
+        { name: 'Карта фич', path: '/docs/feature-map/' },
+        { name: 'OTP через мессенджеры', path: '/docs/otp-via-messengers/' },
+        { separator: true },
+        { header: true, name: 'Статьи' },
+        { name: 'Архитектура highload-систем', path: '/blog/highload-architecture/' },
+        { name: 'PCI DSS Compliance', path: '/blog/pci-dss-compliance/' },
+        { name: 'Тренды финтеха 2026', path: '/blog/fintech-trends-2026/' },
+        { name: 'ROI платформы лояльности', path: '/blog/loyalty-program-roi/' },
+        { name: '161-ФЗ: руководство для стартапов', path: '/blog/161-fz-guideline/' },
+        { name: 'UX платёжных мобильных приложений', path: '/blog/mobile-payment-ux/' },
+        { name: 'Платформа лояльности — необходимость', path: '/blog/loyalty-platform-not-option-necessity/' },
+        { separator: true },
+        { header: true, name: 'Проектная документация' },
+        { name: 'Платформа «Витрина»', path: '/docs/vitrina/' },
+        { name: 'AMBAR — Фудтех', path: '/docs/ambar-proposal/' },
+        { name: 'ИТ-Архитектура (шаблон)', path: '/docs/it-architecture-template/' },
+        { name: 'UniverID — концепция', path: '/docs/univerid-concept/' },
+        { separator: true },
+        { header: true, name: 'Юридическая документация' },
+        { name: 'Юр. структура финтех-платформы', path: '/docs/yur-struktura-platformy/' },
+        { separator: true },
+        { header: true, name: 'Референсы' },
+        { name: 'API супермаркетов', path: '/docs/store-apis-research/' },
+        { name: 'Все документы', path: '/docs/' },
+      ]
+    },
     { name: 'Калькулятор', path: '/calculator/' },
     {
-      name: 'Демо-платформы',
+      name: 'Демо',
       path: '/demo/app/',
       children: [
         { header: true, name: 'Все демо' },
@@ -199,18 +221,19 @@
     },
 
     _findNode: function(path) {
-      for (var i = 0; i < TREE.length; i++) {
-        var n = TREE[i];
-        if (this._pathMatch(n.path, path)) return { node: n, parents: [] };
-        if (n.children) {
-          for (var j = 0; j < n.children.length; j++) {
-            if (this._pathMatch(n.children[j].path, path)) {
-              return { node: n.children[j], parents: [n] };
-            }
+      function search(nodes, parents) {
+        for (var i = 0; i < nodes.length; i++) {
+          var n = nodes[i];
+          if (n.separator || n.header) continue;
+          if (this._pathMatch(n.path, path)) return { node: n, parents: parents };
+          if (n.children) {
+            var result = search.call(this, n.children, parents.concat([n]));
+            if (result) return result;
           }
         }
+        return null;
       }
-      return null;
+      return search.call(this, TREE, []);
     },
 
     _hasHash: function(p) {
@@ -370,6 +393,13 @@
 
     _toggleCta: function() {
       var cta = $('ctaBtn');
+      if (!cta && this.opts.cta) {
+        var wrap = d.querySelector('.nav-actions');
+        if (wrap) {
+          cta = el('a', { href: '/#contact', 'class': 'btn btn-nav', id: 'ctaBtn' }, [tx('\u041E\u0431\u0441\u0443\u0434\u0438\u0442\u044C \u043F\u0440\u043E\u0435\u043A\u0442')]);
+          wrap.insertBefore(cta, wrap.firstChild);
+        }
+      }
       if (cta) cta.style.display = this.opts.cta ? '' : 'none';
     },
 

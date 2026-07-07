@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+    <title>FAQ проекта «Витрина» | Документация AXIIOM</title>
+    <meta name="description" content="Часто задаваемые вопросы о платформе «Витрина»: бизнес-модель, конкуренты, технологии.">
+    <link rel="canonical" href="https://axiiom.ru/docs/vitrina-faq/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://axiiom.ru/docs/vitrina-faq/">
+    <meta property="og:title" content="FAQ проекта «Витрина» | Документация AXIIOM">
+    <meta property="og:description" content="Часто задаваемые вопросы о платформе «Витрина»: бизнес-модель, конкуренты, технологии.">
+    <meta property="og:image" content="https://axiiom.ru/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="AXIIOM">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://axiiom.ru/docs/vitrina-faq/">
+    <meta name="twitter:title" content="FAQ проекта «Витрина» | Документация AXIIOM">
+    <meta name="twitter:description" content="Часто задаваемые вопросы о платформе «Витрина»: бизнес-модель, конкуренты, технологии.">
+    <meta name="twitter:image" content="https://axiiom.ru/og-image.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"FAQ проекта «Витрина»","description":"Часто задаваемые вопросы о платформе «Витрина»: бизнес-модель, конкуренты, технологии.","url":"https://axiiom.ru/docs/vitrina-faq/","author":{"@type":"Organization","name":"AXIIOM"},"isPartOf":{"@type":"WebSite","name":"AXIIOM","url":"https://axiiom.ru"}}</script>
+    <style>*{margin:0;padding:0;box-sizing:border-box}html{font-size:16px;scroll-behavior:smooth}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1.0625rem;background:#0A0A0F;color:#C7C7CC;line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}.noise{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}.grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:60px 60px}.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}.reveal.visible{opacity:1;transform:translateY(0)}</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/docs/styles.css">
+</head>
+<body>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="30" height="30" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/></svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </div>
+</header>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"><ol itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/"><span itemprop="name">Главная</span></a>
+        <meta itemprop="position" content="1">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/docs/"><span itemprop="name">Документация</span></a>
+        <meta itemprop="position" content="2">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">FAQ проекта «Витрина»</span>
+        <meta itemprop="position" content="3">
+      </li>
+    </ol></div></nav>
+<article class="docs-article">
+    <div class="container">
+        <div class="docs-content">
+            <div class="feature-page-hero"><h1>FAQ проекта «Витрина»</h1><p>Часто задаваемые вопросы о платформе «Витрина»: бизнес-модель, конкуренты, технологии.</p><div class="doc-actions"><a href="/docs/" class="btn btn-outline">← Все документы</a></div></div><h1 id="faq">FAQ: ВОПРОСЫ И ОТВЕТЫ ПО ПРОЕКТУ «ВИТРИНА»</h1>
+<p>Версия: 1.0
+Дата: Май 2026 г.</p>
+<hr />
+<h2 id="1">1. ВОПРОСЫ ПО БЮДЖЕТУ</h2>
+<h3 id="11-52-85">1.1. Почему бюджет 52 млн, а не 85 млн (как в исходном документе)?</h3>
+<p><strong>Ответ:</strong> Стоимость снижена за счёт использования живой legacy-системы как основы. Мы не строим с нуля, а трансформируем существующее:</p>
+<ul>
+<li>Используем существующую инфраструктуру и наработки</li>
+<li>Миграция вместо пересоздания — подход с двойной записью</li>
+<li>Команда Аксиомы уже знает систему — не требуется время на погружение</li>
+<li>Снижены риски за счёт работы с проверенной системой</li>
+</ul>
+<hr />
+<h3 id="12">1.2. Как распределяется бюджет по статьям?</h3>
+<p><strong>Ответ:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Статья</th>
+<th>Доля</th>
+<th>Сумма (руб.)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Команда разработки</td>
+<td>61,8%</td>
+<td>32 136 000</td>
+</tr>
+<tr>
+<td>Инфраструктура и лицензии</td>
+<td>10,0%</td>
+<td>5 200 000</td>
+</tr>
+<tr>
+<td>Интеграции и адаптеры</td>
+<td>8,2%</td>
+<td>4 264 000</td>
+</tr>
+<tr>
+<td>QA, безопасность, аудит</td>
+<td>5,9%</td>
+<td>3 068 000</td>
+</tr>
+<tr>
+<td>UX, документация, передача знаний</td>
+<td>4,7%</td>
+<td>2 444 000</td>
+</tr>
+<tr>
+<td>Резерв на риски</td>
+<td>9,4%</td>
+<td>4 888 000</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="13">1.3. Сколько человек в команде?</h3>
+<p><strong>Ответ:</strong> На старте команда состоит из <strong>10–12 человек</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Роль</th>
+<th>Кол-во</th>
+<th>Зона ответственности</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Технический лидер</td>
+<td>1</td>
+<td>Архитектура, координация</td>
+</tr>
+<tr>
+<td>Старший разработчик Go</td>
+<td>2</td>
+<td>Высоконагруженные сервисы, доставка, интеграции</td>
+</tr>
+<tr>
+<td>Старший разработчик PHP</td>
+<td>2</td>
+<td>Бизнес-логика, API, админ-панель</td>
+</tr>
+<tr>
+<td>Frontend-разработчик</td>
+<td>2</td>
+<td>Клиентское приложение, личные кабинеты</td>
+</tr>
+<tr>
+<td>DevOps-инженер</td>
+<td>2</td>
+<td>Инфраструктура, CI/CD, мониторинг</td>
+</tr>
+<tr>
+<td>Бизнес-аналитик</td>
+<td>1</td>
+<td>Требования, бизнес-логика</td>
+</tr>
+<tr>
+<td>QA-инженер / автоматизатор</td>
+<td>2</td>
+<td>Тестирование, контрактные тесты</td>
+</tr>
+<tr>
+<td>Product-менеджер</td>
+<td>1</td>
+<td>Управление продуктом</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="14">1.4. Как меняются расходы по мере реализации проекта?</h3>
+<p><strong>Ответ:</strong> Расходы идут по <strong>регрессии</strong>:</p>
+<ul>
+<li><strong>Этапы 1–3 (W1–W3)</strong>: Основной фокус на разработке, максимальные расходы на команду</li>
+<li><strong>Этапы 4–6 (W4–W6)</strong>: Баланс между разработкой и стабилизацией</li>
+<li><strong>Этапы 7–9 (W7–W9)</strong>: Снижение расходов на разработку, рост расходов на интеграции</li>
+<li><strong>Этапы 10–12 (W10–W12)</strong>: Минимум на разработку, основной фокус на поддержку, мониторинг, масштабирование</li>
+</ul>
+<p>Логика: к концу проекта команда стабилизируется, часть разработчиков завершает работу, но появляется потребность в расширении поддержки и мониторинга для растущей платформы.</p>
+<hr />
+<h3 id="15-49">1.5. На что именно идёт резерв на риски (4,9 млн)?</h3>
+<p><strong>Ответ:</strong> Резерв предназначен для покрытия:</p>
+<ul>
+<li>Задержек оргпроцессов по подключению партнёров и гипермаркетов</li>
+<li>Увеличения сроков из-за согласований и бюрократических процедур</li>
+<li>Непредвиденных технических проблем, требующих дополнительных ресурсов</li>
+<li>Замены подрядчиков или специалистов при выбытии</li>
+<li>Необходимости удержания команды при задержках финансирования</li>
+</ul>
+<p><strong>Ключевой принцип</strong>: резерв позволяет не потерять специалистов раньше времени, если проект затянется по независящим от команды причинам.</p>
+<hr />
+<h3 id="16">1.6. Какой порог входа для запуска нового города?</h3>
+<p><strong>Ответ:</strong> Из документа: подключение нового города занимает <strong>1–3 дня</strong> через готовый Helm-чарт и загрузку конфигурационного профиля.</p>
+<p><strong>Экономика:</strong>
+- Базовая инфраструктура (СПб пилот): ~150–200 тыс. руб./мес
+- Дополнительный город: +100–150 тыс. руб./мес
+- При масштабировании на 10 городов: ~1,5–2 млн руб./мес</p>
+<p>Конфигурационные профили уже включают тарифные зоны, логистические хабы, налоговые ставки — дополнительные затраты только на инфраструктуру.</p>
+<hr />
+<h2 id="2">2. ВОПРОСЫ ОТ ИНВЕСТОРА</h2>
+<h3 id="21">2.1. Когда проект начнёт приносить прибыль?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<h3 id="22-roi">2.2. Какой ожидаемый ROI?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<h3 id="23-retention">2.3. Сколько пользователей планируется привлечь? Какой retention?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<h3 id="24">2.4. Как будет монетизироваться платформа?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<h3 id="25">2.5. Чем вы отличаетесь от конкурентов (Яндекс Лавка, СберМаркет)?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<h3 id="26">2.6. Сколько городов планируется запустить за год?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<h3 id="27-legacy-">2.7. Какая текущая выручка у legacy-системы? Сколько заказов в день?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<h2 id="3">3. ВОПРОСЫ ОТ ВЛАДЕЛЬЦА СЕРВИСА</h2>
+<h3 id="31">3.1. Что произойдёт с текущими пользователями во время миграции?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<h3 id="32">3.2. Нужно ли обучать персонал? Сколько времени?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<h3 id="33">3.3. Сколько сейчас тратится на инфраструктуру? Снизятся ли расходы?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<h3 id="34">3.4. Гипермаркеты уже согласны на подключение?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<h3 id="35">3.5. Нужны ли новые сотрудники для новой платформы?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<h3 id="36">3.6. смогу ли я видеть аналитику в реальном времени?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<h2 id="4">4. ВОПРОСЫ ОТ ГОССТРУКТУР</h2>
+<h3 id="41-152-">4.1. Где хранятся данные пользователей? Соответствие 152-ФЗ?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<h3 id="42-">4.2. Как интегрированы с ФНС? Онлайн-кассы?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<h3 id="43">4.3. Курьеры — сотрудники или подрядчики?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<h3 id="44">4.4. Какой налоговый режим применяется?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<h3 id="45">4.5. Интеграция с системой Честный ЗНАК (маркировка)?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<h3 id="46-pentest">4.6. Проводится ли регулярный pentest? Есть ли аттестация безопасности?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<h3 id="47">4.7. Какие лицензии нужны для работы платформы?</h3>
+<p><em>[Ожидает ответа]</em></p>
+<hr />
+<p><em>Документ дополняется по мере поступления ответов от заказчика.</em></p>
+        </div>
+    </div>
+</article>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-info reveal">
+                <p class="label">Контакты</p>
+                <h2>Готовы к диалогу?</h2>
+                <div class="contact-item">
+                    <span class="contact-label">Телефон</span>
+                    <a href="tel:+78129287478">+7 (812) 928-74-78</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Почта</span>
+                    <a href="mailto:hello@axiiom.ru">hello@axiiom.ru</a>
+                </div>
+            </div>
+        </div>
+        <div id="footerCopy"></div>
+    </div>
+</footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
+<script src="/metrika.js"></script>
+<script src="/config.js"></script>
+<script src="/nav.js"></script>
+<script>Nav.init({breadcrumbs:false});</script>
+<script src="/theme.js"></script>
+<script src="/footer.js"></script>
+<script src="/preloader.js"></script>
+<script>
+(function(){var r=document.querySelectorAll('.reveal');if(r.length){var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible')}})},{threshold:0.15});for(var i=0;i<r.length;i++){o.observe(r[i])}}})();
+</script>
+<script>
+(function(){var t=document.getElementById('navToggle');var o=document.getElementById('navOverlay');if(!t||!o)return;t.addEventListener('click',function(e){e.stopPropagation();o.classList.toggle('open');t.classList.toggle('active');document.body.style.overflow=o.classList.contains('open')?'hidden':''})})();
+</script>
+</body>
+</html>

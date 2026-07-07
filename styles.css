@@ -591,6 +591,16 @@ a.logo:hover::after { width: 100%; }
     margin-bottom: 16px;
     color: var(--clr-accent);
     opacity: .8;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity .3s, transform .3s;
+}
+.tool-card:hover .tool-icon {
+    opacity: 1;
+    transform: scale(1.08);
 }
 
 .tool-meta {
@@ -861,6 +871,8 @@ a.logo:hover::after { width: 100%; }
     line-height: 1.6;
     flex: 1;
     margin: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .blog-read {
@@ -945,7 +957,8 @@ a.logo:hover::after { width: 100%; }
 }
 
 .hero.industries-hero,
-.hero.tools-hero {
+.hero.tools-hero,
+.hero.docs-hero {
     min-height: 50vh;
 }
 
@@ -1991,4 +2004,10 @@ a.logo:hover::after { width: 100%; }
     .stats { gap: 24px; }
     .footer-grid { grid-template-columns: 1fr; gap: 36px; }
     .hero-bg-svg { max-width: 320px; }
+}
+@media (max-width: 600px) {
+    .container { padding: 0 16px; }
+    .tool-card, .blog-card { padding: 20px 16px; }
+    .feature-module { padding: 16px; }
+    .docs-content .container { padding: 24px 16px; }
 }

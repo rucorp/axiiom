@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+    <title>Карта функциональных требований | Документация AXIIOM</title>
+    <meta name="description" content="15 модулей, 80+ фич: полный список функций продукта с 6 интерактивными визуализациями — Treemap, Mindmap, таблица, Roadmap, Kanban, Force Graph.">
+    <link rel="canonical" href="https://axiiom.ru/docs/feature-map/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://axiiom.ru/docs/feature-map/">
+    <meta property="og:title" content="Карта функциональных требований | Документация AXIIOM">
+    <meta property="og:description" content="15 модулей, 80+ фич: полный список функций продукта с 6 интерактивными визуализациями — Treemap, Mindmap, таблица, Roadmap, Kanban, Force Graph.">
+    <meta property="og:image" content="https://axiiom.ru/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="AXIIOM">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://axiiom.ru/docs/feature-map/">
+    <meta name="twitter:title" content="Карта функциональных требований | Документация AXIIOM">
+    <meta name="twitter:description" content="15 модулей, 80+ фич: полный список функций продукта с 6 интерактивными визуализациями — Treemap, Mindmap, таблица, Roadmap, Kanban, Force Graph.">
+    <meta name="twitter:image" content="https://axiiom.ru/og-image.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Карта функциональных требований","description":"15 модулей, 80+ фич: полный список функций продукта с 6 интерактивными визуализациями — Treemap, Mindmap, таблица, Roadmap, Kanban, Force Graph.","url":"https://axiiom.ru/docs/feature-map/","author":{"@type":"Organization","name":"AXIIOM"},"isPartOf":{"@type":"WebSite","name":"AXIIOM","url":"https://axiiom.ru"}}</script>
+    <style>*{margin:0;padding:0;box-sizing:border-box}html{font-size:16px;scroll-behavior:smooth}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1.0625rem;background:#0A0A0F;color:#C7C7CC;line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}.noise{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}.grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:60px 60px}.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}.reveal.visible{opacity:1;transform:translateY(0)}</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/docs/styles.css">
+</head>
+<body>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="30" height="30" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/></svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </div>
+</header>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"><ol itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/"><span itemprop="name">Главная</span></a>
+        <meta itemprop="position" content="1">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/docs/"><span itemprop="name">Документация</span></a>
+        <meta itemprop="position" content="2">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">Карта функциональных требований</span>
+        <meta itemprop="position" content="3">
+      </li>
+    </ol></div></nav>
+<article class="docs-article">
+    <div class="container">
+        <div class="docs-content">
+            <div class="feature-page-hero">
+    <h1>Карта функциональных требований</h1>
+    <p>15 модулей, 80+ функций — полная карта продукта. Ниже — интерактивные визуализации в 6 форматах.</p>
+    <div class="tools-grid"><a href="https://bestdeejay-design.github.io/srs-docs/visualizations/02-treemap.html" class="tool-card blog-card reveal" target="_blank">
+                <div class="tool-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="12" height="12" rx="1"/><rect x="17" y="3" width="12" height="6" rx="1"/><rect x="17" y="11" width="12" height="4" rx="1"/><rect x="3" y="17" width="8" height="12" rx="1"/><rect x="13" y="17" width="16" height="5" rx="1"/><rect x="13" y="24" width="7" height="5" rx="1"/><rect x="22" y="24" width="7" height="5" rx="1"/></svg></div>
+                <h3>Treemap</h3>
+                <p>Прямоугольное дерево. Размер прямоугольника = количество фич. Сравнение объёмов модулей.</p>
+                <span class="viz-tag">D3.js</span>
+            </a><a href="https://bestdeejay-design.github.io/srs-docs/visualizations/03-mindmap.html" class="tool-card blog-card reveal" target="_blank">
+                <div class="tool-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="6" r="3"/><circle cx="6" cy="18" r="2.5"/><circle cx="16" cy="26" r="2.5"/><circle cx="26" cy="18" r="2.5"/><line x1="14" y1="8.5" x2="8" y2="16"/><line x1="16" y1="9" x2="16" y2="23"/><line x1="18" y1="8.5" x2="24" y2="16"/></svg></div>
+                <h3>Mindmap</h3>
+                <p>Майнд-карта от центра. Привычный формат для мозговых штурмов и презентаций. Zoom + pan.</p>
+                <span class="viz-tag">D3.js</span>
+            </a><a href="https://bestdeejay-design.github.io/srs-docs/visualizations/04-table.html" class="tool-card blog-card reveal" target="_blank">
+                <div class="tool-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="26" height="26" rx="2"/><line x1="3" y1="10" x2="29" y2="10"/><line x1="12" y1="3" x2="12" y2="29"/><line x1="20" y1="3" x2="20" y2="29"/><rect x="4" y="4" width="9" height="5" rx="1" fill="currentColor" opacity=".15"/><rect x="13" y="4" width="8" height="5" rx="1" fill="currentColor" opacity=".15"/><rect x="21" y="4" width="7" height="5" rx="1" fill="currentColor" opacity=".15"/></svg></div>
+                <h3>Таблица</h3>
+                <p>Структурированный список: модули, фичи, описания, приоритеты. Поиск, сортировка, фильтрация.</p>
+                <span class="viz-tag">HTML/CSS</span>
+            </a><a href="https://bestdeejay-design.github.io/srs-docs/visualizations/05-roadmap.html" class="tool-card blog-card reveal" target="_blank">
+                <div class="tool-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="16" x2="28" y2="16"/><circle cx="8" cy="16" r="3" fill="currentColor"/><circle cx="16" cy="16" r="3" fill="currentColor"/><circle cx="24" cy="16" r="3" fill="currentColor"/><polyline points="26,12 30,16 26,20" stroke-width="2"/></svg></div>
+                <h3>Roadmap</h3>
+                <p>Дорожная карта по фазам: MVP → V2 → V3 → Future. Понятно, что и когда делать.</p>
+                <span class="viz-tag">HTML/CSS</span>
+            </a><a href="https://bestdeejay-design.github.io/srs-docs/visualizations/06-kanban.html" class="tool-card blog-card reveal" target="_blank">
+                <div class="tool-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="26" rx="1.5"/><rect x="12" y="3" width="8" height="26" rx="1.5"/><rect x="21" y="3" width="8" height="26" rx="1.5"/><rect x="5" y="6" width="4" height="2" rx=".5" fill="currentColor" opacity=".2"/><rect x="14" y="6" width="4" height="2" rx=".5" fill="currentColor" opacity=".2"/><rect x="23" y="6" width="4" height="2" rx=".5" fill="currentColor" opacity=".2"/><rect x="5" y="10" width="4" height="3" rx=".5" fill="currentColor" opacity=".12"/><rect x="14" y="10" width="4" height="4" rx=".5" fill="currentColor" opacity=".12"/><rect x="23" y="10" width="4" height="2" rx=".5" fill="currentColor" opacity=".12"/></svg></div>
+                <h3>Kanban</h3>
+                <p>Доска с drag-n-drop: Backlog → To Do → In Progress → Done. Для командной работы над задачами.</p>
+                <span class="viz-tag">HTML5 Drag & Drop</span>
+            </a><a href="https://bestdeejay-design.github.io/srs-docs/visualizations/07-force-graph.html" class="tool-card blog-card reveal" target="_blank">
+                <div class="tool-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="3" fill="currentColor" opacity=".8"/><circle cx="22" cy="10" r="2.5" fill="currentColor" opacity=".8"/><circle cx="16" cy="20" r="2" fill="currentColor" opacity=".8"/><circle cx="6" cy="24" r="1.5" fill="currentColor" opacity=".8"/><circle cx="26" cy="22" r="2" fill="currentColor" opacity=".8"/><line x1="12.5" y1="10" x2="20" y2="11.5"/><line x1="17" y1="18.5" x2="14" y2="11"/><line x1="8" y1="22" x2="7" y2="10"/><line x1="21" y1="12" x2="24.5" y2="20.5"/><line x1="12.5" y1="18" x2="14.5" y2="22.5"/><line x1="24.5" y1="12" x2="17" y2="20.5"/></svg></div>
+                <h3>Force Graph</h3>
+                <p>Силовой граф. Связи между модулями и фичами. Показывает зависимости и пересечения.</p>
+                <span class="viz-tag">D3.js Force</span>
+            </a></div>
+    <div class="viz-section">
+        <h2>Список всех функций</h2>
+        <p>15 модулей, каждый со своим набором возможностей.</p>
+        <div class="feature-module reveal">
+                <h3 class="feature-module-title">Регистрация и безопасность</h3>
+                <div class="feature-badges"><span class="feature-badge">Вход по телефону</span><span class="feature-badge">SMS-подтверждение</span><span class="feature-badge">Роли: клиент/пикер/курьер/админ/суперадмин</span><span class="feature-badge">JWT access + refresh токены</span><span class="feature-badge">Rate limiting</span><span class="feature-badge">Audit log</span></div>
+            </div><div class="feature-module reveal">
+                <h3 class="feature-module-title">Каталог</h3>
+                <div class="feature-badges"><span class="feature-badge">Выбор магазина по адресу</span><span class="feature-badge">Категории (3 уровня)</span><span class="feature-badge">Поиск (Elasticsearch)</span><span class="feature-badge">Динамические фильтры (по категории)</span><span class="feature-badge">Карточка товара</span><span class="feature-badge">Нормализация данных сетей</span><span class="feature-badge">Маппинг категорий сети → платформа</span><span class="feature-badge">Адаптеры сетей (Лента, METRO, Вкусвилл и др.)</span><span class="feature-badge">Синхронизация цен/остатков (шедулер)</span></div>
+            </div><div class="feature-module reveal">
+                <h3 class="feature-module-title">Корзина</h3>
+                <div class="feature-badges"><span class="feature-badge">Добавление товаров</span><span class="feature-badge">Промокоды и баллы</span><span class="feature-badge">Dynamic Pricing (надбавка за время/погоду/загрузку)</span><span class="feature-badge">Пересчёт стоимости</span><span class="feature-badge">Оформление</span></div>
+            </div><div class="feature-module reveal">
+                <h3 class="feature-module-title">Заказы</h3>
+                <div class="feature-badges"><span class="feature-badge">Создание</span><span class="feature-badge">Статусы (оплачен → сборка → доставка → завершён)</span><span class="feature-badge">Добавление товаров после оформления</span><span class="feature-badge">История</span><span class="feature-badge">Замена товара (пикер → звонок → альтернатива)</span><span class="feature-badge">Возврат и отмена (до/после сборки, комиссия)</span><span class="feature-badge">Event Sourcing (цепочка событий заказа)</span></div>
+            </div><div class="feature-module reveal">
+                <h3 class="feature-module-title">Доставка</h3>
+                <div class="feature-badges"><span class="feature-badge">Временные слоты (3 дня вперёд)</span><span class="feature-badge">Dispatch (multi-objective optimization)</span><span class="feature-badge">ETA (OSRM + ML гибрид)</span><span class="feature-badge">Трекинг для клиента</span><span class="feature-badge">Опция «Можно раньше»</span></div>
+            </div><div class="feature-module reveal">
+                <h3 class="feature-module-title">Платежи</h3>
+                <div class="feature-badges"><span class="feature-badge">Т-Банк (онлайн, 3DSecure)</span><span class="feature-badge">СБП (QR от курьера)</span><span class="feature-badge">Карта курьеру (POS-терминал)</span><span class="feature-badge">Наличные</span><span class="feature-badge">Refund (полный/частичный)</span><span class="feature-badge">Чек (54-ФЗ, ОФД)</span></div>
+            </div><div class="feature-module reveal">
+                <h3 class="feature-module-title">Уведомления</h3>
+                <div class="feature-badges"><span class="feature-badge">Push (FCM)</span><span class="feature-badge">SMS</span><span class="feature-badge">Email</span><span class="feature-badge">Telegram</span><span class="feature-badge">События: заказ создан, сборка начата, курьер выехал, доставлен</span></div>
+            </div><div class="feature-module reveal">
+                <h3 class="feature-module-title">Админка</h3>
+                <div class="feature-badges"><span class="feature-badge">Управление заказами (CRUD, статусы, комментарии)</span><span class="feature-badge">Управление товарами (CRUD, импорт/экспорт CSV)</span><span class="feature-badge">Пользователи (блокировка, роли)</span><span class="feature-badge">Промокоды (создание, статистика)</span><span class="feature-badge">Курьеры и пикеры (зоны, рейтинг)</span><span class="feature-badge">Магазины и зоны доставки (полигоны)</span><span class="feature-badge">Управление сетями-адаптерами (вкл/выкл)</span><span class="feature-badge">Audit log (кто, когда, что сделал)</span></div>
+            </div><div class="feature-module reveal">
+                <h3 class="feature-module-title">B2B</h3>
+                <div class="feature-badges"><span class="feature-badge">Корпоративные заказы в офис</span><span class="feature-badge">Регулярные поставки (ежедневно/еженедельно)</span><span class="feature-badge">Индивидуальные цены по договору</span><span class="feature-badge">Отсрочка платежа (3–30 дней)</span><span class="feature-badge">ЭДО (Диадок / СБИС, УПД)</span><span class="feature-badge">Счета и закрывающие документы</span></div>
+            </div><div class="feature-module reveal">
+                <h3 class="feature-module-title">Dynamic Pricing</h3>
+                <div class="feature-badges"><span class="feature-badge">Факторы: загрузка курьеров, время, погода, расстояние, вес</span><span class="feature-badge">Формула: base_fee × product(multipliers)</span><span class="feature-badge">Max надбавка: 2×</span><span class="feature-badge">Отображение в корзине до подтверждения</span></div>
+            </div><div class="feature-module reveal">
+                <h3 class="feature-module-title">Приложение пикера</h3>
+                <div class="feature-badges"><span class="feature-badge">Список заказов (FIFO)</span><span class="feature-badge">Сканер штрихкодов (Scandit)</span><span class="feature-badge">Замены товаров (поиск альтернатив)</span><span class="feature-badge">Звонок клиенту (скрытый номер)</span><span class="feature-badge">Offline-режим (Firestore cache)</span><span class="feature-badge">Smart Sync Queue (batch upload)</span><span class="feature-badge">Подтверждение упаковки</span></div>
+            </div><div class="feature-module reveal">
+                <h3 class="feature-module-title">Приложение курьера</h3>
+                <div class="feature-badges"><span class="feature-badge">Навигация с multi-stop маршрутом</span><span class="feature-badge">Offline-режим (Hive + Smart Sync)</span><span class="feature-badge">Off-route detection (визуальный + звуковой алерт)</span><span class="feature-badge">Приём оплаты (офлайн hold → sync)</span><span class="feature-badge">Digital Signature (POD)</span><span class="feature-badge">Photo POD</span><span class="feature-badge">Сканер</span><span class="feature-badge">Статусы доставки</span></div>
+            </div><div class="feature-module reveal">
+                <h3 class="feature-module-title">Инфраструктура</h3>
+                <div class="feature-badges"><span class="feature-badge">CI/CD (GitHub Actions, testcontainers)</span><span class="feature-badge">Docker Compose → Kubernetes</span><span class="feature-badge">Мониторинг (Prometheus + Grafana + Loki + Jaeger)</span><span class="feature-badge">Sentry (error tracking)</span><span class="feature-badge">Feature flags (Flipper / LaunchDarkly)</span><span class="feature-badge">Rollback (git revert + rolling update)</span></div>
+            </div><div class="feature-module reveal">
+                <h3 class="feature-module-title">Тестирование</h3>
+                <div class="feature-badges"><span class="feature-badge">Unit (mockery + testify)</span><span class="feature-badge">Integration (testcontainers)</span><span class="feature-badge">Contract (Pact CDC)</span><span class="feature-badge">E2E (Cypress + K6)</span><span class="feature-badge">Load (K6: stress, soak, spike)</span><span class="feature-badge">Security (SonarCloud + Trivy + Aikido)</span></div>
+            </div><div class="feature-module reveal">
+                <h3 class="feature-module-title">Аналитика</h3>
+                <div class="feature-badges"><span class="feature-badge">Дашборды (Grafana)</span><span class="feature-badge">Отчёты (выручка, заказы, конверсия)</span><span class="feature-badge">Метрики (DAU/MAU, время сборки, ETA, топ товаров)</span></div>
+            </div>
+    </div>
+    <a href="/docs/" class="btn btn-outline back-link">← Все документы</a>
+</div>
+        </div>
+    </div>
+</article>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-info reveal">
+                <p class="label">Контакты</p>
+                <h2>Готовы к диалогу?</h2>
+                <div class="contact-item">
+                    <span class="contact-label">Телефон</span>
+                    <a href="tel:+78129287478">+7 (812) 928-74-78</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Почта</span>
+                    <a href="mailto:hello@axiiom.ru">hello@axiiom.ru</a>
+                </div>
+            </div>
+        </div>
+        <div id="footerCopy"></div>
+    </div>
+</footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
+<script src="/metrika.js"></script>
+<script src="/config.js"></script>
+<script src="/nav.js"></script>
+<script>Nav.init({breadcrumbs:false});</script>
+<script src="/theme.js"></script>
+<script src="/footer.js"></script>
+<script src="/preloader.js"></script>
+<script>
+(function(){var r=document.querySelectorAll('.reveal');if(r.length){var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible')}})},{threshold:0.15});for(var i=0;i<r.length;i++){o.observe(r[i])}}})();
+</script>
+<script>
+(function(){var t=document.getElementById('navToggle');var o=document.getElementById('navOverlay');if(!t||!o)return;t.addEventListener('click',function(e){e.stopPropagation();o.classList.toggle('open');t.classList.toggle('active');document.body.style.overflow=o.classList.contains('open')?'hidden':''})})();
+</script>
+</body>
+</html>

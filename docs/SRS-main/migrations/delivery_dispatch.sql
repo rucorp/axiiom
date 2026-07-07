@@ -1,0 +1,3 @@
+-- Delivery & Dispatch Schema
+-- Полные DDL-схемы хранятся в SRS-v2.md §3.5
+-- См. SRS-v2.md §3.5: Delivery & Dispatch Schema

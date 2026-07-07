@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+    <title>OTP-доставка через мессенджеры | Документация AXIIOM</title>
+    <meta name="description" content="Спецификация доставки одноразовых кодов через Telegram, WhatsApp и другие мессенджеры.">
+    <link rel="canonical" href="https://axiiom.ru/docs/otp-via-messengers/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://axiiom.ru/docs/otp-via-messengers/">
+    <meta property="og:title" content="OTP-доставка через мессенджеры | Документация AXIIOM">
+    <meta property="og:description" content="Спецификация доставки одноразовых кодов через Telegram, WhatsApp и другие мессенджеры.">
+    <meta property="og:image" content="https://axiiom.ru/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="AXIIOM">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://axiiom.ru/docs/otp-via-messengers/">
+    <meta name="twitter:title" content="OTP-доставка через мессенджеры | Документация AXIIOM">
+    <meta name="twitter:description" content="Спецификация доставки одноразовых кодов через Telegram, WhatsApp и другие мессенджеры.">
+    <meta name="twitter:image" content="https://axiiom.ru/og-image.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"OTP-доставка через мессенджеры","description":"Спецификация доставки одноразовых кодов через Telegram, WhatsApp и другие мессенджеры.","url":"https://axiiom.ru/docs/otp-via-messengers/","author":{"@type":"Organization","name":"AXIIOM"},"isPartOf":{"@type":"WebSite","name":"AXIIOM","url":"https://axiiom.ru"}}</script>
+    <style>*{margin:0;padding:0;box-sizing:border-box}html{font-size:16px;scroll-behavior:smooth}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1.0625rem;background:#0A0A0F;color:#C7C7CC;line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}.noise{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}.grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:60px 60px}.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}.reveal.visible{opacity:1;transform:translateY(0)}</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/docs/styles.css">
+</head>
+<body>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="30" height="30" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/></svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </div>
+</header>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"><ol itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/"><span itemprop="name">Главная</span></a>
+        <meta itemprop="position" content="1">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/docs/"><span itemprop="name">Документация</span></a>
+        <meta itemprop="position" content="2">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">OTP-доставка через мессенджеры</span>
+        <meta itemprop="position" content="3">
+      </li>
+    </ol></div></nav>
+<article class="docs-article">
+    <div class="container">
+        <div class="docs-content">
+            <div class="feature-page-hero"><h1>OTP-доставка через мессенджеры</h1><p>Спецификация доставки одноразовых кодов через Telegram, WhatsApp и другие мессенджеры.</p><div class="doc-actions"><a href="/docs/" class="btn btn-outline">← Все документы</a></div></div><h1 id="otp-max-telegram">Доставка OTP-кодов через мессенджеры (MAX / Telegram)</h1>
+<blockquote>
+<p><strong>Проблема:</strong> SMS-коды не работают (провайдер недоступен / отключён).
+<strong>Решение:</strong> Отправлять OTP через мессенджеры MAX и Telegram с каскадным fallback.
+<strong>Статус:</strong> Проектирование.</p>
+</blockquote>
+<hr />
+<h2 id="1">1. Ключевое ограничение</h2>
+<p><strong>Ни MAX API, ни Telegram Bot API не имеют метода поиска пользователя по номеру телефона.</strong> Отправить сообщение можно только зная <code>user_id</code> (MAX) или <code>chat_id</code> (Telegram). Эти идентификаторы становятся известны, когда пользователь сам запустил бота.</p>
+<p>Единственный способ отправить код без предварительной привязки — <strong>Deep Link с параметром <code>?start=</code></strong>, который передаётся боту при первом запуске.</p>
+<hr />
+<h2 id="2">2. Принципиальная схема</h2>
+<div class="codehilite"><pre><span></span><code><span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w">                   </span><span class="n">Пользователь</span><span class="w">                           </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="n">Вводит</span><span class="w"> </span><span class="n">телефон</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">нажимает</span><span class="w"> </span><span class="err">«</span><span class="n">Получить</span><span class="w"> </span><span class="n">код</span><span class="w"> </span><span class="n">в</span><span class="w"> </span><span class="nf">MAX</span><span class="err">»</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">TG</span><span class="w">   </span><span class="err">│</span>
+<span class="err">└────────────────────────┬────────────────────────────────┘</span>
+<span class="w">                         </span><span class="err">│</span>
+<span class="w">                         </span><span class="err">▼</span>
+<span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w">                   </span><span class="n">App</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">Frontend</span><span class="w">                         </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="n">Генерирует</span><span class="w"> </span><span class="n">одноразовый</span><span class="w"> </span><span class="n">сессионный</span><span class="w"> </span><span class="nl">токен</span><span class="p">:</span><span class="w">               </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="n">AUTH_</span><span class="o">&lt;</span><span class="mi">32</span><span class="w"> </span><span class="n">random</span><span class="w"> </span><span class="n">hex</span><span class="w"> </span><span class="n">chars</span><span class="o">&gt;</span><span class="w">                             </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="nl">Сохраняет</span><span class="p">:</span><span class="w"> </span><span class="k">session</span><span class="o">[</span><span class="n">AUTH_XXX</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="n">phone</span><span class="p">,</span><span class="w"> </span><span class="nl">expires</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="nf">min</span><span class="err">}</span><span class="w">  </span><span class="err">│</span>
+<span class="err">│</span><span class="w">                                                          </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="n">Открывает</span><span class="w"> </span><span class="n">deep</span><span class="w"> </span><span class="nl">link</span><span class="p">:</span><span class="w">                                   </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="nf">MAX</span><span class="err">:</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="nf">max</span><span class="p">.</span><span class="n">ru</span><span class="o">/&lt;</span><span class="n">bot</span><span class="o">&gt;</span><span class="vm">?</span><span class="k">start</span><span class="o">=</span><span class="n">AUTH_XXX</span><span class="w">               </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="nl">TG</span><span class="p">:</span><span class="w">  </span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">t</span><span class="p">.</span><span class="n">me</span><span class="o">/&lt;</span><span class="n">bot</span><span class="o">&gt;</span><span class="vm">?</span><span class="k">start</span><span class="o">=</span><span class="n">AUTH_XXX</span><span class="w">                 </span><span class="err">│</span>
+<span class="err">└────────────────────────┬────────────────────────────────┘</span>
+<span class="w">                         </span><span class="err">│</span>
+<span class="w">                         </span><span class="err">▼</span>
+<span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w">                   </span><span class="n">Мессенджер</span><span class="w">                              </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="n">Открывает</span><span class="w"> </span><span class="n">чат</span><span class="w"> </span><span class="n">с</span><span class="w"> </span><span class="n">ботом</span><span class="w">                                   </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="n">Пользователь</span><span class="w"> </span><span class="n">нажимает</span><span class="w"> </span><span class="n">Старт</span><span class="w">                             </span><span class="err">│</span>
+<span class="err">└────────────────────────┬────────────────────────────────┘</span>
+<span class="w">                         </span><span class="err">│</span>
+<span class="w">                         </span><span class="err">▼</span>
+<span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w">                   </span><span class="n">Backend</span><span class="w"> </span><span class="p">(</span><span class="n">Bot</span><span class="w"> </span><span class="n">Webhook</span><span class="p">)</span><span class="w">                   </span><span class="err">│</span>
+<span class="err">│</span><span class="w">                                                          </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="nf">MAX</span><span class="err">:</span><span class="w"> </span><span class="n">получает</span><span class="w"> </span><span class="nl">bot_started</span><span class="p">:</span><span class="w">                              </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="err">{</span><span class="w"> </span><span class="n">chat_id</span><span class="p">,</span><span class="w"> </span><span class="nf">user_id</span><span class="p">,</span><span class="w"> </span><span class="nl">payload</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;AUTH_XXX&quot;</span><span class="w"> </span><span class="err">}</span><span class="w">              </span><span class="err">│</span>
+<span class="err">│</span><span class="w">                                                          </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="nl">TG</span><span class="p">:</span><span class="w">  </span><span class="n">получает</span><span class="w"> </span><span class="o">/</span><span class="k">start</span><span class="w"> </span><span class="n">AUTH_XXX</span><span class="w">                          </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="err">{</span><span class="w"> </span><span class="n">chat_id</span><span class="p">,</span><span class="w"> </span><span class="nc">text</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;/start AUTH_XXX&quot;</span><span class="w"> </span><span class="err">}</span><span class="w">                   </span><span class="err">│</span>
+<span class="err">│</span><span class="w">                                                          </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="err">→</span><span class="w"> </span><span class="n">Дёргает</span><span class="w"> </span><span class="n">App</span><span class="w"> </span><span class="nl">API</span><span class="p">:</span><span class="w"> </span><span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">auth</span><span class="o">/</span><span class="n">link</span><span class="w">                     </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="err">{</span><span class="w"> </span><span class="nl">token</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;AUTH_XXX&quot;</span><span class="p">,</span><span class="w"> </span><span class="nl">messenger</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;max&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">user_id</span><span class="w"> </span><span class="err">}</span><span class="w">     </span><span class="err">│</span>
+<span class="err">└────────────────────────┬────────────────────────────────┘</span>
+<span class="w">                         </span><span class="err">│</span>
+<span class="w">                         </span><span class="err">▼</span>
+<span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w">                   </span><span class="n">App</span><span class="w"> </span><span class="n">API</span><span class="w">                                 </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="n">Находит</span><span class="w"> </span><span class="n">phone</span><span class="w"> </span><span class="n">по</span><span class="w"> </span><span class="n">AUTH_XXX</span><span class="w">                              </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="n">Сохраняет</span><span class="w"> </span><span class="nl">связку</span><span class="p">:</span><span class="w"> </span><span class="n">user_messenger_links</span><span class="o">[</span><span class="n">phone</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="w">      </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="nf">max</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="nf">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">linked_at</span><span class="w"> </span><span class="err">}</span><span class="p">,</span><span class="w">                         </span><span class="err">│</span>
+<span class="err">│</span><span class="w">     </span><span class="nl">tg</span><span class="p">:</span><span class="w">  </span><span class="err">{</span><span class="w"> </span><span class="n">chat_id</span><span class="p">,</span><span class="w"> </span><span class="n">linked_at</span><span class="w"> </span><span class="err">}</span><span class="w">                          </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="err">}</span><span class="w">                                                      </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="n">Отвечает</span><span class="w"> </span><span class="nl">боту</span><span class="p">:</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="nl">status</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;ok&quot;</span><span class="p">,</span><span class="w"> </span><span class="nl">otp</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;1234&quot;</span><span class="w"> </span><span class="err">}</span><span class="w">           </span><span class="err">│</span>
+<span class="err">└────────────────────────┬────────────────────────────────┘</span>
+<span class="w">                         </span><span class="err">│</span>
+<span class="w">                         </span><span class="err">▼</span>
+<span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w">                   </span><span class="n">Bot</span><span class="w"> </span><span class="n">в</span><span class="w"> </span><span class="n">чате</span><span class="w">                               </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="nl">Отправляет</span><span class="p">:</span><span class="w"> </span><span class="err">«</span><span class="n">Ваш</span><span class="w"> </span><span class="nl">код</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="err">»</span><span class="w">                             </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="nf">MAX</span><span class="err">:</span><span class="w"> </span><span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">messages</span><span class="vm">?</span><span class="nf">user_id</span><span class="o">=</span><span class="w">                            </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="nl">TG</span><span class="p">:</span><span class="w">  </span><span class="n">sendMessage</span><span class="p">(</span><span class="n">chat_id</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;Ваш код: 1234&quot;</span><span class="p">)</span><span class="w">              </span><span class="err">│</span>
+<span class="err">└────────────────────────┬────────────────────────────────┘</span>
+<span class="w">                         </span><span class="err">│</span>
+<span class="w">                         </span><span class="err">▼</span>
+<span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w">                   </span><span class="n">Пользователь</span><span class="w">                             </span><span class="err">│</span>
+<span class="err">│</span><span class="w">   </span><span class="n">Видит</span><span class="w"> </span><span class="n">код</span><span class="w"> </span><span class="n">в</span><span class="w"> </span><span class="n">чате</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">вводит</span><span class="w"> </span><span class="n">в</span><span class="w"> </span><span class="n">приложении</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">вход</span><span class="w">           </span><span class="err">│</span>
+<span class="err">└─────────────────────────────────────────────────────────┘</span>
+</code></pre></div>
+
+<hr />
+<h2 id="3">3. Каскадная логика (при повторных входах)</h2>
+<p>После первой авторизации через deep link связка <code>phone → user_id/chat_id</code> сохранена в БД. При повторном входе:</p>
+<div class="codehilite"><pre><span></span><code>Пользователь вводит телефон
+  ↓
+Проверка user_messenger_links:
+  ┌──────────────────────────────────────────┐
+  │ Есть user_id в MAX?                      │
+  │   → POST /messages?user_id= → OTP        │
+  │   → «Код отправлен в MAX»                │
+  ├──────────────────────────────────────────┤
+  │ Есть chat_id в TG?                       │
+  │   → sendMessage(chat_id) → OTP           │
+  │   → «Код отправлен в Telegram»           │
+  ├──────────────────────────────────────────┤
+  │ Нет привязки                             │
+  │   → Deep Link flow (см. схему выше)      │
+  │   → Показываем кнопки MAX / TG           │
+  └──────────────────────────────────────────┘
+</code></pre></div>
+
+<hr />
+<h2 id="4">4. Сравнение каналов</h2>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>MAX</th>
+<th>Telegram</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>География</td>
+<td>🇷🇺 РФ</td>
+<td>Global</td>
+</tr>
+<tr>
+<td>Deep Link</td>
+<td><code>https://max.ru/&lt;bot&gt;?start=&lt;payload&gt;</code> (до 128 симв.)</td>
+<td><code>https://t.me/&lt;bot&gt;?start=&lt;payload&gt;</code></td>
+</tr>
+<tr>
+<td>Событие при запуске</td>
+<td><code>bot_started</code> с полем <code>payload</code></td>
+<td><code>/start &lt;payload&gt;</code> как текст сообщения</td>
+</tr>
+<tr>
+<td>Отправка сообщения</td>
+<td><code>POST /messages?user_id=</code></td>
+<td><code>sendMessage(chat_id, text)</code></td>
+</tr>
+<tr>
+<td>Rate limit</td>
+<td>30 rps</td>
+<td>30 msg/s global, 1 msg/s per chat</td>
+</tr>
+<tr>
+<td>Лимит текста</td>
+<td>4000 символов</td>
+<td>4096 символов</td>
+</tr>
+<tr>
+<td>Требуется организация</td>
+<td>Да (ИП/юрлицо/самозанятый, резиденты РФ)</td>
+<td>Нет</td>
+</tr>
+<tr>
+<td>Модерация бота</td>
+<td>Да (может занимать дни)</td>
+<td>Нет</td>
+</tr>
+<tr>
+<td>Макс. ботов</td>
+<td>5 (юрлицо), 2 (самозанятый)</td>
+<td>Не ограничено</td>
+</tr>
+<tr>
+<td>Получение событий</td>
+<td>Webhook (HTTPS, порт 443)</td>
+<td>Webhook или Long Polling</td>
+</tr>
+<tr>
+<td>Запрос контакта</td>
+<td><code>request_contact</code> кнопка + HMAC-верификация</td>
+<td><code>KeyboardButton</code> с <code>request_contact: true</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5">5. Детальные требования</h2>
+<h3 id="51">5.1 Сессионный токен</h3>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Формат</td>
+<td><code>AUTH_</code> + 32 символа (hex)</td>
+</tr>
+<tr>
+<td>TTL</td>
+<td>5 минут</td>
+</tr>
+<tr>
+<td>Хранение</td>
+<td>Redis / in-memory cache</td>
+</tr>
+<tr>
+<td>Привязка</td>
+<td><code>token → { phone, messenger_choice, created_at }</code></td>
+</tr>
+<tr>
+<td>Инвалидация</td>
+<td>После успешного получения OTP, по таймауту</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52-deep-link-url">5.2 Deep Link URL</h3>
+<p><strong>MAX:</strong> <code>https://max.ru/{bot_username}?start=AUTH_{token}</code></p>
+<p><strong>Telegram:</strong> <code>https://t.me/{bot_username}?start=AUTH_{token}</code></p>
+<p>Требования к <code>token</code>:
+- Только латиница, цифры, <code>_</code>, <code>-</code>, <code>.</code>
+- Не содержит чувствительных данных (phone, email, user_id)</p>
+<h3 id="53-bot-webhook-max">5.3 Bot Webhook (MAX)</h3>
+<p><strong>Подписка:</strong> <code>POST /subscriptions</code> с <code>update_types: ["bot_started"]</code></p>
+<p><strong>Входящее событие:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;update_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bot_started&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1748000000000</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;chat_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1234567890</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">543210</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Иван&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ivan_petrov&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AUTH_abc123def456...&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Обработчик webhook:</strong>
+1. Извлечь <code>payload</code> (если <code>null</code> — ответить приветствием, не обрабатывать)
+2. Извлечь <code>user.user_id</code> и <code>chat_id</code>
+3. Вызвать <code>POST /api/v1/auth/link</code> вашего приложения:
+   <code>json
+   {
+     "token": "AUTH_abc123def456...",
+     "messenger": "max",
+     "user_id": 543210,
+     "chat_id": 1234567890
+   }</code>
+4. Если App API вернул <code>{ status: "ok", otp: "1234" }</code> — отправить сообщение:
+   <code>json
+   POST /messages?user_id=543210
+   {
+     "text": "Ваш код подтверждения: 1234\nНикому не сообщайте этот код.",
+     "format": "markdown"
+   }</code>
+5. Если App API вернул ошибку — отправить: «Срок действия ссылки истёк. Запросите код заново в приложении.»</p>
+<h3 id="54-bot-webhook-telegram">5.4 Bot Webhook (Telegram)</h3>
+<p><strong>Входящее сообщение:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;update_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">123456789</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;message_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;chat&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">987654321</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/start AUTH_abc123def456...&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Обработчик:</strong>
+1. Проверить, что текст начинается с <code>/start AUTH_</code>
+2. Извлечь <code>token</code> и <code>chat_id</code>
+3. Вызвать <code>POST /api/v1/auth/link</code>:
+   <code>json
+   {
+     "token": "AUTH_abc123def456...",
+     "messenger": "telegram",
+     "chat_id": 987654321
+   }</code>
+4. Если App API вернул <code>{ status: "ok", otp: "1234" }</code> — отправить:
+   <code>json
+   sendMessage(987654321, {
+     "text": "Ваш код подтверждения: 1234\nНикому не сообщайте этот код."
+   })</code>
+5. Если ошибка — ответ: «Срок действия ссылки истёк.»</p>
+<h3 id="55-app-api-post-apiv1authrequest-otp">5.5 App API — <code>POST /api/v1/auth/request-otp</code></h3>
+<p>Вызывается фронтендом при нажатии кнопки «Получить код в MAX/TG».</p>
+<p><strong>Запрос:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;+79001234567&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;preferred_messenger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;max&quot;</span><span class="w">    </span><span class="c1">// &quot;max&quot; | &quot;telegram&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Логика:</strong>
+1. Проверить <code>user_messenger_links</code> для <code>phone</code>
+2. Если привязка есть → отправить OTP напрямую через бота:
+   - MAX: <code>POST /messages?user_id=...</code>
+   - TG: <code>sendMessage(chat_id, ...)</code>
+3. Если привязки нет → сгенерировать <code>AUTH_token</code>, сохранить в Redis:
+   <code>SET auth_session:AUTH_token '{phone, preferred_messenger}'
+   EXPIRE auth_session:AUTH_token 300</code>
+4. Вернуть <code>{ deep_link: "https://max.ru/bot?start=AUTH_token" }</code></p>
+<p><strong>Ответ:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;deep_link&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://max.ru/bot?start=AUTH_abc123...&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="56-app-api-post-apiv1authlink">5.6 App API — <code>POST /api/v1/auth/link</code></h3>
+<p>Внутренний эндпоинт, вызывается только ботом (защищён общим секретом).</p>
+<p><strong>Запрос:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AUTH_abc123def...&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;messenger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;max&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">543210</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;chat_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1234567890</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Логика:</strong>
+1. Найти сессию по <code>token</code> в Redis
+2. Если не найдена или истекла → <code>{ error: "token_expired" }</code>
+3. Извлечь <code>phone</code> из сессии
+4. Сохранить/обновить <code>user_messenger_links[phone]</code>:
+   <code>sql
+   UPSERT INTO user_messenger_links (phone, max_user_id, max_chat_id, linked_at)
+   VALUES ('+79001234567', 543210, 1234567890, NOW())</code>
+5. Сгенерировать OTP (6 цифр), сохранить:
+   <code>sql
+   UPSERT INTO otp_codes (phone, code, expires_at)
+   VALUES ('+79001234567', '123456', NOW() + INTERVAL 5 MINUTE)</code>
+6. Удалить сессионный токен из Redis
+7. Вернуть <code>{ status: "ok", otp: "123456" }</code></p>
+<h3 id="57-app-api-post-apiv1authverify-otp">5.7 App API — <code>POST /api/v1/auth/verify-otp</code></h3>
+<p><strong>Запрос:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;+79001234567&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123456&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Ответ:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jwt_or_session_token...&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="6-edge-cases">6. Edge Cases &amp; Обработка ошибок</h2>
+<table>
+<thead>
+<tr>
+<th>Сценарий</th>
+<th>Поведение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Пользователь нажал «Получить код» но не перешёл в мессенджер</td>
+<td>Токен истечёт через 5 мин. Нажать кнопку ещё раз → новый токен</td>
+</tr>
+<tr>
+<td>Пользователь перешёл, нажал Старт, но <code>payload</code> не пришёл</td>
+<td>Бот отвечает: «Для входа перейдите по ссылке из приложения»</td>
+</tr>
+<tr>
+<td>Пользователь уже привязан → нажал MAX / TG</td>
+<td>Код приходит сразу, deep link не показывается</td>
+</tr>
+<tr>
+<td>Бот остановлен / удалён пользователем</td>
+<td><code>bot_stopped</code> event → удалить привязку</td>
+</tr>
+<tr>
+<td>Ошибка отправки (бот заблокирован)</td>
+<td>fallback на второй канал, затем предложить перепривязать</td>
+</tr>
+<tr>
+<td>MAX/TG API недоступен</td>
+<td>Время ожидания 5s → ошибка → предложить другой канал</td>
+</tr>
+<tr>
+<td>Пользователь удалил приложение, не введя код</td>
+<td>Токен истекает, связь не сохраняется</td>
+</tr>
+<tr>
+<td><code>payload</code> &gt; 128 символов (MAX)</td>
+<td>Бот не получит <code>payload</code>. Проверять длину при генерации</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7">7. Затрагиваемые платформы</h2>
+<p>Изменения коснутся всех клиентских приложений — экран входа (ввод номера, кнопки выбора канала, ввод кода) и экран привязки мессенджера:</p>
+<table>
+<thead>
+<tr>
+<th>Платформа</th>
+<th>Что меняется</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iOS (App Store)</td>
+<td>Экран входа: +2 кнопки MAX/TG + deep link, поле кода + привязка</td>
+</tr>
+<tr>
+<td>Android (RuStore + HUAWEI AppGallery)</td>
+<td>То же самое</td>
+</tr>
+<tr>
+<td>Web (полная версия)</td>
+<td>Экран входа + deep link (через <code>window.open</code>)</td>
+</tr>
+<tr>
+<td>Web (мобильная версия)</td>
+<td>То же, адаптив под touch</td>
+</tr>
+</tbody>
+</table>
+<p>Требования к реализации:
+- Deep link открывается системно: <code>window.open</code> для web, <code>Linking.openURL</code> / универсальные ссылки для мобильных
+- После возврата из мессенджера приложение само проверяет статус (polling <code>GET /auth/status?token=AUTH_XXX</code> каждые 3s, max 5 мин)
+- На Android важен fallback: если MAX не установлен — открыть Telegram; если и TG нет — показать QR</p>
+<hr />
+<h2 id="8">8. Оценка трудозатрат</h2>
+<table>
+<thead>
+<tr>
+<th>№</th>
+<th>Этап</th>
+<th style="text-align: center;">Зависимости</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Регистрация организации на MAX, создание бота, модерация</td>
+<td style="text-align: center;">Документы организации</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Создание Telegram-бота, webhook, деплой</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Redis-сессия <code>auth_session</code> (генерация, TTL, инвалидация)</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Postgres <code>user_messenger_links</code> (миграция, CRUD)</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Postgres <code>otp_codes</code> (миграция, CRUD, TTL)</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Эндпоинт <code>POST /auth/request-otp</code> + deep link generation</td>
+<td style="text-align: center;">№3, №4</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Эндпоинт <code>POST /auth/link</code> (внутренний, с секретом)</td>
+<td style="text-align: center;">№4, №5</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Эндпоинт <code>POST /auth/verify-otp</code></td>
+<td style="text-align: center;">№5</td>
+</tr>
+<tr>
+<td>9</td>
+<td>MAX Bot: webhook-обработчик <code>bot_started</code></td>
+<td style="text-align: center;">№7</td>
+</tr>
+<tr>
+<td>10</td>
+<td>MAX Bot: отправка OTP <code>POST /messages</code></td>
+<td style="text-align: center;">№9</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Telegram Bot: webhook-обработчик <code>/start AUTH_XXX</code> + отправка</td>
+<td style="text-align: center;">№7</td>
+</tr>
+<tr>
+<td>12</td>
+<td>iOS: экран входа (телефон, кнопки MAX/TG, поле кода)</td>
+<td style="text-align: center;">№6</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Android: экран входа (то же самое)</td>
+<td style="text-align: center;">№6</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Web: экран входа</td>
+<td style="text-align: center;">№6</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Web mobile: экран входа (адаптив)</td>
+<td style="text-align: center;">№6</td>
+</tr>
+<tr>
+<td>16</td>
+<td>iOS: экран привязки мессенджера после входа</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Android: экран привязки мессенджера после входа</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Web: экран привязки мессенджера после входа</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Rate limits, retry, таймауты, логирование</td>
+<td style="text-align: center;">—</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9">9. Схема данных</h2>
+<h3 id="user_messenger_links"><code>user_messenger_links</code></h3>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">user_messenger_links</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w">            </span><span class="n">BIGSERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">  </span><span class="n">phone</span><span class="w">         </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span>
+<span class="w">  </span><span class="n">max_user_id</span><span class="w">   </span><span class="nb">BIGINT</span><span class="p">,</span><span class="w">        </span><span class="c1">-- NULL, если не привязан</span>
+<span class="w">  </span><span class="n">max_chat_id</span><span class="w">   </span><span class="nb">BIGINT</span><span class="p">,</span><span class="w">        </span><span class="c1">-- NULL, если не привязан</span>
+<span class="w">  </span><span class="n">tg_chat_id</span><span class="w">    </span><span class="nb">BIGINT</span><span class="p">,</span><span class="w">        </span><span class="c1">-- NULL, если не привязан</span>
+<span class="w">  </span><span class="n">tg_username</span><span class="w">   </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span><span class="w">  </span><span class="c1">-- для отображения</span>
+<span class="w">  </span><span class="n">linked_at</span><span class="w">     </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">(),</span>
+<span class="w">  </span><span class="n">updated_at</span><span class="w">    </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
+<span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_phone</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">user_messenger_links</span><span class="p">(</span><span class="n">phone</span><span class="p">);</span>
+</code></pre></div>
+
+<h3 id="otp_codes"><code>otp_codes</code></h3>
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">otp_codes</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w">          </span><span class="n">BIGSERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">  </span><span class="n">phone</span><span class="w">       </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">code</span><span class="w">        </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">expires_at</span><span class="w">  </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">used_at</span><span class="w">     </span><span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="w">  </span><span class="n">created_at</span><span class="w">  </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span>
+<span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_phone_expires</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">otp_codes</span><span class="p">(</span><span class="n">phone</span><span class="p">,</span><span class="w"> </span><span class="n">expires_at</span><span class="p">);</span>
+</code></pre></div>
+
+<hr />
+<h2 id="10-deployment">10. Deployment</h2>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Инфраструктура</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MAX Bot Webhook</td>
+<td>HTTPS-endpoint, публично доступен, порт 443</td>
+</tr>
+<tr>
+<td>Telegram Bot Webhook</td>
+<td>HTTPS-endpoint (может быть тот же)</td>
+</tr>
+<tr>
+<td>App API</td>
+<td>Существующий backend</td>
+</tr>
+<tr>
+<td>Redis</td>
+<td>Сессии <code>auth_session</code>, TTL 5 мин</td>
+</tr>
+<tr>
+<td>Postgres</td>
+<td>Таблицы <code>user_messenger_links</code>, <code>otp_codes</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>MAX Bot Deployment:</strong>
+1. Зарегистрировать организацию/ИП на https://business.max.ru
+2. Создать бота, пройти модерацию
+3. Получить токен бота в Расширенные настройки
+4. Настроить webhook: <code>POST /subscriptions</code> с <code>update_types: ["bot_started"]</code></p>
+<p><strong>Telegram Bot Deployment:</strong>
+1. Создать бота через <code>@BotFather</code>
+2. Получить токен
+3. Настроить webhook: <code>setWebhook?url=https://your-domain.com/tg-webhook</code></p>
+        </div>
+    </div>
+</article>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-info reveal">
+                <p class="label">Контакты</p>
+                <h2>Готовы к диалогу?</h2>
+                <div class="contact-item">
+                    <span class="contact-label">Телефон</span>
+                    <a href="tel:+78129287478">+7 (812) 928-74-78</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Почта</span>
+                    <a href="mailto:hello@axiiom.ru">hello@axiiom.ru</a>
+                </div>
+            </div>
+        </div>
+        <div id="footerCopy"></div>
+    </div>
+</footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
+<script src="/metrika.js"></script>
+<script src="/config.js"></script>
+<script src="/nav.js"></script>
+<script>Nav.init({breadcrumbs:false});</script>
+<script src="/theme.js"></script>
+<script src="/footer.js"></script>
+<script src="/preloader.js"></script>
+<script>
+(function(){var r=document.querySelectorAll('.reveal');if(r.length){var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible')}})},{threshold:0.15});for(var i=0;i<r.length;i++){o.observe(r[i])}}})();
+</script>
+<script>
+(function(){var t=document.getElementById('navToggle');var o=document.getElementById('navOverlay');if(!t||!o)return;t.addEventListener('click',function(e){e.stopPropagation();o.classList.toggle('open');t.classList.toggle('active');document.body.style.overflow=o.classList.contains('open')?'hidden':''})})();
+</script>
+</body>
+</html>

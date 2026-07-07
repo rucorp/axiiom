@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+    <title>Исследование API супермаркетов | Документация AXIIOM</title>
+    <meta name="description" content="Анализ API и интеграционных возможностей федеральных сетей: Лента, METRO, ВкусВилл, Globus и других.">
+    <link rel="canonical" href="https://axiiom.ru/docs/store-apis-research/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://axiiom.ru/docs/store-apis-research/">
+    <meta property="og:title" content="Исследование API супермаркетов | Документация AXIIOM">
+    <meta property="og:description" content="Анализ API и интеграционных возможностей федеральных сетей: Лента, METRO, ВкусВилл, Globus и других.">
+    <meta property="og:image" content="https://axiiom.ru/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="AXIIOM">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://axiiom.ru/docs/store-apis-research/">
+    <meta name="twitter:title" content="Исследование API супермаркетов | Документация AXIIOM">
+    <meta name="twitter:description" content="Анализ API и интеграционных возможностей федеральных сетей: Лента, METRO, ВкусВилл, Globus и других.">
+    <meta name="twitter:image" content="https://axiiom.ru/og-image.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Исследование API супермаркетов","description":"Анализ API и интеграционных возможностей федеральных сетей: Лента, METRO, ВкусВилл, Globus и других.","url":"https://axiiom.ru/docs/store-apis-research/","author":{"@type":"Organization","name":"AXIIOM"},"isPartOf":{"@type":"WebSite","name":"AXIIOM","url":"https://axiiom.ru"}}</script>
+    <style>*{margin:0;padding:0;box-sizing:border-box}html{font-size:16px;scroll-behavior:smooth}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1.0625rem;background:#0A0A0F;color:#C7C7CC;line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}.noise{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}.grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:60px 60px}.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}.reveal.visible{opacity:1;transform:translateY(0)}</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/docs/styles.css">
+</head>
+<body>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="30" height="30" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/></svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </div>
+</header>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"><ol itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/"><span itemprop="name">Главная</span></a>
+        <meta itemprop="position" content="1">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/docs/"><span itemprop="name">Документация</span></a>
+        <meta itemprop="position" content="2">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">Исследование API супермаркетов</span>
+        <meta itemprop="position" content="3">
+      </li>
+    </ol></div></nav>
+<article class="docs-article">
+    <div class="container">
+        <div class="docs-content">
+            <div class="feature-page-hero"><h1>Исследование API супермаркетов</h1><p>Анализ API и интеграционных возможностей федеральных сетей: Лента, METRO, ВкусВилл, Globus и других.</p><div class="doc-actions"><a href="/docs/" class="btn btn-outline">← Все документы</a></div></div><h1 id="api">API супермаркетов: исследование интеграций</h1>
+<p><strong>Дата:</strong> 2026-06-17
+<strong>Цель:</strong> Понять, как сервис-аналог и другие агрегаторы получают данные о товарах, ценах и остатках от сетей</p>
+<hr />
+<h2 id="1">1. Сводная таблица</h2>
+<table>
+<thead>
+<tr>
+<th>Сеть</th>
+<th>Оф. API для партнёров</th>
+<th>Продуктовый фид</th>
+<th>EDI</th>
+<th>Как агрегатор получает данные</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Лента</strong></td>
+<td>(есть внутр. API lenta.com)</td>
+<td></td>
+<td>Да</td>
+<td>Парсинг сайта / EDI / коммерческое соглашение</td>
+</tr>
+<tr>
+<td><strong>METRO</strong></td>
+<td>(только METRO Markets B2B)</td>
+<td></td>
+<td>Да (EDI Culture Center)</td>
+<td>EDI + прямое соглашение</td>
+</tr>
+<tr>
+<td><strong>Super Babylon</strong></td>
+<td></td>
+<td></td>
+<td>Нет</td>
+<td>Сборка в магазине (пикер сервис-аналог)</td>
+</tr>
+<tr>
+<td><strong>Утконос МИНИ</strong></td>
+<td></td>
+<td></td>
+<td>Да (Ediweb)</td>
+<td>Через СберМаркет или парсинг</td>
+</tr>
+<tr>
+<td><strong>Вкусвилл</strong></td>
+<td>(MCP API — экспериментальный)</td>
+<td></td>
+<td>Нет</td>
+<td><strong>MCP JSON-RPC API</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2">2. Детали по каждой сети</h2>
+<h3 id="21">2.1 Лента</h3>
+<p><strong>Сайт:</strong> lenta.com
+<strong>Фронтенд:</strong> Angular (lazy-loaded chunks), PHP-бэкенд
+<strong>Защита:</strong> Qrator (JavaScript challenge) — curl и скрипты блокируются. Требуется headless-браузер (Playwright/Puppeteer) для прохождения.</p>
+<p><strong>Официального API нет.</strong> Есть <strong>два внутренних API</strong>:</p>
+<h4 id="211-api-apirest-php-rpc-style">2.1.1 Старый API: <code>/api/rest/*</code> (PHP RPC-style)</h4>
+<p>Формат запроса (JSON RPC-style, MarketingPartnerKey из cookies <code>App_Cache_MPK</code>):</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;request&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;Head&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;MarketingPartnerKey&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mp300-{uuid}&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;web-12.0.633&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Client&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;angular_web_0.0.2&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sessionGet&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;SessionToken&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;RequestId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sessionGet_{random}&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;DeviceId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{uuid}&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;Domain&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;spb&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;Body&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Формат ответа:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;Head&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;RequestId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Created&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-06-17 02:47:14&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sessionGet&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;SessionToken&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{token}&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;ServerName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;php&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;Body&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Эндпоинты:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Метод</th>
+<th>Endpoint</th>
+<th>Описание</th>
+<th>Статус</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>POST</td>
+<td><code>/api/rest/sessionGet</code></td>
+<td>Получение/обновление сессии</td>
+<td>Работает</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/rest/cartLookup</code></td>
+<td>Просмотр корзины</td>
+<td>Работает</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/rest/catalogGetCategories</code></td>
+<td>Категории каталога</td>
+<td>требует сессии</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/rest/catalogGetProducts</code></td>
+<td>Товары</td>
+<td>требует сессии</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/rest/catalogSearch</code></td>
+<td>Поиск товаров</td>
+<td>требует сессии</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/rest/productGet</code></td>
+<td>Товар по ID</td>
+<td>требует сессии</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/rest/productGetBySku</code></td>
+<td>Товар по SKU</td>
+<td>требует сессии</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/rest/deliveryGet</code></td>
+<td>Информация о доставке</td>
+<td>требует сессии</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/rest/deliveryGetStores</code></td>
+<td>Магазины доставки</td>
+<td>требует сессии</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/rest/deliveryGetIntervals</code></td>
+<td>Интервалы доставки</td>
+<td>требует сессии</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/rest/deliveryGetAddresses</code></td>
+<td>Адреса доставки</td>
+<td>требует сессии</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/rest/orderGet</code></td>
+<td>Заказы пользователя</td>
+<td>требует сессии</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/rest/orderCreate</code></td>
+<td>Создание заказа</td>
+<td>требует сессии</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/rest/orderCheckout</code></td>
+<td>Оформление заказа</td>
+<td>требует сессии</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/rest/userGet</code></td>
+<td>Профиль пользователя</td>
+<td>требует сессии</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/rest/favoritesGet</code></td>
+<td>Избранное</td>
+<td>требует сессии</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/rest/promotionsGet</code></td>
+<td>Акции</td>
+<td>требует сессии</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/rest/promotionGetById</code></td>
+<td>Акция по ID</td>
+<td>требует сессии</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ошибка без сессии:</strong> <code>Utk\Utkapi_Exception_MarketingPartner_InvalidKey</code> (код 16)</p>
+<h4 id="212-api-gateway-api-gatewayv1-restful-json">2.1.2 Новый API Gateway: <code>/api-gateway/v1/*</code> (RESTful JSON)</h4>
+<p>Работает <strong>без</strong> MarketingPartnerKey — использует cookies/JWT токены.</p>
+<table>
+<thead>
+<tr>
+<th>Метод</th>
+<th>Endpoint</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td><code>/api-gateway/v1/frontend/features</code></td>
+<td>Фича-флаги (GrowthBook)</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api-gateway/v1/region/list</code></td>
+<td>Список регионов</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api-gateway/v1/region/user</code></td>
+<td>Регион текущего пользователя</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api-gateway/v1/auth/passport/token/guest</code></td>
+<td>Получение гостевого токена (JWT)</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api-gateway/v1/stores/pickup/search</code></td>
+<td>Поиск магазинов для самовывоза</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api-gateway/v1/stores/pickup/recent</code></td>
+<td>Недавние магазины</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api-gateway/v1/delivery/mode</code></td>
+<td>Режим доставки</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api-gateway/v1/catalog/items/recommendations</code></td>
+<td>Рекомендации товаров</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api-gateway/v1/catalog/items/{id}</code></td>
+<td>Товар по ID</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api-gateway/v1/catalog/items/collections</code></td>
+<td>Товары коллекции</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api-gateway/v1/pages/types/{typeId}/widgets</code></td>
+<td>Виджеты по типу страницы</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api-gateway/v1/pages/places/widgets</code></td>
+<td>Виджеты по местам</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api-gateway/v1/pages/widgets/{id}</code></td>
+<td>Виджет по ID</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api-gateway/v1/banners/adhweb</code></td>
+<td>Баннеры</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api-gateway/v1/sem/redirect</code></td>
+<td>Редиректы</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api-gateway/v1/sem/usepattern</code></td>
+<td>Семантический эндпоинт</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Аутентификация:</strong>
+1. <code>POST /api-gateway/v1/auth/passport/token/guest</code> → <code>{"expiresIn": 3600, "sessionId": "..."}</code>
+2. JWT в куках: <code>PassportAccessToken</code> (Bearer), <code>PassportRefreshToken</code></p>
+<p><strong>Рекомендации:</strong> <code>POST /api-gateway/v1/catalog/items/recommendations</code></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;recommendType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="w">   </span><span class="c1">// или &quot;2&quot;</span>
+<span class="w">  </span><span class="nt">&quot;offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Товары коллекции:</strong> <code>POST /api-gateway/v1/catalog/items/collections</code></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">&quot;collectionId&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">310004503</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+
+<p>Ответ содержит <code>items</code>, <code>filters</code> (с брендами, рейтингом и т.д.), <code>collections</code>.</p>
+<p><strong>Поиск товаров по категории — SSR + коллекции.</strong> Каталог рендерится на сервере (Angular Universal), товары доставляются в HTML. Для API-доступа к товарам категории:</p>
+<ol>
+<li>Получить <code>collectionId</code> через виджеты страницы:
+   - <code>GET /api-gateway/v1/pages/types/{typeId}/widgets</code> — виджеты по типу страницы
+   - Или <code>POST /api-gateway/v1/pages/places/widgets</code> с <code>{"placeIds": [...], "categoryId": "153"}</code></li>
+<li>Загрузить товары по коллекции:
+   - <code>POST /api-gateway/v1/catalog/items/collections</code> с <code>{"collectionId": 310004503}</code></li>
+<li><strong>Product ID из SSR:</strong> В HTML товары имеют ID вида <code>product-{id}</code> (напр. <code>product-94429</code>).</li>
+<li><strong>URL товара:</strong> <code>https://lenta.com/product/{slug}-{id}/</code></li>
+</ol>
+<p>Альтернативы для получения списка товаров:
+- <strong>SSR-парсинг:</strong> загрузить <code>https://lenta.com/catalog/{slug}-{id}/</code> и распарсить HTML
+- <strong>Старый PHP API:</strong> <code>POST /api/rest/catalogGetProducts</code> — существует, но класс не найден (возможно, удалён или переименован)</p>
+<p>Фронтенд Angular загружает товары каталога через комбинацию:
+1. <code>POST /api-gateway/v1/pages/places/widgets</code> — получение виджетов для страницы (содержат <code>collectionId</code>)
+2. <code>POST /api-gateway/v1/catalog/items/collections</code> — загрузка товаров коллекции
+3. <code>POST /api-gateway/v1/catalog/items/recommendations</code> — рекомендации</p>
+<p>Вероятные недокументированные эндпоинты (требуют исследования через Network вкладку браузера):
+- <code>GET /api-gateway/v1/catalog/items/list?categoryId={id}&amp;offset=0&amp;limit=24</code> (400 — неверные параметры)
+- <code>GET /api-gateway/v1/catalog/categories</code> (400 — нужен параметр)
+- <code>POST /api-gateway/v1/catalog/items/search</code> (405 — неверный метод)</p>
+<p><strong>Формат товара (из SSR HTML):</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">lu-product-card</span> <span class="na">card-size</span><span class="o">=</span><span class="s">&quot;XL&quot;</span> <span class="na">card-hover</span><span class="o">=</span><span class="s">&quot;false&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://lenta.com/product/limony-ves-094429/&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;product-card small-vertical&quot;</span><span class="p">&gt;</span>
+    <span class="cm">&lt;!-- картинка, название, цена, вес/объём --&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">lu-product-card</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p><strong>Пример данных из HTML:</strong>
+- <strong>ID товара:</strong> <code>94429</code> (из <code>product-94429</code>)
+- <strong>Название:</strong> <code>Лимоны, весовые</code>
+- <strong>URL:</strong> <code>/product/limony-ves-094429/</code>
+- <strong>Цена:</strong> найдена через паттерн <code>[0-9]+\.[0-9]{2}[\s]*[₽р]</code>
+- <strong>Картинка:</strong> <code>https://sitecdn.api.lenta.com/assets-ng/ui-kit/empty-image.svg</code> (placeholder, реальная через lazy load)
+- <strong>Компонент:</strong> <code>&lt;lu-product-card&gt;</code> + <code>&lt;lu-product-card-image&gt;</code></p>
+<p><strong>SSR:</strong> Angular 21.1.1 с Universal (SSR). Страница категории рендерится полностью на сервере — 40+ товаров в HTML. Клиентская гидратация добавляет lazy-загрузку картинок и интерактив.</p>
+<p><strong>CDN для ассетов:</strong> <code>https://sitecdn.api.lenta.com/</code>
+<strong>CDN для изображений:</strong> <code>https://cdn.api.lenta.com/resample/webp/{size}/photo/...</code></p>
+<h4 id="213-url-">2.1.3 URL-структура фронтенда</h4>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/</code></td>
+<td>Главная</td>
+</tr>
+<tr>
+<td><code>/catalog/{slug}-{id}/</code></td>
+<td>Категория каталога (напр. <code>/catalog/frukty-153/</code>)</td>
+</tr>
+<tr>
+<td><code>/product/{slug}-{id}/</code></td>
+<td>Карточка товара (напр. <code>/product/moloko-pitevoe-3-2-720ml-12345/</code>)</td>
+</tr>
+<tr>
+<td><code>/search?query={text}</code></td>
+<td>Поиск</td>
+</tr>
+<tr>
+<td><code>/action/detail/{id}</code></td>
+<td>Акция/спецпредложение</td>
+</tr>
+</tbody>
+</table>
+<h4 id="214">2.1.4 Технологии</h4>
+<ul>
+<li><strong>Бэкенд:</strong> PHP (выяснено из ServerName в API-ответах)</li>
+<li><strong>Фронтенд:</strong> Angular 17+ (SSR — Angular Universal, lazy modules, <code>ngsw-bootstrap.js</code> — Service Worker)</li>
+<li><strong>Feature flags:</strong> GrowthBook (CDN: <code>growthbook-cdn.api.lenta.com</code>)</li>
+<li><strong>Защита:</strong> Qrator Labs (DDoS protection, JS challenge)</li>
+<li><strong>Версия:</strong> <code>web-12.0.633</code></li>
+<li><strong>Клиент:</strong> <code>angular_web_0.0.2</code></li>
+<li><strong>Доп. интеграции:</strong> Max (st.max.ru), Яндекс Passport (аутентификация), Яндекс Rotor (антибот)</li>
+<li><strong>Мульти-брендовая платформа:</strong> runtime-скрипт содержит API-домены нескольких сетей:</li>
+<li><code>api.lenta.com</code> — Лента</li>
+<li><code>api.domlenta.ru</code> — ДомЛента</li>
+<li><code>api.utkonos.ru</code> — Утконос</li>
+<li><code>api.monetka.ru</code> — Монетка</li>
+<li>Это может означать единую платформу для нескольких брендов</li>
+</ul>
+<p><strong>Внутренняя конфигурация:</strong>
+- <code>window.APP_CONFIG = {"APP_API_URL": "http://lenta-site-api"}</code> — внутренний URL API (Kubernetes service)</p>
+<h4 id="215">2.1.5 Данные магазинов (регионы)</h4>
+<p>Регионы Ленты (из <code>/api-gateway/v1/region/list</code>):
+- Москва и МО (id: 1, slug: moscow)
+- Санкт-Петербург и область (id: 3, slug: spb)
+- Уфа (id: 5, slug: ufa)
+- Нижний Новгород (id: 7, slug: nnov)
+- Екатеринбург (id: 9, slug: ekb)
+- Казань (id: 11, slug: kzn)
+- Красноярск (id: 13, slug: krsk)
+- Краснодар (id: 15, slug: krd)</p>
+<p><strong>Партнёрская программа:</strong> <a href="https://lenta.tech/products">lenta.tech</a> — B2B-продукты (аналитика, RPA, EDI Hub), <strong>не API каталога</strong>.</p>
+<h3 id="22-metro-cash-carry">2.2 METRO Cash &amp; Carry</h3>
+<p><strong>Developer Portal:</strong> <a href="https://developer.metro-selleroffice.com/">developer.metro-selleroffice.com</a> — OpenAPI для B2B-маркетплейса (не для продуктового каталога).</p>
+<p><strong>EDI:</strong> METRO Russia использует EDI через <a href="http://edicult.ru/metro.html">EDI Culture Center</a>. Документы: ORDERS, DESADV, RECADV, INVOIC.</p>
+<p><strong>Портал поставщика:</strong> <a href="https://supplier-support.metro-cc.ru/">supplier-support.metro-cc.ru</a></p>
+<p><strong>Вывод:</strong> API есть, но только для B2B-маркетплейса и для поставщиков (EDI), не для агрегаторов доставки.</p>
+<h3 id="23-super-babylon">2.3 Super Babylon</h3>
+<p><strong>Сайт:</strong> superbabylon.ru</p>
+<p><strong>Ключевое открытие:</strong> на сайте написано <strong>«Доставка работает через сервис-аналог»</strong>. То есть Super Babylon сам не занимается доставкой — сервис-аналог является их эксклюзивным партнёром по доставке.</p>
+<p><strong>Интеграция:</strong> НЕ через API. Пикеры сервис-аналог физически приходят в магазины Super Babylon и собирают заказы с полок.</p>
+<h3 id="24">2.4 Утконос МИНИ</h3>
+<p><strong>Сайт:</strong> utkonos.ru</p>
+<p><strong>EDI:</strong> работает через <a href="http://ediweb.com/ru-ru/support/kb/1207">Ediweb</a> (документы: ORDERS, ORDRSP, DESADV, RECADV).</p>
+<p><strong>Особенность:</strong> Утконос МИНИ — суббренд Утконос Онлайн. Товары на этой витрине — фактически ассортимент <strong>Ленты</strong>, доступный через платформу <strong>СберМаркет</strong>.</p>
+<p><strong>Вывод:</strong> данные Утконос МИНИ = данные Ленты + платформа СберМаркета.</p>
+<h3 id="25">2.5 Вкусвилл</h3>
+<p><strong>Сайт:</strong> vkusvill.ru</p>
+<p><strong>API: ЕСТЬ!</strong> Экспериментальный MCP-сервер (Model Context Protocol).</p>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vkusvill_products_search(q, page, sort)</code></td>
+<td>Поиск товаров по названию</td>
+</tr>
+<tr>
+<td><code>vkusvill_product_details(id)</code></td>
+<td>Детали товара: состав, КБЖУ, ингредиенты</td>
+</tr>
+<tr>
+<td><code>vkusvill_cart_link_create(products[])</code></td>
+<td>Генерация ссылки на корзину</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Статья на Habr:</strong> https://habr.com/ru/companies/vkusvill/articles/981866/ (декабрь 2025)</p>
+<p><strong>Ограничения:</strong> экспериментальный, нет остатков по адресу, макс. 20 позиций в корзине.</p>
+<p><strong>Open-source инструменты:</strong>
+- <a href="https://github.com/Elzehorn/vv_mcp">Elzehorn/vv_mcp</a> — MCP клиент/сервер
+- <a href="https://github.com/vakovalskii/vkusvill-agent">vakovalskii/vkusvill-agent</a> — AI-агент
+- <a href="https://github.com/2heoh/vkusvill-mcp-server-example">2heoh/vkusvill-mcp-server-example</a> — пример реализации</p>
+<hr />
+<h2 id="3">3. Как агрегаторы получают данные (общая схема)</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">flowchart</span><span class="w"> </span><span class="n">TD</span>
+<span class="w">    </span><span class="n">subgraph</span><span class="w"> </span><span class="s">&quot;Источники данных&quot;</span>
+<span class="w">        </span><span class="n">A</span><span class="p">[</span><span class="err">Парсинг</span><span class="w"> </span><span class="err">сайта</span><span class="w"> </span><span class="err">сети</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;|</span><span class="n">Scraper</span><span class="o">|</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="err">Сборщик</span><span class="w"> </span><span class="err">данных</span><span class="p">]</span>
+<span class="w">        </span><span class="n">B</span><span class="p">[</span><span class="n">EDI</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">XLS</span><span class="w"> </span><span class="err">от</span><span class="w"> </span><span class="err">сети</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">Прайс</span><span class="o">-</span><span class="err">лист</span><span class="o">|</span><span class="w"> </span><span class="n">C</span>
+<span class="w">        </span><span class="n">D</span><span class="p">[</span><span class="n">API</span><span class="w"> </span><span class="err">сети</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;|</span><span class="n">JSON</span><span class="o">/</span><span class="kr">XML</span><span class="o">|</span><span class="w"> </span><span class="n">C</span>
+<span class="w">        </span><span class="n">E</span><span class="p">[</span><span class="err">Агрегатор</span><span class="o">-</span><span class="err">посредник</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;|</span><span class="n">API</span><span class="o">|</span><span class="w"> </span><span class="n">C</span>
+<span class="w">    </span><span class="kd">end</span>
+
+<span class="w">    </span><span class="n">subgraph</span><span class="w"> </span><span class="s">&quot;Обработка&quot;</span>
+<span class="w">        </span><span class="n">C</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">Нормализация</span><span class="o">|</span><span class="w"> </span><span class="n">F</span><span class="p">[(</span><span class="err">Каталог</span><span class="p">)]</span>
+<span class="w">        </span><span class="n">F</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">G</span><span class="p">[</span><span class="n">API</span><span class="w"> </span><span class="err">для</span><span class="w"> </span><span class="err">клиентов</span><span class="p">]</span>
+<span class="w">    </span><span class="kd">end</span>
+
+<span class="w">    </span><span class="n">subgraph</span><span class="w"> </span><span class="s">&quot;Реальность&quot;</span>
+<span class="w">        </span><span class="n">H</span><span class="p">[</span><span class="err">Пикер</span><span class="w"> </span><span class="err">в</span><span class="w"> </span><span class="err">магазине</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;|</span><span class="err">Подтверждает</span><span class="w"> </span><span class="err">наличие</span><span class="o">|</span><span class="w"> </span><span class="n">I</span><span class="p">[</span><span class="err">Заказ</span><span class="p">]</span>
+<span class="w">    </span><span class="kd">end</span>
+
+<span class="w">    </span><span class="n">G</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">I</span>
+</code></pre></div>
+
+<p><strong>Вывод:</strong> ни одна из сетей не даёт гарантированно точных остатков в реальном времени. Фактическое наличие <strong>всегда подтверждает пикер</strong> в магазине.</p>
+<hr />
+<h2 id="4-open-source-api">4. Open-source инструменты для работы с API российских сетей</h2>
+<table>
+<thead>
+<tr>
+<th>Инструмент</th>
+<th>Сеть</th>
+<th>Язык</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/Open-Inflation/perekrestok_api">Open-Inflation/perekrestok_api</a></td>
+<td>Перекрёсток</td>
+<td>Python</td>
+<td>Неофициальный API (MIT)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Viroopadas/pyaterochka_api">Viroopadas/pyaterochka_api</a></td>
+<td>Пятёрочка</td>
+<td>Python</td>
+<td>Неофициальный API</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Elzehorn/vv_mcp">Elzehorn/vv_mcp</a></td>
+<td>Вкусвилл</td>
+<td>Python</td>
+<td>MCP клиент</td>
+</tr>
+<tr>
+<td>Parse.bot</td>
+<td>Мульти-сеть</td>
+<td>—</td>
+<td>Коммерческий API-агрегатор</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-cookbook-api">4. Cookbook: как исследовать API сети</h2>
+<ol>
+<li><strong>Если сайт защищён Qrator/Cloudflare</strong> — curl не сработает. Используй Playwright с headless-браузером и куками из реальной сессии.</li>
+<li><strong>Перехватывай API-вызовы</strong> через <code>page.on('request')</code> и <code>page.on('response')</code>.</li>
+<li><strong>Загружай страницу дважды:</strong> сначала главную (загрузка сессии), потом целевую (каталог/товар).</li>
+<li><strong>Ищи inline-данные:</strong> <code>__NEXT_DATA__</code> (Next.js), <code>ng-state</code> (Angular SSR), <code>window.__INITIAL_STATE__</code>.</li>
+<li><strong>Анализируй JS-бандлы:</strong> ищи URL-паттерны через regex в главном чанке и source maps.</li>
+<li><strong>Проверяй консольные логеры:</strong> некоторые Angular-приложения логируют API-вызовы в debug-режиме.</li>
+</ol>
+<h2 id="5">5. Выводы для проекта</h2>
+<ol>
+<li><strong>Единого API нет</strong> — каждая сеть интеграция по-своему</li>
+<li><strong>Парсинг</strong> — основной способ получения данных для большинства сетей</li>
+<li><strong>Вкусвилл</strong> — единственная сеть с открытым API (MCP), можно считать эталоном</li>
+<li><strong>Точных остатков</strong> не даёт никто — пикеры проверяют вживую</li>
+<li><strong>Super Babylon</strong> — не просто магазин, а уже партнёр сервис-аналог (доставка = сервис-аналог)</li>
+<li><strong>Коммерческое соглашение</strong> с сетью даёт больше, чем публичный API (EDI, XLS-выгрузки)</li>
+<li><strong>Лента</strong> имеет два API: старый PHP RPC (<code>/api/rest/</code>) и новый REST Gateway (<code>/api-gateway/v1/</code>). Оба недокументированы. Для доступа требуется headless-браузер (Qrator).</li>
+<li><strong>API Gateway Ленты</strong> — RESTful, без MarketingPartnerKey, через JWT/куки. Перспективен для интеграции.</li>
+<li><strong>Angular-фронтенд Ленты</strong> — SSR (Angular Universal), lazy-loaded модули, Service Worker, feature flags через GrowthBook.</li>
+<li><strong>Мульти-брендовая платформа:</strong> фронтенд Ленты обслуживает также ДомЛента, Утконос, Монетку через единую кодовую базу.</li>
+<li><strong>Продуктовый эндпоинт не найден</strong> — товары по категории загружаются через виджеты (<code>pages/places/widgets</code>) и коллекции (<code>catalog/items/collections</code>). Для точного эндпоинта нужно открыть каталог в браузере и перехватить запросы из Network-вкладки.</li>
+</ol>
+        </div>
+    </div>
+</article>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-info reveal">
+                <p class="label">Контакты</p>
+                <h2>Готовы к диалогу?</h2>
+                <div class="contact-item">
+                    <span class="contact-label">Телефон</span>
+                    <a href="tel:+78129287478">+7 (812) 928-74-78</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Почта</span>
+                    <a href="mailto:hello@axiiom.ru">hello@axiiom.ru</a>
+                </div>
+            </div>
+        </div>
+        <div id="footerCopy"></div>
+    </div>
+</footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
+<script src="/metrika.js"></script>
+<script src="/config.js"></script>
+<script src="/nav.js"></script>
+<script>Nav.init({breadcrumbs:false});</script>
+<script src="/theme.js"></script>
+<script src="/footer.js"></script>
+<script src="/preloader.js"></script>
+<script>
+(function(){var r=document.querySelectorAll('.reveal');if(r.length){var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible')}})},{threshold:0.15});for(var i=0;i<r.length;i++){o.observe(r[i])}}})();
+</script>
+<script>
+(function(){var t=document.getElementById('navToggle');var o=document.getElementById('navOverlay');if(!t||!o)return;t.addEventListener('click',function(e){e.stopPropagation();o.classList.toggle('open');t.classList.toggle('active');document.body.style.overflow=o.classList.contains('open')?'hidden':''})})();
+</script>
+</body>
+</html>

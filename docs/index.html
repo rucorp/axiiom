@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+    <title>Документация проектов | AXIIOM</title>
+    <meta name="description" content="Документация проектов AXIIOM: SRS, юридическая документация, проектные документы, API-спецификации, исследования, визуализации.">
+    <link rel="canonical" href="https://axiiom.ru/docs/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://axiiom.ru/docs/">
+    <meta property="og:title" content="Документация проектов | AXIIOM">
+    <meta property="og:description" content="Документация проектов AXIIOM: SRS, юридическая документация, проектные документы, API-спецификации, исследования, визуализации.">
+    <meta property="og:image" content="https://axiiom.ru/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://axiiom.ru/docs/">
+    <meta name="twitter:title" content="Документация проектов | AXIIOM">
+    <meta name="twitter:description" content="Документация проектов AXIIOM: SRS, юридическая документация, проектные документы.">
+    <meta name="twitter:image" content="https://axiiom.ru/og-image.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Документация проектов AXIIOM","description":"Документация проектов AXIIOM: SRS, юридическая документация, проектные документы.","url":"https://axiiom.ru/docs/","isPartOf":{"@type":"WebSite","name":"AXIIOM","url":"https://axiiom.ru/"}}</script>
+    <style>*{margin:0;padding:0;box-sizing:border-box}html{font-size:16px;scroll-behavior:smooth}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1.0625rem;background:#0A0A0F;color:#C7C7CC;line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}.noise{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}.grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:60px 60px}.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/docs/styles.css">
+</head>
+<body>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="30" height="30" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/></svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </div>
+</header>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"><ol itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/"><span itemprop="name">Главная</span></a>
+        <meta itemprop="position" content="1">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">Документация</span>
+        <meta itemprop="position" content="2">
+      </li>
+    </ol></div>
+</nav>
+<section class="hero docs-hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-bg-svg"><svg width="800" height="600" viewBox="0 0 800 600" fill="none">
+  <rect x="60" y="40" width="80" height="80" rx="10" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none" transform="rotate(-5 100 80)"/>
+  <rect x="540" y="30" width="90" height="90" rx="10" stroke="rgba(255,255,255,0.25)" stroke-width="2" fill="none" transform="rotate(10 585 75)"/>
+  <rect x="40" y="450" width="85" height="85" rx="10" stroke="rgba(255,255,255,0.28)" stroke-width="2" fill="none" transform="rotate(-8 82 492)"/>
+  <rect x="620" y="470" width="75" height="75" rx="10" stroke="rgba(255,255,255,0.32)" stroke-width="2" fill="none" transform="rotate(12 657 507)"/>
+  <rect x="250" y="80" width="30" height="30" rx="5" stroke="rgba(255,255,255,0.15)" stroke-width="2" fill="none" transform="rotate(45 265 95)"/>
+  <rect x="520" y="280" width="25" height="25" rx="4" stroke="rgba(255,255,255,0.12)" stroke-width="2" fill="none" transform="rotate(-30 532 292)"/>
+  <rect x="260" y="480" width="28" height="28" rx="4" stroke="rgba(255,255,255,0.14)" stroke-width="2" fill="none" transform="rotate(20 274 494)"/>
+  <circle cx="400" cy="300" r="3" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+  <circle cx="400" cy="300" r="140" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" fill="none"/>
+  <circle cx="400" cy="300" r="220" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" fill="none"/>
+  <line x1="100" y1="80" x2="700" y2="520" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
+  <line x1="700" y1="80" x2="100" y2="520" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
+  <circle cx="140" cy="180" r="3" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+  <circle cx="660" cy="420" r="4" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+  <circle cx="300" cy="520" r="2" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+  <circle cx="500" cy="80" r="3" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+</svg></div>
+            <div class="badge-row">
+                <p class="badge">Документация</p>
+            </div>
+            <h1>Примеры документов AXIIOM</h1>
+            <p class="hero-desc">Спецификации, юридическая документация, проектные документы, API-гайды, исследования и визуализации — всё в одном месте.</p>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+<h2 class="reveal index-section-title"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg><span>SRS / Техническая документация</span></h2>
+            <div class="tools-grid"><a href="/docs/srs-v2/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>Software Requirements Specification</h3>
+                <p>Полная спецификация программного продукта: 2 тома, 14 бизнес-процессов, 7 ADR, архитектура, data model, API, тестирование.</p>
+                <span class="blog-read">Открыть →</span>
+            </a><a href="/docs/audit-as-is/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>Аудит текущего состояния системы (AS IS)</h3>
+                <p>Детальный анализ существующей системы: 178 таблиц PostgreSQL, 100 API endpoint'ов, технологический стек, алгоритмы.</p>
+                <span class="blog-read">Открыть →</span>
+            </a><a href="/docs/business-model/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>Бизнес-модель и юнит-экономика</h3>
+                <p>Доходы, расходы, юнит-экономика, ценообразование, ключевые метрики дашборда. Реальные данные за фев–май 2026.</p>
+                <span class="blog-read">Открыть →</span>
+            </a><a href="/docs/estimation/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>Оценка сроков разработки</h3>
+                <p>Оценка трудозатрат по всем бизнес-процессам, стоимость интеграций, распределение команды.</p>
+                <span class="blog-read">Открыть →</span>
+            </a><a href="/docs/feature-map/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>Карта функциональных требований</h3>
+                <p>15 модулей, 80+ фич: полный список функций продукта с 6 интерактивными визуализациями — Treemap, Mindmap, таблица, Roadmap, Kanban, Force Graph.</p>
+                <span class="blog-read">Открыть →</span>
+            </a><a href="/docs/finops/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>FinOps — оптимизация расходов на инфраструктуру</h3>
+                <p>Стоимость инфраструктуры, оптимизация облачных расходов, бюджетирование и мониторинг затрат.</p>
+                <span class="blog-read">Открыть →</span>
+            </a><a href="/docs/otp-via-messengers/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>OTP-доставка через мессенджеры</h3>
+                <p>Спецификация доставки одноразовых кодов через Telegram, WhatsApp и другие мессенджеры.</p>
+                <span class="blog-read">Открыть →</span>
+            </a></div><h2 class="reveal index-section-title"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span>Проектная документация</span></h2>
+            <div class="tools-grid"><a href="/docs/vitrina/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>Платформа «Витрина»</h3>
+                <p>Каталог электронной коммерции нового поколения: объединение розничных сетей, локальных магазинов и производителей.</p>
+                <span class="blog-read">Открыть →</span>
+            </a><a href="/docs/vitrina-context/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>Контекст проекта «Витрина»</h3>
+                <p>Краткий и подробный контекст проекта: цели, задачи, предпосылки, анализ рынка.</p>
+                <span class="blog-read">Открыть →</span>
+            </a><a href="/docs/vitrina-plan/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>План реализации «Витрина» (W1–W12)</h3>
+                <p>Поэтапный план реализации платформы: 12 недель, 4 этапа, команда, бюджет, метрики успеха.</p>
+                <span class="blog-read">Открыть →</span>
+            </a><a href="/docs/vitrina-faq/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>FAQ проекта «Витрина»</h3>
+                <p>Часто задаваемые вопросы о платформе «Витрина»: бизнес-модель, конкуренты, технологии.</p>
+                <span class="blog-read">Открыть →</span>
+            </a><a href="/docs/ambar-proposal/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>AMBAR — Фудтех-проект</h3>
+                <p>Концепция фудтех-проекта: инфраструктура для фудкорта, ИТ-решения, кухня, инвестиции.</p>
+                <span class="blog-read">Открыть →</span>
+            </a><a href="/docs/it-architecture-template/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><rect x="9" y="13" width="6" height="5" rx="1"/><path d="M11 13v-1a1 1 0 012 0v1"/></svg></div>
+                <h3>Шаблон проекта ИТ-архитектуры</h3>
+                <p>План реализации ИТ-архитектуры предприятия: 6 этапов от инициации до Go-Live. Подходит для любого проекта внедрения.</p>
+                <span class="blog-read">Открыть →</span>
+            </a><a href="/docs/airport-restaurants/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>Драфт для общепита + аэропорт</h3>
+                <p>Техническое задание: PWA-приложение для заказа еды в ресторанах аэропорта. iiko, ЮKassa, три способа получения, 4 месяца разработки.</p>
+                <span class="blog-read">Открыть →</span>
+            </a></div><h2 class="reveal index-section-title"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Юридическая документация</span></h2>
+            <div class="tools-grid"><a href="/docs/yur-struktura-platformy/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg></div>
+                <h3>Юридическая структура финтех-платформы для фудкортов</h3>
+                <p>Полная юридическая модель: сплит-платежи 70/20/6.5, матрица из 5 договоров, 54-ФЗ, налоговые аспекты, риски.</p>
+                <span class="blog-read">Открыть →</span>
+            </a></div><h2 class="reveal index-section-title"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33"/><path d="M4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 8.92 4.6"/><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/></svg><span>API, БД и интеграции</span></h2>
+            <div class="tools-grid"><a href="/docs/arbat38-api/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>API документация</h3>
+                <p>API endpoints, PROJECT_SUMMARY, схема базы данных.</p>
+                <span class="blog-read">Открыть →</span>
+            </a><a href="/docs/ybase-tsp/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>Ybase TSP — документация</h3>
+                <p>Схема базы данных, парсеры, руководство по экспорту, PROJECT_OVERVIEW, PROJECT_STRUCTURE.</p>
+                <span class="blog-read">Открыть →</span>
+            </a><a href="/docs/napolipizza-guide/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>Napoli Pizza — проектная документация</h3>
+                <p>Полный набор документов: PROJECT_GUIDE, STRUCTURE, DEPLOY, QUICKSTART, DONE.</p>
+                <span class="blog-read">Открыть →</span>
+            </a></div><h2 class="reveal index-section-title"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Референсы и исследования</span></h2>
+            <div class="tools-grid"><a href="/docs/store-apis-research/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>Исследование API супермаркетов</h3>
+                <p>Анализ API и интеграционных возможностей федеральных сетей: Лента, METRO, ВкусВилл, Globus и других.</p>
+                <span class="blog-read">Открыть →</span>
+            </a><a href="/docs/booking-docs/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>Grand Hotel — архитектура и документация</h3>
+                <p>Архитектура, модель данных, план имплементации и функциональные возможности системы бронирования отеля.</p>
+                <span class="blog-read">Открыть →</span>
+            </a><a href="/docs/padl-docs/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>PadelPro — проектная документация</h3>
+                <p>Контекст проекта, features, design system, план демо — SAAS-платформа для управления падел-клубом.</p>
+                <span class="blog-read">Открыть →</span>
+            </a><a href="/docs/blog-audit/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>Аудит и гайд по интеграции блога</h3>
+                <p>AUDIT_REPORT, INTEGRATION_GUIDE, MEDIA_GUIDE, SETUP — полная документация по системе блогов.</p>
+                <span class="blog-read">Открыть →</span>
+            </a><a href="/docs/lovii-design-system/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>LOVII — Design System</h3>
+                <p>Дизайн-система платформы лояльности LOVII: компоненты, стили, промпты для генерации интерфейсов.</p>
+                <span class="blog-read">Открыть →</span>
+            </a><a href="/docs/univerid-concept/" class="tool-card blog-card reveal">
+                <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                <h3>UniverID — концепция цифровой экосистемы университета</h3>
+                <p>Полная концепция: структура проекта, roadmap, договор, mind map. Цифровая экосистема для вузов.</p>
+                <span class="blog-read">Открыть →</span>
+            </a></div><h2 class="reveal index-section-title"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span>Статьи</span></h2>
+        <div class="tools-grid"><a href="/blog/highload-architecture/" class="tool-card blog-card reveal">
+            <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+            <h3>Архитектура highload-систем</h3>
+            <p>Принципы построения отказоустойчивых highload-систем: балансировка, кэширование, шардирование, CQRS, Event Sourcing.</p>
+            <span class="blog-read">Читать →</span>
+        </a><a href="/blog/pci-dss-compliance/" class="tool-card blog-card reveal">
+            <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+            <h3>PCI DSS Compliance</h3>
+            <p>Полное руководство по соответствию стандарту PCI DSS для стартапов и платёжных систем: требования, аудит, сертификация.</p>
+            <span class="blog-read">Читать →</span>
+        </a><a href="/blog/fintech-trends-2026/" class="tool-card blog-card reveal">
+            <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+            <h3>Тренды финтеха 2026</h3>
+            <p>Главные тренды финтех-индустрии 2026: Embedded Finance, Open Banking, DeFi, CBDC, AI в финансовых услугах.</p>
+            <span class="blog-read">Читать →</span>
+        </a><a href="/blog/loyalty-program-roi/" class="tool-card blog-card reveal">
+            <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+            <h3>ROI платформы лояльности</h3>
+            <p>Расчёт окупаемости внедрения платформы лояльности: метрики, кейсы, сроки возврата инвестиций.</p>
+            <span class="blog-read">Читать →</span>
+        </a><a href="/blog/161-fz-guideline/" class="tool-card blog-card reveal">
+            <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+            <h3>161-ФЗ: руководство для стартапов</h3>
+            <p>Как соответствовать 161-ФЗ «О национальной платёжной системе»: требования, санкции, пошаговый план внедрения.</p>
+            <span class="blog-read">Читать →</span>
+        </a><a href="/blog/mobile-payment-ux/" class="tool-card blog-card reveal">
+            <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+            <h3>UX платёжных мобильных приложений</h3>
+            <p>Лучшие практики UX/UI для платёжных приложений: безопасность, конверсия, доступность, анимации.</p>
+            <span class="blog-read">Читать →</span>
+        </a><a href="/blog/loyalty-platform-not-option-necessity/" class="tool-card blog-card reveal">
+            <div class="tool-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+            <h3>Платформа лояльности — необходимость</h3>
+            <p>Почему программа лояльности — must-have для e-commerce: анализ рынка, ARPU, LTV, retention.</p>
+            <span class="blog-read">Читать →</span>
+        </a></div>
+    </div>
+</section>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-info reveal">
+                <p class="label">Контакты</p>
+                <h2>Готовы к диалогу?</h2>
+                <div class="contact-item">
+                    <span class="contact-label">Телефон</span>
+                    <a href="tel:+78129287478">+7 (812) 928-74-78</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Почта</span>
+                    <a href="mailto:hello@axiiom.ru">hello@axiiom.ru</a>
+                </div>
+            </div>
+        </div>
+        <div id="footerCopy"></div>
+    </div>
+</footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
+<script src="/metrika.js"></script>
+<script src="/config.js"></script>
+<script src="/nav.js"></script>
+<script>Nav.init({breadcrumbs:false});</script>
+<script src="/theme.js"></script>
+<script src="/footer.js"></script>
+<script src="/preloader.js"></script>
+<script>
+(function(){var r=document.querySelectorAll('.reveal');if(r.length){var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible')}})},{threshold:0.15});r.forEach(function(e){o.observe(e)})}})();
+</script>
+<script>
+(function(){var t=document.getElementById('navToggle');var o=document.getElementById('navOverlay');if(!t||!o)return;t.addEventListener('click',function(e){e.stopPropagation();o.classList.toggle('open');t.classList.toggle('active');document.body.style.overflow=o.classList.contains('open')?'hidden':''})})();
+</script>
+</body>
+</html>

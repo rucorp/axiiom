@@ -1,0 +1,3 @@
+-- Notifications & Promotions Schema
+-- Полные DDL-схемы хранятся в SRS-v2.md §3.6
+-- См. SRS-v2.md §3.6: Notifications & Promotions Schema
