@@ -20,7 +20,7 @@ var INDUSTRIES = [
   { name: 'Системы управления цепочками поставок', path: 'upravlenie-cepochkami.html' },
   { name: 'ПО для юридических фирм', path: 'pravovie-firmu.html' },
   { name: 'ПО для автосервиса', path: 'avtoservice.html' },
-  { name: 'Платформы для доставки еды', path: 'dostavka-edы.html' }
+  { name: 'Платформы для доставки еды', path: 'dostavka-edy.html' }
 ];
 
 function initIndustriesNav(currentPath) {

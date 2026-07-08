@@ -41,7 +41,8 @@
         { name: 'Системы управления цепочками поставок', path: '/industries/upravlenie-cepochkami.html' },
         { name: 'ПО для юридических фирм', path: '/industries/pravovie-firmu.html' },
         { name: 'ПО для автосервиса', path: '/industries/avtoservice.html' },
-        { name: 'Платформы для доставки еды', path: '/industries/dostavka-ed%D1%8B.html' }
+        { name: 'Платформы для доставки еды', path: '/industries/dostavka-edy.html' },
+        { name: 'HR для подбора персонала', path: '/industries/hr-podbor-personala.html' }
       ]
     },
     {

@@ -1784,6 +1784,178 @@ a.logo:hover::after { width: 100%; }
     line-height: 1.6;
 }
 
+/* Horizontal flow (route/map style) */
+.flow-horizontal {
+    display: flex;
+    gap: 0;
+    padding: 20px 0 40px;
+    position: relative;
+    justify-content: center;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.flow-h-stage {
+    flex: 1 1 160px;
+    max-width: 200px;
+    position: relative;
+    text-align: center;
+    padding: 0 12px;
+    margin-bottom: 24px;
+}
+
+.flow-h-stage::after {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--clr-border), transparent);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.flow-h-stage:first-child::after { background: linear-gradient(90deg, transparent 50%, var(--clr-border), transparent); }
+.flow-h-stage:last-child::after { background: linear-gradient(90deg, transparent, var(--clr-border), transparent 50%); }
+
+.flow-h-line {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--clr-accent);
+    margin: 0 auto 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.flow-h-card {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.flow-h-card h3 {
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--clr-heading);
+    margin-bottom: 4px;
+}
+
+.flow-h-card p {
+    font-size: .78rem;
+    color: var(--clr-muted);
+    line-height: 1.4;
+    margin: 0;
+}
+
+.flow-h-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+}
+
+.flow-h-tags .tag {
+    display: inline-block;
+    font-size: .65rem;
+    color: var(--clr-accent);
+    padding: 2px 8px;
+    border: 1px solid var(--clr-border);
+    border-radius: 5px;
+    background: var(--clr-surface);
+}
+
+/* Vertical flow (timeline style) */
+.flow-diagram {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+    padding-left: 20px;
+}
+
+.flow-spine {
+    position: absolute;
+    left: 26px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--clr-border);
+}
+
+.flow-stage {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    margin-bottom: 28px;
+    position: relative;
+}
+
+.flow-stage:last-child { margin-bottom: 0; }
+
+.flow-node {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    flex-shrink: 0;
+    width: 240px;
+}
+
+.flow-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--clr-accent);
+    border: 2px solid var(--clr-bg);
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    margin-top: 18px;
+}
+
+.flow-card {
+    text-align: left;
+}
+
+.flow-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--clr-heading);
+    margin-bottom: 4px;
+}
+
+.flow-card p {
+    font-size: .82rem;
+    color: var(--clr-muted);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.flow-services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 14px;
+}
+
+.flow-services .tag {
+    display: inline-block;
+    font-size: .72rem;
+    color: var(--clr-accent);
+    padding: 3px 10px;
+    border: 1px solid var(--clr-border);
+    border-radius: 6px;
+    background: var(--clr-surface);
+}
+
+.flow-diagram .flow-stage:first-child .flow-dot,
+.flow-diagram .flow-stage:last-child .flow-dot {
+    width: 16px;
+    height: 16px;
+    background: var(--clr-accent);
+    border-width: 3px;
+    margin-top: 16px;
+}
+
 /* CTA */
 .cta-section {
     padding: clamp(60px, 10vw, 110px) 0;
@@ -2004,10 +2176,47 @@ a.logo:hover::after { width: 100%; }
     .stats { gap: 24px; }
     .footer-grid { grid-template-columns: 1fr; gap: 36px; }
     .hero-bg-svg { max-width: 320px; }
+
+    /* Flow vertical */
+    .flow-diagram { padding-left: 16px; }
+    .flow-spine { left: 22px; }
+    .flow-node { width: 180px; }
+    .flow-stage { gap: 12px; }
+
+    /* Flow horizontal */
+    .flow-h-stage { flex: 1 1 180px; max-width: 220px; }
+
+    /* CTA */
+    .cta-card { padding: 36px 24px; }
 }
 @media (max-width: 600px) {
     .container { padding: 0 16px; }
     .tool-card, .blog-card { padding: 20px 16px; }
     .feature-module { padding: 16px; }
     .docs-content .container { padding: 24px 16px; }
+
+    /* Industry page modules */
+    .card { padding: 24px 16px; }
+    .tools-grid { gap: 12px; }
+
+    /* Flow vertical — stack on mobile */
+    .flow-node { width: 100%; min-width: 0; flex-shrink: 1; }
+    .flow-stage { flex-direction: column; gap: 4px; }
+    .flow-diagram { padding-left: 12px; }
+    .flow-spine { left: 18px; }
+    .flow-services { padding-left: 28px; }
+
+    /* Flow horizontal — single column */
+    .flow-h-stage { flex: 1 1 100%; max-width: 100%; margin-bottom: 16px; }
+    .flow-h-stage::after { display: none; }
+    .flow-h-card h3 { font-size: .85rem; }
+    .flow-h-card p { font-size: .72rem; }
+
+    /* CTA */
+    .cta-card { padding: 28px 16px; }
+    .cta-card h2 { font-size: clamp(1.2rem, 5vw, 1.5rem); }
+    .cta-card p { font-size: .9rem; }
+
+    /* Hero */
+    .hero.industries-hero { min-height: 40vh; }
 }

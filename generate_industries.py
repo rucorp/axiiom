@@ -2,6 +2,81 @@
 from string import Template
 import os
 
+MODULES_TMPL = Template('''
+<section class="section">
+<div class="container">
+<h2>Что мы предлагаем</h2>
+<div class="tools-grid">
+${items}
+</div>
+</div>
+</section>''')
+
+MODULE_ITEM = '''
+<div class="card reveal">
+<div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+<h3>${name}</h3>
+<p>${desc}</p>
+</div>'''
+
+CTA_TMPL = Template('''
+<section class="section cta-section">
+<div class="container">
+<div class="cta-card">
+<h2>${title}</h2>
+<p>${text}</p>
+<a href="/#contact" class="btn">Обсудить проект</a>
+</div>
+</div>
+</section>''')
+
+FLOW_VERT = Template('''
+<section class="section dark">
+<div class="container">
+<h2>${heading}</h2>
+<div class="flow-diagram">
+<div class="flow-spine"></div>
+${stages}
+</div>
+</div>
+</section>''')
+
+FLOW_V_STAGE = '''
+<div class="flow-stage reveal">
+<div class="flow-node">
+<div class="flow-dot"></div>
+<div class="flow-card">
+<h3>${title}</h3>
+<p>${subtitle}</p>
+</div>
+</div>
+<div class="flow-services">
+${tags}
+</div>
+</div>'''
+
+FLOW_HORZ = Template('''
+<section class="section dark">
+<div class="container">
+<h2>${heading}</h2>
+<div class="flow-horizontal">
+${stages}
+</div>
+</div>
+</section>''')
+
+FLOW_H_STAGE = '''
+<div class="flow-h-stage reveal">
+<div class="flow-h-line"></div>
+<div class="flow-h-card">
+<h3>${title}</h3>
+<p>${subtitle}</p>
+</div>
+<div class="flow-h-tags">
+${tags}
+</div>
+</div>'''
+
 base_html = Template('''<!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -93,7 +168,10 @@ base_html = Template('''<!DOCTYPE html>
 <div class="badge-row"><p class="badge">Отраслевые решения</p></div>
 <h1>${h1}</h1>
 <p class="hero-desc">${hero}</p></div></div></section>
-<section class="section"><div class="container"><h2>Решения</h2><p class="content-wrapper">${desc}</p><div style="text-align:center;margin-top:40px"><a href="/industries/" class="btn btn-outline">Все отрасли</a></div></div></section>
+<section class="section"><div class="container"><h2>Решения</h2><p class="content-wrapper">${desc}</p></div></section>
+${modules_html}
+${flow_html}
+${cta_html}
 <footer class="footer">
     <div class="container">
         <div id="footerCopy"></div>
@@ -120,6 +198,15 @@ base_html = Template('''<!DOCTYPE html>
   });
 })();
 </script>
+<script>
+var reveals = document.querySelectorAll('.reveal');
+var ro = new IntersectionObserver(function(e) {
+  e.forEach(function(entry) {
+    if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+  });
+}, { threshold: .15 });
+reveals.forEach(function(r) { ro.observe(r); });
+</script>
 </body>
 </html>''')
 
@@ -132,9 +219,64 @@ with open('industries/industries.txt', encoding='utf-8') as f:
         slug = parts[0]
         title = parts[1]
         desc = parts[2]
-        h1 = title
-        hero = parts[3] if len(parts) > 3 else title
-        html = base_html.substitute(slug=slug, title=title, desc=desc, h1=h1, hero=hero)
+        h1 = parts[3] if len(parts) > 3 and parts[3].strip() else title
+        hero = parts[4] if len(parts) > 4 and parts[4].strip() else title
+
+        modules_html = ''
+        if len(parts) > 5 and parts[5].strip():
+            items = ''
+            for module in parts[5].split(':::'):
+                module = module.strip()
+                if not module: continue
+                if '::' in module:
+                    m_name, m_desc = module.split('::', 1)
+                    items += MODULE_ITEM.replace('${name}', m_name.strip()).replace('${desc}', m_desc.strip())
+            if items:
+                modules_html = MODULES_TMPL.substitute(items=items)
+
+        cta_html = ''
+        if len(parts) > 6 and parts[6].strip():
+            cta_parts = parts[6].split('::', 1)
+            cta_title = cta_parts[0].strip()
+            cta_text = cta_parts[1].strip() if len(cta_parts) > 1 else 'Оставьте заявку — мы свяжемся с вами в ближайшее время.'
+            cta_html = CTA_TMPL.substitute(title=cta_title, text=cta_text)
+
+        flow_html = ''
+        if len(parts) > 7 and parts[7].strip():
+            raw = parts[7].strip()
+            flow_type = 'vertical'
+            flow_heading = 'Путь заказа'
+
+            if raw.startswith('vertical:::'):
+                flow_type = 'vertical'
+                raw = raw[len('vertical:::'):]
+            elif raw.startswith('horizontal:::'):
+                flow_type = 'horizontal'
+                flow_heading = 'Маршрут'
+                raw = raw[len('horizontal:::'):]
+
+            stages = ''
+            for stage in raw.split(':::'):
+                stage = stage.strip()
+                if not stage: continue
+                parts_s = stage.split('::')
+                if len(parts_s) >= 2:
+                    s_title = parts_s[0].strip()
+                    s_sub = parts_s[1].strip()
+                    s_tags = parts_s[2].strip() if len(parts_s) > 2 else ''
+                    tags_html = ''.join(f'<span class="tag">{t.strip()}</span>' for t in s_tags.split(',') if t.strip())
+                    if flow_type == 'horizontal':
+                        stages += FLOW_H_STAGE.replace('${title}', s_title).replace('${subtitle}', s_sub).replace('${tags}', tags_html)
+                    else:
+                        stages += FLOW_V_STAGE.replace('${title}', s_title).replace('${subtitle}', s_sub).replace('${tags}', tags_html)
+
+            if stages:
+                if flow_type == 'horizontal':
+                    flow_html = FLOW_HORZ.substitute(heading=flow_heading, stages=stages)
+                else:
+                    flow_html = FLOW_VERT.substitute(heading=flow_heading, stages=stages)
+
+        html = base_html.substitute(slug=slug, title=title, desc=desc, h1=h1, hero=hero, modules_html=modules_html, flow_html=flow_html, cta_html=cta_html)
         with open(f'industries/{slug}.html', 'w', encoding='utf-8') as fw:
             fw.write(html)
 print('Pages generated')
