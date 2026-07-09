@@ -43,12 +43,13 @@
 [data-theme="light"] .fintech-card:hover,
 [data-theme="light"] .sec-card:hover {
     background: #ffffff;
-    border-color: var(--clr-border-hover);
-    box-shadow: 0 4px 16px rgba(0,0,0,.06), 0 0 50px rgba(100,80,220,.06);
+    border-color: var(--clr-accent);
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    transform: translateY(-3px);
 }
 
 [data-theme="light"] .card::before {
-    background: radial-gradient(ellipse at 0% 0%, rgba(100,80,220,.04), transparent);
+    background: radial-gradient(ellipse at 0% 0%, rgba(166,122,69,.06), transparent);
 }
 
 [data-theme="light"] .btn {
@@ -623,8 +624,9 @@ a.logo:hover::after { width: 100%; }
 
 [data-theme="light"] .tool-card:hover {
     background: #ffffff;
-    border-color: var(--clr-border-hover);
-    box-shadow: 0 4px 16px rgba(0,0,0,.06), 0 0 50px rgba(100,80,220,.06);
+    border-color: var(--clr-accent);
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    transform: translateY(-3px);
 }
 
 /* Blog article page */
@@ -889,6 +891,10 @@ a.logo:hover::after { width: 100%; }
 
 [data-theme="light"] .blog-card {
     background: #fff;
+}
+
+[data-theme="light"] .blog-card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
 }
 
 /* Legal pages */
