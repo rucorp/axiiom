@@ -173,9 +173,9 @@ DOCS = [
         "tags": ["database", "schema", "parser", "export", "tsp"],
     },
     {
-        "slug": "napolipizza-guide",
-        "title": "LOVII PIZZA — проектная документация",
-        "desc": "Полный набор документов: PROJECT_GUIDE, STRUCTURE, DEPLOY, QUICKSTART, DONE.",
+        "slug": "loviipizza-guide",
+        "title": "LOVII PIZZA — сайт доставки",
+        "desc": "333 товара, корзина, система лояльности 7 уровней, бэкенд в Yandex Cloud.",
         "category": "API, БД и интеграции",
         "source": "additional/napolipizza/PROJECT_GUIDE.md",
         "tags": ["pizza", "project", "guide", "deploy"],

@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+    <title>LOVII PIZZA — сайт доставки | Документация AXIIOM</title>
+    <meta name="description" content="333 товара, 18 категорий, корзина, система лояльности (7 уровней), профили доставки, бэкенд на Yandex Cloud Functions.">
+    <link rel="canonical" href="https://axiiom.ru/docs/loviipizza-guide/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://axiiom.ru/docs/loviipizza-guide/">
+    <meta property="og:title" content="LOVII PIZZA — сайт доставки | Документация AXIIOM">
+    <meta property="og:description" content="333 товара, 18 категорий, корзина, система лояльности (7 уровней), профили доставки, бэкенд на Yandex Cloud Functions.">
+    <meta property="og:image" content="https://axiiom.ru/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="AXIIOM">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://axiiom.ru/docs/loviipizza-guide/">
+    <meta name="twitter:title" content="LOVII PIZZA — сайт доставки | Документация AXIIOM">
+    <meta name="twitter:description" content="333 товара, 18 категорий, корзина, система лояльности (7 уровней), профили доставки, бэкенд на Yandex Cloud Functions.">
+    <meta name="twitter:image" content="https://axiiom.ru/og-image.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"LOVII PIZZA — сайт доставки","description":"333 товара, 18 категорий, корзина, система лояльности (7 уровней), профили доставки, бэкенд на Yandex Cloud Functions.","url":"https://axiiom.ru/docs/loviipizza-guide/","author":{"@type":"Organization","name":"AXIIOM"},"isPartOf":{"@type":"WebSite","name":"AXIIOM","url":"https://axiiom.ru"}}</script>
+    <style>*{margin:0;padding:0;box-sizing:border-box}html{font-size:16px;scroll-behavior:smooth}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1.0625rem;background:#0A0A0F;color:#C7C7CC;line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}.noise{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}.grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:60px 60px}.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}.reveal.visible{opacity:1;transform:translateY(0)}</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/docs/styles.css">
+</head>
+<body>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="30" height="30" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/></svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </div>
+</header>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"><ol itemscope itemtype="https://schema.org/BreadcrumbList">
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/"><span itemprop="name">Главная</span></a>
+        <meta itemprop="position" content="1">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/docs/"><span itemprop="name">Документация</span></a>
+        <meta itemprop="position" content="2">
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">LOVII PIZZA — сайт доставки</span>
+        <meta itemprop="position" content="3">
+      </li>
+    </ol></div></nav>
+<article class="docs-article">
+    <div class="container">
+        <div class="docs-content">
+            <div class="feature-page-hero"><h1>LOVII PIZZA — сайт доставки</h1><p>Сайт доставки пиццы: 333 товара, корзина, система лояльности, 18 категорий.</p><div class="doc-actions"><a href="/docs/" class="btn btn-outline">← Все документы</a></div></div><h1 id="overview">LOVII PIZZA — Руководство по проекту</h1>
+
+<h2 id="overview">Обзор проекта</h2>
+<p><strong>LOVII PIZZA</strong> — современный сайт доставки неаполитанской пиццы с красивым и функциональным дизайном. Двухколоночный layout со sticky-навигацией, корзиной, системой лояльности и мотивации, профилями доставки и бэкендом на Yandex Cloud Functions.</p>
+
+<ul>
+<li><strong>333 товара</strong> в 18 категориях</li>
+<li>Пицца 30 см, Piccolo 20 см, Кальцоне</li>
+<li>Роллы, суши, хлеб, фокачча</li>
+<li>Комбо-наборы, десерты, напитки</li>
+<li>Замороженная продукция, ароматные масла</li>
+<li>Мастер-классы, франшиза, контакты</li>
+</ul>
+
+<h2 id="architecture">Архитектура</h2>
+
+<h3 id="frontend">Frontend</h3>
+<ul>
+<li><strong>index.html</strong> — двухколоночный layout (sidebar + контент)</li>
+<li><strong>css/main.css</strong> — все стили</li>
+<li><strong>js/config.js</strong> — конфигурация приложения</li>
+<li><strong>js/app-delivery.js (~1420 строк)</strong> — вся логика: загрузка меню, корзина, сортировка, отправка заказа</li>
+</ul>
+
+<h3 id="backend">Backend</h3>
+<p>Go-функция на Yandex Cloud Functions — тонкий транспорт к Max Bot API. Принимает сформированный на фронте HTML заказа и форвардит в Telegram-канал.</p>
+<ul>
+<li><strong>backend/max-order/index.go</strong> — handler (CORS, валидация, форвард)</li>
+<li><strong>backend/setup.sh</strong> — bootstrap (SA + Lockbox)</li>
+<li><strong>backend/deploy.sh</strong> — деплой версии функции</li>
+<li>Секреты (<code>MAX_TOKEN</code>, <code>MAX_CHAT_ID</code>) — в Yandex Lockbox</li>
+<li>Rate limit: 30 req/min на инстанс</li>
+<li>CORS whitelist: <code>pizza.lovii.ru</code> + локальные dev-порты</li>
+</ul>
+
+<h3 id="data">Данные</h3>
+<p><strong>menu-final.json</strong> — канонические данные меню (333 товара):</p>
+<pre><code>{
+  "title": "Пицца Маргарита",
+  "price": 650,
+  "image": "img/800/0002-....webp",
+  "id": 3,
+  "category": "pizza-30cm",
+  "description": "...",
+  "weight": 500
+}
+</code></pre>
+
+<h2 id="core-features">Ключевые возможности</h2>
+
+<h3 id="cart">Корзина</h3>
+<ul>
+<li>Добавление/удаление товаров, изменение количества</li>
+<li>Сохранение в localStorage</li>
+<li>Мини-корзина в хедере с анимацией pulse</li>
+<li>Модальное окно с полной формой заказа</li>
+<li>Расчёт стоимости доставки</li>
+<li>Выбор способа оплаты (карта, СБП, наличные)</li>
+</ul>
+
+<h3 id="loyalty">Система лояльности (7 уровней подарков)</h3>
+<table>
+<thead><tr><th>Сумма заказа</th><th>Подарок</th></tr></thead>
+<tbody>
+<tr><td>750 ₽</td><td>Бесплатная доставка</td></tr>
+<tr><td>1 250 ₽</td><td>Неаполитанский хлеб Классический</td></tr>
+<tr><td>1 750 ₽</td><td>Сок яблочный собственного производства</td></tr>
+<tr><td>2 250 ₽</td><td>Кальцоне-мини «4 сыра»</td></tr>
+<tr><td>2 750 ₽</td><td>Pizza Piccolo 4 сыра</td></tr>
+<tr><td>3 250 ₽</td><td>Пицца 4 сыра</td></tr>
+<tr><td>3 750 ₽</td><td>Ролл Филадельфия с лососем</td></tr>
+</tbody>
+</table>
+<p>При достижении порога клиент выбирает один подарок. Прогресс-бар отображает текущий уровень и следующий доступный подарок.</p>
+
+<h3 id="delivery-profiles">Профили доставки</h3>
+<p>Два режима работы, переключаемые через URL-параметр <code>?source=</code>:</p>
+<table>
+<thead><tr><th>Параметр</th><th>Home (доставка)</th><th>Partner (локации)</th></tr></thead>
+<tbody>
+<tr><td>Беспл. доставка от</td><td>1 500 ₽</td><td>750 ₽</td></tr>
+<tr><td>Стоимость доставки</td><td>199 ₽</td><td>99 ₽</td></tr>
+<tr><td>Мин. заказ</td><td>750 ₽</td><td>750 ₽</td></tr>
+<tr><td>Оплата</td><td>Карта, СБП, наличные без сдачи</td><td>Карта, СБП, наличные</td></tr>
+<tr><td>Адрес</td><td>Требуется</td><td>Не требуется</td></tr>
+</tbody>
+</table>
+<p><strong>Источники-партнёры:</strong> 12 комнат, Музей Гарри Поттера, Музей СВО, Отель Ломоносов, Караоке Party Time, Музыкальная Школа, Супер Соник.</p>
+
+<h3 id="sorting">Сортировка</h3>
+<ul>
+<li><strong>Рекомендуем</strong> — хиты продаж в начале + цена по убыванию</li>
+<li><strong>Цена по возрастанию</strong></li>
+<li><strong>Цена по убыванию</strong></li>
+<li>Desktop: кастомный дропдаун в хедере</li>
+<li>Mobile: FAB-кнопка с bottom sheet</li>
+</ul>
+
+<h3 id="time-management">Тайм-менеджмент</h3>
+<p>Автоматическое переключение режимов работы по времени:</p>
+<ul>
+<li><strong>10:00–20:30</strong> — обычный режим, приём заказов</li>
+<li><strong>20:30–21:00</strong> — предупреждение «Доставляем до 22:00»</li>
+<li><strong>21:00–22:00</strong> — предупреждение + запрос адреса (самовывоз)</li>
+<li><strong>22:00–06:00</strong> — закрыто, ссылка на Яндекс Еду</li>
+</ul>
+
+<h3 id="themes">Тёмная и светлая темы</h3>
+<ul>
+<li>Переключение в мобильном меню</li>
+<li>Сохранение выбора в localStorage</li>
+<li>Атрибут <code>data-theme</code> на <code>&lt;html&gt;</code></li>
+</ul>
+
+<h3 id="lazy-loading">Ленивая загрузка (Lazy Loading)</h3>
+<ul>
+<li>12 товаров за один load</li>
+<li>IntersectionObserver для подгрузки при скролле</li>
+<li>3 начальные группы категорий</li>
+</ul>
+
+<h3 id="mobile">Мобильная версия</h3>
+<ul>
+<li>Бургер-меню с выезжающим сайдбаром</li>
+<li>FAB для сортировки</li>
+<li>Оптимизированные изображения 800px</li>
+<li>Touch-friendly элементы</li>
+</ul>
+
+<h2 id="statistics">Статистика</h2>
+<table>
+<thead><tr><th>Метрика</th><th>Значение</th></tr></thead>
+<tbody>
+<tr><td>Всего товаров</td><td>333</td></tr>
+<tr><td>Категорий</td><td>18</td></tr>
+<tr><td>Изображений (WebP 800px)</td><td>255</td></tr>
+<tr><td>Оригиналов (WebP 1200x800)</td><td>255</td></tr>
+<tr><td>Хитов продаж (HIT_IDS)</td><td>77</td></tr>
+<tr><td>Уровней лояльности</td><td>7</td></tr>
+<tr><td>Строк JS (app-delivery.js)</td><td>~1420</td></tr>
+</tbody>
+</table>
+
+<h2 id="config">Конфигурация</h2>
+<p>Все настройки в <code>js/config.js</code>:</p>
+<ul>
+<li><strong>ORDER_CONFIG.maxEndpoint</strong> — URL Yandex Cloud Function</li>
+<li><strong>ORDER_SOURCES</strong> — справочник источников трафика</li>
+<li><strong>SOURCE_CONFIGS</strong> — профили доставки (home/partner)</li>
+<li><strong>CATEGORY_GROUPS</strong> — группы категорий для ленивой загрузки</li>
+<li><strong>CATEGORY_MAP</strong> — русские названия категорий</li>
+<li><strong>HIT_IDS</strong> — ID товаров-хитов</li>
+<li><strong>MAINTENANCE_MODE</strong> — заглушка «временно не работаем»</li>
+<li><strong>LAZY_LOAD_CONFIG</strong> — настройки ленивой загрузки</li>
+</ul>
+
+<h2 id="quickstart">Быстрый старт</h2>
+<pre><code># Просто откройте index.html в браузере
+open index.html
+</code></pre>
+
+<h2 id="links">Ссылки</h2>
+<ul>
+<li><strong>Репозиторий:</strong> <a href="https://github.com/bestdeejay-design/pizza">github.com/bestdeejay-design/pizza</a></li>
+<li><strong>Документация backend:</strong> <code>backend/README.md</code></li>
+</ul>
+        </div>
+    </div>
+</article>
+<footer class="footer"><div class="container"><div id="footerCopy"></div></div></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
+<script src="/metrika.js"></script>
+<script src="/config.js"></script>
+<script src="/nav.js"></script>
+<script>Nav.init({breadcrumbs:false});</script>
+<script src="/theme.js"></script>
+<script src="/preloader.js"></script>
+<script>
+(function(){var r=document.querySelectorAll('.reveal');if(r.length){var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible')}})},{threshold:0.15});for(var i=0;i<r.length;i++){o.observe(r[i])}}})();
+</script>
+<script>
+(function(){var t=document.getElementById('navToggle');var o=document.getElementById('navOverlay');if(!t||!o)return;t.addEventListener('click',function(e){e.stopPropagation();o.classList.toggle('open');t.classList.toggle('active');document.body.style.overflow=o.classList.contains('open')?'hidden':''})})();
+</script>
+</body>
+</html>
