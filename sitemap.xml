@@ -2,55 +2,55 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://axiiom.ru/</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/404.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.1</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/blog/</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/calculator/</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/docs/</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/privacy/</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/terms/</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/tools/</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -176,133 +176,139 @@
   </url>
   <url>
     <loc>https://axiiom.ru/industries/avtomatizaciya-restoranov.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/avtoservice.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/bronirovanie-gostinits.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/crm-medcentry.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/crm-nedvizhimost.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://axiiom.ru/industries/dostavka-ed%D1%8B.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <loc>https://axiiom.ru/industries/dostavka-edy.html</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://axiiom.ru/industries/hr-podbor-personala.html</loc>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/erp-proizvodstvo.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/fitness-apps.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/iot-umnyy-dom.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/kiberbezopasnost.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/kraudfanding.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/marketing-analitika.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/online-obuchenie.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/platforma-frilans.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/po-stroitelnye-kompanii.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/pravovie-firmu.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/saas-startupy.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/selskokhozyaystvo.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/sistemy-logistika.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/udalennaya-rabota.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/upravlenie-cepochkami.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/upravlenie-proektami.html</loc>
-    <lastmod>2026-07-05</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
