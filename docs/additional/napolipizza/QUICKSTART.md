@@ -1,4 +1,4 @@
-# 🍕 Napoli Pizza - Быстрый старт
+# 🍕 LOVII PIZZA - Быстрый старт
 
 ## ✅ Сайт запущен!
 
@@ -93,7 +93,7 @@ src/
 ```bash
 # GitHub Pages
 git add .
-git commit -m "Napoli Pizza website"
+git commit -m "LOVII PIZZA website"
 git push origin main
 
 # Или используйте Docker

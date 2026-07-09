@@ -174,7 +174,7 @@ DOCS = [
     },
     {
         "slug": "napolipizza-guide",
-        "title": "Napoli Pizza — проектная документация",
+        "title": "LOVII PIZZA — проектная документация",
         "desc": "Полный набор документов: PROJECT_GUIDE, STRUCTURE, DEPLOY, QUICKSTART, DONE.",
         "category": "API, БД и интеграции",
         "source": "additional/napolipizza/PROJECT_GUIDE.md",
