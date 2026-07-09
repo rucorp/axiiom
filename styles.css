@@ -48,8 +48,11 @@
     transform: translateY(-3px);
 }
 
-[data-theme="light"] .card::before {
-    background: radial-gradient(ellipse at 0% 0%, rgba(166,122,69,.06), transparent);
+[data-theme="light"] .card::before,
+[data-theme="light"] .case-card::before,
+[data-theme="light"] .fintech-card::before,
+[data-theme="light"] .sec-card::before {
+    display: none;
 }
 
 [data-theme="light"] .btn {
@@ -629,6 +632,10 @@ a.logo:hover::after { width: 100%; }
     transform: translateY(-3px);
 }
 
+[data-theme="light"] .tool-card::before {
+    display: none;
+}
+
 /* Blog article page */
 .article-page {
     padding: 60px 0;
@@ -895,6 +902,7 @@ a.logo:hover::after { width: 100%; }
 
 [data-theme="light"] .blog-card:hover {
     box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    transform: translateY(-3px);
 }
 
 /* Legal pages */
