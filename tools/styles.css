@@ -11,7 +11,7 @@
     --clr-border-hover: rgba(255,255,255,.1);
     --clr-hero-bg: #0A0A0F;
     --clr-accent: #D4A574;
-    --clr-accent2: #8B9D83;
+    --clr-accent2: #5F7058;
 }
 
 [data-theme="light"] {
@@ -22,11 +22,12 @@
     --clr-text: #424245;
     --clr-heading: #1D1D1F;
     --clr-muted: #6E6E73;
-    --clr-faint: #8E8E93;
+    --clr-faint: #6E6E73;
     --clr-border: #D2D2D7;
     --clr-border-hover: #B0B0B8;
     --clr-hero-bg: #FFFFFF;
-    --clr-accent: #A67A45;
+    --clr-accent: #8A5A2B;
+    --clr-accent2: #5F7058;
 }
 
 [data-theme="light"] .btn {
