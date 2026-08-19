@@ -48,39 +48,4 @@
         container.appendChild(el);
       });
   })();
-
-  // Performance logger
-  (function() {
-    if (window.performance && performance.timing) {
-      var t = performance.timing;
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          var loadTime = t.loadEventEnd - t.navigationStart;
-          var domTime = t.domComplete - t.domLoading;
-          var resources = performance.getEntriesByType
-            ? performance.getEntriesByType('resource') : [];
-          var totalSize = 0;
-          var largeFiles = [];
-          for (var i = 0; i < resources.length; i++) {
-            var r = resources[i];
-            if (r.transferSize) {
-              totalSize += r.transferSize;
-              if (r.transferSize > 50000) {
-                largeFiles.push({ name: r.name.split('/').pop(), size: (r.transferSize / 1024).toFixed(1) + 'KB' });
-              }
-            }
-          }
-          console.log('--- AXIIOM Performance ---');
-          console.log('Page load: ' + (loadTime / 1000).toFixed(2) + 's');
-          console.log('DOM ready: ' + (domTime / 1000).toFixed(2) + 's');
-          console.log('Total resources: ' + resources.length + ', ' + (totalSize / 1024).toFixed(1) + 'KB');
-          if (largeFiles.length) {
-            console.log('Large files:');
-            largeFiles.forEach(function(f) { console.log('  ' + f.size + ' - ' + f.name); });
-          }
-          console.log('--------------------------');
-        }, 100);
-      });
-    }
-  })();
 })();
