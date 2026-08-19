@@ -1,0 +1,96 @@
+name: Bug report
+description: Report a broken page, layout, or behavior on the AXIIOM site
+title: "[bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug on the AXIIOM website (axiiom.ru). Please fill
+        in as much as you can so we can reproduce and fix it quickly.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear and concise description of the bug.
+      placeholder: Describe the problem and what you expected to happen instead.
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Page / URL affected
+      description: The specific page or asset where the issue occurs.
+      placeholder: e.g. https://axiiom.ru/industries/fintech/ or nav.js
+    validations:
+      required: true
+  - type: dropdown
+    id: theme
+    attributes:
+      label: Theme
+      description: Which color theme shows the problem?
+      options:
+        - Light
+        - Dark
+        - Both
+        - Not theme-related
+    validations:
+      required: true
+  - type: dropdown
+    id: device
+    attributes:
+      label: Device type
+      options:
+        - Desktop
+        - Mobile
+        - Tablet
+        - Not sure
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser & version
+      description: Which browser and version did you use?
+      placeholder: e.g. Chrome 124, Safari 17.4, Firefox 125
+    validations:
+      required: false
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What actually happened?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: How can we reproduce the issue?
+      placeholder: |
+        1. Go to ...
+        2. Click on ...
+        3. See error
+    validations:
+      required: false
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots / logs
+      description: Paste or drag in any screenshots, console output, or error text.
+    validations:
+      required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I agree to follow the AXIIOM Code of Conduct.
+          required: true

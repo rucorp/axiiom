@@ -10,7 +10,7 @@
 [![Accessibility](https://img.shields.io/badge/Lighthouse%20a11y-100-brightgreen)](https://axiiom.ru)
 [![SEO](https://img.shields.io/badge/Lighthouse%20SEO-100-brightgreen)](https://axiiom.ru)
 [![Pages Checked](https://img.shields.io/badge/test_site-79%20pages%20%2F%203476%20checks-brightgreen)](https://axiiom.ru)
-[![License](https://img.shields.io/badge/license-proprietary-lightgrey)](https://axiiom.ru)
+[![License](https://img.shields.io/badge/license-MIT-blue)](https://axiiom.ru)
 [![Deploy](https://img.shields.io/badge/deploy-nginx%3Aalpine-blue)](https://axiiom.ru)
 
 ## Статус

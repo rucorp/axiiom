@@ -1,0 +1,67 @@
+name: Feature request
+description: Suggest a new page, demo, tool, or improvement for the AXIIOM site
+title: "[feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an idea for the AXIIOM website (axiiom.ru). Tell us
+        what you'd like to see and why it matters.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or need
+      description: What problem would this feature solve? What are you trying to do?
+      placeholder: A clear description of the need or pain point.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe the feature or change you'd like.
+      placeholder: What should we build or change?
+    validations:
+      required: true
+  - type: input
+    id: area
+    attributes:
+      label: Area of the site
+      description: Which part of the site does this affect?
+      placeholder: e.g. Industries, Demos, Tools, Blog, Calculator, Docs, Navigation
+    validations:
+      required: false
+  - type: dropdown
+    id: theme
+    attributes:
+      label: Theme impact
+      description: Does this affect the dark/light theme?
+      options:
+        - No theme impact
+        - Light theme
+        - Dark theme
+        - Both themes
+    validations:
+      required: false
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any alternative approaches or workarounds you thought about?
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Links, references, mockups, or anything else useful.
+    validations:
+      required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I agree to follow the AXIIOM Code of Conduct.
+          required: true
