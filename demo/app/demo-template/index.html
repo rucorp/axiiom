@@ -22,11 +22,12 @@
   <meta name="twitter:image" content="https://axiiom.ru/og-image.png">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23a855f7' d='M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l4-2.18L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z'/></svg>" type="image/svg+xml">
   <link rel="stylesheet" href="css/app.css">
-  <link rel="stylesheet" href="/preloader.css">
+  <link rel="stylesheet" href="/preloader.css?v=20260819">
 </head>
 <body>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
 <div id="preloader">
-<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<2000){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},2000-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})()</script>
+<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<900){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},900-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})()</script>
   <svg class="preloader-svg" viewBox="0 0 36 36" width="80" height="80">
     <rect class="pr1" x="2" y="2" width="14" height="14" rx="2"/>
     <rect class="pr2" x="20" y="2" width="14" height="14" rx="2"/>
@@ -35,6 +36,8 @@
     <circle class="pc" cx="27" cy="27" r="3"/>
   </svg>
 </div>
+<main id="main">
+
 
   <!-- SVG Icons (hidden) -->
   <svg style="display:none">
@@ -446,11 +449,13 @@
 
   <script src="js/app.js"></script>
   <div style="position:fixed;top:12px;left:16px;z-index:99999;"><a href="https://axiiom.ru/demo/app/" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(10,10,15,.9);color:#C7C7CC;border:1px solid rgba(255,255,255,.08);border-radius:20px;text-decoration:none;font-family:Inter,sans-serif;font-size:13px;transition:all .2s;" onmouseover="this.style.background='rgba(10,10,15,1)';this.style.color='#F5F5F7';" onmouseout="this.style.background='rgba(10,10,15,.9)';this.style.color='#C7C7CC';">← Все демо AXIIOM</a></div>
-  <!-- Yandex.Metrika counter -->
-<script src="/metrika.js"></script>
+  
+</main>
+<!-- Yandex.Metrika counter -->
+<script src="/metrika.js?v=20260819" defer></script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
-  <script src="/preloader.js"></script>
+  <script src="/preloader.js?v=20260819"></script>
 </body>
 </html>
