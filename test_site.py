@@ -33,7 +33,13 @@ def parse_tree(nav_path):
     """Parse nav.js TREE into a flat list of {path, name, parent, parent_name}.
     Uses brace-counting to correctly handle nested objects."""
     raw = nav_path.read_text("utf-8")
-    start = raw.index("var TREE = [") + len("var TREE = [")
+    # TREE lives in the first top-level array: "var TREE = [" (source) or
+    # "var l=[" (esbuild-minified, name is mangled). Anchor on the first
+    # "= [" so the parser survives future minification renames.
+    anchor = re.search(r"=\s*\[", raw)
+    if not anchor:
+        raise ValueError(f"nav.js TREE array not found in {nav_path}")
+    start = anchor.end()
     depth = 1  # we already consumed the opening [
     i = start
     while i < len(raw):
@@ -66,10 +72,10 @@ def parse_tree(nav_path):
                     depth -= 1
                     if depth == 0:
                         block = text[brace_start + 1:j]
-                        name_m = re.search(r"name:\s*'([^']*)'", block)
-                        path_m = re.search(r"path:\s*'([^']+)'", block)
-                        name = name_m.group(1) if name_m else ""
-                        path = path_m.group(1) if path_m else ""
+                        name_m = re.search(r"""name:\s*(['"])([^'"]*)\1""", block)
+                        path_m = re.search(r"""path:\s*(['"])([^'"]+)\1""", block)
+                        name = name_m.group(2) if name_m else ""
+                        path = path_m.group(2) if path_m else ""
                         if path and not path.startswith("http") and not path.startswith("https") and "#" not in path:
                             norm = path.rstrip("/") if path != "/" else "/"
                             pages.append({
@@ -362,6 +368,7 @@ def baseline(page_type):
         b["preloader"] = "no"
         b["preloader-css"] = "no"
         b["preloader-js"] = "no"
+        b["hero-svg"] = "no"  # docs используют feature-page-hero без SVG-анимации
         b["content-marker"] = "required"
 
     if page_type == "root":
@@ -726,6 +733,112 @@ def check_broken_links(content, page, all_pages):
 
 
 # ——————————————————————————————————————————————————————
+# Dynamic theme toggle test (Playwright, optional)
+# ——————————————————————————————————————————————————————
+
+def run_dynamic_theme_checks(pages, base_url="http://localhost:8080", limit=None):
+    """Open pages in a real browser, toggle theme via localStorage, verify that
+    data-theme and the computed background actually change.
+
+    Requires the Python `playwright` package; skips with WARN if unavailable.
+    Returns a list of {url, status, detail} dicts.
+    """
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        return [{"url": "—", "status": "WARN",
+                 "detail": "playwright (python) not installed — dynamic theme test skipped"}]
+
+    # Representative sample: one page per type + landing + 404
+    seen_types = set()
+    sample = []
+    for p in pages:
+        if p.get("missing"):
+            continue
+        t = p.get("type")
+        if t not in seen_types or p.get("url") in ("/", "/404.html"):
+            sample.append(p)
+            seen_types.add(t)
+    if limit:
+        sample = sample[:limit]
+
+    results = []
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch(headless=True)
+        ctx = browser.new_context(viewport={"width": 1280, "height": 800})
+        for page_info in sample:
+            url = page_info["url"] or "/"
+            full = base_url.rstrip("/") + url
+            status, detail = "PASS", ""
+            try:
+                page = ctx.new_page()
+                # 1) Light default: clear storage, load, measure
+                page.goto(full, wait_until="domcontentloaded", timeout=15000)
+                page.evaluate("localStorage.clear(); location.reload()")
+                page.wait_for_load_state("domcontentloaded", timeout=15000)
+                page.wait_for_timeout(400)
+                light = page.evaluate("""() => {
+                    const b = getComputedStyle(document.body).backgroundColor;
+                    const m = b.match(/rgba?\\((\\d+),\\s*(\\d+),\\s*(\\d+)/);
+                    const lum = m ? (0.299*m[1] + 0.587*m[2] + 0.114*m[3]) : -1;
+                    return { theme: document.documentElement.getAttribute('data-theme'),
+                             lum: Math.round(lum), bg: b };
+                }""")
+                # 2) Force dark, reload, measure
+                page.evaluate("localStorage.setItem('theme','dark'); location.reload()")
+                page.wait_for_load_state("domcontentloaded", timeout=15000)
+                page.wait_for_timeout(400)
+                dark = page.evaluate("""() => {
+                    const b = getComputedStyle(document.body).backgroundColor;
+                    const m = b.match(/rgba?\\((\\d+),\\s*(\\d+),\\s*(\\d+)/);
+                    const lum = m ? (0.299*m[1] + 0.587*m[2] + 0.114*m[3]) : -1;
+                    return { theme: document.documentElement.getAttribute('data-theme'),
+                             lum: Math.round(lum), bg: b };
+                }""")
+                # 3) Force light, reload, measure
+                page.evaluate("localStorage.setItem('theme','light'); location.reload()")
+                page.wait_for_load_state("domcontentloaded", timeout=15000)
+                page.wait_for_timeout(400)
+                light2 = page.evaluate("""() => {
+                    const b = getComputedStyle(document.body).backgroundColor;
+                    const m = b.match(/rgba?\\((\\d+),\\s*(\\d+),\\s*(\\d+)/);
+                    const lum = m ? (0.299*m[1] + 0.587*m[2] + 0.114*m[3]) : -1;
+                    return { theme: document.documentElement.getAttribute('data-theme'),
+                             lum: Math.round(lum), bg: b };
+                }""")
+                page.close()
+
+                # Verdicts
+                problems = []
+                if light.get("theme") != "light" and light.get("theme") is not None:
+                    problems.append(f"light theme={light.get('theme')}")
+                if light.get("lum") < 150:
+                    problems.append(f"light lum={light.get('lum')} (expected > 150)")
+                if dark.get("theme") != "dark":
+                    problems.append(f"dark theme={dark.get('theme')}")
+                if dark.get("lum") > 60:
+                    problems.append(f"dark lum={dark.get('lum')} (expected < 60)")
+                if light2.get("theme") != "light" and light2.get("theme") is not None:
+                    problems.append(f"light-return theme={light2.get('theme')}")
+                if light2.get("lum") < 150:
+                    problems.append(f"light-return lum={light2.get('lum')}")
+
+                if problems:
+                    status = "FAIL"
+                    detail = "; ".join(problems[:3])
+                else:
+                    detail = (f"light={light.get('theme') or 'auto'}/lum{light.get('lum')} → "
+                              f"dark={dark.get('theme')}/lum{dark.get('lum')} → "
+                              f"light={light2.get('theme') or 'auto'}/lum{light2.get('lum')}")
+            except Exception as e:
+                status = "FAIL"
+                detail = f"exception: {str(e)[:100]}"
+            results.append({"url": url, "status": status, "detail": detail})
+        browser.close()
+    return results
+
+
+# ——————————————————————————————————————————————————————
 # HTML Report
 # ——————————————————————————————————————————————————————
 
@@ -776,7 +889,7 @@ h2{font-size:1.1rem;margin:20px 0 10px;color:var(--text-dim)}
 """
 
 
-def generate_report(pages, checks_map, timestamp=None):
+def generate_report(pages, checks_map, timestamp=None, dynamic_results=None):
     if timestamp is None:
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -869,6 +982,19 @@ def generate_report(pages, checks_map, timestamp=None):
     for t in types:
         filter_btns += f'<button class="filter-btn" data-f="type_{t}" onclick="filterType(\'{t}\')">{t}</button>'
 
+    if dynamic_results:
+        dyn_rows = ""
+        for r in dynamic_results:
+            icon = {"PASS": "✓", "FAIL": "✗", "WARN": "△"}.get(r["status"], "·")
+            row_cls = {"PASS": "row-pass", "FAIL": "row-fail", "WARN": "row-warn"}.get(r["status"], "row-no")
+            dyn_rows += (f'<div class="check-row {row_cls}"><span class="check-icon">{icon}</span>'
+                         f'<span class="check-label">{r["url"]}</span> '
+                         f'<span class="check-detail">— {r["detail"][:140]}</span></div>')
+        dynamic_html = (f'<h2>Dynamic Theme Test</h2>'
+                        f'<div class="site-map">{dyn_rows}</div>')
+    else:
+        dynamic_html = ""
+
     return f"""<!DOCTYPE html>
 <html lang="ru">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -920,6 +1046,7 @@ function filterAll(){{_ft.type=null;_ft.status=null;_ap();}}
 <h2>Pages</h2>
 <div class="page-grid">{cards}</div>
 
+{dynamic_html}
 <div class="report-footer">AXIIOM Site Validator — {timestamp}</div>
 </body></html>"""
 
@@ -933,6 +1060,9 @@ def main():
     parser.add_argument("--dir", default=str(SITE_ROOT))
     parser.add_argument("--output", default=str(DEFAULT_OUTPUT))
     parser.add_argument("--serve", action="store_true")
+    parser.add_argument("--dynamic", action="store_true", help="run Playwright theme-toggle test (sample)")
+    parser.add_argument("--dynamic-base", default="http://localhost:8080", help="base URL for dynamic test")
+    parser.add_argument("--dynamic-limit", type=int, default=None, help="max pages in dynamic test")
     parser.add_argument("--exit-code", action="store_true")
     args = parser.parse_args()
 
@@ -982,8 +1112,19 @@ def main():
     for page in pages:
         checks_map[page["url"]] = run_checks(page, page["baseline"], pages)
 
+    dynamic_results = None
+    if args.dynamic:
+        print("🌗 Running dynamic theme test (Playwright)...")
+        dynamic_results = run_dynamic_theme_checks(pages, base_url=args.dynamic_base, limit=args.dynamic_limit)
+        n_dyn_pass = sum(1 for r in dynamic_results if r["status"] == "PASS")
+        n_dyn_fail = sum(1 for r in dynamic_results if r["status"] == "FAIL")
+        print(f"  🎨 Theme toggle: {n_dyn_pass} passed, {n_dyn_fail} failed")
+        for r in dynamic_results:
+            icon = "✅" if r["status"] == "PASS" else "❌" if r["status"] == "FAIL" else "⚠️"
+            print(f"    {icon} {r['url']}: {r['detail'][:110]}")
+
     print("📊 Generating report...")
-    report = generate_report(pages, checks_map)
+    report = generate_report(pages, checks_map, dynamic_results=dynamic_results)
     output_path = Path(args.output)
     output_path.write_text(report)
     print(f"📄 Report: {output_path}")
