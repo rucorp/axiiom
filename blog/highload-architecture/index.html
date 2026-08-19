@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0A0A0F">
+    <script>try{var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
     <title>Архитектура highload-систем: опыт AXIIOM | Блог AXIIOM</title>
     <meta name="description" content="Как проектировать highload-системы: микросервисы vs монолит, балансировка, многоуровневое кэширование, K8s, шардирование БД, очереди и observability. Опыт AXIIOM.">
     <link rel="canonical" href="https://axiiom.ru/blog/highload-architecture/">
@@ -52,12 +53,13 @@
       ]
     }
     </script>
-    <link rel="stylesheet" href="/styles.css">
-      <link rel="stylesheet" href="/preloader.css">
+    <link rel="stylesheet" href="/styles.css?v=20260819">
+      <link rel="stylesheet" href="/preloader.css?v=20260819">
 </head>
 <body>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
 <div id="preloader">
-<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<2000){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},2000-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})()</script>
+<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<900){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},900-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})()</script>
   <svg class="preloader-svg" viewBox="0 0 36 36" width="80" height="80">
     <rect class="pr1" x="2" y="2" width="14" height="14" rx="2"/>
     <rect class="pr2" x="20" y="2" width="14" height="14" rx="2"/>
@@ -71,6 +73,7 @@
 <div class="nav-overlay" id="navOverlay">
     <ul class="nav-links" id="mobileNav"></ul>
 </div>
+<main id="main">
 <header class="header" id="header">
     <div class="container">
         <nav class="nav">
@@ -128,14 +131,16 @@ spec:
         </div>
     </div>
 </section>
+</main>
 <footer class="footer">
     <div class="container">
         <div id="footerCopy"></div>
     </div>
 </footer>
-<script src="/nav.js"></script>
+<script src="/config.js?v=20260819"></script>
+<script src="/nav.js?v=20260819"></script>
 <script>Nav.init({ cta: true, breadcrumbs: true });</script>
-<script src="/theme.js"></script>
+<script src="/theme.js?v=20260819"></script>
 <script>
 (function() {
 
@@ -145,12 +150,12 @@ spec:
     }, { passive: true });
 })();
 </script>
-<script src="/metrika.js"></script>
+<script src="/metrika.js?v=20260819" defer></script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
 
-  <script src="/preloader.js"></script>
+  <script src="/preloader.js?v=20260819"></script>
 
 <script>
 (function() {
