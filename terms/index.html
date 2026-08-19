@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0A0A0F">
+    <script>try{var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
     <title>Пользовательское соглашение | AXIIOM</title>
     <meta name="description" content="Условия использования сайта axiiom.ru. Правила и ограничения.">
     <meta name="robots" content="noindex, follow">
@@ -29,12 +30,51 @@
     <meta name="twitter:description" content="Условия использования сайта axiiom.ru. Правила и ограничения.">
     <meta name="twitter:image" content="https://axiiom.ru/og-image.png">
 
-    <link rel="stylesheet" href="/styles.css">
-      <link rel="stylesheet" href="/preloader.css">
+    <link rel="stylesheet" href="/styles.css?v=20260819">
+      <link rel="stylesheet" href="/preloader.css?v=20260819">
+
+    <!-- JSON-LD Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "AXIIOM",
+      "alternateName": "ООО Аксиома",
+      "description": "IT-компания, специализирующаяся на разработке финтех-платформ, систем лояльности и highload-систем.",
+      "url": "https://axiiom.ru/",
+      "foundingDate": "2004",
+      "logo": "https://axiiom.ru/og-image.png",
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "Большой В.О. пр-кт, 83А, офис 329",
+          "addressLocality": "Санкт-Петербург",
+          "addressCountry": "RU"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "ул. Перерва, д. 16, офис 16П",
+          "addressLocality": "Москва",
+          "addressCountry": "RU"
+        }
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+7-812-928-74-78",
+        "contactType": "customer service",
+        "email": "hello@axiiom.ru",
+        "availableLanguage": "Russian"
+      },
+      "sameAs": [
+        "https://t.me/axiiom"
+      ]
+    }
+    </script>
 </head>
 <body>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
 <div id="preloader">
-<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<2000){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},2000-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})()</script>
+<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<900){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},900-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})()</script>
   <svg class="preloader-svg" viewBox="0 0 36 36" width="80" height="80">
     <rect class="pr1" x="2" y="2" width="14" height="14" rx="2"/>
     <rect class="pr2" x="20" y="2" width="14" height="14" rx="2"/>
@@ -72,6 +112,7 @@
 <div class="nav-overlay" id="navOverlay">
     <ul class="nav-links" id="mobileNav"></ul>
 </div>
+<main id="main">
 
 <nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
     <div class="container"></div>
@@ -128,6 +169,7 @@
     <p style="margin-top:40px; font-size:.85rem;">Дата публикации: 12 июня 2026 г.</p>
 </article>
 
+</main>
 <footer class="footer">
     <div class="container">
             <div id="footerCopy"></div>
@@ -138,16 +180,16 @@
 var header = document.getElementById('header');
 window.addEventListener('scroll', function() { header.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
 </script>
-<script src="/config.js"></script>
-<script src="/nav.js"></script>
+<script src="/config.js?v=20260819"></script>
+<script src="/nav.js?v=20260819"></script>
 <script>Nav.init({ cta: false, breadcrumbs: true });</script>
-<script src="/theme.js"></script>
+<script src="/theme.js?v=20260819"></script>
 <!-- Yandex.Metrika counter -->
-<script src="/metrika.js"></script>
+<script src="/metrika.js?v=20260819" defer></script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
-  <script src="/preloader.js"></script>
+  <script src="/preloader.js?v=20260819"></script>
 
 <script>
 (function() {

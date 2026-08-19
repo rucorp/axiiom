@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
     <meta name="theme-color" content="#0A0A0F">
+    <script>try{var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
     <title>Калькулятор стоимости — AXIIOM | Рассчитайте стоимость разработки</title>
     <meta name="description" content="Калькулятор стоимости IT-решений от AXIIOM. Выберите тип услуги, настройте параметры и получите предварительную оценку стоимости разработки.">
     <link rel="canonical" href="https://axiiom.ru/calculator/">
@@ -47,9 +48,8 @@
       }
     }
     </script>
-
-    <link rel="stylesheet" href="/styles.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="/styles.css"></noscript>
+    <link rel="stylesheet" href="/styles.css?v=20260819" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/styles.css?v=20260819"></noscript>
     <style>
         .calc-section {
             padding: clamp(40px, 8vw, 80px) 0;
@@ -206,7 +206,7 @@
             background: rgba(212, 165, 116, .08);
         }
 
-        .service-option h3 {
+        .service-option h2 {
             font-size: 1rem;
             font-weight: 600;
             color: var(--clr-heading);
@@ -408,7 +408,7 @@
             .service-option {
                 padding: 16px 14px;
             }
-            .service-option h3 {
+            .service-option h2 {
                 font-size: .85rem;
             }
             .service-option p {
@@ -430,11 +430,12 @@
             .steps.s3::after { width: calc(100% - 80px); }
         }
     </style>
-  <link rel="stylesheet" href="/preloader.css">
+  <link rel="stylesheet" href="/preloader.css?v=20260819">
 </head>
 <body>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
 <div id="preloader">
-<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<2000){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},2000-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})()</script>
+<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<900){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},900-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})()</script>
   <svg class="preloader-svg" viewBox="0 0 36 36" width="80" height="80">
     <rect class="pr1" x="2" y="2" width="14" height="14" rx="2"/>
     <rect class="pr2" x="20" y="2" width="14" height="14" rx="2"/>
@@ -474,6 +475,7 @@
 <div class="nav-overlay" id="navOverlay">
     <ul class="nav-links" id="mobileNav"></ul>
 </div>
+<main id="main">
 
 <nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
     <div class="container"></div>
@@ -486,7 +488,7 @@
                 <p class="badge">AXIIOM Prices</p>
                 <button class="share-btn" onclick="copyPageUrl(this)" aria-label="Поделиться" title="Поделиться"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg><span class="share-tooltip">Ссылка скопирована</span></button>
             </div>
-        <h2>Рассчитайте стоимость вашего проекта</h2>
+        <h1>Рассчитайте стоимость вашего проекта</h1>
         <p class="calc-desc">Выберите тип услуги, настройте параметры — получите предварительную оценку. Итоговая стоимость уточняется после брифа.</p>
 
         <!-- Steps -->
@@ -541,6 +543,7 @@
     </div>
 </section>
 
+</main>
 <footer class="footer section dark">
     <div class="container">
         <div id="footerCopy"></div>
@@ -781,7 +784,7 @@ function renderServices() {
     grid.innerHTML = SERVICES.map(function(s) {
         return '<div class="glass-card service-option" data-id="' + s.id + '">' +
             '<div class="check"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#0A0A0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
-            '<h3>' + s.name + '</h3>' +
+            '<h2>' + s.name + '</h2>' +
             '<p>' + s.desc + '</p>' +
             '<span class="price-hint">' + s.price + '</span>' +
         '</div>';
@@ -803,7 +806,7 @@ function renderParams() {
     if (!selectedService) return;
     paramValues = {};
 
-    form.innerHTML = '<h3 style="text-align:center;font-size:1.1rem;color:var(--clr-heading);margin-bottom:24px;">' + selectedService.name + '</h3>';
+    form.innerHTML = '<h2 style="text-align:center;font-size:1.1rem;color:var(--clr-heading);margin-bottom:24px;">' + selectedService.name + '</h2>';
 
     selectedService.params.forEach(function(p, idx) {
         var group = document.createElement('div');
@@ -942,15 +945,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 </script>
-<script src="/config.js"></script>
-<script src="/nav.js"></script>
+<script src="/config.js?v=20260819"></script>
+<script src="/nav.js?v=20260819"></script>
 <script>Nav.init({ cta: true, breadcrumbs: true });</script>
-<script src="/theme.js"></script>
-<script src="/metrika.js"></script>
+<script src="/theme.js?v=20260819"></script>
+<script src="/metrika.js?v=20260819" defer></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
 
-  <script src="/preloader.js"></script>
+  <script src="/preloader.js?v=20260819"></script>
 <script>
 (function() {
   var t = document.getElementById('navToggle');

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
     <meta name="theme-color" content="#0A0A0F">
+    <script>try{var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
     <title>Разработка финтех-платформ и IT-решений под ключ | AXIIOM</title>
     <meta name="description" content="Разрабатываем финтех-платформы, системы лояльности и платежные решения под ключ. 20+ лет опыта, 50+ проектов. Соответствие 161-ФЗ, PCI DSS. Бесплатная консультация.">
     <meta name="keywords" content="разработка финтех, платформа лояльности, платежная система, 161-ФЗ, PCI DSS, IT-разработка под ключ, Санкт-Петербург">
@@ -166,7 +167,6 @@
       ]
     }
     </script>
-
     <style>
         :root{--clr-bg:#0A0A0F;--clr-bg-alt:#0E0E14;--clr-surface:#12121A;--clr-surface-hover:#1A1A24;--clr-text:#C7C7CC;--clr-heading:#F5F5F7;--clr-muted:#8E8E93;--clr-faint:#78787D;--clr-border:rgba(255,255,255,.06);--clr-border-hover:rgba(255,255,255,.1);--clr-hero-bg:#0A0A0F;--clr-accent:#D4A574;--clr-accent2:#8B9D83}
         *{margin:0;padding:0;box-sizing:border-box}
@@ -225,13 +225,14 @@
         .result a:hover{text-decoration:underline}
         @media(max-width:1023px){.nav-links--desktop{display:none}.btn-nav{display:none}.nav-overlay{display:flex;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(7,7,10,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);z-index:1001;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s ease}.nav-overlay.open{opacity:1;pointer-events:auto}.nav-links{flex-direction:column;align-items:center;gap:0}.nav-links li{opacity:0;transform:translateY(20px);transition:opacity .4s ease,transform .4s ease}.nav-overlay.open .nav-links li{opacity:1;transform:translateY(0)}.nav-links a{font-size:1.4rem;letter-spacing:1px;padding:14px 0;display:block;color:var(--clr-heading)}.nav-links a::after{display:none}.nav-links a:hover{color:var(--clr-muted)}.nav-toggle{display:flex}.hero-bg-svg{max-width:500px}.stats{gap:24px}.footer-grid{grid-template-columns:1fr;gap:36px}}
     </style>
-    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="styles.css"></noscript>
-  <link rel="stylesheet" href="/preloader.css">
+    <link rel="stylesheet" href="styles.css?v=20260819" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="styles.css?v=20260819"></noscript>
+  <link rel="stylesheet" href="/preloader.css?v=20260819">
 </head>
 <body id="top">
+<a href="#main" class="skip-link">Перейти к содержанию</a>
 <div id="preloader">
-<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<2000){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},2000-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})()</script>
+<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<900){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},900-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})()</script>
   <svg class="preloader-svg" viewBox="0 0 36 36" width="80" height="80">
     <rect class="pr1" x="2" y="2" width="14" height="14" rx="2"/>
     <rect class="pr2" x="20" y="2" width="14" height="14" rx="2"/>
@@ -256,7 +257,7 @@
             <div class="nav-actions">
                 <a href="#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
                 <button class="theme-btn" id="themeToggle" aria-label="Сменить тему"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button>
-                <button class="nav-toggle" id="navToggle" aria-label="Меню"><span></span><span></span><span></span></button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню" aria-expanded="false" aria-controls="navOverlay"><span></span><span></span><span></span></button>
             </div>
         </nav>
     </div>
@@ -264,6 +265,7 @@
 <div class="nav-overlay" id="navOverlay">
     <ul class="nav-links" id="mobileNav"></ul>
 </div>
+<main id="main">
 <header class="hero">
     <div class="container">
         <div class="hero-content">
@@ -297,15 +299,15 @@
         <p class="label reveal">Знакомые ситуации?</p>
         <h2 class="reveal">Мы понимаем ваши боли</h2>
         <div class="problems-grid">
-            <div class="glass-card reveal" style="padding:28px 24px; text-align:left;">
+            <div class="glass-card reveal card-pad-md">
                 <p class="problem-text">Разработчики обещали золотые горы, но проект застрял</p>
                 <p class="solution-text"><strong>Решение:</strong> Мы фиксируем scope, сроки и бюджет на этапе Discovery.</p>
             </div>
-            <div class="glass-card reveal" style="padding:28px 24px; text-align:left;">
+            <div class="glass-card reveal card-pad-md">
                 <p class="problem-text">Банк отказал в интеграции из-за 161-ФЗ</p>
                 <p class="solution-text"><strong>Решение:</strong> У нас есть опыт банковских интеграций и прохождения аудита PCI DSS.</p>
             </div>
-            <div class="glass-card reveal" style="padding:28px 24px; text-align:left;">
+            <div class="glass-card reveal card-pad-md">
                 <p class="problem-text">Сервис падает в пиковые нагрузки</p>
                 <p class="solution-text"><strong>Решение:</strong> Проектируем highload-архитектуру с горизонтальным масштабированием.</p>
             </div>
@@ -343,55 +345,55 @@
         <p class="label reveal">Услуги</p>
         <h2 class="reveal">Финтех-разработка и IT-решения</h2>
         <div class="grid">
-            <div class="glass-card reveal" style="padding:32px 24px; text-align:left;">
+            <div class="glass-card reveal card-pad-lg">
                 <h3>Финтех-платформы</h3>
                 <p>Сплитование, escrow, мультиэквайринг, соответствие 161-ФЗ</p>
                 <p class="result"><a href="/calculator/">Запуск за 3–4 месяца</a></p>
             </div>
-            <div class="glass-card reveal" style="padding:32px 24px; text-align:left;">
+            <div class="glass-card reveal card-pad-lg">
                 <h3>Платформы лояльности</h3>
                 <p>White Label — готовая экосистема LOVII с мобильным приложением и аналитикой</p>
                 <p class="result"><a href="/calculator/">Рост LTV на 30–40%</a></p>
                 <a href="#demos" class="btn btn-card">Смотреть демо</a>
             </div>
-            <div class="glass-card reveal" style="padding:32px 24px; text-align:left;">
+            <div class="glass-card reveal card-pad-lg">
                 <h3>Highload-сервисы</h3>
                 <p>Микросервисы, Kubernetes, выдерживающие миллионы запросов</p>
                 <p class="result"><a href="/calculator/">99.99% Uptime</a></p>
             </div>
-            <div class="glass-card reveal" style="padding:32px 24px; text-align:left;">
+            <div class="glass-card reveal card-pad-lg">
                 <h3>Кибербезопасность</h3>
                 <p>Пентест, SAST/DAST, WAF, подготовка к сертификации</p>
                 <p class="result"><a href="/calculator/">Снижение рисков утечек на 95%</a></p>
             </div>
-            <div class="glass-card reveal" style="padding:32px 24px; text-align:left;">
+            <div class="glass-card reveal card-pad-lg">
                 <h3>Сайты и лендинги</h3>
                 <p>Интернет-магазины, визитки, корпоративные сайты — от сбора требований до поддержки</p>
                 <p class="result"><a href="/calculator/">от 250 000 ₽</a></p>
             </div>
-            <div class="glass-card reveal" style="padding:32px 24px; text-align:left;">
+            <div class="glass-card reveal card-pad-lg">
                 <h3>WEB-приложения</h3>
                 <p>Высоконагруженные сервисы на React, Vue, Node.js, Python, Go</p>
                 <p class="result"><a href="/calculator/">от 300 000 ₽</a></p>
             </div>
-            <div class="glass-card reveal" style="padding:32px 24px; text-align:left;">
+            <div class="glass-card reveal card-pad-lg">
                 <h3>Мобильные приложения</h3>
                 <p>Нативные и кроссплатформенные iOS/Android приложения</p>
                 <p class="result"><a href="/calculator/">от 300 000 ₽</a></p>
             </div>
-            <div class="glass-card reveal" style="padding:32px 24px; text-align:left;">
+            <div class="glass-card reveal card-pad-lg">
                 <h3>UI/UX дизайн</h3>
                 <p>Figma, Sketch, Adobe XD — интерфейсы на основе данных и исследований</p>
                 <p class="result"><a href="/calculator/">от 150 000 ₽</a></p>
             </div>
-            <div class="glass-card reveal" style="padding:32px 24px; text-align:left;">
+            <div class="glass-card reveal card-pad-lg">
                 <h3>Графический дизайн</h3>
                 <p>Логотипы, фирменный стиль, брендбуки, подготовка макетов к печати</p>
                 <p class="result"><a href="/calculator/">от 100 000 ₽</a></p>
             </div>
         </div>
-        <div style="text-align:center;margin-top:40px;">
-            <a href="/calculator/" class="btn btn-outline" style="padding:14px 48px;">Рассчитать стоимость проекта</a>
+        <div class="center mt-40">
+            <a href="/calculator/" class="btn btn-outline btn-wide">Рассчитать стоимость проекта</a>
         </div>
     </div>
 </section>
@@ -401,21 +403,21 @@
         <p class="label reveal">Кейсы</p>
         <h2 class="reveal">Задача → Решение → Бизнес-результат</h2>
         <div class="cases-grid">
-            <div class="glass-card reveal" style="padding:28px 24px; text-align:left;">
+            <div class="glass-card reveal card-pad-md">
                 <span class="case-tag">Платформа лояльности LOVII</span>
                 <p class="case-step"><span>Задача:</span> Сеть ресторанов теряла клиентов, не было данных о покупках.</p>
                 <p class="case-step"><span>Решение:</span> Внедрили white-label приложение LOVII с интеграцией в iiko/r_keeper и персонализированными push-уведомлениями.</p>
                 <p class="case-result">Результат: 40% клиентов вернулись повторно, средний чек вырос на 18%, LTV увеличился на 35%.</p>
                 <a href="#demos" class="btn btn-card">Посмотреть демо этого решения</a>
             </div>
-            <div class="glass-card reveal" style="padding:28px 24px; text-align:left;">
+            <div class="glass-card reveal card-pad-md">
                 <span class="case-tag">Блокчейн-платформа</span>
                 <p class="case-step"><span>Задача:</span> Нужна прозрачная система учёта активов с цифровой инвентаризацией.</p>
                 <p class="case-step"><span>Решение:</span> Построили платформу на BigChainDB со смарт-контрактами и криптозащитой.</p>
                 <p class="case-result">Результат: 1 000 запросов/сек, полная прослеживаемость операций, нулевое мошенничество.</p>
                 <a href="#demos" class="btn btn-card">Посмотреть демо этого решения</a>
             </div>
-            <div class="glass-card reveal" style="padding:28px 24px; text-align:left;">
+            <div class="glass-card reveal card-pad-md">
                 <span class="case-tag">Мобильная касса</span>
                 <p class="case-step"><span>Задача:</span> Кафе и рестораны не могли анализировать продажи в реальном времени.</p>
                 <p class="case-step"><span>Решение:</span> Разработали мобильную кассу с BigData-аналитикой и SmartData-отчётами.</p>
@@ -431,29 +433,29 @@
         <p class="label reveal">Процесс</p>
         <h2 class="reveal">Как мы работаем</h2>
         <div class="process-grid">
-            <div class="glass-card reveal" style="padding:24px 20px; text-align:left;">
+            <div class="glass-card reveal card-pad-sm">
                 <div class="process-num">01</div>
-                <h4>Discovery</h4>
+                <h3>Discovery</h3>
                 <p>Аудит, фиксация бюджета и сроков. 1–2 недели.</p>
             </div>
-            <div class="glass-card reveal" style="padding:24px 20px; text-align:left;">
+            <div class="glass-card reveal card-pad-sm">
                 <div class="process-num">02</div>
-                <h4>Дизайн и Архитектура</h4>
+                <h3>Дизайн и Архитектура</h3>
                 <p>Прототипы в Figma, схема базы данных.</p>
             </div>
-            <div class="glass-card reveal" style="padding:24px 20px; text-align:left;">
+            <div class="glass-card reveal card-pad-sm">
                 <div class="process-num">03</div>
-                <h4>Разработка</h4>
+                <h3>Разработка</h3>
                 <p>Двухнедельные спринты с регулярными демо.</p>
             </div>
-            <div class="glass-card reveal" style="padding:24px 20px; text-align:left;">
+            <div class="glass-card reveal card-pad-sm">
                 <div class="process-num">04</div>
-                <h4>Безопасность и тесты</h4>
+                <h3>Безопасность и тесты</h3>
                 <p>Нагрузочное тестирование, пентест, проверка на 161-ФЗ.</p>
             </div>
-            <div class="glass-card reveal" style="padding:24px 20px; text-align:left;">
+            <div class="glass-card reveal card-pad-sm">
                 <div class="process-num">05</div>
-                <h4>Релиз и SLA</h4>
+                <h3>Релиз и SLA</h3>
                 <p>Деплой, обучение команды, поддержка 24/7.</p>
             </div>
         </div>
@@ -466,23 +468,23 @@
         <h2 class="reveal">На чём строим</h2>
         <div class="stack-grid reveal">
             <div class="stack-group">
-                <h4>Backend</h4>
+                <h3>Backend</h3>
                 <p>PHP, Go, Ruby, Node.js, Python, PostgreSQL, Redis</p>
             </div>
             <div class="stack-group">
-                <h4>Frontend</h4>
+                <h3>Frontend</h3>
                 <p>React, Next.js, Vue.js, TypeScript, Tailwind</p>
             </div>
             <div class="stack-group">
-                <h4>Mobile</h4>
+                <h3>Mobile</h3>
                 <p>Swift, Kotlin, React Native, Flutter</p>
             </div>
             <div class="stack-group">
-                <h4>Infrastructure</h4>
+                <h3>Infrastructure</h3>
                 <p>Kubernetes, Docker, Yandex Cloud, Terraform</p>
             </div>
             <div class="stack-group">
-                <h4>Security</h4>
+                <h3>Security</h3>
                 <p>Vault, SonarQube, PCI DSS compliance</p>
             </div>
         </div>
@@ -494,16 +496,16 @@
         <p class="label reveal">FAQ</p>
         <h2 class="reveal">Частые вопросы</h2>
         <div class="faq-grid reveal">
-            <div class="glass-card" style="padding:28px 24px; text-align:left;">
-                <h4>Сколько стоит разработка?</h4>
+            <div class="glass-card card-pad-md">
+                <h3>Сколько стоит разработка?</h3>
                 <p>MVP финтех-платформы — от 2 млн руб. Точная смета после бесплатной Discovery-фазы.</p>
             </div>
-            <div class="glass-card" style="padding:28px 24px; text-align:left;">
-                <h4>Работаете ли вы по 161-ФЗ и PCI DSS?</h4>
+            <div class="glass-card card-pad-md">
+                <h3>Работаете ли вы по 161-ФЗ и PCI DSS?</h3>
                 <p>Да, у нас есть опыт банковских интеграций и прохождения аудитов.</p>
             </div>
-            <div class="glass-card" style="padding:28px 24px; text-align:left;">
-                <h4>Как получить доступ к демо?</h4>
+            <div class="glass-card card-pad-md">
+                <h3>Как получить доступ к демо?</h3>
                 <p>Оставьте заявку — вышлем логины для тестовой среды (sandbox) в течение часа.</p>
             </div>
         </div>
@@ -676,9 +678,10 @@
                 </div>
             </a>
         </div>
-        <p class="demo-note reveal">Хотите подробнее о проекте или нужен доступ к админ-панели? <a href="#" onclick="openModal(); return false;" style="color:var(--clr-accent);text-decoration:none;border-bottom:1px solid var(--clr-accent);transition:opacity .2s;" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">Оставьте заявку</a> — ответим в течение часа.</p>
+        <p class="demo-note reveal">Хотите подробнее о проекте или нужен доступ к админ-панели? <a href="#" onclick="openModal(); return false;" class="link-accent">Оставьте заявку</a> — ответим в течение часа.</p>
     </div>
 </section>
+</main>
 
 <footer id="contact" class="footer">
     <div class="container">
@@ -747,6 +750,7 @@
                 <option value="ambar">AMBAR</option>
             </select>
             <button type="submit" class="btn">Отправить заявку</button>
+            <p class="form-mailto-note">Нажимая кнопку, откроется ваша почтовая программа с готовым письмом на наш адрес — останется только нажать «Отправить».</p>
             <p class="modal-note">Отправляя форму, вы соглашаетесь с обработкой персональных данных.</p>
         </form>
     </div>
@@ -883,12 +887,12 @@ document.getElementById('demoForm').addEventListener('submit', (e) => {
 });
 
 </script>
-<script src="/config.js"></script>
-<script src="/nav.js"></script>
+<script src="/config.js?v=20260819"></script>
+<script src="/nav.js?v=20260819"></script>
 <script>Nav.init({ cta: true, breadcrumbs: false });</script>
-<script src="/theme.js"></script>
+<script src="/theme.js?v=20260819"></script>
 
-<script src="/metrika.js"></script>
+<script src="/metrika.js?v=20260819" defer></script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
 <script>
@@ -898,18 +902,26 @@ document.getElementById('demoForm').addEventListener('submit', (e) => {
   gtag('config', 'G-HFS4BDGTV4');
 </script>
 
-  <script src="/preloader.js"></script>
+  <script src="/preloader.js?v=20260819"></script>
 
 <script>
 (function() {
   var t = document.getElementById('navToggle');
   var o = document.getElementById('navOverlay');
   if (!t || !o) return;
+  function setOpen(open) {
+    o.classList.toggle('open', open);
+    t.classList.toggle('active', open);
+    t.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (!open) t.focus();
+  }
   t.addEventListener('click', function(e) {
     e.stopPropagation();
-    o.classList.toggle('open');
-    t.classList.toggle('active');
-    document.body.style.overflow = o.classList.contains('open') ? 'hidden' : '';
+    setOpen(!o.classList.contains('open'));
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && o.classList.contains('open')) setOpen(false);
   });
 })();
 </script>

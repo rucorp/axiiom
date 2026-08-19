@@ -26,15 +26,16 @@
     <meta name="twitter:description" content="Страница не найдена. Возможно, она была перемещена или удалена.">
     <meta name="twitter:image" content="https://axiiom.ru/og-image.png">
 
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/styles.css?v=20260819">
     <style>
         .err { text-align:center; min-height:70vh; display:flex; align-items:center; justify-content:center; }
         .err h1 { font-size:clamp(3rem,8vw,6rem); color:var(--clr-accent); margin-bottom:16px; }
         .err p { color:var(--clr-muted); font-size:1.1rem; margin-bottom:32px; }
     </style>
-  <link rel="stylesheet" href="/preloader.css">
+  <link rel="stylesheet" href="/preloader.css?v=20260819">
 </head>
 <body>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
 <div id="preloader">
 <script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<2000){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},2000-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})()</script>
   <svg class="preloader-svg" viewBox="0 0 36 36" width="80" height="80">
@@ -66,7 +67,7 @@
 <div class="nav-overlay" id="navOverlay">
     <ul class="nav-links" id="mobileNav"></ul>
 </div>
-<main class="main">
+<main class="main" id="main">
 <div class="noise"></div>
 <div class="grid-overlay"></div>
 <section class="err">
@@ -76,16 +77,16 @@
         <a href="/" class="btn">На главную</a>
     </div>
 </section>
-<script src="/metrika.js"></script>
+<script src="/metrika.js?v=20260819" defer></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
 </main>
-<script src="/config.js"></script>
-<script src="/nav.js"></script>
+<script src="/config.js?v=20260819"></script>
+<script src="/nav.js?v=20260819"></script>
 <script>Nav.init({ cta: false, breadcrumbs: false });</script>
-<script src="/theme.js"></script>
+<script src="/theme.js?v=20260819"></script>
 
-  <script src="/preloader.js"></script>
+  <script src="/preloader.js?v=20260819"></script>
 
 <script>
 (function() {
