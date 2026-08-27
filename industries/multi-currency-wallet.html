@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A0A0F">
+<title>Мультивалютный кошелёк — фиат и крипта | AXIIOM</title>
+<meta name="description" content="Разработка мультивалютного кошелька: фиат, крипта и стейблкоины в одном месте. Кастодиальный и некастодиальный, обмен, вывод, MPC-безопасность.">
+<link rel="canonical" href="https://axiiom.ru/industries/multi-currency-wallet.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "Мультивалютный кошелёк",
+      "description": "Разработка мультивалютного кошелька: фиат, крипта и стейблкоины в одном месте. Кастодиальный и некастодиальный, обмен, вывод, MPC-безопасность.",
+      "url": "https://axiiom.ru/industries/multi-currency-wallet.html",
+      "isPartOf": { "@type": "WebSite", "name": "AXIIOM", "url": "https://axiiom.ru/" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://axiiom.ru/" },
+        { "@type": "ListItem", "position": 2, "name": "Мультивалютный кошелёк", "item": "https://axiiom.ru/industries/multi-currency-wallet.html" }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Мультивалютный кошелёк",
+      "description": "Разработка кастодиального или некастодиального мультивалютного кошелька для хранения балансов в фиате, криптовалютах и стейблкоинах с мгновенным обменом, on/off-ramp фиата и выводом на карты и счета.",
+      "provider": { "@type": "Organization", "name": "AXIIOM", "url": "https://axiiom.ru/" },
+      "areaServed": "RU",
+      "serviceType": "Разработка мультивалютного кошелька"
+    }
+  ]
+}
+</script>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://axiiom.ru/industries/multi-currency-wallet.html">
+<meta property="og:title" content="Мультивалютный кошелёк — фиат и крипта | AXIIOM">
+<meta property="og:description" content="Разработка мультивалютного кошелька: фиат, крипта и стейблкоины в одном месте. Кастодиальный и некастодиальный, обмен, вывод, MPC-безопасность.">
+<meta property="og:image" content="https://axiiom.ru/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="AXIIOM">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://axiiom.ru/industries/multi-currency-wallet.html">
+<meta name="twitter:title" content="Мультивалютный кошелёк — фиат и крипта | AXIIOM">
+<meta name="twitter:description" content="Разработка мультивалютного кошелька: фиат, крипта и стейблкоины в одном месте. Кастодиальный и некастодиальный, обмен, вывод, MPC-безопасность.">
+<meta name="twitter:image" content="https://axiiom.ru/og-image.png">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/preloader.css">
+</head>
+<body>
+<div id="preloader">
+<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<2000){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},2000-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})()</script>
+<svg class="preloader-svg" viewBox="0 0 36 36" width="80" height="80"><rect class="pr1" x="2" y="2" width="14" height="14" rx="2"/><rect class="pr2" x="20" y="2" width="14" height="14" rx="2"/><rect class="pr3" x="2" y="20" width="14" height="14" rx="2"/><rect class="pr4" x="20" y="20" width="14" height="14" rx="2"/><circle class="pc" cx="27" cy="27" r="3"/></svg>
+</div>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/></svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"></div>
+</nav>
+<section class="hero industries-hero">
+<div class="container"><div class="hero-content">
+<div class="hero-bg-svg"><svg width="800" height="600" viewBox="0 0 800 600" fill="none"><circle cx="400" cy="300" r="280" stroke="rgba(255,255,255,0.03)" stroke-width="1"/><circle cx="400" cy="300" r="200" stroke="rgba(255,255,255,0.04)" stroke-width="1"/><circle cx="400" cy="300" r="120" stroke="rgba(255,255,255,0.06)" stroke-width="1"/><line x1="50" y1="300" x2="750" y2="300" stroke="rgba(255,255,255,0.03)" stroke-width="1"/><line x1="400" y1="20" x2="400" y2="580" stroke="rgba(255,255,255,0.03)" stroke-width="1"/><path d="M200 300 L400 100 L600 300 L400 500 Z" stroke="rgba(255,255,255,0.04)" stroke-width="1" fill="none"/><circle cx="400" cy="300" r="4" fill="rgba(255,255,255,0.1)"/></svg></div>
+<div class="badge-row"><p class="badge">Отраслевые решения</p></div>
+<h1>Мультивалютный кошелёк — фиат, крипта и стейблкоины в одном месте</h1>
+<p class="hero-desc">Мультивалютный кошелёк AXIIOM — это кастодиальное или некастодиальное хранилище балансов в фиате, криптовалютах и стейблкоинах с обменом и выводом средств. Мы строим ядро, в котором пользователь держит рубли, доллары, USDT и BTC в одном интерфейсе, а платформа проводит конвертацию и вывод без привлечения внешних сервисов. Решение закрывает весь цикл денежных движений: от пополнения счёта банковской картой до вывода на карту или корпоративный счёт получателя. Команда AXIIOM берёт на себя проектирование, разработку и интеграцию кошелька с вашими сервисами расчётов, верификации и учёта.</p></div></div></section>
+
+<section class="section">
+<div class="container">
+<h2>Ключевые возможности</h2>
+<p class="content-wrapper">Мультивалютный кошелёк — это фундамент любой финансовой платформы, работающей с разными форматами денег. От его архитектуры зависят скорость зачисления средств, удобство обмена и доверие пользователя к безопасности активов. Ниже перечислены функции, которые мы реализуем в каждом проекте кошелька под фиат, крипту и стейблкоины. Мы закладываем требования к отказоустойчивости на этапе проектирования, поэтому система остаётся стабильной при росте числа пользователей и объёма операций. Каждая функция покрывается автоматическими тестами и аудитом смарт-контрактов, что снижает операционные риски и упрощает работу с регулятором. Мы подбираем модель хранения под бизнес-задачу заказчика: кастодиальную для скорости или некастодиальную для полного контроля пользователя над ключами. При необходимости реализуем гибридную схему, где часть активов хранится на стороне платформы, а часть — под управлением самого пользователя. Такой подход позволяет балансировать между удобством повседневных операций и требованиями к сохранности крупных остатков.</p>
+<div class="tools-grid">
+
+<div class="card reveal">
+<div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+<h3>Мультивалютные балансы</h3>
+<p>Единый счёт пользователя объединяет фиатные валюты, криптоактивы и стейблкоины с раздельным учётом и общей сводкой портфеля. Балансы хранятся в единой модели данных, что исключает расхождения между фиатной и криптографической частью системы. Пользователь видит совокупную стоимость активов в выбранной валюте отображения без ручной конвертации. Добавление новой валюты или токена выполняется через конфигурацию, а не изменение кода ядра.</p>
+</div>
+<div class="card reveal">
+<div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+<h3>Мгновенный обмен и конвертация</h3>
+<p>Встроенный swap проводит обмен между любыми парами валют по внутреннему или внешнему курсу с фиксацией цены до подтверждения. Конвертация фиат-фиат, крипта-крипта и фиат-стейблкоин выполняется в рамках одной транзакции без вывода средств на сторонние биржи. Пользователь получает итоговую сумму сразу после подтверждения, а журнал операций сохраняет полную историю обменов. Лимиты и комиссии настраиваются администратором в единой панели.</p>
+</div>
+<div class="card reveal">
+<div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+<h3>On/off-ramp фиата</h3>
+<p>Пополнение и вывод фиата через банковские карты, счета и платёжные провайдеры с автоматическим сопоставлением платежей. Ввод средств подтверждается по webhook платёжного шлюза, а вывод инициируется по заявке пользователя после прохождения проверки. Поддерживаются как карточные платежи, так и переводы на расчётные счета юридических лиц. Маршрутизация платежей выбирает доступный провайдер, повышая устойчивость к сбоям отдельных каналов.</p>
+</div>
+<div class="card reveal">
+<div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+<h3>Безопасность MPC и выписки</h3>
+<p>Хранение ключей по схеме MPC или multisig исключает единую точку компрометации и защищает средства при утечке части данных. Каждое движение средств подтверждается выпиской с подписью, которую пользователь может проверить независимо. Система формирует детализированные выписки по счёту для отчётности и налоговых целей в режиме реального времени. Резервное копирование и восстановление доступа настроены так, чтобы исключить необратимую потерю активов.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section dark">
+<div class="container">
+<h2>Что входит в состав</h2>
+<p class="content-wrapper">Мультивалютный кошелёк поставляется четырьмя независимыми, но связанными модулями. Такое разделение позволяет запустить минимальную версию за короткий срок, а затем наращивать функциональность без переписывания ядра. Каждый модуль можно развернуть отдельно, протестировать и интегрировать с вашими существующими сервисами расчётов и учёта. Состав поставки фиксируется в техническом задании и может расширяться на этапе эксплуатации по мере появления новых требований бизнеса. Мы документируем контракты между модулями, чтобы вы могли заменить любой из них или доработать самостоятельно после передачи проекта. На старте достаточно модулей счетов и безопасности, а обменник и вывод подключаются, когда платформа готова к приёму платежей. Такая последовательность снижает начальные затраты и даёт понятный план развития продукта.</p>
+<div class="tools-grid">
+
+<div class="card reveal">
+<div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+<h3>Счета и балансы</h3>
+<ul>
+<li>Единая модель счетов для фиата, крипты и стейблкоинов с раздельным учётом.</li>
+<li>Сводный портфель с оценкой в выбранной валюте отображения.</li>
+<li>История операций с фильтрами, поиском и выгрузкой.</li>
+</ul>
+<p>Модуль отвечает за достоверность остатков и сохраняет полный журнал движений, пригодный для аудита и восстановления состояния после сбоя. При росте нагрузки учёт балансов выносится на выделенные узлы без остановки обслуживания пользователей.</p>
+</div>
+<div class="card reveal">
+<div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+<h3>Обменник (swap)</h3>
+<ul>
+<li>Конвертация между любыми парами с фиксацией курса до подтверждения.</li>
+<li>Маршрутизация через внутреннюю ликвидность или внешние биржи.</li>
+<li>Настраиваемые комиссии и лимиты на операции обмена.</li>
+</ul>
+<p>Обменник проводит сделку в рамках одной транзакции и возвращает итоговую сумму сразу после подтверждения. Логика обмена покрыта автоматическими тестами, а правила исполнения проходят аудит на соответствие регламенту площадки.</p>
+</div>
+<div class="card reveal">
+<div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+<h3>Вывод и карты</h3>
+<ul>
+<li>Вывод фиата на карты и расчётные счета по заявкам пользователей.</li>
+<li>Пополнение через карты и платёжные провайдеры с автоподтверждением.</li>
+<li>Маршрутизация платежей между доступными провайдерами.</li>
+</ul>
+<p>Модуль связывает кошелёк с внешней платёжной инфраструктурой и гарантирует сопоставление ввода и вывода средств. Администратор управляет лимитами и провайдерами из единой панели без привлечения разработчиков при рутинных операциях.</p>
+</div>
+<div class="card reveal">
+<div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+<h3>Безопасность (MPC) и уведомления</h3>
+<ul>
+<li>Генерация и хранение ключей по схеме MPC или multisig.</li>
+<li>Подписанные выписки по каждому движению средств.</li>
+<li>Уведомления о входе, операциях и изменении безопасности аккаунта.</li>
+</ul>
+<p>Модуль защищает активы и информирует пользователя о значимых событиях в реальном времени. Резервное копирование и процедура восстановления доступа исключают необратимую потерю средств при утрате устройства.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<h2>Технологический стек</h2>
+<p class="content-wrapper">Мы выбираем проверенные инструменты, которые выдерживают промышленные нагрузки и понятны в сопровождении вашей команде. При необходимости стек адаптируется под корпоративные стандарты заказчика без изменения архитектуры ядра. Выбор компонентов обосновывается профилем нагрузки и требованиями к безопасности, а не модой, поэтому система остаётся понятной для вашей команды сопровождения. Мы отдаём приоритет решениям с открытым исходным кодом там, где это не снижает надёжность, и документируем каждую зависимость для прозрачного аудита. Резервное копирование и процедуры восстановления прорабатываются вместе с основным контуром, а не добавляются постфактум после инцидента.</p>
+<div class="stack-grid reveal">
+  <div class="stack-group">
+    <h4>Хранение ключей</h4>
+    <p>MPC-кошельки, Fireblocks</p>
+  </div>
+  <div class="stack-group">
+    <h4>Бэкенд и данные</h4>
+    <p>gRPC, Postgres, Redis</p>
+  </div>
+  <div class="stack-group">
+    <h4>Безопасность</h4>
+    <p>KYC-хук</p>
+  </div>
+</div>
+<p class="content-wrapper">MPC-кошельки (Fireblocks или самописное решение) обеспечивают распределённое хранение ключей без единой точки компрометации, gRPC — быстрый и типобезопасный обмен между сервисами, Postgres — надёжное хранение балансов и журнала операций, а Redis — мгновенную рассылку событий и кэширование котировок. Хук KYC связывает кошелёк с сервисом верификации, блокируя операции для непроверенных пользователей. Каждый компонент поставляется в виде контейнеров, что упрощает развёртывание в облаке или на собственной инфраструктуре заказчика. При росте нагрузки архитектура позволяет выносить отдельные сервисы на выделенные узлы без остановки обслуживания.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<h2>Кому подходит</h2>
+<p class="content-wrapper">Решение подходит платформам, которые работают с несколькими форматами денег и не хотят связывать пользователя набором разрозненных сервисов. Его выбирают инвестиционные платформы, выплачивающие доход в разных валютах, криптобиржи, которым нужен надёжный внутренний кошелёк, и нео-банки, запускающие мультивалютные счета для клиентов. Если вы планируете держать фиат, крипту и стейблкоины в одном продукте — мультивалютный кошелёк закрывает техническую основу хранения и движения средств. Платформа масштабируется от нескольких тысяч до миллионов активных пользователей, сохраняя предсказуемую задержку зачисления и вывода. Для нео-банков кошелёк обеспечивает единый баланс с карточными платежами, а для бирж — внутреннее хранение с быстрым выводом на внешние адреса. Стартапам это даёт готовую основу, на которой можно сосредоточиться на продукте и привлечении пользователей, а не на инфраструктуре хранения ключей. Мы помогаем подобрать конфигурацию под целевой объём операций и заранее закладываем запас производительности на период роста. Работа с фиатом и криптой предъявляет особые требования к учёту и аудиту, которые мы закладываем в ядро на этапе проектирования. Отдельный сценарий — региональная платёжная платформа, объединяющая локальные валюты и стейблкоины для трансграничных расчётов с прозрачной комиссией.</p>
+</div>
+</section>
+
+<section class="section dark">
+<div class="container">
+<h2>Связанные решения AXIIOM</h2>
+<p class="content-wrapper">Мультивалютный кошелёк органично дополняет другие продукты AXIIOM и закрывает полный контур финансовой платформы. Для запуска биржи его комбинируют с <a href="/industries/trading-engine.html">Trading Engine</a> — биржевым движком для торговли активами, и <a href="/industries/kyc-onboarding.html">KYC &amp; Onboarding</a> — сервисом верификации и допуска пользователей. Вывод средств между участниками закрывает <a href="/industries/p2p-marketplace.html">P2P Marketplace</a> — внебиржевая площадка прямых сделок, а токенизированные активы и стейблкоины поддерживает <a href="/industries/asset-tokenization.html">Asset Tokenization Platform</a> — движок токенизации реальных активов. Совместное использование этих продуктов сокращает срок вывода платформы на рынок и снижает затраты на интеграцию. Такой набор продуктов позволяет построить финансовый сервис «под ключ» на единой технологической базе без привлечения нескольких подрядчиков и рисков нестыковки интерфейсов. При наличии существующей платформы мы выполняем поэтапную миграцию на новое ядро кошелька без остановки активных операций пользователей.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<h2>Сценарии использования</h2>
+<p class="content-wrapper">Ниже — три типовых случая, в которых мультивалютный кошелёк становится основой бизнеса. Каждый сценарий мы адаптируем под набор валют, юрисдикцию и требования к нагрузке заказчика, сохраняя единые принципы безопасности и прозрачности учёта. Во всех случаях мы начинаем с моделирования денежных потоков и проверяем ядро на репрезентативных объёмах до подключения реальных пользователей.</p>
+<div class="tools-grid">
+
+<div class="card reveal">
+<div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+<h3>Выплаты инвесторам</h3>
+<p>Инвестиционная платформа начисляет доход в разных валютах и стейблкоинах, а кошелёк сводит выплаты в единый баланс получателя. Инвестор выводит средства на карту или криптокошелёк в пару кликов без обращения в поддержку. Платформа ведёт полную историю выплат для налоговой отчётности и аудита. Оператор настраивает лимиты и комиссии на вывод из единой панели.</p>
+</div>
+<div class="card reveal">
+<div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+<h3>Хранение стейблкоинов</h3>
+<p>Платформа держит резервы в стейблкоинах с защитой ключей по схеме MPC и ежедневными выписками для подтверждения обеспечения. Пользователи видят баланс в привычных единицах и обменивают стейблкоины на фиат при необходимости. Система формирует подписанные отчёты, которые можно проверить независимо от платформы. Это повышает доверие клиентов к сохранности средств и упрощает работу с регулятором.</p>
+</div>
+<div class="card reveal">
+<div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+<h3>Обмен фиат ↔ крипта</h3>
+<p>Нео-банк предлагает клиенту покупку криптовалюты и стейблкоинов прямо в приложении с мгновенной конвертацией фиата. Кошелёк проводит обмен по внутреннему курсу и зачисляет актив на баланс без перехода на внешнюю биржу. Пользователь продаёт крипту обратно в фиат и выводит средства на карту в рамках одного интерфейса. Такой сценарий сокращает путь клиента и удерживает его в экосистеме платформы.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section cta-section">
+<div class="container">
+<div class="cta-card">
+<h2>Запустите мультивалютный кошелёк</h2>
+<p>Обсудите архитектуру и сроки — мы подберём модель хранения (кастодиальную или некастодиальную) под ваш объём операций и набор валют. Бесплатная консультация по техническому заданию и оценке стоимости разработки. Мы подготовим оценку архитектуры и ответим на технические вопросы в течение рабочей недели после знакомства с вашим проектом.</p>
+<a href="/#contact" class="btn">Обсудить проект</a>
+</div>
+</div>
+</section>
+<footer class="footer">
+    <div class="container">
+        <div id="footerCopy"></div>
+    </div>
+</footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-HFS4BDGTV4");</script>
+<script src="/metrika.js"></script>
+<script src="/config.js"></script>
+<script src="/nav.js"></script>
+<script>Nav.init({ cta: true, breadcrumbs: true });</script>
+<script src="/theme.js"></script>
+<script src="/preloader.js"></script>
+<script>
+(function() {
+  var t = document.getElementById('navToggle');
+  var o = document.getElementById('navOverlay');
+  if (!t || !o) return;
+  t.addEventListener('click', function(e) {
+    e.stopPropagation();
+    o.classList.toggle('open');
+    t.classList.toggle('active');
+    document.body.style.overflow = o.classList.contains('open') ? 'hidden' : '';
+  });
+})();
+</script>
+<script>
+var reveals = document.querySelectorAll('.reveal');
+var ro = new IntersectionObserver(function(e) {
+  e.forEach(function(entry) {
+    if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+  });
+}, { threshold: .15 });
+reveals.forEach(function(r) { ro.observe(r); });
+</script>
+</body>
+</html>
