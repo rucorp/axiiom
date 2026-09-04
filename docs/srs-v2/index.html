@@ -28,8 +28,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles.css?v=20260819">
-    <link rel="stylesheet" href="/docs/styles.css?v=20260819">
+    <link rel="stylesheet" href="/styles.css?v=20260904">
+    <link rel="stylesheet" href="/docs/styles.css?v=20260904">
 </head>
 <body>
 <a href="#main" class="skip-link">Перейти к содержанию</a>
@@ -76,7 +76,7 @@
 <article class="docs-article">
     <div class="container">
         <div class="docs-content">
-            <div class="feature-page-hero"><h1>Software Requirements Specification</h1><p>Полная спецификация программного продукта: 2 тома, 14 бизнес-процессов, 7 ADR, архитектура, data model, API, тестирование.</p><div class="doc-actions"><a href="/docs/" class="btn btn-outline">← Все документы</a></div></div><h1 id="software-requirements-specification">Software Requirements Specification</h1>
+            <div class="feature-page-hero"><h1>Software Requirements Specification</h1><p>Полная спецификация программного продукта: 2 тома, 14 бизнес-процессов, 7 ADR, архитектура, data model, API, тестирование.</p><div class="doc-actions"><a href="/docs/" class="btn btn-outline">← Все документы</a></div></div><h2 class="h1-look" id="software-requirements-specification">Software Requirements Specification</h2>
 <blockquote>
 <p><strong>Назначение:</strong> Документ спецификации программного продукта — агрегатора доставки продуктов из супермаркетов.
 <strong>Цель:</strong> Позволить команде разработки оценить трудозатраты и реализовать продукт-аналог.
@@ -252,7 +252,7 @@
 </tbody>
 </table>
 <hr />
-<h1 id="1-business-requirements">Том 1: Business Requirements</h1>
+<h2 class="h1-look" id="1-business-requirements">Том 1: Business Requirements</h2>
 <h2 id="1-product-overview">1. Product Overview (Общие сведения)</h2>
 <h3 id="11-purpose-scope">1.1 Purpose &amp; Scope</h3>
 <ul>
@@ -1024,7 +1024,7 @@
 </tbody>
 </table>
 <blockquote>
-<p><strong>Фактические данные:</strong> детальный анализ — в <a href="business_model.md">business_model.md</a>. Кратко: план по среднему чеку и комиссии перевыполнен, стоимость сборки выше плана на 55%, но итоговая маржинальность — выше ожидаемой. Заказы/день упали вдвое с февраля к маю при росте маржинальности.</p>
+<p><strong>Фактические данные:</strong> детальный анализ — в <a href="/docs/SRS-main/business_model.md">business_model.md</a>. Кратко: план по среднему чеку и комиссии перевыполнен, стоимость сборки выше плана на 55%, но итоговая маржинальность — выше ожидаемой. Заказы/день упали вдвое с февраля к маю при росте маржинальности.</p>
 </blockquote>
 <p><strong>Ключевой вывод:</strong> B2C — бизнес на объёме, маржинальность ~2.8% от оборота (выход в плюс при среднем чеке от 4 500 руб). B2B — бизнес на сервисе, маржинальность 3–6%. Оба сегмента взаимно дополняют друг друга.</p>
 <h4 id="164-pricing">1.6.4 Модель ценообразования (Pricing)</h4>
@@ -1137,10 +1137,10 @@
 </tbody>
 </table>
 <h4 id="166-franchise-model">1.6.6 Франшиза (Franchise Model)</h4>
-<p>Подробнее — в <a href="roadmap/V3_FRANCHISE.md">roadmap/V3_FRANCHISE.md</a>. Этап внедрения: V3.</p>
+<p>Подробнее — в <a href="/docs/SRS-main/roadmap/V3_FRANCHISE.md">roadmap/V3_FRANCHISE.md</a>. Этап внедрения: V3.</p>
 <hr />
 <hr />
-<h1 id="2-technical-specification">Том 2: Technical Specification</h1>
+<h2 class="h1-look" id="2-technical-specification">Том 2: Technical Specification</h2>
 <h2 id="2-system-architecture">2. System Architecture (Архитектура системы)</h2>
 <h3 id="21-architecture-style-patterns">2.1 Architecture Style &amp; Patterns</h3>
 <p><strong>Источник:</strong> Раздел 5.7.1 исходного документа.</p>
@@ -1538,11 +1538,11 @@
 <h4 id="251-store-api-integration-details">2.5.1 Store API Integration Details</h4>
 <p>Детальные описания интеграций вынесены в отдельные файлы:</p>
 <ul>
-<li><strong>Лента (MVP):</strong> <a href="integrations/lenta.md">integrations/lenta.md</a> — Pickup API v1.1.0, OAuth2</li>
-<li><strong>METRO (V2):</strong> <a href="integrations/metro.md">integrations/metro.md</a> — EDI (EDI Culture Center) + B2B API</li>
-<li><strong>Globus (V2):</strong> <a href="integrations/globus.md">integrations/globus.md</a> — внутренняя интеграция через API v8</li>
-<li><strong>Вкусвилл (V2):</strong> <a href="integrations/vkusvill.md">integrations/vkusvill.md</a> — Pull API v1.0.6, Bearer token</li>
-<li><strong>Super Babylon (V2):</strong> <a href="integrations/super_babylon.md">integrations/super_babylon.md</a> — без API, физическая сборка в магазине</li>
+<li><strong>Лента (MVP):</strong> <a href="/docs/SRS-main/integrations/lenta.md">integrations/lenta.md</a> — Pickup API v1.1.0, OAuth2</li>
+<li><strong>METRO (V2):</strong> <a href="/docs/SRS-main/integrations/metro.md">integrations/metro.md</a> — EDI (EDI Culture Center) + B2B API</li>
+<li><strong>Globus (V2):</strong> <a href="/docs/SRS-main/integrations/globus.md">integrations/globus.md</a> — внутренняя интеграция через API v8</li>
+<li><strong>Вкусвилл (V2):</strong> <a href="/docs/SRS-main/integrations/vkusvill.md">integrations/vkusvill.md</a> — Pull API v1.0.6, Bearer token</li>
+<li><strong>Super Babylon (V2):</strong> <a href="/docs/SRS-main/integrations/super_babylon.md">integrations/super_babylon.md</a> — без API, физическая сборка в магазине</li>
 </ul>
 <h3 id="26-observability">2.6 Observability</h3>
 <p><strong>Источник:</strong> Раздел 5.7.5 исходного документа.</p>
@@ -3871,12 +3871,12 @@
 <p><em>Визуальная ER-диаграмма и ссылки на SQL-схемы.</em></p>
 <p>Полные DDL-схемы вынесены в отдельные файлы:</p>
 <ul>
-<li><a href="migrations/catalog.sql">migrations/catalog.sql</a> — <a href="#catalog-schema-архитектура-хранения-каталога">§3.2</a> Catalog Schema</li>
-<li><a href="migrations/orders_payments.sql">migrations/orders_payments.sql</a> — <a href="#orders-payments-schema">§3.3</a> Orders &amp; Payments</li>
-<li><a href="migrations/users_auth.sql">migrations/users_auth.sql</a> — <a href="#users-auth-schema">§3.4</a> Users &amp; Auth</li>
-<li><a href="migrations/delivery_dispatch.sql">migrations/delivery_dispatch.sql</a> — <a href="#delivery-dispatch-schema">§3.5</a> Delivery &amp; Dispatch</li>
-<li><a href="migrations/notifications_promotions.sql">migrations/notifications_promotions.sql</a> — <a href="#notifications-promotions-schema">§3.6</a> Notifications &amp; Promotions</li>
-<li><a href="db/schema.rb">db/schema.rb</a> — сводная схема (Rails 7.0, PostgreSQL 16.6, ~180 таблиц)</li>
+<li><a href="/docs/SRS-main/migrations/catalog.sql">migrations/catalog.sql</a> — <a href="#catalog-schema-архитектура-хранения-каталога">§3.2</a> Catalog Schema</li>
+<li><a href="/docs/SRS-main/migrations/orders_payments.sql">migrations/orders_payments.sql</a> — <a href="#orders-payments-schema">§3.3</a> Orders &amp; Payments</li>
+<li><a href="/docs/SRS-main/migrations/users_auth.sql">migrations/users_auth.sql</a> — <a href="#users-auth-schema">§3.4</a> Users &amp; Auth</li>
+<li><a href="/docs/SRS-main/migrations/delivery_dispatch.sql">migrations/delivery_dispatch.sql</a> — <a href="#delivery-dispatch-schema">§3.5</a> Delivery &amp; Dispatch</li>
+<li><a href="/docs/SRS-main/migrations/notifications_promotions.sql">migrations/notifications_promotions.sql</a> — <a href="#notifications-promotions-schema">§3.6</a> Notifications &amp; Promotions</li>
+<li><a href="/docs/SRS-main/db/schema.rb">db/schema.rb</a> — сводная схема (Rails 7.0, PostgreSQL 16.6, ~180 таблиц)</li>
 </ul>
 <blockquote>
 <p><strong>Важно:</strong> Разделы 3.2–3.6 описывают <strong>упрощённую целевую модель данных</strong>. Реальная схема (<code>db/schema.rb</code>) значительно отличается: объединяет <code>chains</code>/<code>stores</code> в <code>shops</code> (с полем <code>group</code>), разделяет <code>chain_products</code> на <code>models</code> + <code>products</code>, использует <code>aasm_state</code> вместо статусных полей, и содержит ~180 таблиц (включая <code>honest_labels</code>, <code>external_meta</code>, <code>delivery_plans</code>, <code>returned_orders</code>, <code>payment_states</code>, <code>employee_*</code> и др.). Полный список расхождений — в <a href="#112-текущее-состояние-системы-as-is">§1.1.2</a> (таблица AS IS). При проектировании новых функций следует опираться на реальную схему.</p>
@@ -6600,7 +6600,7 @@ final_fee = base_delivery_fee * product(multipliers)
 </tbody>
 </table>
 <h3 id="58-finops">5.8 FinOps (Оптимизация расходов на облако)</h3>
-<p>Подробнее — в <a href="finops.md">finops.md</a>.</p>
+<p>Подробнее — в <a href="/docs/SRS-main/finops.md">finops.md</a>.</p>
 <h3 id="59-service-readiness-checklist">5.9 Service Readiness Checklist</h3>
 <p>Перед запуском каждого нового сервиса в production:</p>
 <ul>
@@ -7766,7 +7766,7 @@ curl<span class="w"> </span>-f<span class="w"> </span>https://health.example.com
 <hr />
 <h2 id="8-project-estimation-roadmap">8. Project Estimation &amp; Roadmap (Оценка и план)</h2>
 <h3 id="81-effort-estimation-by-bp">8.1 Effort Estimation by BP</h3>
-<p>Полная таблица оценок вынесена в <a href="ESTIMATION.md">ESTIMATION.md</a>.</p>
+<p>Полная таблица оценок вынесена в <a href="/docs/SRS-main/ESTIMATION.md">ESTIMATION.md</a>.</p>
 <blockquote>
 <p><strong>Итого:</strong> ~350 человеко-дней (≈ 17–18 месяцев работы команды из 3–4 человек)
 С поправкой на риски (×1.2 интеграции ×1.3 новизна) = <strong>546 чел.-дней</strong> (~27 месяцев / 3 dev)</p>
@@ -7926,7 +7926,7 @@ curl<span class="w"> </span>-f<span class="w"> </span>https://health.example.com
 </table>
 <p><strong>Ключевой вывод Discovery:</strong> продукт востребован (рынок доставки продуктов растёт), B2C — бизнес на объёме (низкая маржинальность), B2B — бизнес на сервисе (высокая маржинальность). Рекомендуемый старт: 1 сеть (Лента), Санкт-Петербург, MVP за 6–8 месяцев.</p>
 <h3 id="92-references-open-source">9.2 References &amp; Open-Source</h3>
-<p>Полный каталог референсов вынесен в <a href="references/README.md">references/README.md</a>.</p>
+<p>Полный каталог референсов вынесен в <a href="/docs/SRS-main/references/README.md">references/README.md</a>.</p>
 <h3 id="93-completeness-checklist">9.3 Completeness Checklist</h3>
 <p><strong>Источник:</strong> Приложение B исходного документа.</p>
 <p><em>Разделы считаются готовыми после переноса содержимого из исходного документа.</em></p>
@@ -8017,7 +8017,7 @@ npm<span class="w"> </span>run<span class="w"> </span>dev<span class="w">       
 <li>Авто-деплой на staging; прод — вручную через GitHub Actions</li>
 </ol>
 <h3 id="95-as-is">9.5 Текущее состояние системы (AS IS)</h3>
-<p>Полное описание AS IS вынесено в <a href="AUDIT_AS_IS.md">AUDIT_AS_IS.md</a>. Включает: схему БД, API-запросы, ключевые алгоритмы, инфраструктуру и состав команды.</p>
+<p>Полное описание AS IS вынесено в <a href="/docs/SRS-main/AUDIT_AS_IS.md">AUDIT_AS_IS.md</a>. Включает: схему БД, API-запросы, ключевые алгоритмы, инфраструктуру и состав команды.</p>
         </div>
     </div>
 </article>
@@ -8025,12 +8025,12 @@ npm<span class="w"> </span>run<span class="w"> </span>dev<span class="w">       
 <footer class="footer"><div class="container"><div id="footerCopy"></div></div></footer>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
-<script src="/metrika.js?v=20260819" defer></script>
-<script src="/config.js?v=20260819"></script>
-<script src="/nav.js?v=20260819"></script>
+<script src="/metrika.js?v=20260904" defer></script>
+<script src="/config.js?v=20260904"></script>
+<script src="/nav.js?v=20260904"></script>
 <script>Nav.init({breadcrumbs:false});</script>
-<script src="/theme.js?v=20260819"></script>
-<script src="/preloader.js?v=20260819"></script>
+<script src="/theme.js?v=20260904"></script>
+<script src="/preloader.js?v=20260904"></script>
 <script>
 (function(){var r=document.querySelectorAll('.reveal');if(r.length){var o=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible')}})},{threshold:0.15});for(var i=0;i<r.length;i++){o.observe(r[i])}}})();
 </script>

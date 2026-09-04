@@ -2,5 +2,12 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /demo/*/admin/
+Disallow: /docs/archive/
+Disallow: /docs/source/
+Disallow: /docs/additional/
+Disallow: /docs/references/
+Disallow: /test-report.html
+Disallow: /industries/industries.txt
+Disallow: /*.bak
 
 Sitemap: https://axiiom.ru/sitemap.xml

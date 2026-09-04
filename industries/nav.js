@@ -20,7 +20,15 @@ var INDUSTRIES = [
   { name: 'Системы управления цепочками поставок', path: 'upravlenie-cepochkami.html' },
   { name: 'ПО для юридических фирм', path: 'pravovie-firmu.html' },
   { name: 'ПО для автосервиса', path: 'avtoservice.html' },
-  { name: 'Платформы для доставки еды', path: 'dostavka-edy.html' }
+  { name: 'Платформы для доставки еды', path: 'dostavka-edy.html' },
+  { name: 'HR для подбора персонала', path: 'hr-podbor-personala.html' },
+  { name: 'KYC и онбординг пользователей', path: 'kyc-onboarding.html' },
+  { name: 'Мультивалютный кошелёк', path: 'multi-currency-wallet.html' },
+  { name: 'P2P-маркетплейс', path: 'p2p-marketplace.html' },
+  { name: 'Trading Engine (биржевой движок)', path: 'trading-engine.html' },
+  { name: 'CRM для инвестиций', path: 'investment-crm.html' },
+  { name: 'Аналитика в реальном времени', path: 'real-time-analytics.html' },
+  { name: 'Токенизация активов', path: 'asset-tokenization.html' }
 ];
 
 function initIndustriesNav(currentPath) {

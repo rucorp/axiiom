@@ -42,7 +42,16 @@
         { name: 'ПО для юридических фирм', path: '/industries/pravovie-firmu.html' },
         { name: 'ПО для автосервиса', path: '/industries/avtoservice.html' },
         { name: 'Платформы для доставки еды', path: '/industries/dostavka-edy.html' },
-        { name: 'HR для подбора персонала', path: '/industries/hr-podbor-personala.html' }
+        { name: 'HR для подбора персонала', path: '/industries/hr-podbor-personala.html' },
+        { separator: true },
+        { header: true, name: 'Финтех-решения' },
+        { name: 'KYC и онбординг пользователей', path: '/industries/kyc-onboarding.html' },
+        { name: 'Мультивалютный кошелёк', path: '/industries/multi-currency-wallet.html' },
+        { name: 'P2P-маркетплейс', path: '/industries/p2p-marketplace.html' },
+        { name: 'Trading Engine (биржевой движок)', path: '/industries/trading-engine.html' },
+        { name: 'CRM для инвестиций', path: '/industries/investment-crm.html' },
+        { name: 'Аналитика в реальном времени', path: '/industries/real-time-analytics.html' },
+        { name: 'Токенизация активов', path: '/industries/asset-tokenization.html' }
       ]
     },
     {
@@ -119,12 +128,12 @@
         { name: 'Lovii — веб-приложение', path: 'https://app.lovii.ru/' },
         { name: 'Lovii — B2B-портал', path: 'https://b2b.lovii.ru/' },
         { name: 'Lovii — Админ-панель', path: 'https://admin.lovii.ru/' },
-        { name: 'Lovii — мобильная', path: 'https://lovii.mobiap.com/mobile.html' },
+        { name: 'Lovii — мобильная витрина', path: 'https://lovii.mobiap.com/' },
         { separator: true },
         { header: true, name: 'Аналитика и мониторинг' },
         { name: 'Аналитическая панель', path: '/demo/app/analytics-dashboard/' },
         { name: 'Мониторинг инцидентов', path: '/demo/app/incident-monitoring/' },
-        { name: 'Карта функциональных требований', path: 'https://bestdeejay-design.github.io/srs-docs/visualizations/07-force-graph.html' },
+        { name: 'Карта функциональных требований', path: '/docs/visualizations/07-force-graph.html' },
         { name: 'Портфель проектов', path: '/demo/app/project-portfolio/' },
         { separator: true },
         { header: true, name: 'Сервисы' },

@@ -997,7 +997,7 @@ def generate_report(pages, checks_map, timestamp=None, dynamic_results=None):
 
     return f"""<!DOCTYPE html>
 <html lang="ru">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><meta name="robots" content="noindex, nofollow">
 <title>AXIIOM Site Test Report</title>
 <style>{REPORT_CSS}</style>
 <script>
