@@ -341,7 +341,7 @@
       var container = $('breadcrumbs');
       if (!container) return;
 
-      var html = '<div class="container"><ol itemscope itemtype="https://schema.org/BreadcrumbList">';
+      var html = '<div class="container"><ol class="breadcrumbs-list">';
       html += this._bcItem('\u0413\u043B\u0430\u0432\u043D\u0430\u044F', '/', 1);
 
       var match = this._findNode(this.currentPath);
@@ -360,15 +360,14 @@
     },
 
     _bcItem: function(name, href, pos) {
-      return '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">' +
-        '<a itemprop="item" href="' + href + '"><span itemprop="name">' + name + '</span></a>' +
-        '<meta itemprop="position" content="' + pos + '"></li>';
+      return '<li>' +
+        '<a href="' + href + '"><span>' + name + '</span></a>' +
+        '</li>';
     },
 
     _bcItemCurrent: function(name, pos) {
-      return '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">' +
-        '<span itemprop="name">' + name + '</span>' +
-        '<meta itemprop="position" content="' + pos + '"></li>';
+      return '<li class="current"><span>' + name + '</span>' +
+        '</li>';
     },
 
     _renderFooter: function() {

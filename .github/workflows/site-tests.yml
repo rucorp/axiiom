@@ -1,0 +1,38 @@
+name: Site tests
+
+# Запускать 3800+ автопроверок (test_site.py) на каждый пуш и PR,
+# чтобы регресс не попал на прод (GitHub Pages).
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Static site checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run test_site.py (3828 checks)
+        run: python3 test_site.py --output test-report-ci.html --exit-code
+
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: test-report-ci.html
+          retention-days: 14
