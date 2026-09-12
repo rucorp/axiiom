@@ -15,6 +15,7 @@ generate-demos:
 
 generate-industries:
 	cd $(ROOT) && python3 generate_industries.py
+	cd $(ROOT) && python3 generate_industries_index.py
 
 generate-sitemap:
 	cd $(ROOT) && python3 generate_sitemap.py

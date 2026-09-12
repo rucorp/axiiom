@@ -53,15 +53,15 @@
       ]
     }
     </script>
-    <link rel="stylesheet" href="/styles.css?v=20260905">
-      <link rel="stylesheet" href="/preloader.css?v=20260905">
+    <link rel="stylesheet" href="/styles.css?v=20260912">
+      <link rel="stylesheet" href="/preloader.css?v=20260912">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
 </head>
 <body>
 <a href="#main" class="skip-link">Перейти к содержанию</a>
 <div id="preloader">
-<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<900){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},900-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})()</script>
+<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<900){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},900-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})();setTimeout(function(){var q=document.getElementById('preloader');if(q){q.classList.add('hidden');setTimeout(function(){q.classList.add('hidden-done')},500)}},2500)/*preloader-fallback*/</script>
   <svg class="preloader-svg" viewBox="0 0 36 36" width="80" height="80">
     <rect class="pr1" x="2" y="2" width="14" height="14" rx="2"/>
     <rect class="pr2" x="20" y="2" width="14" height="14" rx="2"/>
@@ -129,7 +129,20 @@ spec:
       target:
         type: Utilization
         averageUtilization: 70</code></pre><p>Что важно: stateless приложения, graceful shutdown, readiness и liveness probe. Когда K8s избыточен: меньше 5 микросервисов и нагрузки &lt;100 RPS.</p><h2>Работа с базами данных: шардирование и репликация</h2><p>Три паттерна: Master-Replica (чтение/запись, read-heavy), шардирование по ключу (горизонтальное), NewSQL (CockroachDB, TiDB). Начинаем с PostgreSQL + реплики чтения. Когда реплики перестают справляться — шардирование на уровне приложения.</p><p><strong>Кейс:</strong> для B2B платформы с 2000 записей/сек шардировали таблицу счетов на 64 шарда PostgreSQL с consistent hashing.</p><h2>Асинхронность и очереди</h2><p>Синхронные вызовы убивают highload. Очереди нужны для: обработки изображений, рассылок, логирования, компенсационных транзакций. Выбор: Redis Streams (простые задачи), Kafka (высокая нагрузка, хранение событий), RabbitMQ (worker-очереди).</p><h2>Наблюдаемость (Observability)</h2><p>Три столпа: метрики (Prometheus + Grafana) — CPU, память, RPS, latency p50/p95/p99; логи (ELK или Loki) — ошибки и события; трейсинг (Jaeger, Zipkin) — распределённая трассировка. Внедряйте с первого дня.</p><h2>Частые ошибки в highload-проектах</h2><p>Ранняя оптимизация (микросервисы до 100 пользователей); игнорирование backpressure (OOM и падение системы); отсутствие нагрузочного тестирования до релиза; единая БД для аналитики и транзакций; необратимые миграции без плана отката.</p><h2>Как мы в AXIIOM проектируем highload</h2><p>Анализ нагрузочных профилей (пиковые RPS, чтение/запись); выбор архитектурного стиля (модульный монолит для MVP); прототипирование узких мест (схема БД, кэширование); нагрузочные тесты (K6, JMeter) до написания основного кода; CI/CD с автотестами производительности; пост-релизный мониторинг.</p><p><strong>Пример из портфолио:</strong> платёжный шлюз для агрегатора такси с пиком 15 000 RPS. API на Go в K8s, Redis Cluster (10 нод), Kafka + ClickHouse для аналитики, nginx L7 с circuit breaker. Результат: p99 latency 47 мс, два года без сбоев.</p><h2>Ключевые выводы</h2><p>Highload — это подход, а не технология. Начинайте с монолита, проектируйте модульно. Измеряйте всё. Балансировка и отказоустойчивость — с первого дня. Кэшируйте многоуровнево. Тестируйте нагрузкой до релиза.</p><p>AXIIOM — надёжные highload-решения, которые масштабируются с вашим бизнесом.</p>
-            </div>
+            
+<div class="glass-card card-pad-md" style="margin-top:32px">
+<p class="label">Читайте также — решения AXIIOM</p>
+<h3 style="font-size:1.1rem;margin-bottom:12px;color:var(--clr-heading)">Вам может пригодиться</h3>
+<ul style="padding-left:20px;margin:0">
+<li><a href="/industries/trading-engine.html" class="link-accent">Торговый движок 100k RPS на Go — разработка биржи</a></li>
+<li><a href="/industries/real-time-analytics.html" class="link-accent">Real-time аналитика на ClickHouse и Kafka</a></li>
+<li><a href="/industries/saas-startupy.html" class="link-accent">SaaS для стартапов — мультитенантность и K8s</a></li>
+<li><a href="/industries/fintech/" class="link-accent">Все Fintech-решения AXIIOM — 8 кейсов</a></li>
+</ul>
+<p style="margin-top:16px;font-size:.85rem;color:var(--clr-muted)">Или <a href="/calculator/" class="link-accent">рассчитайте стоимость</a> и <a href="/industries/" class="link-accent">посмотрите все 30 решений</a> • <a href="/projects/" class="link-accent">Портфолио 50+ проектов</a></p>
+</div>
+
+</div>
         </div>
     </div>
 </section>
@@ -139,10 +152,10 @@ spec:
         <div id="footerCopy"></div>
     </div>
 </footer>
-<script src="/config.js?v=20260905"></script>
-<script src="/nav.js?v=20260905"></script>
+<script src="/config.js?v=20260912"></script>
+<script src="/nav.js?v=20260912"></script>
 <script>Nav.init({ cta: true, breadcrumbs: true });</script>
-<script src="/theme.js?v=20260905"></script>
+<script src="/theme.js?v=20260912"></script>
 <script>
 (function() {
 
@@ -152,12 +165,12 @@ spec:
     }, { passive: true });
 })();
 </script>
-<script src="/metrika.js?v=20260905" defer></script>
+<script src="/metrika.js?v=20260912" defer></script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
 
-  <script src="/preloader.js?v=20260905"></script>
+  <script src="/preloader.js?v=20260912"></script>
 
 <script>
 (function() {

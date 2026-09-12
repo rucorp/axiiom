@@ -1,13 +1,31 @@
 User-agent: *
 Allow: /
+
+# Служебные
 Disallow: /admin/
 Disallow: /demo/*/admin/
+Disallow: /test-report.html
+Disallow: /*.bak
+Disallow: /industries/industries.txt
+
+# Внутренняя документация (не для индексации)
 Disallow: /docs/archive/
 Disallow: /docs/source/
 Disallow: /docs/additional/
 Disallow: /docs/references/
-Disallow: /test-report.html
-Disallow: /industries/industries.txt
-Disallow: /*.bak
+Disallow: /docs/SRS-main/
+Disallow: /docs/visualizations/
+Disallow: /docs/feature-map-viz/
+Disallow: /docs/feature-map.html
+Disallow: /docs/feature-map/
+
+# Разрешаем основное
+Allow: /blog/
+Allow: /industries/
+Allow: /tools/
+Allow: /projects/
+Allow: /demo/app/
+Allow: /calculator/
+Allow: /docs/
 
 Sitemap: https://axiiom.ru/sitemap.xml

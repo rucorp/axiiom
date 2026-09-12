@@ -1,113 +1,69 @@
 (function(w, d) {
   'use strict';
 
+  // Навигация AXIIOM — анти-дорвей + конверсия
+  // - 30 отраслевых решений сгруппированы по 5 категориям (mega-меню)
+  // - Все страницы в sitemap, в меню теперь все 30 (было 13) — улучшает перелинковку и SEO
+  // - Добавлены лендинги категорий /industries/fintech/ и т.д.
   var TREE = [
     {
       name: 'Главная',
       path: '/',
       children: [
         { name: 'Услуги', path: '/#services' },
-        { name: 'Проблемы', path: '/#problems' },
         { name: 'Кейсы', path: '/#cases' },
         { name: 'Процесс', path: '/#process' },
-        { name: 'Технологии', path: '/#stack' },
-        { name: 'Интеграции', path: '/#integrations' },
-        { name: 'Демо', path: '/#demos' },
-        { name: 'FAQ', path: '/#faq' }
+        { name: 'Контакты', path: '/#contact' }
       ]
     },
     {
       name: 'Решения',
       path: '/industries/',
       children: [
-        { name: 'Автоматизация ресторанов', path: '/industries/avtomatizaciya-restoranov.html' },
-        { name: 'ПО для строительных компаний', path: '/industries/po-stroitelnye-kompanii.html' },
-        { name: 'CRM для медицинских центров', path: '/industries/crm-medcentry.html' },
-        { name: 'Системы для логистики и грузоперевозок', path: '/industries/sistemy-logistika.html' },
-        { name: 'SaaS для стартапов', path: '/industries/saas-startupy.html' },
-        { name: 'ERP для производства', path: '/industries/erp-proizvodstvo.html' },
-        { name: 'Системы учета для сельского хозяйства', path: '/industries/selskokhozyaystvo.html' },
-        { name: 'Мобильные приложения для фитнеса', path: '/industries/fitness-apps.html' },
-        { name: 'Платформы для онлайн-обучения', path: '/industries/online-obuchenie.html' },
-        { name: 'Системы бронирования для гостиниц', path: '/industries/bronirovanie-gostinits.html' },
-        { name: 'CRM для недвижимости', path: '/industries/crm-nedvizhimost.html' },
-        { name: 'Инструменты для удаленной работы', path: '/industries/udalennaya-rabota.html' },
-        { name: 'Аналитика для маркетинга', path: '/industries/marketing-analitika.html' },
-        { name: 'Кибербезопасность для малого бизнеса', path: '/industries/kiberbezopasnost.html' },
-        { name: 'Системы управления проектами', path: '/industries/upravlenie-proektami.html' },
-        { name: 'Платформы для фриланса', path: '/industries/platforma-frilans.html' },
-        { name: 'IoT для умного дома', path: '/industries/iot-umnyy-dom.html' },
-        { name: 'Платформы для краудфандинга', path: '/industries/kraudfanding.html' },
-        { name: 'Системы управления цепочками поставок', path: '/industries/upravlenie-cepochkami.html' },
-        { name: 'ПО для юридических фирм', path: '/industries/pravovie-firmu.html' },
-        { name: 'ПО для автосервиса', path: '/industries/avtoservice.html' },
-        { name: 'Платформы для доставки еды', path: '/industries/dostavka-edy.html' },
-        { name: 'HR для подбора персонала', path: '/industries/hr-podbor-personala.html' },
-        { separator: true },
-        { header: true, name: 'Финтех-решения' },
-        { name: 'KYC и онбординг пользователей', path: '/industries/kyc-onboarding.html' },
+        { header: true, name: 'Fintech — 8 решений' },
+        { name: 'KYC и онбординг', path: '/industries/kyc-onboarding.html' },
         { name: 'Мультивалютный кошелёк', path: '/industries/multi-currency-wallet.html' },
         { name: 'P2P-маркетплейс', path: '/industries/p2p-marketplace.html' },
-        { name: 'Trading Engine (биржевой движок)', path: '/industries/trading-engine.html' },
-        { name: 'CRM для инвестиций', path: '/industries/investment-crm.html' },
-        { name: 'Аналитика в реальном времени', path: '/industries/real-time-analytics.html' },
-        { name: 'Токенизация активов', path: '/industries/asset-tokenization.html' }
+        { name: 'Trading Engine', path: '/industries/trading-engine.html' },
+        { name: 'Токенизация активов', path: '/industries/asset-tokenization.html' },
+        { name: 'Investment CRM', path: '/industries/investment-crm.html' },
+        { name: 'Real-time аналитика', path: '/industries/real-time-analytics.html' },
+        { name: 'Краудфандинг', path: '/industries/kraudfanding.html' },
+        { separator: true },
+        { header: true, name: 'HoReCa & Retail — 4 решения' },
+        { name: 'Автоматизация ресторанов', path: '/industries/avtomatizaciya-restoranov.html' },
+        { name: 'Доставка еды', path: '/industries/dostavka-edy.html' },
+        { name: 'Бронирование гостиниц', path: '/industries/bronirovanie-gostinits.html' },
+        { name: 'Фитнес-приложения', path: '/industries/fitness-apps.html' },
+        { separator: true },
+        { header: true, name: 'B2B & Enterprise — 10 решений' },
+        { name: 'CRM для медцентров', path: '/industries/crm-medcentry.html' },
+        { name: 'CRM для недвижимости', path: '/industries/crm-nedvizhimost.html' },
+        { name: 'ПО для стройкомпаний', path: '/industries/po-stroitelnye-kompanii.html' },
+        { name: 'ERP для производства', path: '/industries/erp-proizvodstvo.html' },
+        { name: 'Логистика и грузоперевозки', path: '/industries/sistemy-logistika.html' },
+        { name: 'Управление цепочками', path: '/industries/upravlenie-cepochkami.html' },
+        { name: 'ПО для юрфирм', path: '/industries/pravovie-firmu.html' },
+        { name: 'ПО для автосервиса', path: '/industries/avtoservice.html' },
+        { name: 'HR и подбор', path: '/industries/hr-podbor-personala.html' },
+        { name: 'Сельское хозяйство', path: '/industries/selskokhozyaystvo.html' },
+        { separator: true },
+        { header: true, name: 'SaaS & Digital — 7 решений' },
+        { name: 'SaaS для стартапов', path: '/industries/saas-startupy.html' },
+        { name: 'Онлайн-обучение', path: '/industries/online-obuchenie.html' },
+        { name: 'Платформа фриланса', path: '/industries/platforma-frilans.html' },
+        { name: 'IoT умный дом', path: '/industries/iot-umnyy-dom.html' },
+        { name: 'Маркетинг-аналитика', path: '/industries/marketing-analitika.html' },
+        { name: 'Управление проектами', path: '/industries/upravlenie-proektami.html' },
+        { name: 'Удалённая работа', path: '/industries/udalennaya-rabota.html' },
+        { separator: true },
+        { header: true, name: 'Security' },
+        { name: 'Кибербезопасность', path: '/industries/kiberbezopasnost.html' },
+        { separator: true },
+        { name: 'Все 30 решений →', path: '/industries/' },
+        { name: 'Калькулятор стоимости →', path: '/calculator/' }
       ]
     },
-    {
-      name: 'Инструменты',
-      path: '/tools/',
-      children: [
-        { name: 'Счётчик символов', path: '/tools/char-counter/' },
-        { name: 'Генератор паролей', path: '/tools/password-gen/' },
-        { name: 'Транслитератор', path: '/tools/translit/' },
-        { name: 'Base64', path: '/tools/base64/' },
-        { name: 'URL Encode', path: '/tools/url-encode/' },
-        { name: 'Lorem Ipsum', path: '/tools/lorem-ipsum/' },
-        { name: 'Color Picker', path: '/tools/color-picker/' },
-        { name: 'Конвертер валют', path: '/tools/currency/' },
-        { name: 'Калькулятор дат', path: '/tools/date-calc/' },
-        { name: 'Конвертер единиц', path: '/tools/unit-converter/' },
-        { name: 'SEO Сниппет', path: '/tools/snippet-gen/' },
-        { name: 'Чек-листы', path: '/tools/checklist/' }
-      ]
-    },
-    {
-      name: 'Документация',
-      path: '/docs/',
-      children: [
-        { header: true, name: 'SRS / Техническая документация' },
-        { name: 'SRS v2 — Спецификация', path: '/docs/srs-v2/' },
-        { name: 'Аудит системы (AS IS)', path: '/docs/audit-as-is/' },
-        { name: 'Бизнес-модель', path: '/docs/business-model/' },
-        { name: 'Оценка сроков', path: '/docs/estimation/' },
-        { name: 'Карта фич', path: '/docs/feature-map/' },
-        { name: 'OTP через мессенджеры', path: '/docs/otp-via-messengers/' },
-        { separator: true },
-        { header: true, name: 'Статьи' },
-        { name: 'Архитектура highload-систем', path: '/blog/highload-architecture/' },
-        { name: 'PCI DSS Compliance', path: '/blog/pci-dss-compliance/' },
-        { name: 'Тренды финтеха 2026', path: '/blog/fintech-trends-2026/' },
-        { name: 'ROI платформы лояльности', path: '/blog/loyalty-program-roi/' },
-        { name: '161-ФЗ: руководство для стартапов', path: '/blog/161-fz-guideline/' },
-        { name: 'UX платёжных мобильных приложений', path: '/blog/mobile-payment-ux/' },
-        { name: 'Платформа лояльности — необходимость', path: '/blog/loyalty-platform-not-option-necessity/' },
-        { separator: true },
-        { header: true, name: 'Проектная документация' },
-        { name: 'Платформа «Витрина»', path: '/docs/vitrina/' },
-        { name: 'AMBAR — Фудтех', path: '/docs/ambar-proposal/' },
-        { name: 'ИТ-Архитектура (шаблон)', path: '/docs/it-architecture-template/' },
-        { name: 'UniverID — концепция', path: '/docs/univerid-concept/' },
-        { separator: true },
-        { header: true, name: 'Юридическая документация' },
-        { name: 'Юр. структура финтех-платформы', path: '/docs/yur-struktura-platformy/' },
-        { separator: true },
-        { header: true, name: 'Референсы' },
-        { name: 'API супермаркетов', path: '/docs/store-apis-research/' },
-        { name: 'Все документы', path: '/docs/' },
-      ]
-    },
-    { name: 'Калькулятор', path: '/calculator/' },
     {
       name: 'Демо',
       path: '/demo/app/',
@@ -125,47 +81,74 @@
         { header: true, name: 'Лояльность' },
         { name: 'Программа лояльности', path: '/demo/app/loyalty-program/' },
         { name: 'Система лояльности', path: '/demo/app/loyalty-system/' },
-        { name: 'Lovii — веб-приложение', path: 'https://app.lovii.ru/' },
-        { name: 'Lovii — B2B-портал', path: 'https://b2b.lovii.ru/' },
-        { name: 'Lovii — Админ-панель', path: 'https://admin.lovii.ru/' },
-        { name: 'Lovii — мобильная витрина', path: 'https://lovii.mobiap.com/' },
         { separator: true },
-        { header: true, name: 'Аналитика и мониторинг' },
+        { header: true, name: 'Аналитика' },
         { name: 'Аналитическая панель', path: '/demo/app/analytics-dashboard/' },
         { name: 'Мониторинг инцидентов', path: '/demo/app/incident-monitoring/' },
-        { name: 'Карта функциональных требований', path: '/docs/visualizations/07-force-graph.html' },
         { name: 'Портфель проектов', path: '/demo/app/project-portfolio/' },
         { separator: true },
         { header: true, name: 'Сервисы' },
         { name: 'Чат-бот техподдержки', path: '/demo/app/chatbot-support/' },
         { name: 'Витрина в Telegram', path: '/demo/app/telegram-storefront/' },
         { name: 'Онбординг пользователей', path: '/demo/app/user-onboarding/' },
-        { name: 'Платежный терминал', path: '/demo/app/payment-terminal/' },
-        { separator: true },
-        { header: true, name: 'Проекты' },
-        { name: 'PadelPro', path: 'https://bestdeejay-design.github.io/padl/' },
-        { name: 'Каталог заведений', path: 'https://bestdeejay-design.github.io/catalog/' },
-        { name: 'Grand Hotel', path: 'https://bestdeejay-design.github.io/booking/' },
-        { name: 'UniverID', path: 'https://univerid.ru/' },
-        { name: 'University Portal', path: '/demo/app/demo-template/' },
-        { name: 'Foodie', path: 'https://bestdeejay-design.github.io/foodie/' },
-        { name: 'eSIM Travel', path: 'https://bestdeejay-design.github.io/mvno/' },
-        { name: 'AXIIOM Logistics', path: 'https://bestdeejay-design.github.io/logistics/' },
-        { name: 'HR Motivation', path: 'https://bestdeejay-design.github.io/hrmodule/' },
-        { name: 'Мобильная касса', path: 'https://bestdeejay-design.github.io/cashier/' },
-        { name: 'Primary — Премиум такси', path: 'https://bestdeejay-design.github.io/primary/' },
-        { name: 'Alfred', path: 'https://bestdeejay-design.github.io/alfred/' },
-        { name: 'Qbik', path: 'https://bestdeejay-design.github.io/qbik/' },
-        { name: 'Код Доступа', path: 'https://bestdeejay-design.github.io/kodstudy/' },
-        { name: 'DAJET', path: 'https://dajet.ru/' },
-        { name: 'Hype', path: 'https://hype-marketplace-1.web.app/' },
-        { name: 'AMBAR', path: 'https://bestdeejay-design.github.io/ambar/' },
-        { name: 'Мини-игры', path: 'https://bestdeejay-design.github.io/minigames/' }
+        { name: 'Платежный терминал', path: '/demo/app/payment-terminal/' }
       ]
     },
+    {
+      name: 'Портфолио',
+      path: '/projects/',
+      children: [
+        { header: true, name: 'Избранные' },
+        { name: 'PadelPro — SAAS для падел-клубов', path: '/projects/#padelpro' },
+        { name: 'Каталог заведений', path: '/projects/#catalog' },
+        { name: 'Grand Hotel — бронирование', path: '/projects/#booking' },
+        { name: 'UniverID — экосистема вуза', path: '/projects/#univerid' },
+        { name: 'LOVII — платформа лояльности', path: '/projects/#lovii' },
+        { name: 'AMBAR — фудтех', path: '/projects/#ambar' },
+        { separator: true },
+        { name: 'Все проекты →', path: '/projects/' }
+      ]
+    },
+    {
+      name: 'Блог',
+      path: '/blog/',
+      children: [
+        { name: 'Архитектура highload-систем', path: '/blog/highload-architecture/' },
+        { name: 'PCI DSS Compliance', path: '/blog/pci-dss-compliance/' },
+        { name: 'Тренды финтеха 2026', path: '/blog/fintech-trends-2026/' },
+        { name: 'ROI платформы лояльности', path: '/blog/loyalty-program-roi/' },
+        { name: '161-ФЗ: руководство для стартапов', path: '/blog/161-fz-guideline/' },
+        { name: 'UX платёжных мобильных приложений', path: '/blog/mobile-payment-ux/' },
+        { name: 'Платформа лояльности — необходимость', path: '/blog/loyalty-platform-not-option-necessity/' },
+        { separator: true },
+        { name: 'Все статьи →', path: '/blog/' }
+      ]
+    },
+    {
+      name: 'Инструменты',
+      path: '/tools/',
+      children: [
+        { name: 'Счётчик символов', path: '/tools/char-counter/' },
+        { name: 'Генератор паролей', path: '/tools/password-gen/' },
+        { name: 'Транслитератор', path: '/tools/translit/' },
+        { name: 'Base64', path: '/tools/base64/' },
+        { name: 'URL Encode', path: '/tools/url-encode/' },
+        { name: 'Lorem Ipsum', path: '/tools/lorem-ipsum/' },
+        { name: 'Color Picker', path: '/tools/color-picker/' },
+        { name: 'Конвертер валют', path: '/tools/currency/' },
+        { name: 'Калькулятор дат', path: '/tools/date-calc/' },
+        { name: 'Конвертер единиц', path: '/tools/unit-converter/' },
+        { name: 'SEO Сниппет', path: '/tools/snippet-gen/' },
+        { name: 'Чек-листы', path: '/tools/checklist/' },
+        { separator: true },
+        { name: 'Все инструменты →', path: '/tools/' }
+      ]
+    },
+    { name: 'Калькулятор', path: '/calculator/' },
     { name: 'Контакты', path: '/#contact' },
     { name: 'Политика конфиденциальности', path: '/privacy/', footerOnly: true },
-    { name: 'Пользовательское соглашение', path: '/terms/', footerOnly: true }
+    { name: 'Пользовательское соглашение', path: '/terms/', footerOnly: true },
+    { name: 'Документация', path: '/docs/', footerOnly: true }
   ];
 
   function $(id) { return d.getElementById(id); }
@@ -341,7 +324,7 @@
       var container = $('breadcrumbs');
       if (!container) return;
 
-      var html = '<div class="container"><ol class="breadcrumbs-list">';
+      var html = '<div class=\"container\"><ol class=\"breadcrumbs-list\">';
       html += this._bcItem('\u0413\u043B\u0430\u0432\u043D\u0430\u044F', '/', 1);
 
       var match = this._findNode(this.currentPath);
@@ -352,7 +335,12 @@
         }
         html += this._bcItemCurrent(match.node.name, pos);
       } else {
-        html += this._bcItemCurrent('\u0421\u0442\u0440\u0430\u043D\u0438\u0446\u0430', 2);
+        var pretty = this.currentPath.replace(/-/g, ' ').replace(/\//g, ' ').trim();
+        if (pretty && this.currentPath !== '/') {
+          html += this._bcItemCurrent(pretty, 2);
+        } else {
+          html += this._bcItemCurrent('\u0421\u0442\u0440\u0430\u043D\u0438\u0446\u0430', 2);
+        }
       }
 
       html += '</ol></div>';
@@ -361,12 +349,12 @@
 
     _bcItem: function(name, href, pos) {
       return '<li>' +
-        '<a href="' + href + '"><span>' + name + '</span></a>' +
+        '<a href=\"' + href + '\"><span>' + name + '</span></a>' +
         '</li>';
     },
 
     _bcItemCurrent: function(name, pos) {
-      return '<li class="current"><span>' + name + '</span>' +
+      return '<li class=\"current\"><span>' + name + '</span>' +
         '</li>';
     },
 
@@ -383,26 +371,26 @@
         else if (!this._hasHash(n.path)) { mainLinks.push(n); }
       }
 
-      var html = '<p class="copy">';
+      var html = '<p class=\"copy\">';
       for (var i = 0; i < mainLinks.length; i++) {
         if (i > 0) html += ' \u00B7 ';
         var name = mainLinks[i].path === '/' ? (c.shortName || '\u0410\u041A\u0421\u0418\u041E\u041C\u0410') : mainLinks[i].name;
-        html += '<a href="' + mainLinks[i].path + '" class="footer-link">' + name + '</a>';
+        html += '<a href=\"' + mainLinks[i].path + '\" class=\"footer-link\">' + name + '</a>';
       }
       html += '</p>';
 
       if (legalLinks.length > 0) {
-        html += '<p class="copy" style="font-size:.7rem;margin-top:8px;border:none;padding-top:0;">';
+        html += '<p class=\"copy\" style=\"font-size:.7rem;margin-top:8px;border:none;padding-top:0;\">';
         for (var i = 0; i < legalLinks.length; i++) {
           if (i > 0) html += ' \u00B7 ';
-          html += '<a href="' + legalLinks[i].path + '" class="footer-link">' + legalLinks[i].name + '</a>';
+          html += '<a href=\"' + legalLinks[i].path + '\" class=\"footer-link\">' + legalLinks[i].name + '</a>';
         }
         html += '</p>';
       }
 
       var year = new Date().getFullYear();
       var start = c.copyrightStart || 2024;
-      html += '<p class="copy" style="font-size:.65rem;margin-top:8px;border:none;padding-top:0;text-transform:none;letter-spacing:0;">' +
+      html += '<p class=\"copy\" style=\"font-size:.65rem;margin-top:8px;border:none;padding-top:0;text-transform:none;letter-spacing:0;\">' +
         '\u00A9 ' + start + '\u2013' + year + ' ' + (c.name || 'AXIIOM') + ' (' + (c.nameRu || '\u041E\u041E\u041E \u0410\u043A\u0441\u0438\u043E\u043C\u0430') + '). \u0412\u0441\u0435 \u043F\u0440\u0430\u0432\u0430 \u0437\u0430\u0449\u0438\u0449\u0435\u043D\u044B.' +
       '</p>';
 
@@ -492,6 +480,16 @@
       if (header) {
         w.addEventListener('scroll', function() {
           header.classList.toggle('scrolled', w.scrollY > 40);
+        }, { passive: true });
+      }
+
+      // Sticky CTA logic for industries
+      var sticky = d.getElementById('stickyCta');
+      if (sticky) {
+        var showAt = 600;
+        w.addEventListener('scroll', function() {
+          if (w.scrollY > showAt) sticky.classList.add('visible');
+          else sticky.classList.remove('visible');
         }, { passive: true });
       }
     }
