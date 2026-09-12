@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
 
     <title>LOVII — Презентация для инвесторов</title>    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="../css/theme.css?v=2">
@@ -646,7 +646,7 @@ body {
             .doc-arrow { margin-left: auto; }
             /* Sections */
         section {
-            padding: 100px 20px;
+           adding: 100px 20px;
         }
 
         .section-header {
@@ -1865,7 +1865,7 @@ footer {
             <div class="footer-links">
                 <a href="../docs/privacy/" style="color: var(--accent-color);">Политика конфиденциальности</a>
                 <a href="../docs/terms/" style="color: var(--accent-color);">Пользовательское соглашение</a>
-                <a href="../../#docs" style="color: var(--accent-color);">Документация выпуска</a>
+                <a href="../#docs" style="color: var(--accent-color);">Документация выпуска</a>
             </div>
             <p class="disclaimer">Информация, представленная на данном сайте, не является индивидуальной инвестиционной рекомендацией. ЦФА являются высокорискованным инструментом. Перед совершением сделок ознакомьтесь с рисками и документацией по выпуску цифровых финансовых активов.</p>
             <p style="margin-top: 20px;">© 2026 LOVII. Все права защищены. Эмитент — ООО «Аксиома».</p>
@@ -1889,9 +1889,9 @@ footer {
 
             // Tab + slides logic
             const presData = {
-                general: { prefix: 'general', total: 13 },
-                investor: { prefix: 'investor', total: 15 },
-                supplier: { prefix: 'supplier', total: 12 }
+                general: { prefix: 'general', total: 13, name: 'Общая', pdf: '../pdf/LOVII_General.pdf' },
+                investor: { prefix: 'investor', total: 15, name: 'Для инвесторов', pdf: '../pdf/LOVII_4Investors.pdf' },
+                supplier: { prefix: 'supplier', total: 12, name: 'Для поставщиков', pdf: '../pdf/LOVII_4Suppliers.pdf' }
             };
 
             let activePres = 'general';
@@ -1901,6 +1901,17 @@ footer {
             const modal = document.getElementById('slideModal');
             const modalImg = document.getElementById('modalImage');
             const tabBtns = document.querySelectorAll('.tab-btn');
+
+            // Fallback tile shown when a slide PNG (pdf_images/) is missing.
+            function thumbFallback(thumb, presKey, index) {
+                var d = presData[presKey];
+                thumb.classList.add('is-fallback');
+                thumb.innerHTML = '<div class="slide-fallback">'
+                    + '<span class="slide-fallback-num">' + (index + 1) + '</span>'
+                    + '<span class="slide-fallback-label">' + d.name + ' · слайд ' + (index + 1) + '/' + d.total + '</span>'
+                    + '<span class="slide-fallback-hint">PNG отсутствует — откройте PDF</span>'
+                    + '</div>';
+            }
 
             function buildSlides(prefix, total) {
                 slideGrid.innerHTML = '';
@@ -1916,7 +1927,17 @@ footer {
                         <div class="slide-caption">
                             <span class="slide-num">${i + 1}/${total}</span>
                         </div>`;
-                    card.querySelector('.slide-thumb').addEventListener('click', function() {
+                    const thumb = card.querySelector('.slide-thumb');
+                    const img = thumb.querySelector('img');
+                    img.addEventListener('error', function onThumbError() {
+                        img.removeEventListener('error', onThumbError);
+                        thumbFallback(thumb, activePres, i);
+                    });
+                    // If the image already failed (cached error), show fallback immediately.
+                    if (img.complete && img.naturalWidth === 0) {
+                        thumbFallback(thumb, activePres, i);
+                    }
+                    thumb.addEventListener('click', function() {
                         currentSlide = i;
                         openSlide(i);
                     });
@@ -1924,10 +1945,33 @@ footer {
                 }
             }
 
+            const modalFallback = document.getElementById('modalFallback');
+            const modalFallbackNum = document.getElementById('modalFallbackNum');
+            const modalFallbackPdf = document.getElementById('modalFallbackPdf');
+
+            function showModalFallback() {
+                var d = presData[activePres];
+                modalImg.style.display = 'none';
+                modalFallbackNum.textContent = (currentSlide + 1) + '/' + d.total;
+                modalFallbackPdf.href = d.pdf;
+                modalFallback.hidden = false;
+            }
+
+            function showModalImage(src) {
+                modalFallback.hidden = true;
+                modalImg.style.display = '';
+                modalImg.src = src;
+            }
+
+            modalImg.addEventListener('error', function() {
+                if (!modalImg.getAttribute('src')) return;
+                showModalFallback();
+            });
+
             function openSlide(index) {
                 currentSlide = index;
                 const num = String(index + 1).padStart(2, '0');
-                modalImg.src = '../pdf_images/' + presData[activePres].prefix + '-' + num + '.png';
+                showModalImage('../pdf_images/' + presData[activePres].prefix + '-' + num + '.png');
                 modal.classList.add('open');
                 document.body.style.overflow = 'hidden';
             }
@@ -1936,7 +1980,7 @@ footer {
                 const total = presData[activePres].total;
                 currentSlide = (currentSlide + dir + total) % total;
                 const num = String(currentSlide + 1).padStart(2, '0');
-                modalImg.src = '../pdf_images/' + presData[activePres].prefix + '-' + num + '.png';
+                showModalImage('../pdf_images/' + presData[activePres].prefix + '-' + num + '.png');
             }
 
             tabBtns.forEach(btn => {
@@ -2128,4 +2172,4 @@ footer {
     </script>
     <script src="../js/navigation.js"></script>
 </body>
-</html>
+</html>html>

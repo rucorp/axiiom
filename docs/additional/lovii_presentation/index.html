@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+
+    <title>LOVII — Инвестиционный портал ЦФА</title>
+    <meta name="description" content="LOVII — цифровая инфраструктура локальной экономики. Инвестиционный портал: стратегия, презентации, документы выпуска ЦФА. Эмитент — ООО «Аксиома».">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="./css/theme.css?v=2">
+    <link rel="stylesheet" href="./css/core.css?v=2">
+    <link rel="stylesheet" href="./css/components.css?v=2">
+    <link rel="stylesheet" href="./css/responsive.css?v=2">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        .main { padding-top: 96px; }
+        .portal-hero { text-align: center; padding: 56px 20px 40px; max-width: 860px; margin: 0 auto; }
+        .portal-hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 14px; }
+        .portal-hero p { color: var(--text-secondary); font-size: 1.05rem; }
+        .portal-section { padding: 24px 20px 60px; max-width: 1200px; margin: 0 auto; }
+        .portal-section h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 6px; }
+        .portal-section .section-lead { color: var(--text-secondary); margin-bottom: 22px; }
+        section[id] { scroll-margin-top: 110px; }
+        .portal-card { display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: inherit; }
+        .portal-card h3 { font-size: 1.1rem; font-weight: 700; }
+        .portal-card p { color: var(--text-secondary); font-size: 0.92rem; flex: 1; }
+        .portal-card .card-link { font-weight: 700; color: var(--accent-color); font-size: 0.92rem; }
+        .doc-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-top: 22px; }
+        .doc-item { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; text-decoration: none; color: var(--text-color); font-weight: 600; font-size: 0.92rem; transition: border-color 0.2s, transform 0.2s; }
+        .doc-item:hover { border-color: var(--accent-color); transform: translateY(-2px); }
+        .doc-item svg { flex-shrink: 0; color: var(--accent-color); }
+        .pdf-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+        @media (max-width: 768px) { .portal-hero { padding-top: 36px; } }
+    </style>
+</head>
+<body data-theme="light">
+    <header class="header">
+        <div class="status-bar">
+            <span class="status-step active"><span class="step-dot"></span><span class="status-label">Портал</span></span>
+            <span class="step-line"></span>
+            <span class="status-step"><span class="step-dot"></span><span class="status-label">Стратегия</span></span>
+            <span class="step-line"></span>
+            <span class="status-step"><span class="step-dot"></span><span class="status-label">Презентация</span></span>
+            <span class="step-line"></span>
+            <span class="status-step"><span class="step-dot"></span><span class="status-label">Выпуск</span></span>
+        </div>
+        <div class="header-inner">
+            <a href="./" class="logo">
+                <img src="./img/logos/lovii-logo.svg" alt="LOVII" class="logo-light">
+                <img src="./img/logos/lovii-logo_dark.svg" alt="LOVII" class="logo-dark">
+            </a>
+            <div class="header-actions">
+                <a href="#docs" class="header-link">Документация</a>
+                <span class="header-badge">ЦФА 2026</span>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+                    <svg class="theme-icon sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                    </svg>
+                    <svg class="theme-icon moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="portal-hero">
+            <span class="hero-badge">Инвестиционный портал</span>
+            <h1>LOVII — цифровая инфраструктура локальной экономики</h1>
+            <p>SaaS-платформа для микробизнеса: оператор лояльности, цифровая витрина, City Franchise. Эмитент ЦФА — ООО «Аксиома», 20+ лет на рынке.</p>
+        </div>
+
+        <div class="portal-section">
+            <div class="grid-4col">
+                <div class="stat-box"><div class="stat-box-value">52 млн ₽</div><div class="stat-box-label">сумма выпуска</div></div>
+                <div class="stat-box"><div class="stat-box-value">до 21%</div><div class="stat-box-label">годовых, фикс.</div></div>
+                <div class="stat-box"><div class="stat-box-value">9 мес.</div><div class="stat-box-label">срок обращения</div></div>
+                <div class="stat-box"><div class="stat-box-value">от 1 000 ₽</div><div class="stat-box-label">мин. инвестиция</div></div>
+            </div>
+        </div>
+
+        <div class="portal-section">
+            <h2>Разделы портала</h2>
+            <p class="section-lead">Стратегия развития, слайды презентаций и документы выпуска.</p>
+            <div class="grid-3col">
+                <a href="./strategy/" class="card portal-card">
+                    <span class="badge">Раздел</span>
+                    <h3>Стратегия</h3>
+                    <p>Стратегический план развития LOVII: рынок, продукт, юнит-экономика, дорожная карта.</p>
+                    <span class="card-link">Читать →</span>
+                </a>
+                <a href="./presentation/" class="card portal-card">
+                    <span class="badge">Слайды + PDF</span>
+                    <h3>Презентация</h3>
+                    <p>Три версии презентации: общая, для инвесторов и для поставщиков. Доступны PDF-файлы.</p>
+                    <span class="card-link">Смотреть →</span>
+                </a>
+                <a href="#docs" class="card portal-card">
+                    <span class="badge">PDF + HTML</span>
+                    <h3>Документы</h3>
+                    <p>Решение о выпуске ЦФА, технический паспорт, политика рисков, оферты и согласия.</p>
+                    <span class="card-link">К документам →</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="portal-section" id="docs">
+            <h2>Документация выпуска</h2>
+            <p class="section-lead">Презентации в PDF и юридические документы.</p>
+            <div class="pdf-row">
+                <a href="./pdf/LOVII_General.pdf" class="btn-pdf" download>Общая презентация (PDF)</a>
+                <a href="./pdf/LOVII_4Investors.pdf" class="btn-pdf" download>Для инвесторов (PDF)</a>
+                <a href="./pdf/LOVII_4Suppliers.pdf" class="btn-pdf" download>Для поставщиков (PDF)</a>
+            </div>
+            <div class="doc-list">
+                <a href="./docs/issue-terms/" class="doc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Решение о выпуске ЦФА</a>
+                <a href="./docs/whitepaper/" class="doc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Технический паспорт</a>
+                <a href="./docs/risk-policy/" class="doc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Политика управления рисками</a>
+                <a href="./docs/terms/" class="doc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Пользовательское соглашение</a>
+                <a href="./docs/privacy/" class="doc-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Политика конфиденциальности</a>
+            </div>
+            <div class="callout">Информация на портале не является индивидуальной инвестиционной рекомендацией. ЦФА — высокорискованный инструмент. Перед совершением сделок ознакомьтесь с рисками и документацией выпуска.</div>
+        </div>
+
+        <footer class="footer">
+            <p>© 2026 LOVII · <a href="./" style="color: var(--accent-color);">На главную</a></p>
+            <div class="footer-links">
+                <a href="./docs/privacy/" style="color: var(--accent-color);">Политика конфиденциальности</a>
+                <a href="./docs/terms/" style="color: var(--accent-color);">Пользовательское соглашение</a>
+                <a href="#docs" style="color: var(--accent-color);">Документация выпуска</a>
+            </div>
+            <p style="margin-top: 20px;">© 2026 LOVII. Все права защищены. Эмитент — ООО «Аксиома».</p>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var themeToggle = document.getElementById('theme-toggle');
+            var body = document.body;
+            var savedTheme = localStorage.getItem('lovii-theme') || 'light';
+            body.setAttribute('data-theme', savedTheme);
+            themeToggle.addEventListener('click', function() {
+                var newTheme = body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('lovii-theme', newTheme);
+            });
+        });
+    </script>
+    <script src="./js/navigation.js"></script>
+</body>
+</html>

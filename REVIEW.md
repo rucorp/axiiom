@@ -197,7 +197,7 @@ Every page includes (in order):
 6. ~~**Tools nav.js** loads separately at `/tools/nav.js` — also not using main Nav~~ RESOLVED (see #5)
 7. ~~**Performance:** no critical CSS inlining — RESOLVED: critical CSS is now inlined in `index.html` `<head>` (restored), and `styles.css` loads with `media="print"` `onload` trick on `index.html` and `calculator/index.html`. Preloader still shows on every page load unless `_seen` is set.~~
 8. **No 301 redirects** — if pages move, old URLs will 404
-9. **404.html** is a full page but Nginx needs explicit `error_page 404` config (not in Dockerfile)
+9. ~~**404.html** is a full page but Nginx needs explicit `error_page 404` config (not in Dockerfile)~~ RESOLVED: `nginx.conf` with `error_page 404 /404.html` added, wired in `Dockerfile`; broken `#contact` CTA link in `404.html` fixed to `/#contact`
 10. **Demo pages** are generated with embedded widget HTML/CSS/JS inside `generate_demos.py` — hard to edit individually
 11. **No service worker** — no offline support or caching strategy beyond browser defaults
 12. **Footer** is rendered twice on some pages (from `nav.js` `_renderFooter` + `footer.js`)
