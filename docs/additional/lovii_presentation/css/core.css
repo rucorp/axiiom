@@ -54,6 +54,66 @@ body {
     white-space: nowrap;
 }
 
+/* ===== Logo (light/dark variants) ===== */
+.logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo img {
+    height: 28px;
+    width: auto;
+    display: block;
+}
+
+.logo-dark { display: none; }
+
+[data-theme="dark"] .logo-dark { display: block; }
+[data-theme="dark"] .logo-light { display: none; }
+
+/* ===== Header actions / theme toggle ===== */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.header-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.header-link:hover { color: var(--accent-color); }
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.theme-toggle:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+.theme-icon { width: 18px; height: 18px; }
+.theme-icon.moon { display: none; }
+
+[data-theme="dark"] .theme-icon.moon { display: block; }
+[data-theme="dark"] .theme-icon.sun { display: none; }
+
 /* ===== Status bar (deal pipeline) ===== */
 .status-bar {
     display: flex;

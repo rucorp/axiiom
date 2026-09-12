@@ -492,6 +492,44 @@
           else sticky.classList.remove('visible');
         }, { passive: true });
       }
+    },
+
+    _initReveal: function() {
+      // Global safety net for .reveal elements: covers pages without an inline
+      // observer and nodes injected later via JS. Idempotent — pages with their
+      // own IntersectionObserver keep working as before.
+      if (!('IntersectionObserver' in w)) {
+        var all = d.querySelectorAll('.reveal');
+        for (var j = 0; j < all.length; j++) all[j].classList.add('visible');
+        return;
+      }
+      var io = new IntersectionObserver(function(entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting) {
+            entries[i].target.classList.add('visible');
+            io.unobserve(entries[i].target);
+          }
+        }
+      }, { threshold: 0.15 });
+      function watch(root) {
+        var nodes = root.querySelectorAll('.reveal:not(.visible)');
+        for (var i = 0; i < nodes.length; i++) io.observe(nodes[i]);
+      }
+      watch(d);
+      if ('MutationObserver' in w) {
+        var mo = new MutationObserver(function(muts) {
+          for (var i = 0; i < muts.length; i++) {
+            var added = muts[i].addedNodes;
+            for (var k = 0; k < added.length; k++) {
+              var n = added[k];
+              if (n.nodeType !== 1) continue;
+              if (n.classList && n.classList.contains('reveal') && !n.classList.contains('visible')) io.observe(n);
+              watch(n);
+            }
+          }
+        });
+        mo.observe(d.body || d.documentElement, { childList: true, subtree: true });
+      }
     }
   };
 
