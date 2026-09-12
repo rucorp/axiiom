@@ -123,44 +123,23 @@
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Разработка highload-сервисов" } },
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Кибербезопасность и аудит" } },
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Разработка сайтов и лендингов" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Разработка WEB-приложений" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Разработка мобильных приложений" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "UI/UX дизайн" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Графический дизайн" } }
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Мобильные приложения" } }
         ]
       }
     }
     </script>
 
-    <!-- JSON-LD CaseStudy -->
+    <!-- JSON-LD BreadcrumbList -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Article",
-          "headline": "Платформа лояльности для сети ресторанов — LOVII",
-          "description": "Внедрение white-label приложения лояльности LOVII с интеграцией в iiko/r_keeper. Результат: 40% повторных визитов, рост LTV на 35%.",
-          "author": { "@type": "Organization", "name": "AXIIOM" },
-          "articleSection": "Кейсы"
-        },
-        {
-          "@type": "Article",
-          "headline": "Блокчейн-платформа для учёта активов",
-          "description": "Построили платформу на BigChainDB со смарт-контрактами. Результат: 1 000 запросов/сек, нулевое мошенничество.",
-          "author": { "@type": "Organization", "name": "AXIIOM" },
-          "articleSection": "Кейсы"
-        },
-        {
-          "@type": "Article",
-          "headline": "Мобильная касса с BigData-аналитикой",
-          "description": "Разработка мобильной кассы для кафе и ресторанов. Результат: автоматизация 100+ точек, рост выручки на 22%.",
-          "author": { "@type": "Organization", "name": "AXIIOM" },
-          "articleSection": "Кейсы"
-        }
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://axiiom.ru/" }
       ]
     }
     </script>
+
     <style>
         :root{--clr-bg:#0A0A0F;--clr-bg-alt:#0E0E14;--clr-surface:#12121A;--clr-surface-hover:#1A1A24;--clr-text:#C7C7CC;--clr-heading:#F5F5F7;--clr-muted:#8E8E93;--clr-faint:#78787D;--clr-border:rgba(255,255,255,.06);--clr-border-hover:rgba(255,255,255,.1);--clr-hero-bg:#0A0A0F;--clr-accent:#D4A574;--clr-accent2:#8B9D83}
         *{margin:0;padding:0;box-sizing:border-box}
@@ -169,8 +148,6 @@
         .noise{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}
         .grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background-image:linear-gradient(var(--clr-border) 1px,transparent 1px),linear-gradient(90deg,var(--clr-border) 1px,transparent 1px);background-size:60px 60px}
         .container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
-        .content-wrapper{max-width:680px;margin:0 auto}
-        .wide-wrapper{max-width:1200px;margin:0 auto;padding:0 24px}
         .header{position:sticky;top:0;left:0;width:100%;z-index:1000;transition:background .35s,backdrop-filter .35s,border-color .35s;border-bottom:1px solid transparent;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
         .header.scrolled{background:rgba(10,10,15,.85);border-bottom-color:var(--clr-border)}
         .nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0;position:relative;z-index:100}
@@ -219,16 +196,15 @@
         .result a:hover{text-decoration:underline}
         @media(max-width:1023px){.nav-links--desktop{display:none}.btn-nav{display:none}.nav-overlay{display:flex;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(7,7,10,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);z-index:1001;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s ease}.nav-overlay.open{opacity:1;pointer-events:auto}.nav-links{flex-direction:column;align-items:center;gap:0}.nav-links li{opacity:0;transform:translateY(20px);transition:opacity .4s ease,transform .4s ease}.nav-overlay.open .nav-links li{opacity:1;transform:translateY(0)}.nav-links a{font-size:1.4rem;letter-spacing:1px;padding:14px 0;display:block;color:var(--clr-heading)}.nav-links a::after{display:none}.nav-links a:hover{color:var(--clr-muted)}.nav-toggle{display:flex}.hero-bg-svg{max-width:500px}.stats{gap:24px}.footer-grid{grid-template-columns:1fr;gap:36px}}
     </style>
-    <link rel="stylesheet" href="styles.css?v=20260905" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="styles.css?v=20260905"></noscript>
-  <link rel="stylesheet" href="/preloader.css?v=20260905">
-<link rel="manifest" href="/manifest.webmanifest">
-<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="stylesheet" href="/styles.css?v=20260912">
+    <link rel="stylesheet" href="/preloader.css?v=20260912">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
 </head>
 <body id="top">
 <a href="#main" class="skip-link">Перейти к содержанию</a>
 <div id="preloader">
-<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<900){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},900-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})()</script>
+<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<900){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},900-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})();setTimeout(function(){var q=document.getElementById('preloader');if(q){q.classList.add('hidden');setTimeout(function(){q.classList.add('hidden-done')},500)}},2500)/*preloader-fallback*/</script>
   <svg class="preloader-svg" viewBox="0 0 36 36" width="80" height="80">
     <rect class="pr1" x="2" y="2" width="14" height="14" rx="2"/>
     <rect class="pr2" x="20" y="2" width="14" height="14" rx="2"/>
@@ -240,7 +216,6 @@
 
 <div class="noise"></div>
 <div class="grid-overlay"></div>
-
 
 <header class="header" id="header">
     <div class="container">
@@ -261,6 +236,7 @@
 <div class="nav-overlay" id="navOverlay">
     <ul class="nav-links" id="mobileNav"></ul>
 </div>
+
 <main id="main">
 <header class="hero">
     <div class="container">
@@ -274,42 +250,21 @@
   <path d="M200 300 L400 100 L600 300 L400 500 Z" stroke="rgba(255,255,255,0.05)" stroke-width="2" fill="none"/>
   <circle cx="400" cy="300" r="4" fill="rgba(255,255,255,0.12)"/>
 </svg></div>
-            <p class="badge">AXIIOM FinTech</p>
+            <p class="badge">AXIIOM FinTech • 20+ лет</p>
             <h1>Финтех-инфраструктура<br>и IT-решения для бизнеса</h1>
-            <p class="hero-desc">Создаём финтех-решения и IT-продукты для финансового сектора: платформы лояльности, маркетплейсы и платёжные системы под ключ. Берём на себя комплаенс (161-ФЗ, PCI&nbsp;DSS), разработку банковского ПО и интеграцию с банками.</p>
+            <p class="hero-desc">Платформы лояльности, маркетплейсы и платёжные системы под ключ. Комплаенс 161-ФЗ, PCI DSS, интеграции с банками — берём на себя.</p>
             <div class="hero-btns">
-                <a href="#contact" class="btn" onclick="ym(109391253,'reachGoal','cta_hero'); gtag('event','cta_hero');">Обсудить архитектуру проекта</a>
-                <a href="#demos" class="btn btn-outline" onclick="ym(109391253,'reachGoal','demo_view'); gtag('event','demo_view');">Смотреть демо-платформы</a>
+                <a href="#contact" class="btn" onclick="ym(109391253,'reachGoal','cta_hero'); gtag('event','cta_hero');">Обсудить архитектуру</a>
+                <a href="/projects/" class="btn btn-outline" onclick="ym(109391253,'reachGoal','demo_view'); gtag('event','demo_view');">Смотреть портфолио</a>
             </div>
             <div class="hero-trust">
                 <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--clr-accent)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 50+ проектов</span>
                 <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--clr-accent)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 99.99% Uptime</span>
-                <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--clr-accent)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Опыт банковских интеграций</span>
+                <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--clr-accent)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 161-ФЗ / PCI DSS</span>
             </div>
         </div>
     </div>
 </header>
-
-<section id="problems" class="section">
-    <div class="container">
-        <p class="label reveal">Знакомые ситуации?</p>
-        <h2 class="reveal">Мы понимаем ваши боли</h2>
-        <div class="problems-grid">
-            <div class="glass-card reveal card-pad-md">
-                <p class="problem-text">Разработчики обещали золотые горы, но проект застрял</p>
-                <p class="solution-text"><strong>Решение:</strong> Мы фиксируем scope, сроки и бюджет на этапе Discovery.</p>
-            </div>
-            <div class="glass-card reveal card-pad-md">
-                <p class="problem-text">Банк отказал в интеграции из-за 161-ФЗ</p>
-                <p class="solution-text"><strong>Решение:</strong> У нас есть опыт банковских интеграций и прохождения аудита PCI DSS.</p>
-            </div>
-            <div class="glass-card reveal card-pad-md">
-                <p class="problem-text">Сервис падает в пиковые нагрузки</p>
-                <p class="solution-text"><strong>Решение:</strong> Проектируем highload-архитектуру с горизонтальным масштабированием.</p>
-            </div>
-        </div>
-    </div>
-</section>
 
 <section id="about" class="section dark">
     <div class="container">
@@ -318,11 +273,11 @@
         <div class="stats reveal">
             <div class="stat">
                 <span class="stat-num" data-target="50" data-suffix="+">0</span>
-                <span class="stat-label">реализованных проектов</span>
+                <span class="stat-label">проектов</span>
             </div>
             <div class="stat">
                 <span class="stat-num stat-static">99.99%</span>
-                <span class="stat-label">гарантированный uptime</span>
+                <span class="stat-label">uptime</span>
             </div>
             <div class="stat">
                 <span class="stat-num stat-static">20+</span>
@@ -330,159 +285,181 @@
             </div>
             <div class="stat">
                 <span class="stat-num stat-static">24/7</span>
-                <span class="stat-label">Мониторинг</span>
+                <span class="stat-label">мониторинг</span>
             </div>
+        </div>
+        <div class="partners-list reveal" style="margin-top:40px">
+            <span>Сбербанк</span>
+            <span>Альфа-Банк</span>
+            <span>Тинькофф</span>
+            <span>Яндекс</span>
+            <span>Ozon</span>
+            <span>Wildberries</span>
+            <span>1С</span>
+            <span>СДЭК</span>
         </div>
     </div>
 </section>
 
-<section id="services" class="section dark">
+<section id="services" class="section">
     <div class="container">
         <p class="label reveal">Услуги</p>
-        <h2 class="reveal">Финтех-разработка и IT-решения</h2>
+        <h2 class="reveal">6 ключевых направлений</h2>
+        <p class="text reveal">Фокус на финтех и highload. Остальное — в <a href="/industries/" class="link-accent">отраслевых решениях</a> и <a href="/calculator/" class="link-accent">калькуляторе</a>.</p>
         <div class="grid">
             <div class="glass-card reveal card-pad-lg">
                 <h3>Финтех-платформы</h3>
-                <p>Сплитование, escrow, мультиэквайринг, соответствие 161-ФЗ</p>
-                <p class="result"><a href="/calculator/">Запуск за 3–4 месяца</a></p>
+                <p>Сплит, escrow, мультиэквайринг, 161-ФЗ. Запуск за 3–4 месяца.</p>
+                <p class="result"><a href="/industries/asset-tokenization.html">→ Токенизация, кошельки, P2P</a></p>
             </div>
             <div class="glass-card reveal card-pad-lg">
                 <h3>Платформы лояльности</h3>
-                <p>White Label — готовая экосистема LOVII с мобильным приложением и аналитикой</p>
-                <p class="result"><a href="/calculator/">Рост LTV на 30–40%</a></p>
-                <a href="#demos" class="btn btn-card">Смотреть демо</a>
+                <p>White-label LOVII: баллы, уровни, push, iiko/r_keeper. Рост LTV 30–40%.</p>
+                <p class="result"><a href="/demo/app/loyalty-program/">→ Демо лояльности</a></p>
             </div>
             <div class="glass-card reveal card-pad-lg">
                 <h3>Highload-сервисы</h3>
-                <p>Микросервисы, Kubernetes, выдерживающие миллионы запросов</p>
-                <p class="result"><a href="/calculator/">99.99% Uptime</a></p>
+                <p>Микросервисы, Kubernetes, миллионы RPS, 99.99% uptime.</p>
+                <p class="result"><a href="/blog/highload-architecture/">→ Архитектура highload</a></p>
             </div>
             <div class="glass-card reveal card-pad-lg">
                 <h3>Кибербезопасность</h3>
-                <p>Пентест, SAST/DAST, WAF, подготовка к сертификации</p>
-                <p class="result"><a href="/calculator/">Снижение рисков утечек на 95%</a></p>
+                <p>Пентест, SAST/DAST, WAF, подготовка к PCI DSS.</p>
+                <p class="result"><a href="/blog/pci-dss-compliance/">→ PCI DSS гайд</a></p>
             </div>
             <div class="glass-card reveal card-pad-lg">
-                <h3>Сайты и лендинги</h3>
-                <p>Интернет-магазины, визитки, корпоративные сайты — от сбора требований до поддержки</p>
-                <p class="result"><a href="/calculator/">от 250 000 ₽</a></p>
-            </div>
-            <div class="glass-card reveal card-pad-lg">
-                <h3>WEB-приложения</h3>
-                <p>Высоконагруженные сервисы на React, Vue, Node.js, Python, Go</p>
-                <p class="result"><a href="/calculator/">от 300 000 ₽</a></p>
+                <h3>Сайты и WEB-приложения</h3>
+                <p>React/Vue/Next.js, интернет-магазины, кабинеты, админки. От 250к ₽.</p>
+                <p class="result"><a href="/projects/">→ Портфолио</a></p>
             </div>
             <div class="glass-card reveal card-pad-lg">
                 <h3>Мобильные приложения</h3>
-                <p>Нативные и кроссплатформенные iOS/Android приложения</p>
-                <p class="result"><a href="/calculator/">от 300 000 ₽</a></p>
-            </div>
-            <div class="glass-card reveal card-pad-lg">
-                <h3>UI/UX дизайн</h3>
-                <p>Figma, Sketch, Adobe XD — интерфейсы на основе данных и исследований</p>
-                <p class="result"><a href="/calculator/">от 150 000 ₽</a></p>
-            </div>
-            <div class="glass-card reveal card-pad-lg">
-                <h3>Графический дизайн</h3>
-                <p>Логотипы, фирменный стиль, брендбуки, подготовка макетов к печати</p>
-                <p class="result"><a href="/calculator/">от 100 000 ₽</a></p>
+                <p>iOS/Android, React Native/Flutter, NFC/QR/SBP. От 300к ₽.</p>
+                <p class="result"><a href="/calculator/">→ Рассчитать стоимость</a></p>
             </div>
         </div>
         <div class="center mt-40">
-            <a href="/calculator/" class="btn btn-outline btn-wide">Рассчитать стоимость проекта</a>
+            <a href="/calculator/" class="btn btn-outline btn-wide">Калькулятор проекта</a>
+            <a href="/industries/" class="btn btn-wide" style="margin-left:12px">Все 31 решение →</a>
         </div>
     </div>
 </section>
 
-<section id="cases" class="section">
+<section id="cases" class="section dark">
     <div class="container">
         <p class="label reveal">Кейсы</p>
-        <h2 class="reveal">Задача → Решение → Бизнес-результат</h2>
+        <h2 class="reveal">Задача → Решение → Результат</h2>
         <div class="cases-grid">
             <div class="glass-card reveal card-pad-md">
-                <span class="case-tag">Платформа лояльности LOVII</span>
-                <p class="case-step"><span>Задача:</span> Сеть ресторанов теряла клиентов, не было данных о покупках.</p>
-                <p class="case-step"><span>Решение:</span> Внедрили white-label приложение LOVII с интеграцией в iiko/r_keeper и персонализированными push-уведомлениями.</p>
-                <p class="case-result">Результат: 40% клиентов вернулись повторно, средний чек вырос на 18%, LTV увеличился на 35%.</p>
-                <a href="#demos" class="btn btn-card">Посмотреть демо этого решения</a>
+                <span class="case-tag">LOVII • лояльность</span>
+                <p class="case-step"><span>Задача:</span> Сеть ресторанов теряла клиентов, нет данных о покупках.</p>
+                <p class="case-step"><span>Решение:</span> White-label LOVII + iiko/r_keeper + персонализированные push.</p>
+                <p class="case-result">40% возврат, +18% средний чек, +35% LTV.</p>
+                <a href="/demo/app/loyalty-program/" class="btn btn-card">Демо →</a>
             </div>
             <div class="glass-card reveal card-pad-md">
-                <span class="case-tag">Блокчейн-платформа</span>
-                <p class="case-step"><span>Задача:</span> Нужна прозрачная система учёта активов с цифровой инвентаризацией.</p>
-                <p class="case-step"><span>Решение:</span> Построили платформу на BigChainDB со смарт-контрактами и криптозащитой.</p>
-                <p class="case-result">Результат: 1 000 запросов/сек, полная прослеживаемость операций, нулевое мошенничество.</p>
-                <a href="#demos" class="btn btn-card">Посмотреть демо этого решения</a>
+                <span class="case-tag">Блокчейн • учёт активов</span>
+                <p class="case-step"><span>Задача:</span> Прозрачный учёт активов, инвентаризация.</p>
+                <p class="case-step"><span>Решение:</span> BigChainDB + смарт-контракты + криптозащита.</p>
+                <p class="case-result">1 000 RPS, полная прослеживаемость, 0 мошенничества.</p>
+                <a href="/projects/#ambar" class="btn btn-card">Кейс AMBAR →</a>
             </div>
             <div class="glass-card reveal card-pad-md">
-                <span class="case-tag">Мобильная касса</span>
-                <p class="case-step"><span>Задача:</span> Кафе и рестораны не могли анализировать продажи в реальном времени.</p>
-                <p class="case-step"><span>Решение:</span> Разработали мобильную кассу с BigData-аналитикой и SmartData-отчётами.</p>
-                <p class="case-result">Результат: Автоматизация 100+ точек, рост выручки на 22%, время закрытия смены сокращено с 30 до 3 минут.</p>
-                <a href="#demos" class="btn btn-card">Посмотреть демо этого решения</a>
+                <span class="case-tag">Мобильная касса • HoReCa</span>
+                <p class="case-step"><span>Задача:</span> Нет аналитики продаж в реальном времени.</p>
+                <p class="case-step"><span>Решение:</span> Мобильная касса + BigData + SmartData-отчёты.</p>
+                <p class="case-result">100+ точек, +22% выручка, закрытие смены 30→3 мин.</p>
+                <a href="/projects/" class="btn btn-card">Все кейсы →</a>
             </div>
         </div>
     </div>
 </section>
 
-<section id="process" class="section dark">
+<section id="process" class="section">
     <div class="container">
         <p class="label reveal">Процесс</p>
-        <h2 class="reveal">Как мы работаем</h2>
+        <h2 class="reveal">Как мы работаем — 5 шагов</h2>
         <div class="process-grid">
             <div class="glass-card reveal card-pad-sm">
                 <div class="process-num">01</div>
                 <h3>Discovery</h3>
-                <p>Аудит, фиксация бюджета и сроков. 1–2 недели.</p>
+                <p>Аудит, scope, бюджет, сроки. 1–2 недели, бесплатно.</p>
             </div>
             <div class="glass-card reveal card-pad-sm">
                 <div class="process-num">02</div>
-                <h3>Дизайн и Архитектура</h3>
-                <p>Прототипы в Figma, схема базы данных.</p>
+                <h3>Дизайн и архитектура</h3>
+                <p>Figma, схема БД, API-контракты.</p>
             </div>
             <div class="glass-card reveal card-pad-sm">
                 <div class="process-num">03</div>
                 <h3>Разработка</h3>
-                <p>Двухнедельные спринты с регулярными демо.</p>
+                <p>Спринты 2 недели, демо каждую пятницу.</p>
             </div>
             <div class="glass-card reveal card-pad-sm">
                 <div class="process-num">04</div>
                 <h3>Безопасность и тесты</h3>
-                <p>Нагрузочное тестирование, пентест, проверка на 161-ФЗ.</p>
+                <p>Нагрузочные, пентест, 161-ФЗ чек.</p>
             </div>
             <div class="glass-card reveal card-pad-sm">
                 <div class="process-num">05</div>
-                <h3>Релиз и SLA</h3>
-                <p>Деплой, обучение команды, поддержка 24/7.</p>
+                <h3>Релиз и SLA 24/7</h3>
+                <p>Деплой, обучение, поддержка.</p>
             </div>
         </div>
     </div>
 </section>
 
-<section id="stack" class="section">
+<section id="stack" class="section dark">
     <div class="container">
-        <p class="label reveal">Технологический стек</p>
+        <p class="label reveal">Стек</p>
         <h2 class="reveal">На чём строим</h2>
         <div class="stack-grid reveal">
-            <div class="stack-group">
-                <h3>Backend</h3>
-                <p>PHP, Go, Ruby, Node.js, Python, PostgreSQL, Redis</p>
-            </div>
-            <div class="stack-group">
-                <h3>Frontend</h3>
-                <p>React, Next.js, Vue.js, TypeScript, Tailwind</p>
-            </div>
-            <div class="stack-group">
-                <h3>Mobile</h3>
-                <p>Swift, Kotlin, React Native, Flutter</p>
-            </div>
-            <div class="stack-group">
-                <h3>Infrastructure</h3>
-                <p>Kubernetes, Docker, Yandex Cloud, Terraform</p>
-            </div>
-            <div class="stack-group">
-                <h3>Security</h3>
-                <p>Vault, SonarQube, PCI DSS compliance</p>
-            </div>
+            <div class="stack-group"><h3>Backend</h3><p>Go, PHP, Node.js, Python, PostgreSQL, Redis, Kafka</p></div>
+            <div class="stack-group"><h3>Frontend</h3><p>React, Next.js, Vue, TypeScript, Tailwind</p></div>
+            <div class="stack-group"><h3>Mobile</h3><p>Swift, Kotlin, React Native, Flutter, NFC/QR/SBP</p></div>
+            <div class="stack-group"><h3>Infra</h3><p>Kubernetes, Docker, Yandex Cloud, Terraform</p></div>
+            <div class="stack-group"><h3>Security</h3><p>Vault, SonarQube, PCI DSS, 161-ФЗ, 54-ФЗ</p></div>
+        </div>
+    </div>
+</section>
+
+<section id="demos" class="section">
+    <div class="container">
+        <p class="label reveal">Демо и портфолио</p>
+        <h2 class="reveal">Потрогайте руками</h2>
+        <p class="text reveal">3 избранных демо. Остальные — в каталоге и портфолио.</p>
+        <div class="demo-grid">
+            <a href="/demo/app/" class="demo-card reveal">
+                <div class="demo-accent" style="background:linear-gradient(135deg,#00b894,#55efc4)"></div>
+                <div class="demo-body">
+                    <h3>Все демо AXIIOM — 14 штук</h3>
+                    <p>Платёжный шлюз, лояльность, маркетплейс, аналитика, чат-бот, онбординг. С кодом и архитектурой.</p>
+                    <div class="demo-tags"><span>Fintech</span><span>Live</span><span>Code</span></div>
+                    <span class="demo-link">Открыть каталог →</span>
+                </div>
+            </a>
+            <a href="/projects/" class="demo-card reveal">
+                <div class="demo-accent" style="background:linear-gradient(135deg,#6c5ce7,#a29bfe)"></div>
+                <div class="demo-body">
+                    <h3>Портфолио — 20+ проектов</h3>
+                    <p>PadelPro, UniverID, LOVII, каталог, Grand Hotel, Foodie, eSIM, логистика, HR, касса, такси, AMBAR.</p>
+                    <div class="demo-tags"><span>Portfolio</span><span>Cases</span><span>Live</span></div>
+                    <span class="demo-link">Смотреть портфолио →</span>
+                </div>
+            </a>
+            <a href="https://app.lovii.ru/" target="_blank" rel="noopener" class="demo-card reveal">
+                <div class="demo-accent" style="background:linear-gradient(135deg,#fd79a8,#e84393)"></div>
+                <div class="demo-body">
+                    <h3>LOVII — платформа лояльности</h3>
+                    <p>White-label: веб + B2B + админка. +40% возврат, +35% LTV.</p>
+                    <div class="demo-tags"><span>React</span><span>PWA</span><span>Highload</span></div>
+                    <span class="demo-link">app.lovii.ru →</span>
+                </div>
+            </a>
+        </div>
+        <div class="center mt-40">
+            <a href="/demo/app/" class="btn btn-outline">Все демо</a>
+            <a href="/projects/" class="btn" style="margin-left:12px">Портфолио →</a>
         </div>
     </div>
 </section>
@@ -493,26 +470,27 @@
         <h2 class="reveal">Частые вопросы</h2>
         <div class="faq-grid reveal">
             <div class="glass-card card-pad-md">
-                <h3>Сколько стоит разработка?</h3>
-                <p>MVP финтех-платформы — от 2 млн руб. Точная смета после бесплатной Discovery-фазы.</p>
+                <h3>Сколько стоит?</h3>
+                <p>MVP финтех-платформы — от 2 млн ₽. Точная смета после бесплатной Discovery (1–2 недели).</p>
             </div>
             <div class="glass-card card-pad-md">
-                <h3>Работаете ли вы по 161-ФЗ и PCI DSS?</h3>
-                <p>Да, у нас есть опыт банковских интеграций и прохождения аудитов.</p>
+                <h3>161-ФЗ и PCI DSS?</h3>
+                <p>Да. Опыт банковских интеграций, аудитов, подготовки к сертификации.</p>
             </div>
             <div class="glass-card card-pad-md">
-                <h3>Как получить доступ к демо?</h3>
-                <p>Оставьте заявку — вышлем логины для тестовой среды (sandbox) в течение часа.</p>
+                <h3>Доступ к демо?</h3>
+                <p>Оставьте заявку — вышлем логины для sandbox в течение часа + схему архитектуры.</p>
             </div>
         </div>
+        <p class="demo-note reveal">Больше ответов — в <a href="/blog/" class="link-accent">блоге</a> и <a href="/docs/" class="link-accent">документации</a>.</p>
     </div>
 </section>
 
 <section class="section cta-section">
     <div class="container">
         <div class="glass-card cta-card reveal">
-            <h2>Готовы обсудить архитектуру вашего проекта?</h2>
-            <p>Расскажите о задаче, мы предложим решение и рассчитаем стоимость за 24 часа.</p>
+            <h2>Готовы обсудить архитектуру?</h2>
+            <p>Расскажите о задаче — предложим решение и смету за 24 часа. Discovery — бесплатно.</p>
             <div class="cta-contacts">
                 <a href="mailto:hello@axiiom.ru" class="btn">hello@axiiom.ru</a>
                 <a href="tel:+78129287478" class="btn btn-outline">+7 (812) 928-74-78</a>
@@ -521,162 +499,6 @@
     </div>
 </section>
 
-<section id="integrations" class="section dark">
-    <div class="container">
-        <p class="label reveal">Интеграции</p>
-        <h2 class="reveal">Мы интегрировали</h2>
-        <div class="partners-list reveal">
-            <span>Сбербанк</span>
-            <span>Альфа-Банк</span>
-            <span>Тинькофф</span>
-            <span>МТС</span>
-            <span>Билайн</span>
-            <span>Яндекс.Go</span>
-            <span>Яндекс</span>
-            <span>Aviasales</span>
-            <span>Ostrovok.ru</span>
-            <span>Сравни.ру</span>
-            <span>Ozon</span>
-            <span>Wildberries</span>
-            <span>СДЭК</span>
-            <span>1С</span>
-            <span>Магнит</span>
-            <span>Лента</span>
-            <span>Ашан</span>
-            <span>Метро</span>
-            <span>ЮMoney</span>
-            <span>Admitad</span>
-        </div>
-    </div>
-</section>
-
-<section id="demos" class="section">
-    <div class="container">
-        <p class="label reveal">Демо-платформы</p>
-        <h2 class="reveal">Потрогайте наши решения руками</h2>
-        <p class="text reveal">Не верьте на слово. Протестируйте работающие продукты. Доступ к админ-панелям предоставляем по запросу.</p>
-        <div class="demo-grid">
-            <a href="/demo/app/" class="demo-card reveal" data-demo>
-                <div class="demo-accent" style="background:linear-gradient(135deg,#00b894,#55efc4)"></div>
-                <div class="demo-body">
-                    <h3>Все демо AXIIOM</h3>
-                    <p>28+ интерактивных демо: платёжный шлюз, система лояльности, маркетплейс, чат-бот, аналитика и многое другое. Полный каталог с примерами кода и описанием.</p>
-                    <div class="demo-tags">
-                        <span>Fintech</span>
-                        <span>Code Samples</span>
-                        <span>Interactive</span>
-                    </div>
-                    <span class="demo-link">Открыть каталог &rarr;</span>
-                </div>
-            </a>
-            <a href="https://univerid.ru/" class="demo-card reveal" data-demo>
-                <div class="demo-accent" style="background:linear-gradient(135deg,#6c5ce7,#a29bfe)"></div>
-                <div class="demo-body">
-                    <h3>UniverID</h3>
-                    <p>Цифровая экосистема университета. Электронная зачётка, расписание, чат с деканатом, проход в общежитие — всё в одном приложении.</p>
-                    <div class="demo-tags">
-                        <span>HTML/CSS/JS</span>
-                        <span>UI/UX</span>
-                        <span>PWA</span>
-                    </div>
-                    <span class="demo-link">Смотреть демо &rarr;</span>
-                </div>
-            </a>
-            <a href="https://bestdeejay-design.github.io/padl/" class="demo-card reveal" data-demo>
-                <div class="demo-accent" style="background:linear-gradient(135deg,#fdcb6e,#f39c12)"></div>
-                <div class="demo-body">
-                    <h3>PadelPro</h3>
-                    <p>SAAS-платформа для управления падел-клубом: бронирование кортов, учёт клиентов, расписание, аналитика и финансы.</p>
-                    <div class="demo-tags">
-                        <span>SAAS</span>
-                        <span>Dashboard</span>
-                        <span>UI/UX</span>
-                    </div>
-                    <span class="demo-link">Смотреть демо &rarr;</span>
-                </div>
-            </a>
-            <a href="https://bestdeejay-design.github.io/catalog/" class="demo-card reveal" data-demo>
-                <div class="demo-accent" style="background:linear-gradient(135deg,#74b9ff,#0984e3)"></div>
-                <div class="demo-body">
-                    <h3>Каталог заведений</h3>
-                    <p>Каталог заведений России с поиском, фильтрацией, картой и подробной информацией о каждом месте.</p>
-                    <div class="demo-tags">
-                        <span>Vue</span>
-                        <span>API</span>
-                        <span>Карты</span>
-                    </div>
-                    <span class="demo-link">Смотреть демо &rarr;</span>
-                </div>
-            </a>
-            <a href="https://bestdeejay-design.github.io/booking/" class="demo-card reveal" data-demo>
-                <div class="demo-accent" style="background:linear-gradient(135deg,#2d3436,#636e72)"></div>
-                <div class="demo-body">
-                    <h3>Grand Hotel</h3>
-                    <p>Система бронирования номеров и услуг отеля: календарь доступности, онлайн-оплата, управление бронями.</p>
-                    <div class="demo-tags">
-                        <span>Vue</span>
-                        <span>Vite</span>
-                        <span>Booking</span>
-                    </div>
-                    <span class="demo-link">Смотреть демо &rarr;</span>
-                </div>
-            </a>
-            <a href="https://app.lovii.ru/" class="demo-card reveal" data-demo>
-                <div class="demo-accent" style="background:linear-gradient(135deg,#fd79a8,#e84393)"></div>
-                <div class="demo-body">
-                    <h3>Lovii — веб-приложение</h3>
-                    <p>Пользовательский интерфейс платформы лояльности: каталог, профиль, баллы, промокоды и история операций.</p>
-                    <div class="demo-tags">
-                        <span>React</span>
-                        <span>PWA</span>
-                        <span>UI/UX</span>
-                    </div>
-                    <span class="demo-link">Смотреть демо &rarr;</span>
-                </div>
-            </a>
-            <a href="https://b2b.lovii.ru/" class="demo-card reveal" data-demo>
-                <div class="demo-accent" style="background:linear-gradient(135deg,#a29bfe,#6c5ce7)"></div>
-                <div class="demo-body">
-                    <h3>Lovii — B2B-портал</h3>
-                    <p>Партнёрский портал для бизнеса: управление программами лояльности, отчёты и аналитика по клиентам.</p>
-                    <div class="demo-tags">
-                        <span>React</span>
-                        <span>B2B</span>
-                        <span>Dashboard</span>
-                    </div>
-                    <span class="demo-link">Смотреть демо &rarr;</span>
-                </div>
-            </a>
-            <a href="https://admin.lovii.ru/" class="demo-card reveal" data-demo>
-                <div class="demo-accent" style="background:linear-gradient(135deg,#55efc4,#00b894)"></div>
-                <div class="demo-body">
-                    <h3>Lovii — Админ-панель</h3>
-                    <p>Полная админ-панель платформы: пользователи, роли, контент, настройки системы и мониторинг.</p>
-                    <div class="demo-tags">
-                        <span>React</span>
-                        <span>Admin</span>
-                        <span>RBAC</span>
-                    </div>
-                    <span class="demo-link">Смотреть демо &rarr;</span>
-                </div>
-            </a>
-            <a href="https://bestdeejay-design.github.io/ambar/" class="demo-card reveal" data-demo>
-                <div class="demo-accent" style="background:linear-gradient(135deg,#d4a574,#8b5e3c)"></div>
-                <div class="demo-body">
-                    <h3>AMBAR</h3>
-                    <p>Инвестиционный лэндинг фуд-хаба и цифровой платформы в центре Санкт-Петербурга. Выручка 13,85 млн/мес, 30+ резидентов.</p>
-                    <div class="demo-tags">
-                        <span>Landing</span>
-                        <span>Food Tech</span>
-                        <span>Investment</span>
-                    </div>
-                    <span class="demo-link">Смотреть демо &rarr;</span>
-                </div>
-            </a>
-        </div>
-        <p class="demo-note reveal">Хотите подробнее о проекте или нужен доступ к админ-панели? <a href="#" onclick="openModal(); return false;" class="link-accent">Оставьте заявку</a> — ответим в течение часа.</p>
-    </div>
-</section>
 </main>
 
 <footer id="contact" class="footer">
@@ -697,26 +519,39 @@
                     <span class="contact-label">Санкт-Петербург</span>
                     <span class="contact-value">192029, г. Санкт-Петербург, Вн.тер. г. Муниципальный округ Невская Застава, ул. Профессора Качалова, дом 15А, литера А</span>
                 </div>
+                <div class="contact-item">
+                    <span class="contact-label">Быстрые ссылки</span>
+                    <p style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
+                        <a href="/industries/" class="btn btn-card" style="font-size:.75rem">Решения</a>
+                        <a href="/projects/" class="btn btn-card" style="font-size:.75rem">Портфолио</a>
+                        <a href="/blog/" class="btn btn-card" style="font-size:.75rem">Блог</a>
+                        <a href="/tools/" class="btn btn-card" style="font-size:.75rem">Инструменты</a>
+                        <a href="/calculator/" class="btn btn-card" style="font-size:.75rem">Калькулятор</a>
+                    </p>
+                </div>
             </div>
             <div class="footer-reqs reveal">
                 <p class="label">Реквизиты</p>
                 <p>ООО «Аксиома»</p>
                 <p>ИНН 7842223709 · ОГРН 1247800067690</p>
-                <p>ОКВЭД 62.01 — Разработка компьютерного программного обеспечения</p>
+                <p>ОКВЭД 62.01 — Разработка ПО</p>
                 <p class="label bank-label">Банк</p>
                 <p>АО БАНК «ПСКБ»</p>
                 <p>р/с 40702810200000906387</p>
                 <p>БИК 044030852</p>
+                <p class="label bank-label" style="margin-top:24px">SEO</p>
+                <p style="font-size:.8rem;line-height:1.6">Финтех-платформы, лояльность, highload, 161-ФЗ, PCI DSS, маркетплейсы, SaaS, логистика, HoReCa, CRM, ERP. <a href="/sitemap.xml" class="link-accent">Карта сайта</a></p>
             </div>
         </div>
         <div id="footerCopy"></div>
     </div>
 </footer>
+
 <div class="modal-overlay" id="demoModal">
     <div class="modal glass-card">
         <button class="modal-close" id="modalClose" aria-label="Закрыть">&times;</button>
-        <h3>Получить доступ к админке</h3>
-        <p class="modal-sub">Вместе с доступом вы получите архитектурную схему и оценку стоимости аналогичного решения для вашего бизнеса.</p>
+        <h3>Получить доступ к демо</h3>
+        <p class="modal-sub">Вы получите логины для sandbox + архитектурную схему и оценку стоимости аналогичного решения.</p>
         <form id="demoForm" class="modal-form">
             <label>Имя</label>
             <input type="text" name="name" placeholder="Иван Петров">
@@ -729,20 +564,15 @@
             <label>Демо-продукт</label>
             <select name="product">
                 <option value="">Выберите продукт</option>
-                <option value="univerid">UniverID</option>
-                <option value="foodie">Foodie</option>
-                <option value="app">App Demos</option>
-                <option value="qbis">Qbik</option>
-                <option value="padel">PadelPro</option>
-                <option value="catalog">Каталог заведений</option>
-                <option value="booking">Grand Hotel</option>
-                <option value="kodstudy">Код Доступа</option>
-                <option value="dajet">DAJET</option>
                 <option value="lovii">LOVII Platform</option>
-                <option value="ambar">AMBAR</option>
+                <option value="payment">Платежный шлюз</option>
+                <option value="marketplace">Маркетплейс</option>
+                <option value="loyalty">Программа лояльности</option>
+                <option value="analytics">Аналитика</option>
+                <option value="portfolio">Портфолио</option>
             </select>
             <button type="submit" class="btn">Отправить заявку</button>
-            <p class="form-mailto-note">Нажимая кнопку, откроется ваша почтовая программа с готовым письмом на наш адрес — останется только нажать «Отправить».</p>
+            <p class="form-mailto-note">Откроется почтовая программа с готовым письмом — останется нажать «Отправить».</p>
             <p class="modal-note">Отправляя форму, вы соглашаетесь с обработкой персональных данных.</p>
         </form>
     </div>
@@ -789,7 +619,6 @@ setTimeout(() => {
     });
 }, 2000);
 
-// Header scroll
 const header = document.getElementById('header');
 let ticking = false;
 window.addEventListener('scroll', () => {
@@ -802,7 +631,6 @@ window.addEventListener('scroll', () => {
     }
 }, { passive: true });
 
-// Cursor glow
 const cursor = document.createElement('div');
 cursor.className = 'cursor-glow';
 document.body.appendChild(cursor);
@@ -810,7 +638,6 @@ document.addEventListener('mousemove', (e) => {
     cursor.style.transform = `translate(${e.clientX - 400}px, ${e.clientY - 400}px)`;
 });
 
-// 3D tilt на карточках
 document.querySelectorAll('.card, .fintech-card, .sec-card, .case-card, .demo-card').forEach(card => {
     card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
@@ -827,7 +654,6 @@ document.querySelectorAll('.card, .fintech-card, .sec-card, .case-card, .demo-ca
     });
 });
 
-// Modal
 const modal = document.getElementById('demoModal');
 const modalClose = document.getElementById('modalClose');
 function openModal() { modal.classList.add('open'); document.body.style.overflow = 'hidden'; }
@@ -836,19 +662,6 @@ modalClose.addEventListener('click', closeModal);
 modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-// Demo card admin buttons
-document.querySelectorAll('.btn-admin').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const product = btn.dataset.product;
-        const select = document.getElementById('demoModal').querySelector('select[name="product"]');
-        if (product && select) select.value = product;
-        openModal();
-    });
-});
-
-// Form submit
 document.getElementById('demoForm').addEventListener('submit', (e) => {
     e.preventDefault();
     const form = e.target;
@@ -870,22 +683,19 @@ document.getElementById('demoForm').addEventListener('submit', (e) => {
     btn.style.background = 'var(--clr-accent2)';
     btn.disabled = true;
 
-    ym(109391253, 'reachGoal', 'form_demo');
-    gtag('event', 'form_demo');
+    try{ ym(109391253, 'reachGoal', 'form_demo'); }catch(_){}
+    try{ gtag('event', 'form_demo'); }catch(_){}
 
     window.location.href = 'mailto:hello@axiiom.ru?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
 
     setTimeout(function() { btn.textContent = 'Отправить заявку'; btn.style.background = ''; btn.disabled = false; closeModal(); }, 2000);
 });
-
 </script>
-<script src="/config.js?v=20260905"></script>
-<script src="/nav.js?v=20260905"></script>
+<script src="/config.js?v=20260912"></script>
+<script src="/nav.js?v=20260912"></script>
 <script>Nav.init({ cta: true, breadcrumbs: false });</script>
-<script src="/theme.js?v=20260905"></script>
-
-<script src="/metrika.js?v=20260905" defer></script>
-
+<script src="/theme.js?v=20260912"></script>
+<script src="/metrika.js?v=20260912" defer></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -893,9 +703,7 @@ document.getElementById('demoForm').addEventListener('submit', (e) => {
   gtag('js', new Date());
   gtag('config', 'G-HFS4BDGTV4');
 </script>
-
-  <script src="/preloader.js?v=20260905"></script>
-
+<script src="/preloader.js?v=20260912"></script>
 <script>
 (function() {
   var t = document.getElementById('navToggle');

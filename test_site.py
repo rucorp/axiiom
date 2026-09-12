@@ -130,6 +130,7 @@ def build_page_registry(nav_path):
     reg["/tools"] = {"type": "tool-index", "name": "Инструменты"}
     reg["/docs"] = {"type": "docs-index", "name": "Документация"}
     reg["/demo/app"] = {"type": "demo-index", "name": "Демо"}
+    reg["/projects"] = {"type": "projects-index", "name": "Портфолио"}
 
     for tp in tree_pages:
         url = tp["path"]
@@ -151,6 +152,10 @@ def build_page_registry(nav_path):
             ptype = "blog"
         elif parent == "/demo/app":
             ptype = "demo-sub"
+        elif parent == "/projects":
+            ptype = "projects"
+        elif url.startswith("/projects"):
+            ptype = "projects-index" if url == "/projects" else "projects"
         elif url == "/calculator":
             ptype = "calculator"
         elif url in ("/privacy", "/terms"):
@@ -173,6 +178,8 @@ def build_page_registry(nav_path):
             ptype = "industry-index"
         elif url == "/demo/app":
             ptype = "demo-index"
+        elif url == "/projects":
+            ptype = "projects-index"
         elif url == "/calculator":
             ptype = "calculator"
         elif url == "/privacy" or url == "/terms":
@@ -360,7 +367,7 @@ def baseline(page_type):
         b["breadcrumbs"] = "no"
         b["content-marker"] = "required"
 
-    if page_type in ("blog", "blog-index", "tool-sub", "tool-index", "industry-index", "demo-index", "calculator", "legal"):
+    if page_type in ("blog", "blog-index", "tool-sub", "tool-index", "industry-index", "demo-index", "projects-index", "projects", "calculator", "legal"):
         b["cta-btn"] = "no"
         b["content-marker"] = "required"
 
@@ -482,12 +489,12 @@ def check_google_fonts(content):
 
 
 def check_styles_css(content):
-    m = re.search(r'<link[^>]*rel\s*=\s*["\']stylesheet["\'][^>]*styles\.css', content, re.IGNORECASE)
+    m = re.search(r'<link[^>]*rel\s*=\s*["\']stylesheet["\'][^>]*styles\.css(?:\?v=\d+)?', content, re.IGNORECASE)
     return ("PASS", "linked") if m else ("FAIL", "NOT linked")
 
 
 def check_preloader_css(content):
-    has_link = bool(re.search(r'<link[^>]*rel\s*=\s*["\']stylesheet["\'][^>]*preloader\.css', content, re.IGNORECASE))
+    has_link = bool(re.search(r'<link[^>]*rel\s*=\s*["\']stylesheet["\'][^>]*preloader\.css(?:\?v=\d+)?', content, re.IGNORECASE))
     has_div = '<div id="preloader"' in content
     if has_link and has_div: return "PASS", "linked"
     if has_link and not has_div: return "WARN", "linked but no preloader div"
@@ -526,7 +533,7 @@ def check_ui(content, check_id):
 
 
 def check_script(content, script_src):
-    pat = rf'<script[^>]*src\s*=\s*["\']/?{re.escape(script_src.lstrip("/"))}["\'][^>]*>'
+    pat = rf'<script[^>]*src\s*=\s*["\']/?{re.escape(script_src.lstrip("/"))}(?:\?v=\d+)?["\'][^>]*>'
     return ("PASS", "loaded") if re.search(pat, content, re.IGNORECASE) else ("WARN", "NOT loaded")
 
 
@@ -563,6 +570,8 @@ def check_content_marker(content, page_type):
         "legal":          r'class\s*=\s*["\']legal["\']',
         "404":            r'class\s*=\s*["\']err["\']',
         "root":           r'hero',
+        "projects":       r'projects|demo-grid',
+        "projects-index": r'projects|demo-grid',
     }
     pat = pats.get(page_type)
     if not pat: return "FAIL", "no content marker for this page type"
