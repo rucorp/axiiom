@@ -1,0 +1,29 @@
+/* LOVII design tokens — restored build (theme.css) */
+:root {
+    --bg-color: #F8FAFC;
+    --text-color: #0F172A;
+    --text-secondary: #475569;
+    --accent-color: #0D9488;
+    --accent-light: #CCFBF1;
+    --card-bg: #FFFFFF;
+    --border-color: #E2E8F0;
+    --section-alt: #F1F5F9;
+    --gradient-primary: linear-gradient(135deg, #14B8A6, #0EA5E9);
+    --shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+    --shadow-hover: 0 8px 30px rgba(13, 148, 136, 0.18);
+    --radius: 16px;
+}
+
+[data-theme="dark"] {
+    --bg-color: #0F172A;
+    --text-color: #F1F5F9;
+    --text-secondary: #94A3B8;
+    --accent-color: #14B8A6;
+    --accent-light: rgba(20, 184, 166, 0.16);
+    --card-bg: #1E293B;
+    --border-color: #334155;
+    --section-alt: #1E293B;
+    --gradient-primary: linear-gradient(135deg, #14B8A6, #0EA5E9);
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 8px 30px rgba(13, 148, 136, 0.2);
+}

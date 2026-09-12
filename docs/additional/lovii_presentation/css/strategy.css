@@ -1,0 +1,37 @@
+/* LOVII strategy page — restored build (strategy.css) */
+
+.main { padding-top: 96px; }
+
+/* Hero metrics chips */
+.shm-label {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+/* Contact row (links under CTA) */
+.contact-row a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.contact-row a:hover { background: rgba(255, 255, 255, 0.26); }
+
+/* Section spacing for alternate backgrounds */
+.section-alt .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}

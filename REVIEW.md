@@ -42,8 +42,8 @@ axiiom/
 │
 ├── tools/                         # 12 utility tools
 │   ├── index.html                 # Tools listing page
-│   ├── nav.js / styles.css        # Tools-specific nav + styles
 │   └── {tool-name}/index.html     # Each is a standalone HTML app
+│                                  # (tool-specific styles live in main styles.css)
 │
 ├── industries/                    # 23 industry solution pages
 │   ├── index.html                 # Industries listing
@@ -193,8 +193,8 @@ Every page includes (in order):
 2. **sitemap.xml** doesn't include demo subpages (only `/demo/app/`) — should add individual demo URLs
 3. ~~**nav.js** had a Cyrillic URL `dostavka-ed%D1%8B.html` — RESOLVED: file renamed to `dostavka-edy.html`, sitemap updated~~
 4. **Industry pages** are `.html` flat files (not `index.html` in subdirs) — inconsistent with blog/demo pattern
-5. **Industry nav.js** loads separately at `/industries/nav.js` with `initIndustriesNav()` — not using the main Nav system
-6. **Tools nav.js** loads separately at `/tools/nav.js` — also not using main Nav
+5. ~~**Industry nav.js** loads separately at `/industries/nav.js` with `initIndustriesNav()` — not using the main Nav system~~ RESOLVED: both `/industries/nav.js` and `/tools/nav.js` were removed; all sections now use the unified `/nav.js` Nav system
+6. ~~**Tools nav.js** loads separately at `/tools/nav.js` — also not using main Nav~~ RESOLVED (see #5)
 7. ~~**Performance:** no critical CSS inlining — RESOLVED: critical CSS is now inlined in `index.html` `<head>` (restored), and `styles.css` loads with `media="print"` `onload` trick on `index.html` and `calculator/index.html`. Preloader still shows on every page load unless `_seen` is set.~~
 8. **No 301 redirects** — if pages move, old URLs will 404
 9. **404.html** is a full page but Nginx needs explicit `error_page 404` config (not in Dockerfile)
