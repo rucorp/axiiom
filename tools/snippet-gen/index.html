@@ -421,11 +421,20 @@ linkLoadBtn.addEventListener('click', function() {
     linkLoadBtn.disabled = true;
     linkLoadBtn.textContent = 'Загрузка...';
     showLinkStatus('', true);
+    function cleanUrl(url) {
+        try {
+            var u = new URL(url);
+            u.searchParams.delete('_cb');
+            return u.href;
+        } catch (e) { return url; }
+    }
     function fetchDirect(url) {
-        return fetch(withNoCache(url), { cache: 'no-store', headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' } })
+        // Без кастомных заголовков: Pragma/Cache-Control провоцируют CORS-префлайт
+        // и ломают сайты, отдающие простые GET-запросы. Свежесть даёт _cb в URL.
+        return fetch(withNoCache(url), { cache: 'no-store' })
             .then(function(resp) {
                 if (!resp.ok) throw new Error('http ' + resp.status);
-                var finalUrl = resp.url || url;
+                var finalUrl = cleanUrl(resp.url || url);
                 return resp.text().then(function(text) { return { text: text, finalUrl: finalUrl, via: 'direct' }; });
             });
     }
