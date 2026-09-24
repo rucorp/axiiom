@@ -359,6 +359,39 @@ function showLinkStatus(msg, ok) {
     linkStatus.style.color = ok ? 'var(--clr-accent)' : '#e74c3c';
 }
 
+function withNoCache(url) {
+    try {
+        var u = new URL(url);
+        u.searchParams.set('_cb', String(Date.now()));
+        return u.href;
+    } catch (e) { return url; }
+}
+
+function resolveUrl(value, base) {
+    if (!value) return '';
+    try { return new URL(value, base).href; } catch (e) { return value; }
+}
+
+function parseTags(text, baseUrl) {
+    var doc = new DOMParser().parseFromString(text, 'text/html');
+    function meta(sel) {
+        var el = doc.querySelector(sel);
+        return el ? (el.getAttribute('content') || '').trim() : '';
+    }
+    var title = meta('meta[property="og:title"]') || (doc.title || '').trim();
+    var desc = meta('meta[property="og:description"]')
+        || meta('meta[name="description"]')
+        || meta('meta[name="twitter:description"]');
+    var image = meta('meta[property="og:image"]')
+        || meta('meta[name="twitter:image"]')
+        || meta('meta[property="twitter:image"]');
+    if (!image) {
+        var linkImg = doc.querySelector('link[rel="image_src"]');
+        if (linkImg) image = (linkImg.getAttribute('href') || '').trim();
+    }
+    return { title: title, desc: desc, image: resolveUrl(image, baseUrl) };
+}
+
 function populateCards(title, desc, image, domain) {
     var cards = document.querySelectorAll('.preview-card');
     cards.forEach(function(card) {
@@ -367,53 +400,51 @@ function populateCards(title, desc, image, domain) {
         card.querySelector('.pv-desc').textContent = desc || '(не найден)';
         var imgWrap = card.querySelector('.pv-img-wrap');
         var img = card.querySelector('.pv-img');
+        img.onerror = function() { imgWrap.classList.remove('has-image'); };
         if (image) {
-            img.src = image + (image.indexOf('?') > -1 ? '&' : '?') + '_t=' + Date.now();
+            img.src = withNoCache(image);
             imgWrap.classList.add('has-image');
         } else {
-            img.src = '';
+            img.removeAttribute('src');
             imgWrap.classList.remove('has-image');
         }
     });
 }
 
 linkLoadBtn.addEventListener('click', function() {
-    var url = linkUrl.value.trim();
-    if (!url) { showLinkStatus('Введите URL', false); return; }
+    var raw = linkUrl.value.trim();
+    if (!raw) { showLinkStatus('Введите URL', false); return; }
+    if (!/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(raw)) raw = 'https://' + raw;
+    var target;
+    try { target = new URL(raw).href; }
+    catch (e) { showLinkStatus('Некорректный URL', false); return; }
     linkLoadBtn.disabled = true;
     linkLoadBtn.textContent = 'Загрузка...';
     showLinkStatus('', true);
-    fetch(url, { cache: 'no-store' })
-        .then(function(resp) { return resp.text(); })
-        .then(function(text) {
-            function getMeta(html, name) {
-                var re = new RegExp('<meta[^>]+(?:property|name)=[\"\\\']' + name + '[\"\\\'][^>]+content=[\"\\\']([^\"\\\']*)[\"\\\']', 'i');
-                var m = html.match(re);
-                if (m) return m[1];
-                re = new RegExp('<meta[^>]+content=[\"\\\']([^\"\\\']*)[\"\\\'][^>]+(?:property|name)=[\"\\\']' + name + '[\"\\\']', 'i');
-                m = html.match(re);
-                return m ? m[1] : '';
-            }
-            var title = getMeta(text, 'og:title');
-            var desc = getMeta(text, 'og:description');
-            var image = getMeta(text, 'og:image');
-            if (!title) {
-                var tm = text.match(/<title>([^<]*)<\/title>/i);
-                title = tm ? tm[1].trim() : '';
-            }
-            if (!desc) {
-                desc = getMeta(text, 'description');
-            }
+    fetch(withNoCache(target), { cache: 'no-store', headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' } })
+        .then(function(resp) {
+            if (!resp.ok) throw new Error('http ' + resp.status);
+            var finalUrl = resp.url || target;
+            return resp.text().then(function(text) { return { text: text, finalUrl: finalUrl }; });
+        })
+        .then(function(data) {
+            var parsed = parseTags(data.text, data.finalUrl);
             var domain = '';
-            try { domain = new URL(url).hostname; } catch(e) {}
-            populateCards(title, desc, image, domain);
-            linkOgRaw.textContent = JSON.stringify({ ogTitle: title || '', ogDescription: desc || '', ogImage: image || '' }, null, 2);
-            showLinkStatus('Готово', true);
+            try { domain = new URL(data.finalUrl).hostname; } catch (e) {}
+            populateCards(parsed.title, parsed.desc, parsed.image, domain);
+            linkOgRaw.textContent = JSON.stringify({
+                url: data.finalUrl,
+                fetchedAt: new Date().toLocaleString('ru-RU'),
+                ogTitle: parsed.title || '',
+                ogDescription: parsed.desc || '',
+                ogImage: parsed.image || ''
+            }, null, 2);
+            showLinkStatus('Готово — теги прямо с сайта. Мессенджеры могут показывать старое из своего кэша.', true);
             linkLoadBtn.disabled = false;
             linkLoadBtn.textContent = 'Загрузить';
         })
         .catch(function() {
-            showLinkStatus('Не удалось загрузить — проверьте URL', false);
+            showLinkStatus('Не удалось загрузить: чужой сайт блокирует CORS или недоступен. Свои страницы axiiom.ru грузятся напрямую.', false);
             linkLoadBtn.disabled = false;
             linkLoadBtn.textContent = 'Загрузить';
         });
