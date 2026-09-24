@@ -421,12 +421,32 @@ linkLoadBtn.addEventListener('click', function() {
     linkLoadBtn.disabled = true;
     linkLoadBtn.textContent = 'Загрузка...';
     showLinkStatus('', true);
-    fetch(withNoCache(target), { cache: 'no-store', headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' } })
-        .then(function(resp) {
-            if (!resp.ok) throw new Error('http ' + resp.status);
-            var finalUrl = resp.url || target;
-            return resp.text().then(function(text) { return { text: text, finalUrl: finalUrl }; });
-        })
+    function fetchDirect(url) {
+        return fetch(withNoCache(url), { cache: 'no-store', headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' } })
+            .then(function(resp) {
+                if (!resp.ok) throw new Error('http ' + resp.status);
+                var finalUrl = resp.url || url;
+                return resp.text().then(function(text) { return { text: text, finalUrl: finalUrl, via: 'direct' }; });
+            });
+    }
+    function fetchViaProxy(url) {
+        var proxies = [
+            'https://api.allorigins.win/raw?url=',
+            'https://api.codetabs.com/v1/proxy?quest='
+        ];
+        var chain = Promise.reject(new Error('start'));
+        proxies.forEach(function(base) {
+            chain = chain.catch(function() {
+                return fetch(base + encodeURIComponent(withNoCache(url)), { cache: 'no-store' })
+                    .then(function(resp) {
+                        if (!resp.ok) throw new Error('http ' + resp.status);
+                        return resp.text().then(function(text) { return { text: text, finalUrl: url, via: 'proxy' }; });
+                    });
+            });
+        });
+        return chain;
+    }
+    fetchDirect(target).catch(function() { return fetchViaProxy(target); })
         .then(function(data) {
             var parsed = parseTags(data.text, data.finalUrl);
             var domain = '';
@@ -434,17 +454,22 @@ linkLoadBtn.addEventListener('click', function() {
             populateCards(parsed.title, parsed.desc, parsed.image, domain);
             linkOgRaw.textContent = JSON.stringify({
                 url: data.finalUrl,
+                via: data.via,
                 fetchedAt: new Date().toLocaleString('ru-RU'),
                 ogTitle: parsed.title || '',
                 ogDescription: parsed.desc || '',
                 ogImage: parsed.image || ''
             }, null, 2);
-            showLinkStatus('Готово — теги прямо с сайта. Мессенджеры могут показывать старое из своего кэша.', true);
+            if (data.via === 'proxy') {
+                showLinkStatus('Готово — теги с сайта (через прокси: сайт блокирует прямые запросы). Мессенджеры могут показывать старое из своего кэша.', true);
+            } else {
+                showLinkStatus('Готово — теги прямо с сайта. Мессенджеры могут показывать старое из своего кэша.', true);
+            }
             linkLoadBtn.disabled = false;
             linkLoadBtn.textContent = 'Загрузить';
         })
         .catch(function() {
-            showLinkStatus('Не удалось загрузить: чужой сайт блокирует CORS или недоступен. Свои страницы axiiom.ru грузятся напрямую.', false);
+            showLinkStatus('Не удалось загрузить даже через прокси — сайт недоступен или блокирует ботов. Попробуй другой URL.', false);
             linkLoadBtn.disabled = false;
             linkLoadBtn.textContent = 'Загрузить';
         });
