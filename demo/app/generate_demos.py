@@ -1027,6 +1027,35 @@ document.getElementById('pp-modal').addEventListener('click',function(e){if(e.ta
 })();</script>""",
         "widget_css": "",
         "widget_js": ""
+    },
+    {
+        # Standalone-демо: живые файлы лежат в demo/app/resume-3-themes/
+        # (index.html + styles.css + app.js + assets — копия шаблона резюме).
+        # Генератор их НЕ перезаписывает (см. standalone-ветку в main()).
+        "slug": "resume-3-themes",
+        "title": "Резюме 3 темы",
+        "desc": "Шаблон персональной витрины CTO/CDTO/CPO: 3 темы Deck/Brief/CLI, RU/EN, воронки найм/проект. Ноль внешних зависимостей.",
+        "meta_desc": "Демо шаблона персональной витрины CTO/CDTO/CPO: 3 темы (Deck, Brief, CLI), RU/EN, воронки найм/проект. Ноль зависимостей, адаптив 344–1440.",
+        "code": """// Переключение темы — как в шаблоне: radio-инпуты + URL-параметры
+document.querySelector('input[name="theme"][value="brief"]').checked = true;
+document.querySelector('input[name="lang"][value="en"]').checked = true;
+
+// Или deep-link без JS-кликов:
+// resume-3-themes/?theme=terminal&lang=en
+// темы: deck | brief | terminal; языки: ru | en
+// состояние дублируется в localStorage (kz-theme / kz-lang)""",
+        "features": ["3 темы: Deck, Brief, CLI-терминал", "RU/EN без перезагрузки страницы", "Pre-release честность: статусы отдельно", "Адаптив 344–1440 px", "Ноль зависимостей: HTML + CSS + JS", "Deep-link ?theme=&lang= и CLI-команды"],
+        "tags": ["HTML", "CSS", "JavaScript"],
+        "gradient": "#1B2A4A,#8CA9C7",
+        "standalone": True,
+        "widget_html": """<div class="dw" style="text-align:center;padding:32px 24px">
+  <div style="font-size:40px;margin-bottom:12px">📄</div>
+  <h3 class="dw-t">Резюме 3 темы — standalone-демо</h3>
+  <p style="font-size:14px;color:var(--clr-text);margin-bottom:16px">Живая страница: <a href="./" style="color:var(--clr-accent)">resume-3-themes/</a> — Deck / Brief / CLI × RU / EN</p>
+</div>
+<style>.dw{margin:12px 0;background:var(--clr-surface);border:1px solid var(--clr-border);border-radius:16px;padding:24px}.dw-t{font-size:16px;font-weight:600;margin:0 0 16px;color:var(--clr-heading)}</style>""",
+        "widget_css": "",
+        "widget_js": ""
     }
 ]
 
@@ -1305,9 +1334,13 @@ def make_features(features, color):
 
 def main():
     base = os.path.dirname(os.path.abspath(__file__))
+    n = 0
 
     for demo in DEMOS:
         slug = demo["slug"]
+        if demo.get("standalone"):
+            print(f"⊘ {slug}/ — standalone, пропущено (файлы ведутся вручную)")
+            continue
         color = demo["gradient"].split(",")[0].strip("#")
         r, g, b = hex_to_rgb(demo["gradient"].split(",")[0].strip())
 
@@ -1335,8 +1368,9 @@ def main():
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(html)
         print(f"✓ {slug}/index.html")
+        n += 1
 
-    print(f"\nВсего создано: {len(DEMOS)} страниц")
+    print(f"\nВсего создано: {n} страниц")
 
 
 if __name__ == "__main__":
