@@ -431,7 +431,7 @@ SRS разделён на два тома. В зависимости от ваш
 ### 2.5 Integration Context Map (Context Map)
 **Источник:** Раздел 5.7.4 исходного документа.
 
-![Рис. 1: Контекстная диаграмма интеграций — API Gateway, сервисы, БД, внешние системы](exports/diagrams/diagram-01.png)
+![Рис. 1: Контекстная диаграмма интеграций — API Gateway, сервисы, БД, внешние системы](exports/diagrams/diagram-01.webp)
 
 #### 2.5.1 Store API Integration Details
 
@@ -632,7 +632,7 @@ SRS разделён на два тома. В зависимости от ваш
 
 #### 2.10.1 Order
 
-![Рис. 2: Order — State Machine (создан → оплачен → сборка → доставка → завершён)](exports/diagrams/diagram-02.png)
+![Рис. 2: Order — State Machine (создан → оплачен → сборка → доставка → завершён)](exports/diagrams/diagram-02.webp)
 
 | Переход | Триггер | Preconditions | Postconditions | Инициатор | Событие |
 |---------|---------|---------------|----------------|-----------|---------|
@@ -649,7 +649,7 @@ SRS разделён на два тома. В зависимости от ваш
 
 #### 2.10.2 Payment
 
-![Рис. 3: Payment — State Machine (ожидание → обработан → refund)](exports/diagrams/diagram-03.png)
+![Рис. 3: Payment — State Machine (ожидание → обработан → refund)](exports/diagrams/diagram-03.webp)
 
 | Переход | Триггер | Preconditions | Postconditions | Инициатор | Событие |
 |---------|---------|---------------|----------------|-----------|---------|
@@ -661,7 +661,7 @@ SRS разделён на два тома. В зависимости от ваш
 
 #### 2.10.3 Delivery
 
-![Рис. 4: Delivery — State Machine (ожидание → в пути → доставлен → возврат)](exports/diagrams/diagram-04.png)
+![Рис. 4: Delivery — State Machine (ожидание → в пути → доставлен → возврат)](exports/diagrams/diagram-04.webp)
 
 | Переход | Триггер | Preconditions | Postconditions | Инициатор | Событие |
 |---------|---------|---------------|----------------|-----------|---------|
@@ -674,7 +674,7 @@ SRS разделён на два тома. В зависимости от ваш
 
 #### 2.10.4 Courier
 
-![Рис. 5: Courier — State Machine (свободен → назначен → занят → офлайн)](exports/diagrams/diagram-05.png)
+![Рис. 5: Courier — State Machine (свободен → назначен → занят → офлайн)](exports/diagrams/diagram-05.webp)
 
 | Переход | Триггер | Preconditions | Postconditions | Инициатор | Событие |
 |---------|---------|---------------|----------------|-----------|---------|
@@ -689,7 +689,7 @@ SRS разделён на два тома. В зависимости от ваш
 
 #### 2.10.5 Picker Task
 
-![Рис. 6: Picker Task — State Machine (назначена → сборка → замены → завершена)](exports/diagrams/diagram-06.png)
+![Рис. 6: Picker Task — State Machine (назначена → сборка → замены → завершена)](exports/diagrams/diagram-06.webp)
 
 | Переход | Триггер | Preconditions | Postconditions | Инициатор | Событие |
 |---------|---------|---------------|----------------|-----------|---------|
@@ -709,31 +709,31 @@ Sequence Diagrams для 5 критических сценариев. Участ
 
 **Сценарий:** Клиент выбирает товары, оформляет заказ, оплачивает онлайн через Т-Банк.
 
-![Рис. 7: Sequence — Оформление заказа (клиент → корзина → оплата → подтверждение)](exports/diagrams/diagram-07.png)
+![Рис. 7: Sequence — Оформление заказа (клиент → корзина → оплата → подтверждение)](exports/diagrams/diagram-07.webp)
 
 #### 2.11.2 Сборка с заменой товара
 
 **Сценарий:** Пикер собирает заказ, обнаруживает отсутствующий товар, звонит клиенту, предлагает замену.
 
-![Рис. 8: Sequence — Сборка с заменой товара (пикер → система → звонок клиенту)](exports/diagrams/diagram-08.png)
+![Рис. 8: Sequence — Сборка с заменой товара (пикер → система → звонок клиенту)](exports/diagrams/diagram-08.webp)
 
 #### 2.11.3 Назначение курьера (Dispatch)
 
 **Сценарий:** Заказ собран — диспетчер назначает ближайшего курьера, рассчитывает ETA, уведомляет клиента.
 
-![Рис. 9: Sequence — Назначение курьера (диспетчер → OSRM → ETA → уведомление)](exports/diagrams/diagram-09.png)
+![Рис. 9: Sequence — Назначение курьера (диспетчер → OSRM → ETA → уведомление)](exports/diagrams/diagram-09.webp)
 
 #### 2.11.4 Refund
 
 **Сценарий:** Клиент запрашивает возврат, система инициирует refund через платёжный шлюз.
 
-![Рис. 10: Sequence — Refund (клиент → запрос → платежный шлюз → подтверждение)](exports/diagrams/diagram-10.png)
+![Рис. 10: Sequence — Refund (клиент → запрос → платежный шлюз → подтверждение)](exports/diagrams/diagram-10.webp)
 
 #### 2.11.5 Offline-sync курьера
 
 **Сценарий:** Курьер теряет интернет во время доставки, отмечает доставку офлайн, данные синхронизируются позже.
 
-![Рис. 11: Sequence — Offline-sync курьера (офлайн hold → batch sync → сервер)](exports/diagrams/diagram-11.png)
+![Рис. 11: Sequence — Offline-sync курьера (офлайн hold → batch sync → сервер)](exports/diagrams/diagram-11.webp)
 
 ---
 
@@ -1252,7 +1252,7 @@ func IdempotencyMiddleware(rdb *redis.Client) func(http.Handler) http.Handler {
 
 Миграция выполняется от наименее рискованного к наиболее рискованному. Каждый сервис проходит этапы: Double Write → Validation → Cut-over → Monolith decommission.
 
-![Рис. 12: Порядок миграции сервисов — Auth → Notifications → Catalog → Orders → Payments → Delivery → Dispatch](exports/diagrams/diagram-12.png)
+![Рис. 12: Порядок миграции сервисов — Auth → Notifications → Catalog → Orders → Payments → Delivery → Dispatch](exports/diagrams/diagram-12.webp)
 
 | Приоритет | Сервис | Риск | Обоснование |
 |-----------|--------|------|-------------|
@@ -1267,7 +1267,7 @@ func IdempotencyMiddleware(rdb *redis.Client) func(http.Handler) http.Handler {
 
 На этапе Double Write каждый сервис пишет одновременно в старую (монолит) и новую (микросервис) БД. Консистентность обеспечивается через Transactional Outbox:
 
-![Рис. 13: Double Write — синхронная запись в старую и новую БД + Transactional Outbox](exports/diagrams/diagram-13.png)
+![Рис. 13: Double Write — синхронная запись в старую и новую БД + Transactional Outbox](exports/diagrams/diagram-13.webp)
 
 **Reconciliation job:**
 
@@ -1320,7 +1320,7 @@ Cut-over (переключение трафика на новый сервис) 
 
 **Reverse replication:**
 
-![Рис. 14: Reverse replication — синхронизация данных из новой БД обратно в старую](exports/diagrams/diagram-14.png)
+![Рис. 14: Reverse replication — синхронизация данных из новой БД обратно в старую](exports/diagrams/diagram-14.webp)
 
 #### 2.14.5 Миграция исторических данных
 
@@ -1425,7 +1425,7 @@ Content-Type: application/json
 
 **Схема работы:**
 
-![Рис. 15: Rate Limits — схема работы Nginx + Redis (sliding window, burst, лимиты по ролям)](exports/diagrams/diagram-15.png)
+![Рис. 15: Rate Limits — схема работы Nginx + Redis (sliding window, burst, лимиты по ролям)](exports/diagrams/diagram-15.webp)
 
 **Whitelist:**
 
@@ -2734,7 +2734,7 @@ POST /table?sources={магазин}&destinations={адрес_клиента} �
 
 **Workflow:**
 
-![Рис. 16: Dispute & Chargeback — Workflow (спор создан → расследование → решение → refund)](exports/diagrams/diagram-16.png)
+![Рис. 16: Dispute & Chargeback — Workflow (спор создан → расследование → решение → refund)](exports/diagrams/diagram-16.webp)
 
 **Типы споров:**
 
@@ -3175,7 +3175,7 @@ final_fee = base_delivery_fee * product(multipliers)
 
 ### 4.7 Feature Map (Карта функциональных требований)
 
-![Feature Map](exports/diagrams/feature-map.png)
+![Feature Map](exports/diagrams/feature-map.webp)
 
 - **Регистрация и безопасность**
   - Вход по телефону
@@ -3295,7 +3295,7 @@ final_fee = base_delivery_fee * product(multipliers)
 ### 5.2 CI/CD Pipeline
 **Источник:** Раздел 5.10.2 исходного документа.
 
-![Рис. 17: CI/CD Pipeline — PR → проверки → сборка → registry → staging → E2E → approval → prod](exports/diagrams/diagram-17.png)
+![Рис. 17: CI/CD Pipeline — PR → проверки → сборка → registry → staging → E2E → approval → prod](exports/diagrams/diagram-17.webp)
 
 **Ключевые правила:**
 
@@ -3674,7 +3674,7 @@ curl -f https://health.example.com/api/health && echo "OK"
 
 #### 6.5.3 Workflow проверки
 
-![Рис. 18: Fraud Detection — Workflow проверки (правила → скоринг → блокировка / ручная проверка)](exports/diagrams/diagram-18.png)
+![Рис. 18: Fraud Detection — Workflow проверки (правила → скоринг → блокировка / ручная проверка)](exports/diagrams/diagram-18.webp)
 
 #### 6.5.4 Интеграции
 
