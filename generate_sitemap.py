@@ -47,6 +47,7 @@ priority_map = {
     "https://axiiom.ru/tools/": 0.9,
     "https://axiiom.ru/projects/": 0.9,
     "https://axiiom.ru/docs/": 0.6,
+    "https://axiiom.ru/mock-services/": 0.8,
     "https://axiiom.ru/demo/app/": 0.8,
     "https://axiiom.ru/calculator/": 0.8,
 }
@@ -57,6 +58,7 @@ freq_map = {
     "https://axiiom.ru/tools/": "weekly",
     "https://axiiom.ru/projects/": "weekly",
     "https://axiiom.ru/docs/": "monthly",
+    "https://axiiom.ru/mock-services/": "weekly",
     "https://axiiom.ru/demo/app/": "monthly",
 }
 
@@ -71,6 +73,8 @@ def prio(url: str) -> float:
         return 0.8
     if "/tools/" in url or "/demo/app/" in url:
         return 0.6
+    if "/mock-services/" in url:
+        return 0.6
     if "/docs/" in url:
         return 0.4
     if "/privacy/" in url or "/terms/" in url:
@@ -83,6 +87,8 @@ def freq(url: str) -> str:
     if "/blog/" in url:
         return "weekly"
     if "/docs/" in url:
+        return "monthly"
+    if "/mock-services/" in url:
         return "monthly"
     return "monthly"
 
