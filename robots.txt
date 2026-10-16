@@ -19,6 +19,9 @@ Disallow: /docs/feature-map-viz/
 Disallow: /docs/feature-map.html
 Disallow: /docs/feature-map/
 
+# Публичная документация mock-services доступна для обхода и индексации
+Allow: /mock-services/
+
 # Разрешаем основное
 Allow: /blog/
 Allow: /industries/

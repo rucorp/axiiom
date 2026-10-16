@@ -24,7 +24,7 @@ axiiom/
 ├── nav.src.js                     # Source for nav.js (pre-minify)
 ├── styles.src.css                 # Source for styles.css (pre-minify)
 ├── DESIGN.md                      # Design system contract
-├── test_site.py                   # 79-page regression suite
+├── test_site.py                   # 74-page regression suite
 ├── test-report.html               # Latest test report output
 ├── generate_sitemap.py            # Sitemap generator
 ├── fill_industries.py             # Industry data helper
@@ -190,7 +190,7 @@ Every page includes (in order):
 ## Known Issues / Gotchas
 
 1. ~~**sitemap.xml** had a duplicate homepage entry — RESOLVED: sitemap now has 79 unique URLs, no duplicates~~
-2. **sitemap.xml** doesn't include demo subpages (only `/demo/app/`) — should add individual demo URLs
+2. ~~**sitemap.xml** omitted demo subpages~~ RESOLVED: sitemap is generated from indexable HTML, excludes noindex pages and the demo template; currently 139 URLs
 3. ~~**nav.js** had a Cyrillic URL `dostavka-ed%D1%8B.html` — RESOLVED: file renamed to `dostavka-edy.html`, sitemap updated~~
 4. **Industry pages** are `.html` flat files (not `index.html` in subdirs) — inconsistent with blog/demo pattern
 5. ~~**Industry nav.js** loads separately at `/industries/nav.js` with `initIndustriesNav()` — not using the main Nav system~~ RESOLVED: both `/industries/nav.js` and `/tools/nav.js` were removed; all sections now use the unified `/nav.js` Nav system
@@ -212,7 +212,7 @@ Every page includes (in order):
 - Canonical URLs on all pages
 - `robots.txt`: allows all, disallows `/admin/` and `/demo/*/admin/`
 - Privacy/Terms pages: `<meta name="robots" content="noindex, follow">`
-- Sitemap: 79 URLs (main, 23 industries, 12 tools, 7 blog, calculator, demo hub, 16 demos, docs pages, privacy, terms)
+- Sitemap: 139 indexable URLs; excludes `noindex` pages (privacy/terms), 404 files and the demo scaffold. Mock-services pages are prerendered in HTML and included.
 
 ---
 
@@ -241,8 +241,6 @@ window.AXIIOM_CONFIG = {
 
 ## Active Issues / Tasks Remaining
 
-1. Add individual demo subpage URLs to sitemap.xml
-2. Consider normalizing URL structure (industries should use subdirectories instead of `.html`)
-3. Set up Nginx error_page 404 config in Dockerfile
-4. Clean up footer double-rendering issue
-5. `test_site.py --dynamic` flag validates both themes (14/14 PASS)
+1. Consider normalizing industry URLs only with a redirect plan; existing `.html` canonicals are valid.
+2. Clean up footer double-rendering issue.
+3. Add `test_site.py --dynamic` (Playwright) to a browser-based CI job when the dependency is available.

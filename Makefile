@@ -1,11 +1,11 @@
 SHELL := /bin/sh
 ROOT := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
-.PHONY: all generate test build clean
+.PHONY: all generate test build clean generate-mock-services-seo
 
 all: generate test
 
-generate: generate-docs generate-demos generate-industries generate-sitemap
+generate: generate-docs generate-demos generate-industries generate-mock-services-seo generate-sitemap
 
 generate-docs:
 	cd $(ROOT)docs && python3 generate_docs.py
@@ -17,10 +17,14 @@ generate-industries:
 	cd $(ROOT) && python3 generate_industries.py
 	cd $(ROOT) && python3 generate_industries_index.py
 
+generate-mock-services-seo:
+	python3 $(ROOT)patch_mock_services_seo.py
+
 generate-sitemap:
 	cd $(ROOT) && python3 generate_sitemap.py
 
 test:
+	python3 $(ROOT)test_seo.py
 	python3 $(ROOT)test_site.py --exit-code
 
 test-serve:
