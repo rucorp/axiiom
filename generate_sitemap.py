@@ -9,8 +9,9 @@
 - Портфолио /projects/ имеет высокий приоритет
 - Приоритеты: главная 1.0, блог/индустрии/тулзы/проекты 0.9, демо/калькулятор 0.8, отраслевые/блог-посты 0.7, доки/тулзы/демки 0.6, privacy 0.3, визуализации 0.2
 """
-from datetime import datetime, timezone
+from html.parser import HTMLParser
 from pathlib import Path
+import re
 
 root = Path(__file__).resolve().parent
 
@@ -21,15 +22,53 @@ EXCLUDE_PARTS = (
 )
 EXCLUDE_FILES = {"test-report.html", "404.html", "feature-map.html"}  # служебные/noindex/визуализации
 
+
+class HeadMetaParser(HTMLParser):
+    """Read indexing directives without third-party HTML dependencies."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.in_head = False
+        self.robots = []
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag.lower() == "head":
+            self.in_head = True
+        elif tag.lower() == "meta" and self.in_head:
+            name = (attrs.get("name") or "").lower()
+            if name in {"robots", "googlebot", "yandex"}:
+                self.robots.append((attrs.get("content") or "").lower())
+
+    def handle_endtag(self, tag):
+        if tag.lower() == "head":
+            self.in_head = False
+
+
+def has_noindex(p: Path) -> bool:
+    """Honor explicit noindex directives so sitemap and page policy agree."""
+    parser = HeadMetaParser()
+    try:
+        parser.feed(p.read_text("utf-8", errors="replace"))
+    except OSError:
+        return False
+    return any(re.search(r"(?:^|[,\s])(?:noindex|none)(?:$|[,\s])", value)
+               for value in parser.robots)
+
+
 def is_excluded(p: Path) -> bool:
     rel = p.relative_to(root).as_posix()
     if rel in EXCLUDE_FILES or p.name in EXCLUDE_FILES:
         return True
+    # A reusable demo scaffold is not a real user-facing demo page.
+    if "demo-template" in p.parts:
+        return True
     return any(ex in rel for ex in EXCLUDE_PARTS)
+
 
 pages = []
 for p in root.rglob("*.html"):
-    if is_excluded(p):
+    if is_excluded(p) or has_noindex(p):
         continue
     pages.append("/" + p.relative_to(root).as_posix())
 
@@ -92,8 +131,6 @@ def freq(url: str) -> str:
         return "monthly"
     return "monthly"
 
-today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-
 urls = sorted({url_of(p) for p in pages})
 lines = [
     '<?xml version="1.0" encoding="UTF-8"?>',
@@ -103,7 +140,6 @@ for u in urls:
     lines += [
         "  <url>",
         "    <loc>" + u + "</loc>",
-        "    <lastmod>" + today + "</lastmod>",
         "    <changefreq>" + freq(u) + "</changefreq>",
         "    <priority>" + str(prio(u)) + "</priority>",
         "  </url>",

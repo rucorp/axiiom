@@ -1,0 +1,20 @@
+.git
+.github
+**/__pycache__/
+**/*.py[cod]
+*.py
+**/*.py
+*.md
+**/*.md
+test-report.html
+
+# Internal/source-only documentation excluded from robots.txt and sitemap.
+docs/archive/
+docs/source/
+docs/additional/
+docs/references/
+docs/SRS-main/
+docs/visualizations/
+docs/feature-map-viz/
+docs/feature-map/
+docs/feature-map.html

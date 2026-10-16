@@ -119,7 +119,7 @@ html = f'''<!DOCTYPE html>
     <meta name="theme-color" content="#0A0A0F">
     <script>try{{var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'');document.documentElement.setAttribute('data-theme',t)}}catch(e){{}}</script>
     <title>Отраслевые решения — 30 кейсов AXIIOM | Fintech, HoReCa, B2B, SaaS</title>
-    <meta name="description" content="30 отраслевых решений AXIIOM: финтех (KYC, кошельки, P2P, трейдинг, токенизация), HoReCa (рестораны, доставка, отели, фитнес), B2B (CRM, ERP, логистика, стройка), SaaS (обучение, фриланс, IoT, аналитика). Кейсы, модули, стек, интеграции, сроки от 6 недель.">
+    <meta name="description" content="Отраслевые IT-решения AXIIOM для финтеха, HoReCa, B2B и SaaS: кейсы разработки, интеграции, сроки и оценки стоимости для 30 направлений.">
     <link rel="canonical" href="https://axiiom.ru/industries/">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
