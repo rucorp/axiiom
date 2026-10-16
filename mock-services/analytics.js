@@ -51,48 +51,54 @@
   });
   window.addEventListener('popstate', track);
 
-  // Сквозной CTA: помогает читателю документации перейти от тестовой интеграции
-  // к обсуждению разработки с AXIIOM. Встраивается после гидратации VitePress.
+  // Сквозной CTA: компактная карточка внизу левого сайдбара документации.
+  // ВАЖНО про клик: ссылка ведёт на same-origin (https://axiiom.ru/#contact),
+  // и роутер VitePress перехватывает такие переходы как «внутренние» — вместо
+  // главной сайта открывался индекс мок-сервисов (/mock-services/#contact),
+  // а якоря контактов там нет. Поэтому клик обрабатываем вручную: гасим
+  // событие и делаем полную навигацию на главную к блоку контактов.
+  var CTA_URL = 'https://axiiom.ru/#contact';
+
   function ensureCtaStyles() {
     if (document.getElementById('axiiom-mock-cta-style')) return;
     var style = document.createElement('style');
     style.id = 'axiiom-mock-cta-style';
     style.textContent = [
-      '.axiiom-mock-cta{margin:2.5rem 0 1rem;padding:1.25rem 1.5rem;border:1px solid var(--vp-c-divider,#d8d8d8);border-radius:12px;background:var(--vp-c-bg-soft,#f6f6f7);color:var(--vp-c-text-1,#333)}',
-      '.axiiom-mock-cta h2{margin:0 0 .5rem;font-size:1.2rem;line-height:1.4}',
-      '.axiiom-mock-cta p{margin:.4rem 0 1rem;color:var(--vp-c-text-2,#555)}',
-      '.axiiom-mock-cta a{display:inline-block;padding:.55rem .9rem;border-radius:8px;background:var(--vp-c-brand-1,#3451b2);color:#fff;text-decoration:none;font-weight:600}',
-      '.axiiom-mock-cta a:hover{opacity:.88}',
-      '@media(prefers-reduced-motion:reduce){.axiiom-mock-cta a{transition:none}}'
+      '.axiiom-mock-cta{margin:1.5rem 1rem 2rem;padding:1rem 1.1rem;border:1px solid var(--vp-c-divider,#d8d8d8);border-radius:10px;background:var(--vp-c-bg-soft,#f6f6f7)}',
+      '.axiiom-mock-cta-title{margin:0 0 .6rem;font-size:.85rem;line-height:1.45;color:var(--vp-c-text-2,#555);font-weight:600}',
+      '.axiiom-mock-cta a{display:block;text-align:center;padding:.5rem .75rem;border-radius:8px;background:var(--vp-c-brand-1,#3451b2);color:#fff;text-decoration:none;font-weight:600;font-size:.9rem}',
+      '.axiiom-mock-cta a:hover{opacity:.88}'
     ].join('');
     document.head.appendChild(style);
   }
 
   function addBusinessCta() {
-    var content = document.querySelector('#VPContent .vp-doc');
-    if (!content || content.querySelector('.axiiom-mock-cta')) return;
+    var sidebarNav = document.querySelector('.VPSidebar nav.nav') || document.querySelector('.VPSidebar');
+    if (!sidebarNav || sidebarNav.querySelector('.axiiom-mock-cta')) return;
     ensureCtaStyles();
 
     var section = document.createElement('aside');
     section.className = 'axiiom-mock-cta';
     section.setAttribute('aria-label', 'Разработка финтех-продуктов AXIIOM');
 
-    var heading = document.createElement('h2');
-    heading.textContent = 'Переход от теста к запуску';
-    var description = document.createElement('p');
-    description.textContent = 'Нужна помощь с платёжной интеграцией, онлайн-кассой или финтех-продуктом? Команда AXIIOM поможет обсудить архитектуру и план разработки.';
+    var title = document.createElement('p');
+    title.className = 'axiiom-mock-cta-title';
+    title.textContent = 'Нужна платёжная интеграция или онлайн-касса?';
+
     var link = document.createElement('a');
-    link.href = 'https://axiiom.ru/#contact';
+    link.href = CTA_URL;
     link.textContent = 'Обсудить проект с AXIIOM';
-    link.addEventListener('click', function () {
-      try { if (typeof window.ym === 'function') window.ym(YM_ID, 'reachGoal', 'mock_services_cta'); } catch (e) { /* no-op */ }
-      try { window.gtag('event', 'mock_services_cta', { page_path: location.pathname }); } catch (e) { /* no-op */ }
+    link.addEventListener('click', function (e) {
+      e.preventDefault();                  // не отдаём клик роутеру VitePress
+      e.stopPropagation();                 // и не пускаем событие до document-хендлеров
+      try { if (typeof window.ym === 'function') window.ym(YM_ID, 'reachGoal', 'mock_services_cta'); } catch (err) { /* no-op */ }
+      try { window.gtag('event', 'mock_services_cta', { page_path: location.pathname }); } catch (err) { /* no-op */ }
+      window.location.assign(CTA_URL);     // полная загрузка главной с якорем контактов
     });
 
-    section.appendChild(heading);
-    section.appendChild(description);
+    section.appendChild(title);
     section.appendChild(link);
-    content.appendChild(section);
+    sidebarNav.appendChild(section);
   }
 
   if (typeof MutationObserver === 'function' && document.documentElement) {
