@@ -52,11 +52,15 @@
   window.addEventListener('popstate', track);
 
   // Сквозной CTA: компактная карточка внизу левого сайдбара документации.
-  // ВАЖНО про клик: ссылка ведёт на same-origin (https://axiiom.ru/#contact),
-  // и роутер VitePress перехватывает такие переходы как «внутренние» — вместо
-  // главной сайта открывался индекс мок-сервисов (/mock-services/#contact),
-  // а якоря контактов там нет. Поэтому клик обрабатываем вручную: гасим
-  // событие и делаем полную навигацию на главную к блоку контактов.
+  // ВАЖНО про клик (проверено на живом сайте 2026-10-17): роутер VitePress
+  // вешает click-хендлер на window В CAPTURE-ФАЗЕ ({capture:!0}) и перехватывает
+  // same-origin ссылки ДО любого обработчика на самой ссылке — preventDefault +
+  // stopPropagation + location.assign в target-фазе не спасают, SPA всё равно
+  // уводит на /mock-services/#contact. Обход — в самом коде роутера: он пропускает
+  // ссылки с атрибутом target (c.hasAttribute("target") → return). Ставим
+  // target="_top" (в обычной странице это тот же таб) — роутер игнорирует клик,
+  // и браузер делает нативный переход на главную к блоку контактов. Работает
+  // даже без JS-обработчика; обработчик оставлен только для целей аналитики.
   var CTA_URL = 'https://axiiom.ru/#contact';
 
   function ensureCtaStyles() {
@@ -74,7 +78,8 @@
 
   function addBusinessCta() {
     var sidebarNav = document.querySelector('.VPSidebar nav.nav') || document.querySelector('.VPSidebar');
-    if (!sidebarNav || sidebarNav.querySelector('.axiiom-mock-cta')) return;
+    // дедуп по всему документу: карточка могла остаться в .VPSidebar вне nav.nav
+    if (!sidebarNav || document.querySelector('.axiiom-mock-cta')) return;
     ensureCtaStyles();
 
     var section = document.createElement('aside');
@@ -87,13 +92,14 @@
 
     var link = document.createElement('a');
     link.href = CTA_URL;
+    // target="_top" — ключ фикса: роутер VitePress на capture-фазе пропускает
+    // любые ссылки с атрибутом target, и переход делает сам браузер нативно.
+    link.setAttribute('target', '_top');
     link.textContent = 'Обсудить проект с AXIIOM';
-    link.addEventListener('click', function (e) {
-      e.preventDefault();                  // не отдаём клик роутеру VitePress
-      e.stopPropagation();                 // и не пускаем событие до document-хендлеров
+    link.addEventListener('click', function () {
+      // Только аналитика: никакой ручной навигации — её делает браузер.
       try { if (typeof window.ym === 'function') window.ym(YM_ID, 'reachGoal', 'mock_services_cta'); } catch (err) { /* no-op */ }
       try { window.gtag('event', 'mock_services_cta', { page_path: location.pathname }); } catch (err) { /* no-op */ }
-      window.location.assign(CTA_URL);     // полная загрузка главной с якорем контактов
     });
 
     section.appendChild(title);
