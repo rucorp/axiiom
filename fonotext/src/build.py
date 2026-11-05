@@ -219,7 +219,7 @@ def page_html(*, title: str, desc: str, canonical: str, body: str,
     <nav class="crumbs" aria-label="Хлебные крошки">
       <a href="/fonotext/">Fonotext</a><span aria-hidden="true">/</span><span>{crumb}</span>
     </nav>
-    <a href="{LANDING}" class="ext" rel="noopener">fonotext.ru — лендинг и демо</a>
+    <a href="{LANDING}" class="ext" rel="noopener">Fonotext</a>
   </div>
 </header>
 <div class="wrap layout">
@@ -231,7 +231,7 @@ def page_html(*, title: str, desc: str, canonical: str, body: str,
 <footer class="site-footer">
   <div class="wrap">
     <p><strong>Fonotext</strong> — сервис речевой аналитики. Проект компании AXIIOM
-       (<a href="/" rel="noopener">axiiom.ru</a>). Лендинг и демо:
+       (<a href="/" rel="noopener">axiiom.ru</a>). Сайт проекта:
        <a href="{LANDING}" rel="noopener">fonotext.ru</a>.</p>
     <p>{ORG["name"]}, {ORG["inn"]}, {ORG["ogrn"]}. {ORG["address"]}.</p>
     <p>Пилот и демо: <a href="mailto:{ORG["email"]}">{ORG["email"]}</a>,
@@ -298,7 +298,7 @@ def render_index() -> str:
 автоматическая классификация каждого звонка, контроль соблюдения скриптов с доказательствами
 (цитата + таймкод + канал), дашборды для руководства и разбор накопленных архивов. Обработка и
 хранение данных — на территории РФ (152-ФЗ). Fonotext — проект компании AXIIOM.</p>
-<p class="cta"><a class="btn" href="{LANDING}" rel="noopener">Лендинг и демо на fonotext.ru</a>
+<p class="cta"><a class="btn" href="{LANDING}" rel="noopener">Fonotext</a>
 <a class="btn btn-ghost" href="{BASE}/00-product-presentation/">Начать с обзора</a></p>
 </section>
 <section><h2>Документация</h2><div class="grid">{cards_main}</div></section>
@@ -372,7 +372,7 @@ def main() -> None:
         "> дашборды и разбор архивов. Данные обрабатываются и хранятся в РФ (152-ФЗ).",
         "> Fonotext — проект компании AXIIOM.",
         "",
-        f"Лендинг и демо: {LANDING}",
+        f"Сайт проекта: {LANDING}",
         f"Документация: {SITE}{BASE}/",
         f"Репозиторий документации: https://github.com/rucorp/axiiom (каталог fonotext/)",
         "",
