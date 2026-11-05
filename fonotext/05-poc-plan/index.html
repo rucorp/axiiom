@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>План пилота Fonotext</title>
+<meta name="description" content="Измерительный пилот 4–6 недель: этапы, метрики (WER, F1, полнота скриптов), критерии Go/No-Go, риски пилота и как они снимаются.">
+<link rel="canonical" href="https://axiiom.ru/fonotext/05-poc-plan/">
+<link rel="icon" href="/fonotext/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonotext/assets/style.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AXIIOM — Fonotext">
+<meta property="og:title" content="План пилота Fonotext">
+<meta property="og:description" content="Измерительный пилот 4–6 недель: этапы, метрики (WER, F1, полнота скриптов), критерии Go/No-Go, риски пилота и как они снимаются.">
+<meta property="og:url" content="https://axiiom.ru/fonotext/05-poc-plan/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://axiiom.ru/og-image.png">
+</head>
+<body>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a href="/" class="brand">AXIIOM</a>
+    <nav class="crumbs" aria-label="Хлебные крошки">
+      <a href="/fonotext/">Fonotext</a><span aria-hidden="true">/</span><span>План пилота Fonotext</span>
+    </nav>
+    <a href="https://fonotext.ru/" class="ext" rel="noopener">fonotext.ru — лендинг и демо</a>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar" aria-label="Навигация по документации"><section><h2>Обзор</h2><ul><li><a href="/fonotext/00-product-presentation/">Fonotext: презентация продукта</a></li><li><a href="/fonotext/14-chto-novogo-v1-1/">Что нового в Fonotext 1.1</a></li></ul></section><section><h2>Внедрение</h2><ul><li><a href="/fonotext/01-integration/">Интеграция и анкета подключения </a></li><li><a href="/fonotext/05-poc-plan/" class="active">План пилота Fonotext</a></li><li><a href="/fonotext/08-api/">API Fonotext</a></li></ul></section><section><h2>Технология</h2><ul><li><a href="/fonotext/02-architecture/">Архитектура Fonotext</a></li><li><a href="/fonotext/03-models/">Модели и качество распознавания </a></li><li><a href="/fonotext/04-hardware/">Мощности и оборудование </a></li></ul></section><section><h2>Эксплуатация</h2><ul><li><a href="/fonotext/07-deployment/">Поставка, SLA и развёртывание </a></li><li><a href="/fonotext/13-bezopasnost-i-152-fz/">Безопасность и 152-ФЗ </a></li></ul></section><section><h2>Спецификации функций</h2><ul><li><a href="/fonotext/specs/01-full-coverage/">Покрытие 100 % звонков</a></li><li><a href="/fonotext/specs/02-taxonomy-builder/">Конструктор таксономии</a></li><li><a href="/fonotext/specs/03-script-evidence/">Скрипты с доказательствами</a></li><li><a href="/fonotext/specs/04-archive/">Разбор архива</a></li><li><a href="/fonotext/specs/05-private-shard/">Выделенный шард</a></li><li><a href="/fonotext/specs/06-ask-your-calls/">Спроси свои звонки</a></li><li><a href="/fonotext/specs/07-quality-drift/">Контроль дрейфа качества</a></li><li><a href="/fonotext/specs/08-alerts-actions/">Оповещения и действия</a></li><li><a href="/fonotext/specs/09-integrations/">Интеграции (CRM, BI)</a></li><li><a href="/fonotext/specs/10-dashboards/">Дашборды</a></li><li><a href="/fonotext/specs/11-qa-checklists/">Чек-листы контроля качества</a></li><li><a href="/fonotext/specs/12-copilot/">Отчётный копилот</a></li></ul></section></aside>
+  <main id="main" class="doc">
+<h1 class="doc-title" id="05">05. План пилота: как измеряем качество и договариваемся цифрами</h1>
+<p>Версия 1.0 от 2026-10-03. Ссылки из <a href="/fonotext/03-models/">03-models.md</a> §4 и
+<a href="https://fonotext.ru/demo/index.html">демо-панель</a> ведут сюда. Цель документа — сделать пилот
+предсказуемым: что делаем, в какие сроки, что измеряем и при каких цифрах идём дальше.</p>
+<h2 id="1">1. Принцип</h2>
+<p><strong>Мы не обещаем волшебный WER — мы его измеряем.</strong> Публичные бенчмарки ASR на телефонном
+русском не переносятся на записи конкретного заказчика: другой кодек, уровень шума, сленг,
+акцент, качество микрофонов. Поэтому пилот — это измерительный эксперимент с заранее
+согласованными критериями, а не «демо».</p>
+<p>Результат пилота — <strong>отчёт с цифрами и приложение к договору</strong>, где зафиксированы:
+модель ASR, WER на контрольной выборке, качество классификации по классам, фактическая
+скорость обработки и ресурсы на час аудио для этого заказчика.</p>
+<h2 id="2-24">2. Сроки и состав работ (2–4 недели)</h2>
+<table>
+<thead>
+<tr>
+<th>Неделя</th>
+<th>Что делаем</th>
+<th>Что нужно от заказчика</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Анкета (<a href="/fonotext/01-integration/">01-integration.md</a>), доступы, выгрузка тестовой выборки, стратификация записей по типам</td>
+<td>доступ к системе записи, 1–2 контактных лица, ответы на блоки A–C анкеты</td>
+</tr>
+<tr>
+<td>1–2</td>
+<td>Эталонная разметка: 60–90 минут аудио вручную (обычные, автоответчики, шумные, короткие, «трудные») + 300–500 звонков для разметки классификации</td>
+<td>воркшоп по таксономии (2 часа), списки скриптов и стоп-слов</td>
+</tr>
+<tr>
+<td>2–3</td>
+<td>Прогон 3–4 моделей ASR, замер WER/CER по слоям; настройка каскада классификации; первые дашборды</td>
+<td>подтверждение таксономии, участие руководителя группы в разборе спорных звонков</td>
+</tr>
+<tr>
+<td>3–4</td>
+<td>Прогон на объёме, замер RTF и ресурсов на час; отчёт Go/No-Go; демонстрация дашбордов</td>
+<td>обратная связь по дашбордам, решение о переходе на тариф</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3">3. Что именно измеряем</h2>
+<h3 id="31">3.1 Распознавание</h3>
+<ul>
+<li><strong>WER / CER</strong> общие и по слоям: обычные звонки, автоответчики, шумные, короткие, «трудные».</li>
+<li>Сравнение моделей между собой важнее абсолютных чисел.</li>
+<li>Доля сегментов с низкой уверенностью (<code>no_speech_prob</code>, <code>avg_logprob</code>) — индикатор
+  «мусорных» вставок, которые потом портят метрики (см. историю с галлюцинациями в
+  <a href="https://fonotext.ru/demo/index.html">демо-панель</a>).</li>
+</ul>
+<h3 id="32">3.2 Классификация</h3>
+<ul>
+<li><strong>Precision / recall / F1</strong> по каждому классу таксономии на размеченных 300–500 звонках.</li>
+<li>Отдельно — бинарная задача <strong>«живой разговор vs всё остальное»</strong>: именно она определяет
+  достоверность главных KPI руководства (конверсия, покрытие, нагрузка).</li>
+<li>Доля звонков, ушедших в очередь ручного контроля (настраивается порогом уверенности).</li>
+</ul>
+<h3 id="33">3.3 Скорость и ресурсы</h3>
+<ul>
+<li><strong>RTF</strong> на целевой карте при реальном батчинге, включая предобработку.</li>
+<li>Стоимость обработки часа аудио (аренда + электричество/облако) → основание для расчёта
+  конфигурации под объём (<a href="/fonotext/04-hardware/">04-hardware.md</a>).</li>
+</ul>
+<h2 id="4-go-no-go">4. Критерии Go / No-Go</h2>
+<p>Согласуются <strong>до</strong> пилота, чтобы решения не принимались по впечатлениям:</p>
+<table>
+<thead>
+<tr>
+<th>Критерий</th>
+<th>Порог</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WER на «живых» звонках</td>
+<td>соответствует ожиданиям заказчика (обсуждается индивидуально; для телефонии ориентир 10–25 % и зависит от качества канала)</td>
+</tr>
+<tr>
+<td>F1 бинарной задачи «живой разговор / не живой»</td>
+<td>≥ 0,90</td>
+</tr>
+<tr>
+<td>F1 ключевых бизнес-классов (результат разговора)</td>
+<td>≥ 0,75 после настройки</td>
+</tr>
+<tr>
+<td>Соблюдение скрипта: precision срабатывания правил</td>
+<td>≥ 0,90</td>
+</tr>
+<tr>
+<td>Обработка без ручного вмешательства</td>
+<td>≥ 95 % звонков</td>
+</tr>
+<tr>
+<td>Скорость: результат по новому звонку</td>
+<td>≤ 30 минут (SLA ≤ 24 ч)</td>
+</tr>
+</tbody>
+</table>
+<p>Если пороги не достигнуты — мы говорим об этом прямо и предлагаем: сменить модель ASR,
+сузить таксономию или отказаться от проекта. «Продать любой ценой» — не наша модель.</p>
+<h2 id="5">5. Артефакты пилота</h2>
+<ol>
+<li><strong>Отчёт о качестве</strong> (PDF): методика, метрики, примеры, ограничения.</li>
+<li><strong>Приложение к договору</strong> с зафиксированными метриками и версией модели.</li>
+<li><strong>Работающий контур:</strong> API-ключ, дашборды, карточка звонка по живым записям заказчика.</li>
+<li><strong>Таксономия v1</strong> и словари скриптов — пополняемые, с измерениями на регресс-наборе.</li>
+<li><strong>Регресс-набор</strong> (при согласии заказчика) — основа ежемесячного контроля качества
+   (<a href="/fonotext/specs/07-quality-drift/">10-feature-specs/07</a>).</li>
+</ol>
+<h2 id="6">6. Как устроен пилот</h2>
+<ul>
+<li><strong>Разметка эталона</strong> (60–90 минут аудио + 300–500 звонков) — делается нами и входит в пилот.</li>
+<li><strong>Рабочий контур на время пилота:</strong> API-ключ, дашборды и карточка звонка на живых записях заказчика.</li>
+<li><strong>Отчёт с измерениями:</strong> WER по слоям, F1 по классам, полнота проверки скриптов — до решения о продолжении.</li>
+<li>Если заказчик решает не продолжать — данные и транскрипты удаляются по акту, оригиналы
+  никогда не покидали его контур (<a href="/fonotext/07-deployment/">07-deployment.md</a> §4).</li>
+<li>Коммерческие условия пилота обсуждаются отдельно и на сайте не публикуются.</li>
+</ul>
+<h2 id="7">7. Типовые риски пилота и что делаем</h2>
+<table>
+<thead>
+<tr>
+<th>Риск</th>
+<th>Митигация</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Выборка не репрезентативна (только «удобные» звонки)</td>
+<td>стратификация по типам, требование включить «трудные» записи</td>
+</tr>
+<tr>
+<td>Нет размеченных данных для классификации</td>
+<td>воркшоп по таксономии + разметка силами аналитика заказчика и нашего</td>
+</tr>
+<tr>
+<td>API записи нестабилен, выгрузка медленная</td>
+<td>ранний замер скорости, физическая отгрузка дисков для объёмов</td>
+</tr>
+<tr>
+<td>Расхождение ожиданий по «спец-ответам»</td>
+<td>формализация определения метки с примерами «да/нет» до замера</td>
+</tr>
+<tr>
+<td>Служба безопасности не согласует облако</td>
+<td>вариант приватного контура или коробки (<a href="/fonotext/specs/05-private-shard/">10-feature-specs/05</a>)</td>
+</tr>
+</tbody>
+</table>
+  </main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Fonotext</strong> — сервис речевой аналитики. Проект компании AXIIOM
+       (<a href="/" rel="noopener">axiiom.ru</a>). Лендинг и демо:
+       <a href="https://fonotext.ru/" rel="noopener">fonotext.ru</a>.</p>
+    <p>ООО «Аксиома», ИНН 7842223709, ОГРН 1247800067690. 192029, г. Санкт-Петербург, ул. Профессора Качалова, д. 15А, литера А.</p>
+    <p>Пилот и демо: <a href="mailto:axiiom@ya.ru">axiiom@ya.ru</a>,
+       <a href="tel:+78129287478">+7 (812) 928-74-78</a>.
+       Коммерческие условия — по запросу.</p>
+  </div>
+</footer>
+</body>
+</html>

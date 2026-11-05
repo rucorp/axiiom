@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Мощности и оборудование | Fonotext</title>
+<meta name="description" content="Расчёт GPU-мощностей под объём звонков, арендованные GPU с автоскейлом, требования к серверам для коробочной поставки.">
+<link rel="canonical" href="https://axiiom.ru/fonotext/04-hardware/">
+<link rel="icon" href="/fonotext/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonotext/assets/style.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AXIIOM — Fonotext">
+<meta property="og:title" content="Мощности и оборудование | Fonotext">
+<meta property="og:description" content="Расчёт GPU-мощностей под объём звонков, арендованные GPU с автоскейлом, требования к серверам для коробочной поставки.">
+<meta property="og:url" content="https://axiiom.ru/fonotext/04-hardware/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://axiiom.ru/og-image.png">
+</head>
+<body>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a href="/" class="brand">AXIIOM</a>
+    <nav class="crumbs" aria-label="Хлебные крошки">
+      <a href="/fonotext/">Fonotext</a><span aria-hidden="true">/</span><span>Мощности и оборудование </span>
+    </nav>
+    <a href="https://fonotext.ru/" class="ext" rel="noopener">fonotext.ru — лендинг и демо</a>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar" aria-label="Навигация по документации"><section><h2>Обзор</h2><ul><li><a href="/fonotext/00-product-presentation/">Fonotext: презентация продукта</a></li><li><a href="/fonotext/14-chto-novogo-v1-1/">Что нового в Fonotext 1.1</a></li></ul></section><section><h2>Внедрение</h2><ul><li><a href="/fonotext/01-integration/">Интеграция и анкета подключения </a></li><li><a href="/fonotext/05-poc-plan/">План пилота Fonotext</a></li><li><a href="/fonotext/08-api/">API Fonotext</a></li></ul></section><section><h2>Технология</h2><ul><li><a href="/fonotext/02-architecture/">Архитектура Fonotext</a></li><li><a href="/fonotext/03-models/">Модели и качество распознавания </a></li><li><a href="/fonotext/04-hardware/" class="active">Мощности и оборудование </a></li></ul></section><section><h2>Эксплуатация</h2><ul><li><a href="/fonotext/07-deployment/">Поставка, SLA и развёртывание </a></li><li><a href="/fonotext/13-bezopasnost-i-152-fz/">Безопасность и 152-ФЗ </a></li></ul></section><section><h2>Спецификации функций</h2><ul><li><a href="/fonotext/specs/01-full-coverage/">Покрытие 100 % звонков</a></li><li><a href="/fonotext/specs/02-taxonomy-builder/">Конструктор таксономии</a></li><li><a href="/fonotext/specs/03-script-evidence/">Скрипты с доказательствами</a></li><li><a href="/fonotext/specs/04-archive/">Разбор архива</a></li><li><a href="/fonotext/specs/05-private-shard/">Выделенный шард</a></li><li><a href="/fonotext/specs/06-ask-your-calls/">Спроси свои звонки</a></li><li><a href="/fonotext/specs/07-quality-drift/">Контроль дрейфа качества</a></li><li><a href="/fonotext/specs/08-alerts-actions/">Оповещения и действия</a></li><li><a href="/fonotext/specs/09-integrations/">Интеграции (CRM, BI)</a></li><li><a href="/fonotext/specs/10-dashboards/">Дашборды</a></li><li><a href="/fonotext/specs/11-qa-checklists/">Чек-листы контроля качества</a></li><li><a href="/fonotext/specs/12-copilot/">Отчётный копилот</a></li></ul></section></aside>
+  <main id="main" class="doc">
+<h1 class="doc-title" id="04">04. Мощности и пропускная способность</h1>
+<p>Версия 1.1 от 2026-10-03. Документ отвечает на три вопроса: сколько нужно железа на объём
+заказчика, как рассчитывается парк и почему мы <strong>арендуем мощность, а не покупаем</strong>.</p>
+<h2 id="1">1. Правило расчёта мощности</h2>
+<p>Пропускная способность считается не в «RTF на бенчмарке», а в <strong>часах аудио в сутки на карту</strong>
+при реальной эксплуатации (батчинг, int8_float16, паузы, повторы):</p>
+<table>
+<thead>
+<tr>
+<th>Карта</th>
+<th>Часов аудио в сутки</th>
+<th>Комментарий</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RTX 4090 24 ГБ</td>
+<td><strong>≈550</strong></td>
+<td>базовая карта парка; соотношение часов на картуодительность лучшее</td>
+</tr>
+<tr>
+<td>L40S 48 ГБ</td>
+<td><strong>≈800</strong></td>
+<td>резерв качества: больше VRAM — больше батч, лучше на «трудном» аудио</td>
+</tr>
+<tr>
+<td>A100 80 ГБ</td>
+<td>≈900–1000</td>
+<td>если требуется ECC и серверный класс</td>
+</tr>
+</tbody>
+</table>
+<p>Правило: <strong>+1 карта = +550 часов аудио в сутки</strong>. Это и есть единица масштабирования —
+от неё считаются все конфигурации в <a href="/fonotext/07-deployment/">07-deployment.md</a>.</p>
+<h2 id="2">2. Почему аренда, а не своё железо</h2>
+<table>
+<thead>
+<tr>
+<th>Критерий</th>
+<th>Аренда (наш выбор)</th>
+<th>Покупка</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Стартовые вложения</td>
+<td>капитальных затрат нет</td>
+<td>сервер, ЦОД и обслуживание за свой счёт</td>
+</tr>
+<tr>
+<td>Реакция на пик</td>
+<td>+карта за минуты (автоскейл)</td>
+<td>закупка, поставка, монтаж — недели</td>
+</tr>
+<tr>
+<td>Провал спроса</td>
+<td>масштаб вниз, платим за фактическое время</td>
+<td>железо простаивает, но амортизация идёт</td>
+</tr>
+<tr>
+<td>Смена модели GPU</td>
+<td>переключение на новое поколение без списаний</td>
+<td>остаточная стоимость и перепродажа</td>
+</tr>
+<tr>
+<td>Порог окупаемости</td>
+<td>нет</td>
+<td>нужна постоянная загрузка, иначе железо простаивает</td>
+</tr>
+</tbody>
+</table>
+<p>Ставки аренды мы проверяем перед каждым пересчётом мощностей (последняя проверка — 25.09–03.10.2026)
+и не публикуем: это условие наших расчётов, а не предложение заказчику. Для бэклога и архивов
+берём <strong>прерываемые инстансы</strong> — задачу можно прервать и вернуть в очередь, поэтому она идёт
+фоном и не конкурирует за ресурсы с потоком.</p>
+<h2 id="3">3. Как считаются мощности под объём</h2>
+<p>Формула: <code>карт = (минут в месяц ÷ 60) ÷ (часов аудио на карту в сутки × 30)</code>, затем — запас
+на пики и SLA.</p>
+<table>
+<thead>
+<tr>
+<th>Объём заказчика</th>
+<th>Часов аудио в месяц</th>
+<th>Карт (по расчёту)</th>
+<th>Карт с запасом под SLA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100 тыс. минут</td>
+<td>≈1 700</td>
+<td>0,1</td>
+<td>2 (минимум для доступности)</td>
+</tr>
+<tr>
+<td>1 млн минут</td>
+<td>≈17 000</td>
+<td>1,0</td>
+<td>2–3</td>
+</tr>
+<tr>
+<td>10 млн минут</td>
+<td>≈167 000</td>
+<td>10,1</td>
+<td>12–14</td>
+</tr>
+<tr>
+<td>27 млн минут (архив 450 тыс. часов)</td>
+<td>≈450 000</td>
+<td>27,3</td>
+<td>28–34 (в низком приоритете)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Расчёт вычислительного пула под эти объёмы</strong> (ускорители класса RTX 4090 / L40S, режим 24/7
+с запасом под пики): 1 млн минут/мес ≈ 2 базовые карты под поток; 10 млн минут/мес ≈ 12–14 карт
+с автоматическим масштабированием. При выносе разбора архива и фоновых задач на прерываемые
+инстансы затраты вычислительного времени снижаются ещё на 30–50 %.</p>
+<h2 id="4">4. Архитектура парка и автоматизация</h2>
+<ul>
+<li><strong>Базовая мощность</strong> — минимальный набор карт под SLA live-потока (минимум 2 — для
+  доступности при обслуживании).</li>
+<li><strong>Автоскейл</strong> — KEDA по длине очереди + Cluster Autoscaler/Karpenter: новая карта
+  поднимается под нагрузку и гасится, когда очередь пуста. Ночью и в выходные парк сжимается.</li>
+<li><strong>Бэклог</strong> — отдельный пул на прерываемых инстансах, чекпоинт по <code>call_id</code>: потеря узла не
+  роняет прогресс (<a href="/fonotext/02-architecture/">02-architecture.md</a> §4).</li>
+<li><strong>Инфраструктура как код</strong> — terraform/ansible: новый контур (в том числе коробка) поднимается
+  из шаблона, а не «руками за две недели».</li>
+<li><strong>Наблюдаемость</strong> — Prometheus/Grafana: утилизация карт, длина очереди, скорость
+  обработки, отставание SLA. Цель утилизации — 70 %: ниже — переплата за простой, выше —
+  нечем закрывать пик.</li>
+</ul>
+<h2 id="5">5. Что нужно со стороны заказчика (для коробки)</h2>
+<p>Точные конфигурации — в <a href="/fonotext/07-deployment/">07-deployment.md</a> (§2). Кратко: сервер с 2 или
+8 картами класса 4090/L40S, 32–64 ядра, 128–256 ГБ RAM, NVMe и 10/25 GbE; Linux с docker;
+для «Про» — отдельная нода хранения (~100 ТБ). Электричество: ~0,8 кВт на «Старт», ~3 кВт на «Про».</p>
+<p>Если заказчик не хочет покупать железо — это не проблема: тот же продукт доступен как
+облако или как приватный контур на нашей аренде — изоляция без капитальных затрат
+(<a href="/fonotext/07-deployment/">07-deployment.md</a> §1).</p>
+<h2 id="6">6. Ограничения и риски</h2>
+<table>
+<thead>
+<tr>
+<th>Риск</th>
+<th>Как закрыт</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Аренда дороже ожидаемого на пиках</td>
+<td>прерываемые инстансы для не-срочного, автоскейл, лимиты на параллельные задачи</td>
+</tr>
+<tr>
+<td>Дрейф пропускной способности при смене модели ASR</td>
+<td>замер RTF в пилоте; консервативная цифра 550 ч/сутки в расчётах (L40S даёт больше)</td>
+</tr>
+<tr>
+<td>Дефицит карт у провайдера</td>
+<td>два облака-партнёра + приоритет на выделенные серверы для базовой мощности</td>
+</tr>
+<tr>
+<td>Рост объёма ×2–3 за год</td>
+<td>линейное масштабирование: +карта = +550 ч/сутки, без пересборки архитектуры</td>
+</tr>
+</tbody>
+</table>
+  </main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Fonotext</strong> — сервис речевой аналитики. Проект компании AXIIOM
+       (<a href="/" rel="noopener">axiiom.ru</a>). Лендинг и демо:
+       <a href="https://fonotext.ru/" rel="noopener">fonotext.ru</a>.</p>
+    <p>ООО «Аксиома», ИНН 7842223709, ОГРН 1247800067690. 192029, г. Санкт-Петербург, ул. Профессора Качалова, д. 15А, литера А.</p>
+    <p>Пилот и демо: <a href="mailto:axiiom@ya.ru">axiiom@ya.ru</a>,
+       <a href="tel:+78129287478">+7 (812) 928-74-78</a>.
+       Коммерческие условия — по запросу.</p>
+  </div>
+</footer>
+</body>
+</html>

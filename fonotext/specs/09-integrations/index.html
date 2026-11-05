@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>09. Интеграции: коннекторы CRM, АТС и мессенджеров | Спецификация Fonotext</title>
+<meta name="description" content="Спецификация функции Fonotext: Интеграции (CRM, BI). Сценарий работы, данные, интерфейс, метрики приёмки и ограничения.">
+<link rel="canonical" href="https://axiiom.ru/fonotext/specs/09-integrations/">
+<link rel="icon" href="/fonotext/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonotext/assets/style.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AXIIOM — Fonotext">
+<meta property="og:title" content="09. Интеграции: коннекторы CRM, АТС и мессенджеров | Спецификация Fonotext">
+<meta property="og:description" content="Спецификация функции Fonotext: Интеграции (CRM, BI). Сценарий работы, данные, интерфейс, метрики приёмки и ограничения.">
+<meta property="og:url" content="https://axiiom.ru/fonotext/specs/09-integrations/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://axiiom.ru/og-image.png">
+</head>
+<body>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a href="/" class="brand">AXIIOM</a>
+    <nav class="crumbs" aria-label="Хлебные крошки">
+      <a href="/fonotext/">Fonotext</a><span aria-hidden="true">/</span><span>Спецификации / 09. Интеграции: коннекторы CRM, АТС и мессенджеров</span>
+    </nav>
+    <a href="https://fonotext.ru/" class="ext" rel="noopener">fonotext.ru — лендинг и демо</a>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar" aria-label="Навигация по документации"><section><h2>Обзор</h2><ul><li><a href="/fonotext/00-product-presentation/">Fonotext: презентация продукта</a></li><li><a href="/fonotext/14-chto-novogo-v1-1/">Что нового в Fonotext 1.1</a></li></ul></section><section><h2>Внедрение</h2><ul><li><a href="/fonotext/01-integration/">Интеграция и анкета подключения </a></li><li><a href="/fonotext/05-poc-plan/">План пилота Fonotext</a></li><li><a href="/fonotext/08-api/">API Fonotext</a></li></ul></section><section><h2>Технология</h2><ul><li><a href="/fonotext/02-architecture/">Архитектура Fonotext</a></li><li><a href="/fonotext/03-models/">Модели и качество распознавания </a></li><li><a href="/fonotext/04-hardware/">Мощности и оборудование </a></li></ul></section><section><h2>Эксплуатация</h2><ul><li><a href="/fonotext/07-deployment/">Поставка, SLA и развёртывание </a></li><li><a href="/fonotext/13-bezopasnost-i-152-fz/">Безопасность и 152-ФЗ </a></li></ul></section><section><h2>Спецификации функций</h2><ul><li><a href="/fonotext/specs/01-full-coverage/">Покрытие 100 % звонков</a></li><li><a href="/fonotext/specs/02-taxonomy-builder/">Конструктор таксономии</a></li><li><a href="/fonotext/specs/03-script-evidence/">Скрипты с доказательствами</a></li><li><a href="/fonotext/specs/04-archive/">Разбор архива</a></li><li><a href="/fonotext/specs/05-private-shard/">Выделенный шард</a></li><li><a href="/fonotext/specs/06-ask-your-calls/">Спроси свои звонки</a></li><li><a href="/fonotext/specs/07-quality-drift/">Контроль дрейфа качества</a></li><li><a href="/fonotext/specs/08-alerts-actions/">Оповещения и действия</a></li><li><a href="/fonotext/specs/09-integrations/" class="active">Интеграции (CRM, BI)</a></li><li><a href="/fonotext/specs/10-dashboards/">Дашборды</a></li><li><a href="/fonotext/specs/11-qa-checklists/">Чек-листы контроля качества</a></li><li><a href="/fonotext/specs/12-copilot/">Отчётный копилот</a></li></ul></section></aside>
+  <main id="main" class="doc">
+<h1 class="doc-title" id="09-crm">09. Интеграции: коннекторы CRM, АТС и мессенджеров</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Статус</strong></td>
+<td>доступно (релиз v1.1)</td>
+</tr>
+<tr>
+<td><strong>Доступно</strong></td>
+<td>«Бизнес» и выше, без дополнительной оплаты</td>
+</tr>
+<tr>
+<td><strong>Зависимости</strong></td>
+<td><a href="/fonotext/01-integration/">01-integration.md</a> (способы подключения), <a href="/fonotext/08-api/">08-api.md</a> (вебхуки)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_1">Проблема</h2>
+<p>Подключение речевой аналитики к контуру заказчика обычно превращается в интеграционный проект:
+согласование форматов, разработка адаптеров, отдельный бюджет и недели задержки. Классические
+вендоры закрывают это только внутри своей экосистемы.</p>
+<h2 id="_2">Решение</h2>
+<p><strong>Готовые коннекторы входят в подписку:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Направление</th>
+<th>Коннекторы</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CRM</td>
+<td>Битрикс24, amoCRM, Salesforce</td>
+</tr>
+<tr>
+<td>Контакт-центры и АТС</td>
+<td>Asterisk, 3CX</td>
+</tr>
+<tr>
+<td>Уведомления и вебхуки</td>
+<td>Telegram, Slack, MS Teams</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Результаты разбора звонка (транскрипт, класс, оценка, цитаты) попадают в карточку клиента
+  в CRM автоматически; настройка — авторизация и выбор полей, без разработки.</li>
+<li>Алерты и автодействия (<a href="/fonotext/specs/08-alerts-actions/">спека 08</a>) доставляются в те же системы по
+  тем же коннекторам.</li>
+<li>Для систем, которых нет в списке, остаётся универсальный путь — REST API и вебхуки с
+  HMAC-подписью (<a href="/fonotext/08-api/">08-api.md</a>).</li>
+</ul>
+<h2 id="_3">Как измеряем успех</h2>
+<ul>
+<li>Доля подключений «без кода» (настройка силами администратора заказчика, без разработчиков).</li>
+<li>Время от анкеты подключения до первого звонка в системе — целевой ориентир прежний:
+  дни, а не недели (<a href="/fonotext/01-integration/">01-integration.md</a>).</li>
+</ul>
+<h2 id="_4">Как это устроено у нас</h2>
+<p>Готовые коннекторы к популярным CRM и АТС подключает администратор заказчика, без
+разработки: аналитика независима от телефонии, поэтому при смене АТС коннекторы
+и история результатов остаются.</p>
+  </main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Fonotext</strong> — сервис речевой аналитики. Проект компании AXIIOM
+       (<a href="/" rel="noopener">axiiom.ru</a>). Лендинг и демо:
+       <a href="https://fonotext.ru/" rel="noopener">fonotext.ru</a>.</p>
+    <p>ООО «Аксиома», ИНН 7842223709, ОГРН 1247800067690. 192029, г. Санкт-Петербург, ул. Профессора Качалова, д. 15А, литера А.</p>
+    <p>Пилот и демо: <a href="mailto:axiiom@ya.ru">axiiom@ya.ru</a>,
+       <a href="tel:+78129287478">+7 (812) 928-74-78</a>.
+       Коммерческие условия — по запросу.</p>
+  </div>
+</footer>
+</body>
+</html>

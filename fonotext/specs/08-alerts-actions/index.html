@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>08. Алерты и автодействия: отчёт, который сам приходит вовремя | Спецификация Fonotext</title>
+<meta name="description" content="Спецификация функции Fonotext: Оповещения и действия. Сценарий работы, данные, интерфейс, метрики приёмки и ограничения.">
+<link rel="canonical" href="https://axiiom.ru/fonotext/specs/08-alerts-actions/">
+<link rel="icon" href="/fonotext/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonotext/assets/style.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AXIIOM — Fonotext">
+<meta property="og:title" content="08. Алерты и автодействия: отчёт, который сам приходит вовремя | Спецификация Fonotext">
+<meta property="og:description" content="Спецификация функции Fonotext: Оповещения и действия. Сценарий работы, данные, интерфейс, метрики приёмки и ограничения.">
+<meta property="og:url" content="https://axiiom.ru/fonotext/specs/08-alerts-actions/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://axiiom.ru/og-image.png">
+</head>
+<body>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a href="/" class="brand">AXIIOM</a>
+    <nav class="crumbs" aria-label="Хлебные крошки">
+      <a href="/fonotext/">Fonotext</a><span aria-hidden="true">/</span><span>Спецификации / 08. Алерты и автодействия: отчёт, который сам приходит вовремя</span>
+    </nav>
+    <a href="https://fonotext.ru/" class="ext" rel="noopener">fonotext.ru — лендинг и демо</a>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar" aria-label="Навигация по документации"><section><h2>Обзор</h2><ul><li><a href="/fonotext/00-product-presentation/">Fonotext: презентация продукта</a></li><li><a href="/fonotext/14-chto-novogo-v1-1/">Что нового в Fonotext 1.1</a></li></ul></section><section><h2>Внедрение</h2><ul><li><a href="/fonotext/01-integration/">Интеграция и анкета подключения </a></li><li><a href="/fonotext/05-poc-plan/">План пилота Fonotext</a></li><li><a href="/fonotext/08-api/">API Fonotext</a></li></ul></section><section><h2>Технология</h2><ul><li><a href="/fonotext/02-architecture/">Архитектура Fonotext</a></li><li><a href="/fonotext/03-models/">Модели и качество распознавания </a></li><li><a href="/fonotext/04-hardware/">Мощности и оборудование </a></li></ul></section><section><h2>Эксплуатация</h2><ul><li><a href="/fonotext/07-deployment/">Поставка, SLA и развёртывание </a></li><li><a href="/fonotext/13-bezopasnost-i-152-fz/">Безопасность и 152-ФЗ </a></li></ul></section><section><h2>Спецификации функций</h2><ul><li><a href="/fonotext/specs/01-full-coverage/">Покрытие 100 % звонков</a></li><li><a href="/fonotext/specs/02-taxonomy-builder/">Конструктор таксономии</a></li><li><a href="/fonotext/specs/03-script-evidence/">Скрипты с доказательствами</a></li><li><a href="/fonotext/specs/04-archive/">Разбор архива</a></li><li><a href="/fonotext/specs/05-private-shard/">Выделенный шард</a></li><li><a href="/fonotext/specs/06-ask-your-calls/">Спроси свои звонки</a></li><li><a href="/fonotext/specs/07-quality-drift/">Контроль дрейфа качества</a></li><li><a href="/fonotext/specs/08-alerts-actions/" class="active">Оповещения и действия</a></li><li><a href="/fonotext/specs/09-integrations/">Интеграции (CRM, BI)</a></li><li><a href="/fonotext/specs/10-dashboards/">Дашборды</a></li><li><a href="/fonotext/specs/11-qa-checklists/">Чек-листы контроля качества</a></li><li><a href="/fonotext/specs/12-copilot/">Отчётный копилот</a></li></ul></section></aside>
+  <main id="main" class="doc">
+<h1 class="doc-title" id="08">08. Алерты и автодействия: отчёт, который сам приходит вовремя</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Статус</strong></td>
+<td>доступно</td>
+</tr>
+<tr>
+<td><strong>Доступно</strong></td>
+<td>«Корпоративный» и выше</td>
+</tr>
+<tr>
+<td><strong>Зависимости</strong></td>
+<td><a href="/fonotext/02-architecture/">02-architecture.md</a> §2 (поток live), <a href="/fonotext/08-api/">08-api.md</a> (вебхуки)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_1">Проблема</h2>
+<p>Аналитика сегодня приходит через сутки — когда клиент уже ушёл, а менеджер забыл, что обещал.
+Отчёт «в марте было 42 конфликта» не помогает в момент конфликта. Ценность разговора
+заканчивается вместе с разговором, а вся речевая аналитика построена на разборе post factum.</p>
+<h2 id="_2">Решение</h2>
+<p><strong>Правила реального времени + действия, а не только письмо с алертом.</strong></p>
+<p>Конвейер live (см. <a href="/fonotext/02-architecture/">02-architecture.md</a> §2) уже даёт результат за
+минуты. На этот поток накладываются правила:</p>
+<table>
+<thead>
+<tr>
+<th>Правило (настраивается клиентом)</th>
+<th>Типовое действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Конфликт / оскорбление / угроза расторжения</td>
+<td>Задача руководителю группы + карточка звонка, SLA реакции 15 минут</td>
+</tr>
+<tr>
+<td>Упоминание конкурента</td>
+<td>Тег в CRM + в отчёт маркетинга</td>
+</tr>
+<tr>
+<td>Клиент назвал крупную сумму или объём</td>
+<td>Пуш аккаунт-менеджеру</td>
+</tr>
+<tr>
+<td>Оператор не выполнил обязательную фразу (критичную)</td>
+<td>Уведомление ОКК и запись в лист развития</td>
+</tr>
+<tr>
+<td>Низкая уверенность классификации</td>
+<td>Очередь ручного контроля</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Куда доставляем:</strong> вебхук в систему заказчика, задача в CRM (шаблонные коннекторы:
+Битрикс24, amoCRM), Telegram/почта для дежурных, а также внутри продукта — в ленте событий.</p>
+<p><strong>Анти-спам как обязательная часть.</strong> Дедупликация по звонку и правилу, группировка («12
+конфликтов за час по одной кампании» — одно уведомление, а не двенадцать), эскалация по
+необработанным алертам, «тихие часы». Правило без настроенной реакции не публикуется —
+иначе аналитика превращается в шум, который все отключают.</p>
+<h2 id="_3">Как это выглядит</h2>
+<ul>
+<li><strong>Экран «Правила и действия»:</strong> конструктор «событие → условие → действие» с тестом на
+  историческом звонке.</li>
+<li><strong>Лента событий</strong> с фильтром по статусу: новое / принято / закрыто, время реакции.</li>
+<li><strong>Отчёт «Что дали алерты»:</strong> сколько событий, сколько обработано, среднее время реакции,
+  сколько денег вернули (если есть связь с CRM).</li>
+<li><strong>API:</strong> <code>POST /v1/rules</code>, <code>GET /v1/events</code>, вебхук <code>event.triggered</code> с тем же HMAC-подписыванием.</li>
+</ul>
+<h2 id="_4">Метрики успеха</h2>
+<table>
+<thead>
+<tr>
+<th>Метрика</th>
+<th>Цель</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Задержка от окончания звонка до алерта</td>
+<td>≤ 30 минут (p95)</td>
+</tr>
+<tr>
+<td>Доля ложных срабатываний</td>
+<td>≤ 10 % после двух недель настройки</td>
+</tr>
+<tr>
+<td>Доля алертов с зафиксированной реакцией</td>
+<td>≥ 70 %</td>
+</tr>
+<tr>
+<td>Эффект (по данным CRM клиента)</td>
+<td>возврат ≥ 1 клиента на 100 алертов</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_5">Как это устроено у нас</h2>
+<ul>
+<li>Правило срабатывает на содержании разговора, а не только на событиях телефонии.</li>
+<li>Дедупликация и группировка: одно событие — одна задача, без потока уведомлений.</li>
+<li>Действие настраивается: задача руководителю, запись в CRM, тег в карточке звонка.</li>
+</ul>
+  </main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Fonotext</strong> — сервис речевой аналитики. Проект компании AXIIOM
+       (<a href="/" rel="noopener">axiiom.ru</a>). Лендинг и демо:
+       <a href="https://fonotext.ru/" rel="noopener">fonotext.ru</a>.</p>
+    <p>ООО «Аксиома», ИНН 7842223709, ОГРН 1247800067690. 192029, г. Санкт-Петербург, ул. Профессора Качалова, д. 15А, литера А.</p>
+    <p>Пилот и демо: <a href="mailto:axiiom@ya.ru">axiiom@ya.ru</a>,
+       <a href="tel:+78129287478">+7 (812) 928-74-78</a>.
+       Коммерческие условия — по запросу.</p>
+  </div>
+</footer>
+</body>
+</html>

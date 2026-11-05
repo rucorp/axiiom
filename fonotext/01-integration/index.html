@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Интеграция и анкета подключения | Fonotext</title>
+<meta name="description" content="Как подключить Fonotext к телефонии: REST API, вебхуки, SFTP/S3, форматы аудио, анкета подключения и что получает заказчик после интеграции.">
+<link rel="canonical" href="https://axiiom.ru/fonotext/01-integration/">
+<link rel="icon" href="/fonotext/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonotext/assets/style.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AXIIOM — Fonotext">
+<meta property="og:title" content="Интеграция и анкета подключения | Fonotext">
+<meta property="og:description" content="Как подключить Fonotext к телефонии: REST API, вебхуки, SFTP/S3, форматы аудио, анкета подключения и что получает заказчик после интеграции.">
+<meta property="og:url" content="https://axiiom.ru/fonotext/01-integration/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://axiiom.ru/og-image.png">
+</head>
+<body>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a href="/" class="brand">AXIIOM</a>
+    <nav class="crumbs" aria-label="Хлебные крошки">
+      <a href="/fonotext/">Fonotext</a><span aria-hidden="true">/</span><span>Интеграция и анкета подключения </span>
+    </nav>
+    <a href="https://fonotext.ru/" class="ext" rel="noopener">fonotext.ru — лендинг и демо</a>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar" aria-label="Навигация по документации"><section><h2>Обзор</h2><ul><li><a href="/fonotext/00-product-presentation/">Fonotext: презентация продукта</a></li><li><a href="/fonotext/14-chto-novogo-v1-1/">Что нового в Fonotext 1.1</a></li></ul></section><section><h2>Внедрение</h2><ul><li><a href="/fonotext/01-integration/" class="active">Интеграция и анкета подключения </a></li><li><a href="/fonotext/05-poc-plan/">План пилота Fonotext</a></li><li><a href="/fonotext/08-api/">API Fonotext</a></li></ul></section><section><h2>Технология</h2><ul><li><a href="/fonotext/02-architecture/">Архитектура Fonotext</a></li><li><a href="/fonotext/03-models/">Модели и качество распознавания </a></li><li><a href="/fonotext/04-hardware/">Мощности и оборудование </a></li></ul></section><section><h2>Эксплуатация</h2><ul><li><a href="/fonotext/07-deployment/">Поставка, SLA и развёртывание </a></li><li><a href="/fonotext/13-bezopasnost-i-152-fz/">Безопасность и 152-ФЗ </a></li></ul></section><section><h2>Спецификации функций</h2><ul><li><a href="/fonotext/specs/01-full-coverage/">Покрытие 100 % звонков</a></li><li><a href="/fonotext/specs/02-taxonomy-builder/">Конструктор таксономии</a></li><li><a href="/fonotext/specs/03-script-evidence/">Скрипты с доказательствами</a></li><li><a href="/fonotext/specs/04-archive/">Разбор архива</a></li><li><a href="/fonotext/specs/05-private-shard/">Выделенный шард</a></li><li><a href="/fonotext/specs/06-ask-your-calls/">Спроси свои звонки</a></li><li><a href="/fonotext/specs/07-quality-drift/">Контроль дрейфа качества</a></li><li><a href="/fonotext/specs/08-alerts-actions/">Оповещения и действия</a></li><li><a href="/fonotext/specs/09-integrations/">Интеграции (CRM, BI)</a></li><li><a href="/fonotext/specs/10-dashboards/">Дашборды</a></li><li><a href="/fonotext/specs/11-qa-checklists/">Чек-листы контроля качества</a></li><li><a href="/fonotext/specs/12-copilot/">Отчётный копилот</a></li></ul></section></aside>
+  <main id="main" class="doc">
+<h1 class="doc-title" id="01">01. Интеграция и анкета подключения</h1>
+<p>Версия 1.0 от 2026-10-03. Что нужно для подключения Fonotext к телефонии заказчика, какие
+возможности включаются после интеграции, и анкета для старта.</p>
+<h2 id="1">1. Как происходит подключение</h2>
+<ol>
+<li>Заказчик заполняет анкету (раздел 4) — 20 минут.</li>
+<li>Мы подключаемся к системе записи (типы доступа — раздел 2) и получаем тестовую выборку.</li>
+<li>Пилот 2–4 недели: качество, таксономия, дашборды — на записях заказчика.</li>
+<li>Поставка (<a href="/fonotext/07-deployment/">07-deployment.md</a>): облако или коробка.</li>
+</ol>
+<h2 id="2">2. Способы передачи записей</h2>
+<table>
+<thead>
+<tr>
+<th>Способ</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>REST API системы записи</td>
+<td>мы опрашиваем список новых записей (частота — по согласованию, стандарт 1–5 мин)</td>
+</tr>
+<tr>
+<td>Вебхуки</td>
+<td>система записи уведомляет нас о новом файле</td>
+</tr>
+<tr>
+<td>SFTP / S3</td>
+<td>выгрузка в каталог/бакет, забираем по расписанию</td>
+</tr>
+<tr>
+<td>API метаданных</td>
+<td>номер, оператор, направление, кампания — если доступны</td>
+</tr>
+</tbody>
+</table>
+<p>Поддерживаемые форматы аудио: wav/mp3/opus и др. (контейнер не важен), 8–48 кГц, стерео
+(клиент/оператор в разных каналах) или моно. Стерео-записи дают максимальную точность
+определения спикеров — без нейросетевой диаризации.</p>
+<h2 id="3">3. Что получает заказчик после интеграции</h2>
+<ul>
+<li>Транскрипт каждого звонка с таймкодами и метками спикера (клиент/оператор).</li>
+<li>Классификацию: тип соединения (живой разговор / автоответчик / спам-блокировка / робот /
+  без ответа), результат разговора, теги, соблюдение скрипта оператором (обязательные и
+  запрещённые фразы), конфликтность.</li>
+<li>Метрики: talk ratio, перебивания, паузы, длительность.</li>
+<li>Дашборды и карточку звонка, экспорт отчётов, вебхуки и API (<a href="/fonotext/08-api/">08-api.md</a>).</li>
+<li>Хранение транскриптов 12 месяцев (дольше — по договорённости); оригиналы остаются у заказчика.</li>
+</ul>
+<p>Требования к системе описаны в <a href="/fonotext/02-architecture/">02-architecture.md</a>; SLA и безопасность —
+в <a href="/fonotext/07-deployment/">07-deployment.md</a>.</p>
+<h2 id="4">4. Анкета подключения</h2>
+<h3 id="a">A. Доступ к аудио (критично)</h3>
+<ol>
+<li>Как хранятся записи: система (АТС/биллинг/CRM — какая?), файловое хранилище, облако?</li>
+<li>Какой доступ возможен: REST API, S3/SFTP, вебхуки о новых записях, доступ к БД метаданных?</li>
+<li>Лимиты API: частота запросов, скорость отдачи, глубина выборки за запрос?</li>
+<li>Возможна ли физическая отгрузка большого архива на дисках?</li>
+<li>Кто и как быстро выдаст тестовый доступ?</li>
+</ol>
+<h3 id="b">B. Формат аудио (критично)</h3>
+<ol>
+<li>Кодек и битрейт, частота дискретизации?</li>
+<li>Канальная карта: левый = клиент, правый = оператор? Всегда ли?</li>
+<li>Бывают ли моно-записи или записи с одной занятой дорожкой?</li>
+<li>Примеры «трудных» записей: автоответчики, спам-роботы, короткие сбросы, шум, IVR.</li>
+</ol>
+<h3 id="c">C. Объёмы (критично)</h3>
+<ol>
+<li>Звонков в сутки: среднее и максимум; темп прироста за год?</li>
+<li>Средняя и p95 длительность звонка; общий объём архива (часы и число файлов)?</li>
+<li>Часовые пики поступления новых записей?</li>
+</ol>
+<h3 id="d">D. Метаданные</h3>
+<ol>
+<li>Метаданные записи: номер звонящего, ID оператора, направление, кампания/очередь, ID в CRM?</li>
+<li>Где зафиксировано соответствие каналов и операторов по звонкам?</li>
+</ol>
+<h3 id="e">E. Приватность и развёртывание</h3>
+<ol>
+<li>Где допустима обработка: контур заказчика / облако в РФ?</li>
+<li>Требуется ли маскирование номеров телефонов и иных ПДн в транскриптах и выгрузках?</li>
+<li>Сроки хранения транскриптов; требования к уничтожению по запросу субъекта ПД?</li>
+<li>Согласия на обработку записей (уведомление о записи)?</li>
+</ol>
+<h3 id="f-">F. Отчётность и бизнес-контекст</h3>
+<ol>
+<li>Топ-5–10 отчётов/KPI для руководства; кто получатели?</li>
+<li>Существующая BI-система (Power BI/Tableau/др.) — интеграция или наша?</li>
+<li>Как сегодня классифицируют звонки вручную? Есть ли размеченные примеры?</li>
+<li>Скрипты операторов, списки обязательных и запрещённых фраз?</li>
+<li>Какие категории «спец-ответов» операторов бизнес различает?</li>
+</ol>
+<h3 id="g-sla">G. Интеграции и SLA</h3>
+<ol>
+<li>Возвращать результаты (теги/статусы) в CRM/биллинг? В каком виде?</li>
+<li>SSO/AD для доступа к отчётам?</li>
+<li>Требования к бэкапам и времени восстановления.</li>
+</ol>
+<p>Ответы на блоки A–C позволяют до пилота точно оценить объёмость (облачную или размер
+коробки) — без них используются консервативные оценки.</p>
+  </main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Fonotext</strong> — сервис речевой аналитики. Проект компании AXIIOM
+       (<a href="/" rel="noopener">axiiom.ru</a>). Лендинг и демо:
+       <a href="https://fonotext.ru/" rel="noopener">fonotext.ru</a>.</p>
+    <p>ООО «Аксиома», ИНН 7842223709, ОГРН 1247800067690. 192029, г. Санкт-Петербург, ул. Профессора Качалова, д. 15А, литера А.</p>
+    <p>Пилот и демо: <a href="mailto:axiiom@ya.ru">axiiom@ya.ru</a>,
+       <a href="tel:+78129287478">+7 (812) 928-74-78</a>.
+       Коммерческие условия — по запросу.</p>
+  </div>
+</footer>
+</body>
+</html>

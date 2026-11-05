@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>01. Аудит 100 % звонков и переклассификация без повторного ASR | Спецификация Fonotext</title>
+<meta name="description" content="Спецификация функции Fonotext: Покрытие 100 % звонков. Сценарий работы, данные, интерфейс, метрики приёмки и ограничения.">
+<link rel="canonical" href="https://axiiom.ru/fonotext/specs/01-full-coverage/">
+<link rel="icon" href="/fonotext/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonotext/assets/style.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AXIIOM — Fonotext">
+<meta property="og:title" content="01. Аудит 100 % звонков и переклассификация без повторного ASR | Спецификация Fonotext">
+<meta property="og:description" content="Спецификация функции Fonotext: Покрытие 100 % звонков. Сценарий работы, данные, интерфейс, метрики приёмки и ограничения.">
+<meta property="og:url" content="https://axiiom.ru/fonotext/specs/01-full-coverage/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://axiiom.ru/og-image.png">
+</head>
+<body>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a href="/" class="brand">AXIIOM</a>
+    <nav class="crumbs" aria-label="Хлебные крошки">
+      <a href="/fonotext/">Fonotext</a><span aria-hidden="true">/</span><span>Спецификации / 01. Аудит 100 % звонков и переклассификация без повторного ASR</span>
+    </nav>
+    <a href="https://fonotext.ru/" class="ext" rel="noopener">fonotext.ru — лендинг и демо</a>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar" aria-label="Навигация по документации"><section><h2>Обзор</h2><ul><li><a href="/fonotext/00-product-presentation/">Fonotext: презентация продукта</a></li><li><a href="/fonotext/14-chto-novogo-v1-1/">Что нового в Fonotext 1.1</a></li></ul></section><section><h2>Внедрение</h2><ul><li><a href="/fonotext/01-integration/">Интеграция и анкета подключения </a></li><li><a href="/fonotext/05-poc-plan/">План пилота Fonotext</a></li><li><a href="/fonotext/08-api/">API Fonotext</a></li></ul></section><section><h2>Технология</h2><ul><li><a href="/fonotext/02-architecture/">Архитектура Fonotext</a></li><li><a href="/fonotext/03-models/">Модели и качество распознавания </a></li><li><a href="/fonotext/04-hardware/">Мощности и оборудование </a></li></ul></section><section><h2>Эксплуатация</h2><ul><li><a href="/fonotext/07-deployment/">Поставка, SLA и развёртывание </a></li><li><a href="/fonotext/13-bezopasnost-i-152-fz/">Безопасность и 152-ФЗ </a></li></ul></section><section><h2>Спецификации функций</h2><ul><li><a href="/fonotext/specs/01-full-coverage/" class="active">Покрытие 100 % звонков</a></li><li><a href="/fonotext/specs/02-taxonomy-builder/">Конструктор таксономии</a></li><li><a href="/fonotext/specs/03-script-evidence/">Скрипты с доказательствами</a></li><li><a href="/fonotext/specs/04-archive/">Разбор архива</a></li><li><a href="/fonotext/specs/05-private-shard/">Выделенный шард</a></li><li><a href="/fonotext/specs/06-ask-your-calls/">Спроси свои звонки</a></li><li><a href="/fonotext/specs/07-quality-drift/">Контроль дрейфа качества</a></li><li><a href="/fonotext/specs/08-alerts-actions/">Оповещения и действия</a></li><li><a href="/fonotext/specs/09-integrations/">Интеграции (CRM, BI)</a></li><li><a href="/fonotext/specs/10-dashboards/">Дашборды</a></li><li><a href="/fonotext/specs/11-qa-checklists/">Чек-листы контроля качества</a></li><li><a href="/fonotext/specs/12-copilot/">Отчётный копилот</a></li></ul></section></aside>
+  <main id="main" class="doc">
+<h1 class="doc-title" id="01-100-asr">01. Аудит 100 % звонков и переклассификация без повторного ASR</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Статус</strong></td>
+<td>ядро продукта</td>
+</tr>
+<tr>
+<td><strong>Доступно</strong></td>
+<td>все подписки; в API-режиме — транскрипт + метрики</td>
+</tr>
+<tr>
+<td><strong>Зависимости</strong></td>
+<td><a href="/fonotext/02-architecture/">02-architecture.md</a> §2, §4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_1">Проблема</h2>
+<p>Отдел контроля качества физически слушает 1–7 % звонков: выборка формируется вручную, а
+«неудобные» звонки (короткие, с конфликтом, с отказами) в неё не попадают. Руководитель
+принимает решения по 3 % разговоров и считает, что знает про остальные 97 %.</p>
+<p>Вторая, менее очевидная проблема: <strong>модель классификации устаревает</strong>. Сменился скрипт,
+появилась новая кампания, изменилась таксономия — и весь исторический массив звонков
+описан старыми метками. У классических решений повторный разбор означает повторный прогон
+распознавания: дорого, долго, иногда невозможно (аудио уже удалено).</p>
+<h2 id="_2">Решение</h2>
+<p><strong>Разделяем дорогое и дешёвое.</strong> Распознавание (ASR) делается один раз и сохраняется в
+S3/MinIO как JSON с таймкодами. Классификация — отдельная стадия, которая читает транскрипт
+и пишет вердикт по ключу <code>call_id + taxonomy_version</code>.</p>
+<p>Отсюда три следствия, которые и продаются:</p>
+<ol>
+<li><strong>100 % покрытие.</strong> Обрабатываются все записи, без выборок и «ручных отборов». Полный
+   охват даёт то, чего не даёт выборочное прослушивание: конфликты, отказы и короткие сбросы
+   попадают в анализ, а не выпадают из него.</li>
+<li><strong>Переклассификация архива за часы.</strong> Изменили таксономию или промпт — запускается только
+   стадия классификации. ASR не повторяется. Пересчёт 6 млн звонков — это работа LLM-слоя,
+   а не GPU-распознавания: часы вместо недель.</li>
+<li><strong>Сравнение версий таксономии.</strong> Каждый вердикт хранит <code>taxonomy_version</code>, поэтому можно
+   ответить на вопрос «сколько было бы конфликтов, если считать по новому определению» —
+   без повторной обработки аудио.</li>
+</ol>
+<h2 id="_3">Знаменатель покрытия</h2>
+<p>«100 %» считается <strong>от записей, поступивших в конвейер</strong>: файл доставлен коннектором или
+выгрузкой из АТС и прошёл стадию приёма. Что не было доставлено, система увидеть не может, —
+поэтому честный охват проверяется сверкой объёмов: число звонков в выгрузке АТС против числа
+принятых и обработанных. Методику сверки (период, источник, разбор расхождений — недоставленные
+файлы, дубли, записи вне периода) фиксируем на пилоте, вместе с критериями Go/No-Go.</p>
+<p>Дашборд покрытия разделяет три знаменателя: поступившие записи, обработанные и ушедшие
+в очередь ручного контроля — чтобы «обработано 100 %» всегда имело явную базу сравнения.</p>
+<h2 id="_4">Как это выглядит</h2>
+<ul>
+<li><strong>Дашборд покрытия:</strong> «обработано 100 % из 1 284 930 звонков за период», отдельно — доля
+  звонков, где сработала очередь ручного контроля.</li>
+<li><strong>Кнопка «Переклассифицировать»:</strong> выбор периода + версии таксономии → задача с прогрессом
+  и ETA; по завершении — отчёт «что изменилось» (сколько звонков сменило метку).</li>
+<li><strong>API:</strong> <code>POST /v1/reclassify {from, to, taxonomy_version}</code> → <code>job_id</code>;
+  <code>GET /v1/jobs/{job_id}</code> → прогресс. Тарификация — по полям <code>classification.*</code>, без повторной
+  оплаты минут.</li>
+</ul>
+<h2 id="_5">Метрики успеха</h2>
+<table>
+<thead>
+<tr>
+<th>Метрика</th>
+<th>Цель</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Доля обработанных звонков от поступивших</td>
+<td>100 % (SLA ≤ 24 ч, цель ≤ 30 мин)</td>
+</tr>
+<tr>
+<td>Время переклассификации 1 млн звонков</td>
+<td>≤ 6 ч</td>
+</tr>
+<tr>
+<td>Ресурс на переклассификацию</td>
+<td>только LLM-слой, ASR не повторяется</td>
+</tr>
+<tr>
+<td>Доля звонков в очереди ручного контроля</td>
+<td>≤ 5 % (порог уверенности настраивается)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_6">Как это устроено у нас</h2>
+<ul>
+<li>Классификация идёт по сохранённым транскриптам: смена таксономии пересчитывает вердикты за часы и не запускает распознавание заново.</li>
+<li>Версии таксономии сохраняются: видно, что изменилось после переклассификации и на каких звонках.</li>
+<li>Один конвейер работает и на потоке, и на архиве.</li>
+</ul>
+  </main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Fonotext</strong> — сервис речевой аналитики. Проект компании AXIIOM
+       (<a href="/" rel="noopener">axiiom.ru</a>). Лендинг и демо:
+       <a href="https://fonotext.ru/" rel="noopener">fonotext.ru</a>.</p>
+    <p>ООО «Аксиома», ИНН 7842223709, ОГРН 1247800067690. 192029, г. Санкт-Петербург, ул. Профессора Качалова, д. 15А, литера А.</p>
+    <p>Пилот и демо: <a href="mailto:axiiom@ya.ru">axiiom@ya.ru</a>,
+       <a href="tel:+78129287478">+7 (812) 928-74-78</a>.
+       Коммерческие условия — по запросу.</p>
+  </div>
+</footer>
+</body>
+</html>

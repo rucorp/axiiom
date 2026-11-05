@@ -1,0 +1,44 @@
+# Fonotext
+
+> Fonotext — сервис речевой аналитики телефонных разговоров: расшифровка звонков со
+> спикерами, автоматическая классификация, контроль скриптов с доказательствами,
+> дашборды и разбор архивов. Данные обрабатываются и хранятся в РФ (152-ФЗ).
+> Fonotext — проект компании AXIIOM.
+
+Лендинг и демо: https://fonotext.ru/
+Документация: https://axiiom.ru/fonotext/
+Репозиторий документации: https://github.com/rucorp/axiiom (каталог fonotext/)
+
+## Документы
+
+- [Fonotext: презентация продукта](https://axiiom.ru/fonotext/00-product-presentation/): Что такое Fonotext: расшифровка и классификация 100 % звонков, контроль скриптов с доказательствами, дашборды. 12 тезисов для руководителя контакт-центра.
+- [Интеграция и анкета подключения | Fonotext](https://axiiom.ru/fonotext/01-integration/): Как подключить Fonotext к телефонии: REST API, вебхуки, SFTP/S3, форматы аудио, анкета подключения и что получает заказчик после интеграции.
+- [Архитектура Fonotext](https://axiiom.ru/fonotext/02-architecture/): Конвейер обработки звонков: транскрибация, классификация, контроль скриптов, хранение транскриптов в ClickHouse и S3, риски и их закрытие.
+- [Модели и качество распознавания | Fonotext](https://axiiom.ru/fonotext/03-models/): Каскад моделей: Whisper, GigaAM, T-one; LLM-классификация, методика оценки качества в пилоте (WER, F1), выбор моделей под телефонию.
+- [Мощности и оборудование | Fonotext](https://axiiom.ru/fonotext/04-hardware/): Расчёт GPU-мощностей под объём звонков, арендованные GPU с автоскейлом, требования к серверам для коробочной поставки.
+- [План пилота Fonotext](https://axiiom.ru/fonotext/05-poc-plan/): Измерительный пилот 4–6 недель: этапы, метрики (WER, F1, полнота скриптов), критерии Go/No-Go, риски пилота и как они снимаются.
+- [Поставка, SLA и развёртывание | Fonotext](https://axiiom.ru/fonotext/07-deployment/): Три сценария поставки: облако в РФ, выделенный шард с BYOK, коробка on-prem. Конфигурации серверов, SLA, обновления модели.
+- [API Fonotext](https://axiiom.ru/fonotext/08-api/): Асинхронный API: загрузка звонков, статусы, вебхуки, выгрузка транскриптов и результатов классификации, формат карточки звонка.
+- [Безопасность и 152-ФЗ | Fonotext](https://axiiom.ru/fonotext/13-bezopasnost-i-152-fz/): Обработка и хранение данных на территории РФ, роли оператора и обработчика ПДн, ролевая модель, SSO/AD, маскирование данных в выгрузках.
+- [Что нового в Fonotext 1.1](https://axiiom.ru/fonotext/14-chto-novogo-v1-1/): Изменения версии 1.1: новые возможности классификации, контроля скриптов и отчётности.
+
+## Спецификации функций
+
+- [Покрытие 100 % звонков](https://axiiom.ru/fonotext/specs/01-full-coverage/)
+- [Конструктор таксономии](https://axiiom.ru/fonotext/specs/02-taxonomy-builder/)
+- [Скрипты с доказательствами](https://axiiom.ru/fonotext/specs/03-script-evidence/)
+- [Разбор архива](https://axiiom.ru/fonotext/specs/04-archive/)
+- [Выделенный шард](https://axiiom.ru/fonotext/specs/05-private-shard/)
+- [Спроси свои звонки](https://axiiom.ru/fonotext/specs/06-ask-your-calls/)
+- [Контроль дрейфа качества](https://axiiom.ru/fonotext/specs/07-quality-drift/)
+- [Оповещения и действия](https://axiiom.ru/fonotext/specs/08-alerts-actions/)
+- [Интеграции (CRM, BI)](https://axiiom.ru/fonotext/specs/09-integrations/)
+- [Дашборды](https://axiiom.ru/fonotext/specs/10-dashboards/)
+- [Чек-листы контроля качества](https://axiiom.ru/fonotext/specs/11-qa-checklists/)
+- [Отчётный копилот](https://axiiom.ru/fonotext/specs/12-copilot/)
+
+## Правообладатель и контакты
+
+- ООО «Аксиома», ИНН 7842223709, ОГРН 1247800067690. 192029, г. Санкт-Петербург, ул. Профессора Качалова, д. 15А, литера А.
+- Пилот, демо, коммерческое предложение: axiiom@ya.ru, +7 (812) 928-74-78.
+- Коммерческие условия и тарифы на сайте не публикуются — обсуждаются на пилоте.
