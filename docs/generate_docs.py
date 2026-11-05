@@ -85,6 +85,20 @@ DOCS = [
     
     # ── Проектная документация ──
     {
+        "slug": "fonotext-docs",
+        "title": "Fonotext — документация",
+        "desc": "Документация сервиса речевой аналитики Fonotext: интеграция с телефонией, архитектура, модели, безопасность и 152-ФЗ, API, план пилота и спецификации функций.",
+        "category": "Проектная документация",
+        "url": "/fonotext/",
+    },
+    {
+        "slug": "mock-services-docs",
+        "title": "Mock Services",
+        "desc": "Открытый тестовый стенд AXIIOM: моки эквайринга, онлайн-касс и ОФД по публичным API-протоколам. Быстрый запуск, сценарии и гайды интеграции.",
+        "category": "Проектная документация",
+        "url": "/mock-services/",
+    },
+    {
         "slug": "vitrina",
         "title": "Платформа «Витрина»",
         "subtitle": "Технико-коммерческое описание",
@@ -523,7 +537,8 @@ def generate_index():
                 icon_svg = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg>'
             else:
                 icon_svg = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>'
-            html += f'''<a href="{doc_url}" class="tool-card blog-card reveal"{' target="_blank"' if doc.get("url") else ''}>
+            ext = doc.get("url", "").startswith("http")
+            html += f'''<a href="{doc_url}" class="tool-card blog-card reveal"{' target="_blank"' if ext else ''}>
                 <div class="tool-icon">{icon_svg}</div>
                 <h3>{doc["title"]}</h3>
                 <p>{doc["desc"][:180]}{"…" if len(doc["desc"]) > 180 else ""}</p>
