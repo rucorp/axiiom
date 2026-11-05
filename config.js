@@ -11,7 +11,7 @@ window.AXIIOM_CONFIG = {
     copyrightStart: 2024
   },
   contact: {
-    email: 'hello@axiiom.ru',
+    email: 'axiiom@ya.ru',
     phone: '+7 (812) 928-74-78',
     phoneLink: '+78129287478',
     telegram: 'https://t.me/axiiom'

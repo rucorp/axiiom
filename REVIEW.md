@@ -230,7 +230,7 @@ From `config.js`:
 ```js
 window.AXIIOM_CONFIG = {
   company: { name: 'AXIIOM', nameRu: 'ООО Аксиома', domain: 'axiiom.ru', ... },
-  contact: { email: 'hello@axiiom.ru', phone: '+7 (812) 928-74-78', telegram: 'https://t.me/axiiom' },
+  contact: { email: 'axiiom@ya.ru', phone: '+7 (812) 928-74-78', telegram: 'https://t.me/axiiom' },
   address: { spb: 'СПб, Большой В.О. пр-кт, 83А, офис 329', msk: 'Москва, ул. Перерва, д. 16' },
   legal: { inn: '7842223709', ogrn: '1247800067690', ... },
   analytics: { yandexMetrika: '109391253', googleAnalytics: 'G-HFS4BDGTV4' }
