@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API Fonotext</title>
+<meta name="description" content="Асинхронный API: загрузка звонков, статусы, вебхуки, выгрузка транскриптов и результатов классификации, формат карточки звонка.">
+<link rel="canonical" href="https://axiiom.ru/fonotext/08-api/">
+<link rel="icon" href="/fonotext/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonotext/assets/style.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AXIIOM — Fonotext">
+<meta property="og:title" content="API Fonotext">
+<meta property="og:description" content="Асинхронный API: загрузка звонков, статусы, вебхуки, выгрузка транскриптов и результатов классификации, формат карточки звонка.">
+<meta property="og:url" content="https://axiiom.ru/fonotext/08-api/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://axiiom.ru/og-image.png">
+</head>
+<body>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a href="/" class="brand">AXIIOM</a>
+    <nav class="crumbs" aria-label="Хлебные крошки">
+      <a href="/fonotext/">Fonotext</a><span aria-hidden="true">/</span><span>API Fonotext</span>
+    </nav>
+    <a href="https://fonotext.ru/" class="ext" rel="noopener">fonotext.ru — лендинг и демо</a>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar" aria-label="Навигация по документации"><section><h2>Обзор</h2><ul><li><a href="/fonotext/00-product-presentation/">Fonotext: презентация продукта</a></li><li><a href="/fonotext/14-chto-novogo-v1-1/">Что нового в Fonotext 1.1</a></li></ul></section><section><h2>Внедрение</h2><ul><li><a href="/fonotext/01-integration/">Интеграция и анкета подключения </a></li><li><a href="/fonotext/05-poc-plan/">План пилота Fonotext</a></li><li><a href="/fonotext/08-api/" class="active">API Fonotext</a></li></ul></section><section><h2>Технология</h2><ul><li><a href="/fonotext/02-architecture/">Архитектура Fonotext</a></li><li><a href="/fonotext/03-models/">Модели и качество распознавания </a></li><li><a href="/fonotext/04-hardware/">Мощности и оборудование </a></li></ul></section><section><h2>Эксплуатация</h2><ul><li><a href="/fonotext/07-deployment/">Поставка, SLA и развёртывание </a></li><li><a href="/fonotext/13-bezopasnost-i-152-fz/">Безопасность и 152-ФЗ </a></li></ul></section><section><h2>Спецификации функций</h2><ul><li><a href="/fonotext/specs/01-full-coverage/">Покрытие 100 % звонков</a></li><li><a href="/fonotext/specs/02-taxonomy-builder/">Конструктор таксономии</a></li><li><a href="/fonotext/specs/03-script-evidence/">Скрипты с доказательствами</a></li><li><a href="/fonotext/specs/04-archive/">Разбор архива</a></li><li><a href="/fonotext/specs/05-private-shard/">Выделенный шард</a></li><li><a href="/fonotext/specs/06-ask-your-calls/">Спроси свои звонки</a></li><li><a href="/fonotext/specs/07-quality-drift/">Контроль дрейфа качества</a></li><li><a href="/fonotext/specs/08-alerts-actions/">Оповещения и действия</a></li><li><a href="/fonotext/specs/09-integrations/">Интеграции (CRM, BI)</a></li><li><a href="/fonotext/specs/10-dashboards/">Дашборды</a></li><li><a href="/fonotext/specs/11-qa-checklists/">Чек-листы контроля качества</a></li><li><a href="/fonotext/specs/12-copilot/">Отчётный копилот</a></li></ul></section></aside>
+  <main id="main" class="doc">
+<h1 class="doc-title" id="08-api-v1">08. Спецификация API v1</h1>
+<p>Статус: <strong>контракт /v1 стабилен</strong>. Обратная совместимость гарантируется 12 месяцев с момента
+релиза. Доступ к API — через пилот и корпоративные поставки.</p>
+<p>Базовый URL: <code>https://api.fonotext.ru</code>.</p>
+<p>API — асинхронный: вы передаёте запись, получаете <code>call_id</code>, результат забираете вебхуком или
+опросом. SLA готовности результата — ≤ 24 часа (фактически — минуты).</p>
+<p><strong>Что доступно по API:</strong> транскрибация (транскрипт, спикеры, таймкоды, метрики) — сразу;
+поля <code>classification.*</code> (тип соединения, результат, теги, скрипты, тональность) — в поставке
+с аналитикой, в коробке on-prem входят всегда.</p>
+<h2 id="_1">Аутентификация</h2>
+<p><code>Authorization: Bearer &lt;API-ключ&gt;</code>. Ключи выпускаются в личном кабинете, ротация — без простоя
+(два активных ключа). Все запросы — TLS.</p>
+<h2 id="_2">Отправка звонка</h2>
+<pre><code>POST /v1/calls
+Content-Type: multipart/form-data
+
+file          — аудиофайл (wav/mp3/opus, до 500 МБ)  [или url=… — ссылка на файл/S3]
+external_id   — ваш идентификатор звонка (опционально)
+direction     — in | out
+operator_id   — идентификатор оператора (опционально)
+campaign      — кампания/очередь (опционально)
+channel_map   — left=client,right=operator (по умолчанию) | mono
+callback_url  — куда прислать результат (опционально)
+</code></pre>
+<pre><code class="language-json">200 OK
+{
+  &quot;call_id&quot;: &quot;c7f3e1a2…&quot;,
+  &quot;status&quot;: &quot;queued&quot;,
+  &quot;duration_planned_sec&quot;: 0,
+  &quot;charged_sec&quot;: 282
+}
+</code></pre>
+<p>Учитывается длительность записи: оба канала суммарно один раз, округление до 6 секунд
+в большую сторону.</p>
+<h2 id="_3">Статусы и результат</h2>
+<p>Статусы: <code>queued → processing → completed | failed</code> (причины отказа: битый файл, нет речи,
+неверный формат — с кодом и описанием).</p>
+<pre><code>GET /v1/calls/{call_id}
+</code></pre>
+<pre><code class="language-json">200 OK
+{
+  &quot;call_id&quot;: &quot;c7f3e1a2…&quot;,
+  &quot;status&quot;: &quot;completed&quot;,
+  &quot;audio&quot;: {&quot;duration_sec&quot;: 282, &quot;channels&quot;: &quot;stereo&quot;},
+  &quot;classification&quot;: {
+    &quot;connection_type&quot;: &quot;live_talk | answering_machine | spam_block | robot | no_answer | failed&quot;,
+    &quot;outcome&quot;: &quot;sale | appointment | consult | refusal | complaint | callback | other&quot;,
+    &quot;script_compliance&quot;: [
+      {&quot;rule&quot;: &quot;greeting&quot;, &quot;passed&quot;: true,  &quot;evidence&quot;: &quot;Добрый день, компания…&quot;},
+      {&quot;rule&quot;: &quot;no_profanity&quot;, &quot;passed&quot;: true, &quot;evidence&quot;: null}
+    ],
+    &quot;tags&quot;: [&quot;интерес&quot;, &quot;следующий шаг&quot;],
+    &quot;sentiment&quot;: &quot;neutral | positive | negative | conflict&quot;,
+    &quot;confidence&quot;: 0.9
+  },
+  &quot;metrics&quot;: {
+    &quot;talk_ratio_client&quot;: 0.48,
+    &quot;interruptions&quot;: 3,
+    &quot;silence_sec&quot;: 21.4
+  },
+  &quot;transcript&quot;: {
+    &quot;format&quot;: &quot;segments&quot;,
+    &quot;segments&quot;: [
+      {&quot;start&quot;: 0.0, &quot;end&quot;: 3.6, &quot;speaker&quot;: &quot;operator&quot;,
+       &quot;text&quot;: &quot;Добрый день! Меня зовут Алексей, компания Стройдом.&quot;}
+    ]
+  },
+  &quot;web_url&quot;: &quot;https://app.fonotext.ru/calls/c7f3e1a2&quot;
+}
+</code></pre>
+<p>Набор классов <code>connection_type</code>/<code>outcome</code> и правила скрипта настраиваются таксономией
+заказчика; выдача всегда в стабильном формате.</p>
+<p><strong>Без подписки</strong> блок <code>classification</code> возвращается как <code>null</code> (транскрипт и метрики — всегда);
+явный запрос <code>GET /v1/calls/{id}?include=classification</code> без подписки вернёт
+<code>402 payment_required</code> с приглашением подключить «Аналитику». В период теста классификация
+открыта на пробных объёмах.</p>
+<h2 id="_4">Список звонков и выгрузки</h2>
+<pre><code>GET /v1/calls?from=2026-11-01&amp;to=2026-11-30&amp;operator_id=…&amp;connection_type=answering_machine&amp;limit=100&amp;cursor=…
+GET /v1/reports/{report_id}/export?format=xlsx     — отчёты по расписанию/по требованию
+GET /v1/balance                                    — остаток пакета минут
+</code></pre>
+<h2 id="_5">Вебхуки</h2>
+<p>Подписка: <code>POST /v1/webhooks</code> (<code>url</code>, <code>events</code>, <code>secret</code>). События: <code>call.completed</code>,
+<code>call.failed</code>. Доставка с повторами (экспоненциально, 24 ч), подпись HMAC-SHA256 в заголовке.</p>
+<pre><code class="language-json">{&quot;event&quot;: &quot;call.completed&quot;, &quot;call_id&quot;: &quot;c7f3e1a2…&quot;, &quot;external_id&quot;: &quot;crm-88113&quot;}
+</code></pre>
+<h2 id="_6">Лимиты и ошибки</h2>
+<ul>
+<li>100 запросов/с на ключ; пиковая загрузка файлов — по договорённости (батч-импорт архива
+  отдельным процессом, см. <a href="/fonotext/07-deployment/">07-deployment.md</a>).</li>
+<li>Ошибки — JSON: <code>401</code> (ключ), <code>404</code> (нет звонка), <code>422</code> (формат аудио), <code>429</code> (лимит),
+  <code>5xx</code> (повторите с backoff). Идемпотентность: повторный <code>POST /v1/calls</code> с тем же
+  <code>external_id</code> не создаёт дубликат и не тарифицируется повторно.</li>
+</ul>
+<h2 id="sdk">SDK и примеры</h2>
+<ul>
+<li><code>curl -F file=@call.wav -F direction=out -H "Authorization: Bearer $KEY" https://api.fonotext.ru/v1/calls</code></li>
+<li>SDK: Python (позже), шаблон интеграции с АТС — по запросу.</li>
+</ul>
+<p>Формат результата совпадает с тем, что показывает <a href="https://fonotext.ru/demo/index.html">демо-панель</a>
+(out/*.json) — можно разрабатывать интеграцию уже на пилоте.</p>
+  </main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Fonotext</strong> — сервис речевой аналитики. Проект компании AXIIOM
+       (<a href="/" rel="noopener">axiiom.ru</a>). Лендинг и демо:
+       <a href="https://fonotext.ru/" rel="noopener">fonotext.ru</a>.</p>
+    <p>ООО «Аксиома», ИНН 7842223709, ОГРН 1247800067690. 192029, г. Санкт-Петербург, ул. Профессора Качалова, д. 15А, литера А.</p>
+    <p>Пилот и демо: <a href="mailto:axiiom@ya.ru">axiiom@ya.ru</a>,
+       <a href="tel:+78129287478">+7 (812) 928-74-78</a>.
+       Коммерческие условия — по запросу.</p>
+  </div>
+</footer>
+</body>
+</html>

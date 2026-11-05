@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Спецификации функций | Fonotext</title>
+<meta name="description" content="12 спецификаций функций Fonotext: покрытие звонков, таксономия, контроль скриптов с доказательствами, разбор архива, выделенный шард, дашборды, интеграции.">
+<link rel="canonical" href="https://axiiom.ru/fonotext/specs/">
+<link rel="icon" href="/fonotext/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonotext/assets/style.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AXIIOM — Fonotext">
+<meta property="og:title" content="Спецификации функций | Fonotext">
+<meta property="og:description" content="12 спецификаций функций Fonotext: покрытие звонков, таксономия, контроль скриптов с доказательствами, разбор архива, выделенный шард, дашборды, интеграции.">
+<meta property="og:url" content="https://axiiom.ru/fonotext/specs/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://axiiom.ru/og-image.png">
+</head>
+<body>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a href="/" class="brand">AXIIOM</a>
+    <nav class="crumbs" aria-label="Хлебные крошки">
+      <a href="/fonotext/">Fonotext</a><span aria-hidden="true">/</span><span>Спецификации функций</span>
+    </nav>
+    <a href="https://fonotext.ru/" class="ext" rel="noopener">fonotext.ru — лендинг и демо</a>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar" aria-label="Навигация по документации"><section><h2>Обзор</h2><ul><li><a href="/fonotext/00-product-presentation/">Fonotext: презентация продукта</a></li><li><a href="/fonotext/14-chto-novogo-v1-1/">Что нового в Fonotext 1.1</a></li></ul></section><section><h2>Внедрение</h2><ul><li><a href="/fonotext/01-integration/">Интеграция и анкета подключения </a></li><li><a href="/fonotext/05-poc-plan/">План пилота Fonotext</a></li><li><a href="/fonotext/08-api/">API Fonotext</a></li></ul></section><section><h2>Технология</h2><ul><li><a href="/fonotext/02-architecture/">Архитектура Fonotext</a></li><li><a href="/fonotext/03-models/">Модели и качество распознавания </a></li><li><a href="/fonotext/04-hardware/">Мощности и оборудование </a></li></ul></section><section><h2>Эксплуатация</h2><ul><li><a href="/fonotext/07-deployment/">Поставка, SLA и развёртывание </a></li><li><a href="/fonotext/13-bezopasnost-i-152-fz/">Безопасность и 152-ФЗ </a></li></ul></section><section><h2>Спецификации функций</h2><ul><li><a href="/fonotext/specs/01-full-coverage/">Покрытие 100 % звонков</a></li><li><a href="/fonotext/specs/02-taxonomy-builder/">Конструктор таксономии</a></li><li><a href="/fonotext/specs/03-script-evidence/">Скрипты с доказательствами</a></li><li><a href="/fonotext/specs/04-archive/">Разбор архива</a></li><li><a href="/fonotext/specs/05-private-shard/">Выделенный шард</a></li><li><a href="/fonotext/specs/06-ask-your-calls/">Спроси свои звонки</a></li><li><a href="/fonotext/specs/07-quality-drift/">Контроль дрейфа качества</a></li><li><a href="/fonotext/specs/08-alerts-actions/">Оповещения и действия</a></li><li><a href="/fonotext/specs/09-integrations/">Интеграции (CRM, BI)</a></li><li><a href="/fonotext/specs/10-dashboards/">Дашборды</a></li><li><a href="/fonotext/specs/11-qa-checklists/">Чек-листы контроля качества</a></li><li><a href="/fonotext/specs/12-copilot/">Отчётный копилот</a></li></ul></section></aside>
+  <main id="main" class="doc">
+<h1 class="doc-title" id="10-fonotext">10. Спецификации фич Fonotext</h1>
+<p>Версия 1.1 от 2026-10-04 (релиз v1.1: добавлены спеки 09–12 — интеграции, конструктор дашбордов, QA-модуль, Fonotext Copilot). Здесь — не «список возможностей», а спецификации: что именно делаем,
+как это работает и как измеряем успех.</p>
+<table>
+<thead>
+<tr>
+<th>№</th>
+<th>Фича</th>
+<th>Суть в одну строку</th>
+<th>Доступно в</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/fonotext/specs/01-full-coverage/">01</a></td>
+<td>Аудит 100 % и переклассификация без повторного ASR</td>
+<td>Смена таксономии без повторного распознавания и повторной оплаты</td>
+<td>все подписки</td>
+</tr>
+<tr>
+<td><a href="/fonotext/specs/02-taxonomy-builder/">02</a></td>
+<td>Конструктор таксономии и правил без релиза</td>
+<td>Бизнес сам правит классификацию, версии и A/B на эталоне</td>
+<td>Бизнес+</td>
+</tr>
+<tr>
+<td><a href="/fonotext/specs/03-script-evidence/">03</a></td>
+<td>Контроль скриптов с доказательной базой</td>
+<td>Каждое нарушение подтверждено цитатой и таймкодом</td>
+<td>Бизнес+</td>
+</tr>
+<tr>
+<td><a href="/fonotext/specs/04-archive/">04</a></td>
+<td>«Архив под ключ» — конвейер разбора</td>
+<td>Разбор накопленного архива партиями, с ETA и чекпоинтами</td>
+<td>разовая услуга</td>
+</tr>
+<tr>
+<td><a href="/fonotext/specs/05-private-shard/">05</a></td>
+<td>Приватный контур на аренде</td>
+<td>Изоляция данных без покупки железа и лицензии</td>
+<td>Приватный контур</td>
+</tr>
+<tr>
+<td><a href="/fonotext/specs/06-ask-your-calls/">06</a></td>
+<td>LLM-аналитик «спросите свои звонки»</td>
+<td>Вопрос на естественном языке → ответ с цитатами</td>
+<td>Бизнес+</td>
+</tr>
+<tr>
+<td><a href="/fonotext/specs/07-quality-drift/">07</a></td>
+<td>Мониторинг качества и дрейфа моделей</td>
+<td>Мы подписываемся цифрами WER и следим за деградацией</td>
+<td>все</td>
+</tr>
+<tr>
+<td><a href="/fonotext/specs/08-alerts-actions/">08</a></td>
+<td>Алерты и автодействия</td>
+<td>Событие по звонку → задача в CRM в реальном времени</td>
+<td>Корпоративный+</td>
+</tr>
+<tr>
+<td><a href="/fonotext/specs/09-integrations/">09</a></td>
+<td>Интеграции: CRM, АТС, мессенджеры</td>
+<td>Коннекторы Битрикс24/amoCRM/Salesforce, Asterisk/3CX, Telegram/Slack/Teams — без интеграционного проекта</td>
+<td>Бизнес+, без доплаты</td>
+</tr>
+<tr>
+<td><a href="/fonotext/specs/10-dashboards/">10</a></td>
+<td>Конструктор дашбордов: сравнения и тренды</td>
+<td>Операторы и отделы в одном разрезе, тренды KPI по всем звонкам</td>
+<td>Бизнес+</td>
+</tr>
+<tr>
+<td><a href="/fonotext/specs/11-qa-checklists/">11</a></td>
+<td>QA-модуль: чек-листы с весами</td>
+<td>Оценка качества по каждому звонку, авторазметка лучших и худших</td>
+<td>Корпоративный+</td>
+</tr>
+<tr>
+<td><a href="/fonotext/specs/12-copilot/">12</a></td>
+<td>Fonotext Copilot</td>
+<td>Автоотчёты, прогноз исхода по первым 30 сек, live-подсказки оператору</td>
+<td>модуль к корпоративным сценариям</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Почему именно эти двенадцать.</strong> Мы отбирали фичи по одному критерию: закрывает ли она боль,
+которую клиент уже сформулировал сам — на встрече или в тендерной документации.
+Переклассификация без ASR отвечает на «мы поменяли скрипты, а система считает
+по-старому». Доказательная проверка скриптов — на «оператор говорит, что я придираюсь».
+Архив — на «у нас пять лет записей, которые никто не слушал». Приватный контур — на
+«служба безопасности не пропустит облако». Каждая спецификация ниже заканчивается
+разделом «Как это устроено у нас» — это рабочая гипотеза, которую проверяет пилот,
+а не рекламное утверждение.</p>
+<p><strong>Как читать.</strong> Каждая спецификация отвечает на четыре вопроса: какую боль закрывает, как
+устроена внутри, что видит клиент, как считается успех. Разделы «Как это устроено у нас» —
+не реклама, а рабочая гипотеза: её проверяет пилот, а не презентация.</p>
+<p><strong>Связка с архитектурой.</strong> Все фичи опираются на решения из <a href="/fonotext/02-architecture/">02-architecture.md</a>:
+спикеры определяются физически по каналам стереозаписи, стадии пайплайна идемпотентны по ключу
+<code>call_id + stage</code>, транскрипты лежат отдельно от вердиктов классификации. Именно это делает
+переклассификацию дешёвой, а 100 % покрытие — реальным.</p>
+  </main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Fonotext</strong> — сервис речевой аналитики. Проект компании AXIIOM
+       (<a href="/" rel="noopener">axiiom.ru</a>). Лендинг и демо:
+       <a href="https://fonotext.ru/" rel="noopener">fonotext.ru</a>.</p>
+    <p>ООО «Аксиома», ИНН 7842223709, ОГРН 1247800067690. 192029, г. Санкт-Петербург, ул. Профессора Качалова, д. 15А, литера А.</p>
+    <p>Пилот и демо: <a href="mailto:axiiom@ya.ru">axiiom@ya.ru</a>,
+       <a href="tel:+78129287478">+7 (812) 928-74-78</a>.
+       Коммерческие условия — по запросу.</p>
+  </div>
+</footer>
+</body>
+</html>

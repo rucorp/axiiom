@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Архитектура Fonotext</title>
+<meta name="description" content="Конвейер обработки звонков: транскрибация, классификация, контроль скриптов, хранение транскриптов в ClickHouse и S3, риски и их закрытие.">
+<link rel="canonical" href="https://axiiom.ru/fonotext/02-architecture/">
+<link rel="icon" href="/fonotext/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonotext/assets/style.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AXIIOM — Fonotext">
+<meta property="og:title" content="Архитектура Fonotext">
+<meta property="og:description" content="Конвейер обработки звонков: транскрибация, классификация, контроль скриптов, хранение транскриптов в ClickHouse и S3, риски и их закрытие.">
+<meta property="og:url" content="https://axiiom.ru/fonotext/02-architecture/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://axiiom.ru/og-image.png">
+</head>
+<body>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a href="/" class="brand">AXIIOM</a>
+    <nav class="crumbs" aria-label="Хлебные крошки">
+      <a href="/fonotext/">Fonotext</a><span aria-hidden="true">/</span><span>Архитектура Fonotext</span>
+    </nav>
+    <a href="https://fonotext.ru/" class="ext" rel="noopener">fonotext.ru — лендинг и демо</a>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar" aria-label="Навигация по документации"><section><h2>Обзор</h2><ul><li><a href="/fonotext/00-product-presentation/">Fonotext: презентация продукта</a></li><li><a href="/fonotext/14-chto-novogo-v1-1/">Что нового в Fonotext 1.1</a></li></ul></section><section><h2>Внедрение</h2><ul><li><a href="/fonotext/01-integration/">Интеграция и анкета подключения </a></li><li><a href="/fonotext/05-poc-plan/">План пилота Fonotext</a></li><li><a href="/fonotext/08-api/">API Fonotext</a></li></ul></section><section><h2>Технология</h2><ul><li><a href="/fonotext/02-architecture/" class="active">Архитектура Fonotext</a></li><li><a href="/fonotext/03-models/">Модели и качество распознавания </a></li><li><a href="/fonotext/04-hardware/">Мощности и оборудование </a></li></ul></section><section><h2>Эксплуатация</h2><ul><li><a href="/fonotext/07-deployment/">Поставка, SLA и развёртывание </a></li><li><a href="/fonotext/13-bezopasnost-i-152-fz/">Безопасность и 152-ФЗ </a></li></ul></section><section><h2>Спецификации функций</h2><ul><li><a href="/fonotext/specs/01-full-coverage/">Покрытие 100 % звонков</a></li><li><a href="/fonotext/specs/02-taxonomy-builder/">Конструктор таксономии</a></li><li><a href="/fonotext/specs/03-script-evidence/">Скрипты с доказательствами</a></li><li><a href="/fonotext/specs/04-archive/">Разбор архива</a></li><li><a href="/fonotext/specs/05-private-shard/">Выделенный шард</a></li><li><a href="/fonotext/specs/06-ask-your-calls/">Спроси свои звонки</a></li><li><a href="/fonotext/specs/07-quality-drift/">Контроль дрейфа качества</a></li><li><a href="/fonotext/specs/08-alerts-actions/">Оповещения и действия</a></li><li><a href="/fonotext/specs/09-integrations/">Интеграции (CRM, BI)</a></li><li><a href="/fonotext/specs/10-dashboards/">Дашборды</a></li><li><a href="/fonotext/specs/11-qa-checklists/">Чек-листы контроля качества</a></li><li><a href="/fonotext/specs/12-copilot/">Отчётный копилот</a></li></ul></section></aside>
+  <main id="main" class="doc">
+<h1 class="doc-title" id="02">02. Архитектура системы</h1>
+<p>Версия 1.0 от 2026-10-02. Ключевая архитектурная развилка уже решена самим входным форматом:
+<strong>стерео с разделением каналов</strong> → спикеры известны физически, нейросетевая диаризация не нужна.
+Это дешевле, точнее и быстрее любых решений «диаризация + ASR» для моно-записей.</p>
+<h2 id="1">1. Общая схема</h2>
+<pre><code class="language-mermaid">flowchart LR
+    subgraph SRC[&quot;Контур заказчика&quot;]
+        A[&quot;АТС / система записи&lt;br/&gt;стерео-файлы + метаданные&quot;]
+    end
+
+    subgraph ING[&quot;Слой приёма&quot;]
+        B[&quot;Ingest-адаптер&lt;br/&gt;REST / S3 / SFTP / вебхук&quot;]
+        C[&quot;Планировщик задач&lt;br/&gt;Redis Streams → Kafka*&quot;]
+        D[&quot;Оригиналы&lt;br/&gt;S3 / MinIO&quot;]
+    end
+
+    subgraph PREP[&quot;Предобработка — CPU&quot;]
+        E[&quot;ffmpeg: разделение каналов,&lt;br/&gt;16 кГц моно, нормализация громкости&quot;]
+        F[&quot;VAD Silero + аудио-фичи:&lt;br/&gt;тишина, бипы, DTMF, музыка&quot;]
+    end
+
+    subgraph ASR[&quot;Распознавание — GPU&quot;]
+        G[&quot;ASR-воркеры&lt;br/&gt;faster-whisper / WhisperX&lt;br/&gt;батчинг, int8_float16&quot;]
+    end
+
+    subgraph POST[&quot;Постобработка&quot;]
+        H[&quot;Слияние каналов по таймкодам&lt;br/&gt;реплики клиент/оператор&quot;]
+        I[&quot;Метрики: talk ratio,&lt;br/&gt;перебивания, паузы&quot;]
+        J[&quot;Правила: стоп-слова, фразы скрипта,&lt;br/&gt;regex, нечёткий поиск&quot;]
+        K[&quot;LLM-классификатор&lt;br/&gt;vLLM + Qwen, JSON-schema&quot;]
+    end
+
+    subgraph STORE[&quot;Хранение&quot;]
+        L[(&quot;S3/MinIO: аудио, транскрипты JSON&quot;)]
+        M[(&quot;PostgreSQL: звонки, таксономия, пользователи&quot;)]
+        N[(&quot;ClickHouse: метрики, сегменты, теги&quot;)]
+    end
+
+    subgraph BI[&quot;Аналитика и доступ&quot;]
+        O[&quot;Дашборды Superset&quot;]
+        P[&quot;Карточка звонка:&lt;br/&gt;плеер + транскрипт + теги&quot;]
+        Q[&quot;Экспорт и рассылка отчётов&quot;]
+        R[&quot;API для систем заказчика&quot;]
+    end
+
+    S[&quot;Очередь ручного контроля&lt;br/&gt;human-in-the-loop&quot;]
+    T[&quot;Prometheus + Grafana&lt;br/&gt;алерты, SLA-мониторинг&quot;]
+
+    A --&gt; B --&gt; C
+    B --&gt; D
+    C --&gt; E --&gt; F --&gt; G --&gt; H --&gt; I
+    H --&gt; J --&gt; K
+    K --&gt;|низкая уверенность| S
+    I --&gt; L &amp; M &amp; N
+    K --&gt; L &amp; M &amp; N
+    N &amp; M --&gt; O &amp; P &amp; Q &amp; R
+    C &amp; E &amp; G &amp; K -.телеметрия.-&gt; T
+</code></pre>
+<p>* Redis Streams достаточно до ~50 тыс. задач/час; миграция на Kafka — если объёмы/ретеншн очередей
+потребуют (решение зафиксируем после замеров в PoC).</p>
+<h2 id="2">2. Поток обработки одного звонка</h2>
+<ol>
+<li><strong>Обнаружение.</strong> Ingest-адаптер по расписанию (каждые 1–5 мин) опрашивает API заказчика о новых
+   записях либо принимает вебхук. Задача (<code>call_id</code>, пути, метаданные) — в очередь с приоритетом
+   <code>live</code>; бэклог-выгрузка кладётся в очередь <code>backfill</code> с низким приоритетом.</li>
+<li><strong>Предобработка (CPU, ffmpeg).</strong> Разделение каналов → ресемпл 16 кГц моно → нормализация громкости
+   (loudnorm) → VAD (Silero): выкидываем тишину, считаем долю речи по каналам, детектируем бипы/DTMF.
+   Звонки, где второй канал пуст (типично для автоответчиков), распознаются только по «говорящему» каналу.</li>
+<li><strong>ASR (GPU).</strong> Каждый канал независимо, батчами (faster-whisper/CTranslate2, int8_float16).
+   Выравнивание до слов — forced alignment (WhisperX / wav2vec2). Пунктуация — из самой Whisper;
+   для альтернативных моделей добавляется отдельная модель пунктуации.</li>
+<li><strong>Слияние.</strong> Сегменты двух каналов сортируются по <code>start</code> → единая хронология реплик с меткой
+   спикера. Пересечения сегментов = перебивания; паузы = промежутки без речи.</li>
+<li><strong>Классификация.</strong> Каскад: (а) детерминированные правила и аудио-фичи (доля речи по каналам,
+   длительность, наличие бипов/музыки, словари «оставьте сообщение», стоп-слова, фразы скрипта через
+   нечёткий поиск); (б) LLM со строгой JSON-схемой — финальные метки: тип соединения, результат,
+   соблюдение скрипта, конфликтность, теги; (в) низкая уверенность → очередь ручного контроля.</li>
+<li><strong>Индексация.</strong> Транскрипт — S3 (JSON + текст), метаданные и вердикты — PostgreSQL, метрики и
+   сегменты — ClickHouse. Звонок виден в дашбордах и карточке.</li>
+<li><strong>Идемпотентность.</strong> Все стадии пишет результат по ключу <code>call_id + stage</code>; повторный запуск
+   стадии не создаёт дубликатов; перезапуск возможен с любой стадии (ASR не повторяется при
+   смене таксономии — только классификация, FR-41).</li>
+</ol>
+<h2 id="3">3. Компоненты и стек</h2>
+<table>
+<thead>
+<tr>
+<th>Слой</th>
+<th>Выбор</th>
+<th>Альтернатива / комментарий</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Приём</td>
+<td>Кастомный ingest-адаптер (Python)</td>
+<td>Адаптер изолирует специфику API заказчика; новые источники — новые адаптеры</td>
+</tr>
+<tr>
+<td>Очередь</td>
+<td>Redis Streams + consumer groups</td>
+<td>Kafka — при росте; Temporal — если нужны долгие SLA-процессы</td>
+</tr>
+<tr>
+<td>Предобработка</td>
+<td>ffmpeg, Silero VAD</td>
+<td>CPU-нода(ы), масштабируется ядрами</td>
+</tr>
+<tr>
+<td>ASR</td>
+<td>faster-whisper (CTranslate2) / WhisperX</td>
+<td>Модель выбирается в PoC (см. 03-models): Whisper large-v3-turbo — базовый кандидат</td>
+</tr>
+<tr>
+<td>Выравнивание слов</td>
+<td>WhisperX forced alignment (wav2vec2 ru)</td>
+<td>Нужно для перебиваний и перемотки по репликам</td>
+</tr>
+<tr>
+<td>Классификация</td>
+<td>Правила (Python, rapidfuzz) + LLM через vLLM (structured output)</td>
+<td>LLM: Qwen3-14B/32B локально; облако — только если разрешит анкета E</td>
+</tr>
+<tr>
+<td>Объектное хранилище</td>
+<td>MinIO (S3-совместимое)</td>
+<td>Или S3-совместимое СХД заказчика</td>
+</tr>
+<tr>
+<td>Метаданные</td>
+<td>PostgreSQL</td>
+<td>Звонки, статусы, таксономия, RBAC, аудит</td>
+</tr>
+<tr>
+<td>Аналитика</td>
+<td>ClickHouse</td>
+<td>Сегменты/теги/метрики, агрегации по 6+ млн звонков</td>
+</tr>
+<tr>
+<td>BI</td>
+<td>Apache Superset</td>
+<td>Встраиваемые дашборды, XLSX/PDF-экспорт; Metabase — проще, но менее гибок</td>
+</tr>
+<tr>
+<td>Карточка звонка</td>
+<td>Веб-приложение (FastAPI + фронтенд)</td>
+<td>Плеер (wavesurfer.js) с синхронной подсветкой транскрипта</td>
+</tr>
+<tr>
+<td>Поиск по текстам</td>
+<td>ClickHouse full-text (токены)</td>
+<td>OpenSearch — если нужен полноценный поисковый движок (фаза 5)</td>
+</tr>
+<tr>
+<td>Мониторинг</td>
+<td>Prometheus + Grafana + Alertmanager</td>
+<td>SLA-дашборд: отставание очереди, DLQ, GPU-утилизация, WER-дрейф</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4">4. Режимы работы</h2>
+<ul>
+<li><strong>Live:</strong> новые звонки, приоритетная очередь. SLA ≤ 24 ч с огромным запасом (ожидаемое E2E — минуты).
+  При пиковом поступлении воркеры <code>backfill</code> временно переключаются на <code>live</code>.</li>
+<li><strong>Backfill:</strong> 450 тыс. часов, низкий приоритет, пакетами; устойчивость к прерываниям и перезапускам
+  (чекпоинт по <code>call_id</code>). Прогресс и ETA бэклога — отдельный дашборд.</li>
+<li><strong>Переклассификация:</strong> при изменении таксономии/промптов — повторный прогон стадии классификации
+  по транскриптам из S3 без ASR (дёшево; SLA переклассификации всего архива — часы, не дни).</li>
+</ul>
+<h2 id="5">5. Безопасность</h2>
+<ul>
+<li>Всё внутри контура РФ; TLS на всех передачах; шифрование СХД (опция); оригиналы не размножаются —
+  кэш с TTL, основное хранение транскриптов.</li>
+<li>Маскирование номеров телефонов/сумм в транскриптах — флаг обработки (анкета E2); de-маскирование
+  только через RBAC.</li>
+<li>Доступ к карточкам/выгрузкам — по ролям; аудит выгрузок; водяные знаки в PDF-отчётах (опция).</li>
+<li>Развертываемо on-prem у заказчика без изменений архитектуры (k8s/docker-compose).</li>
+</ul>
+<h2 id="6">6. Развёртывание</h2>
+<ul>
+<li>Docker Compose для PoC; Kubernetes (или Nomad) для прода.</li>
+<li>GPU-ноды: ASR-воркеры по количеству карт (по 1 процессу на GPU, батчинг внутри), LLM — vLLM
+  с отдельными картами.</li>
+<li>CPU-ноды: ingest, предобработка, слияние, правила, индексация.</li>
+<li>СУБД и S3 — на CPU-нодах/СХД с бэкапами; стенд 1:1 воспроизводится IaC (ansible/terraform).</li>
+</ul>
+<h2 id="7">7. Риски и как они закрыты</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Риск</th>
+<th>Вероятн.</th>
+<th>Влияние</th>
+<th>Митигация</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1</td>
+<td>Телефонное аудио (8 кГц, шум, сленг) даёт WER заметно выше публичных бенчмарков</td>
+<td>высокая</td>
+<td>среднее</td>
+<td><strong>PoC на реальных данных до закупки</strong>; сравнение 3–4 моделей; выбор по фактам; затравочные словари (имена, продукты) в постобработке</td>
+</tr>
+<tr>
+<td>R2</td>
+<td>Лицензия GigaAM (SOTA для ru) некоммерческая</td>
+<td>высокая</td>
+<td>низкое</td>
+<td>Базовый план — Whisper (MIT); GigaAM — только при договоре со Сбером (см. 03)</td>
+</tr>
+<tr>
+<td>R3</td>
+<td>API заказчика: лимиты/нестабильность на выгрузке бэклога</td>
+<td>средняя</td>
+<td>среднее</td>
+<td>Ранний замер скорости выгрузки; физическая отгрузка дисков (анкета A4)</td>
+</tr>
+<tr>
+<td>R4</td>
+<td>Классификация «спец-ответов» не формализована бизнесом</td>
+<td>высокая</td>
+<td>среднее</td>
+<td>Воркшоп по таксономии в фазе PoC; очередь ручного контроля как страховка; правила правятся без релиза</td>
+</tr>
+<tr>
+<td>R5</td>
+<td>Объём LLM-классификации на бэклоге (до ~70 тыс. звонков/сут)</td>
+<td>средняя</td>
+<td>низкое</td>
+<td>Каскад: правила отсекают очевидное; локальная LLM на vLLM — копейки/GPU-час; при нехватке — вторая карта</td>
+</tr>
+<tr>
+<td>R6</td>
+<td>ПДн/152-ФЗ: ограничения на размещение</td>
+<td>средняя</td>
+<td>высокое</td>
+<td>Анкета E до подписания; вариант полного on-prem в контуре заказчика; маскирование</td>
+</tr>
+<tr>
+<td>R7</td>
+<td>Рост объёма новых звонков (×2–3 за год)</td>
+<td>средняя</td>
+<td>низкое</td>
+<td>Горизонтальное масштабирование: +GPU-карта = +~800 ч/сутки пропускной способности</td>
+</tr>
+<tr>
+<td>R8</td>
+<td>Дрейф качества (новые кампании, смена скриптов)</td>
+<td>средняя</td>
+<td>среднее</td>
+<td>Регресс-набор размеченных звонков; мониторинг WER-выборки ежемесячно; дообучение словарей</td>
+</tr>
+</tbody>
+</table>
+  </main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Fonotext</strong> — сервис речевой аналитики. Проект компании AXIIOM
+       (<a href="/" rel="noopener">axiiom.ru</a>). Лендинг и демо:
+       <a href="https://fonotext.ru/" rel="noopener">fonotext.ru</a>.</p>
+    <p>ООО «Аксиома», ИНН 7842223709, ОГРН 1247800067690. 192029, г. Санкт-Петербург, ул. Профессора Качалова, д. 15А, литера А.</p>
+    <p>Пилот и демо: <a href="mailto:axiiom@ya.ru">axiiom@ya.ru</a>,
+       <a href="tel:+78129287478">+7 (812) 928-74-78</a>.
+       Коммерческие условия — по запросу.</p>
+  </div>
+</footer>
+</body>
+</html>

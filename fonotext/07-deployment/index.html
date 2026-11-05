@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Поставка, SLA и развёртывание | Fonotext</title>
+<meta name="description" content="Три сценария поставки: облако в РФ, выделенный шард с BYOK, коробка on-prem. Конфигурации серверов, SLA, обновления модели.">
+<link rel="canonical" href="https://axiiom.ru/fonotext/07-deployment/">
+<link rel="icon" href="/fonotext/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonotext/assets/style.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AXIIOM — Fonotext">
+<meta property="og:title" content="Поставка, SLA и развёртывание | Fonotext">
+<meta property="og:description" content="Три сценария поставки: облако в РФ, выделенный шард с BYOK, коробка on-prem. Конфигурации серверов, SLA, обновления модели.">
+<meta property="og:url" content="https://axiiom.ru/fonotext/07-deployment/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://axiiom.ru/og-image.png">
+</head>
+<body>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a href="/" class="brand">AXIIOM</a>
+    <nav class="crumbs" aria-label="Хлебные крошки">
+      <a href="/fonotext/">Fonotext</a><span aria-hidden="true">/</span><span>Поставка, SLA и развёртывание </span>
+    </nav>
+    <a href="https://fonotext.ru/" class="ext" rel="noopener">fonotext.ru — лендинг и демо</a>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar" aria-label="Навигация по документации"><section><h2>Обзор</h2><ul><li><a href="/fonotext/00-product-presentation/">Fonotext: презентация продукта</a></li><li><a href="/fonotext/14-chto-novogo-v1-1/">Что нового в Fonotext 1.1</a></li></ul></section><section><h2>Внедрение</h2><ul><li><a href="/fonotext/01-integration/">Интеграция и анкета подключения </a></li><li><a href="/fonotext/05-poc-plan/">План пилота Fonotext</a></li><li><a href="/fonotext/08-api/">API Fonotext</a></li></ul></section><section><h2>Технология</h2><ul><li><a href="/fonotext/02-architecture/">Архитектура Fonotext</a></li><li><a href="/fonotext/03-models/">Модели и качество распознавания </a></li><li><a href="/fonotext/04-hardware/">Мощности и оборудование </a></li></ul></section><section><h2>Эксплуатация</h2><ul><li><a href="/fonotext/07-deployment/" class="active">Поставка, SLA и развёртывание </a></li><li><a href="/fonotext/13-bezopasnost-i-152-fz/">Безопасность и 152-ФЗ </a></li></ul></section><section><h2>Спецификации функций</h2><ul><li><a href="/fonotext/specs/01-full-coverage/">Покрытие 100 % звонков</a></li><li><a href="/fonotext/specs/02-taxonomy-builder/">Конструктор таксономии</a></li><li><a href="/fonotext/specs/03-script-evidence/">Скрипты с доказательствами</a></li><li><a href="/fonotext/specs/04-archive/">Разбор архива</a></li><li><a href="/fonotext/specs/05-private-shard/">Выделенный шард</a></li><li><a href="/fonotext/specs/06-ask-your-calls/">Спроси свои звонки</a></li><li><a href="/fonotext/specs/07-quality-drift/">Контроль дрейфа качества</a></li><li><a href="/fonotext/specs/08-alerts-actions/">Оповещения и действия</a></li><li><a href="/fonotext/specs/09-integrations/">Интеграции (CRM, BI)</a></li><li><a href="/fonotext/specs/10-dashboards/">Дашборды</a></li><li><a href="/fonotext/specs/11-qa-checklists/">Чек-листы контроля качества</a></li><li><a href="/fonotext/specs/12-copilot/">Отчётный копилот</a></li></ul></section></aside>
+  <main id="main" class="doc">
+<h1 class="doc-title" id="07">07. Поставка и развёртывание</h1>
+<p>Версия 1.0 от 2026-10-03. Одна кодовая база, три сценария поставки — выбирается заказчиком
+на пилоте. Во всех сценариях SLA отчётности по новым звонкам ≤ 24 ч (фактически — минуты).</p>
+<h2 id="1">1. Варианты поставки</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Облачный сервис (модель A)</th>
+<th>Коробка on-prem (модель B)</th>
+<th>Проект «под ключ» (модель C)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Где обрабатываются данные</td>
+<td>наш операторский контур, РФ-облако</td>
+<td>серверы заказчика</td>
+<td>аренда мощностей на срок проекта</td>
+</tr>
+<tr>
+<td>Кто владеет железом</td>
+<td>мы</td>
+<td>заказчик</td>
+<td>аренда</td>
+</tr>
+<tr>
+<td>Формат отношений</td>
+<td>сервис</td>
+<td>лицензия и поддержка</td>
+<td>проект под ключ</td>
+</tr>
+<tr>
+<td>Время старта</td>
+<td>1–2 недели после пилота</td>
+<td>4–8 недель (закупка железа + внедрение)</td>
+<td>2–3 недели</td>
+</tr>
+<tr>
+<td>Для кого</td>
+<td>быстрый старт, средние объёмы</td>
+<td>ПДн строго в контуре, большие объёмы</td>
+<td>большой архив + переход на A/B</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2">2. Требования к инфраструктуре заказчика (для коробки)</h2>
+<p>Типовые конфигурации; точный sizing — после пилота по фактическому объёму заказчика
+(правило: одна карта класса RTX 4090 ≈ 550 ч аудио/сутки, L40S 48 ГБ ≈ 800 ч/сутки).</p>
+<h3 id="10-000">«Старт» — до ~10 000 часов в месяц</h3>
+<ul>
+<li>1 сервер: 2× GPU (RTX 4090 24 ГБ или L40S), 32+ ядра, 128 ГБ RAM (ECC желательно),
+  2× 8 ТБ NVMe, 10 GbE</li>
+<li>Потребление ~0,8 кВт; размещение 2–4 юнита</li>
+<li>ОС Linux (Ubuntu 22.04+/Debian), доступ по SSH, docker</li>
+</ul>
+<h3 id="60-000">«Про» — до ~60 000 часов в месяц</h3>
+<ul>
+<li>2× GPU-сервера (4× RTX 4090 или 4× L40S каждый), 32–64 ядра, 256 ГБ RAM, 2× 4 ТБ NVMe</li>
+<li>1× нода хранения: 64 ядра, 128+ ГБ RAM, 8× 16 ТБ RAID6 (~100 ТБ)</li>
+<li>Потребление ~3 кВт; ~1/4 стойки; сеть 10/25 GbE</li>
+</ul>
+<h3 id="_1">Со стороны заказчика также нужны</h3>
+<ul>
+<li>Доступ к системе записи звонков: REST API / SFTP / S3 (или вебхуки) — уточняется анкетой
+  из <a href="/fonotext/01-integration/">01-integration.md</a></li>
+<li>Внешний сетевой канал: от 100 Мбит/с (типично 1 Гбит/с)</li>
+<li>Резервное копирование по согласованию (транскрипты ~0,1–0,3 МБ на звонок)</li>
+</ul>
+<h2 id="3-48">3. Процесс внедрения (4–8 недель)</h2>
+<table>
+<thead>
+<tr>
+<th>Этап</th>
+<th>Срок</th>
+<th>Результат</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Анкета и доступ</td>
+<td>1 неделя</td>
+<td>интеграция с системой записи, метаданные</td>
+</tr>
+<tr>
+<td>2. Пилот</td>
+<td>2–4 недели</td>
+<td>качество на реальных записях, таксономия, первые дашборды, отчёт Go/No-Go</td>
+</tr>
+<tr>
+<td>3. Развёртывание</td>
+<td>1–2 недели</td>
+<td>прод-контур (облако или коробка), загрузка потока</td>
+</tr>
+<tr>
+<td>4. Приёмка</td>
+<td>1 неделя</td>
+<td>подписание метрик качества, обучение пользователей</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4">4. Безопасность и соответствие</h2>
+<ul>
+<li>Обработка и хранение только на территории РФ (152-ФЗ); TLS на всех передачах; шифрование
+  хранилищ опционально.</li>
+<li>Маскирование номеров телефонов и иных ПДн в транскриптах/выгрузках — по требованию.</li>
+<li>Ролевая модель (руководство / руководители групп / аналитики / аудит), журнал аудита
+  доступа и выгрузок.</li>
+<li>В коробке данные физически не покидают контур заказчика; исходящий трафик — только
+  обновления ПО (по согласованию, можно офлайн-установкой).</li>
+<li>Модели и компоненты — только с коммерчески совместимыми лицензиями (см. <a href="/fonotext/03-models/">03-models.md</a>).</li>
+</ul>
+<h2 id="5">5. Интеграции</h2>
+<ul>
+<li>Вход аудио: REST API / SFTP / S3 / вебхуки (адаптеры), файловые метаданные или API метаданных.</li>
+<li>Выход: API результатов (транскрипт, теги, метрики), выгрузки XLSX/CSV, рассылка отчётов;
+  пуш тегов/статусов в CRM заказчика (шаблонные коннекторы — по договорённости).</li>
+<li>Доступ пользователей: SSO/AD — по требованию (в коробке — без выхода в интернет).</li>
+</ul>
+<h2 id="6">6. Что входит в поддержку (подписка)</h2>
+<ul>
+<li>Мониторинг здоровья пайплайна и реакция на инциденты по SLA.</li>
+<li>Обновления моделей распознавания и классификации 2 раза в год (регресс на эталоне —
+  качество не падает).</li>
+<li>Консультации по таксономии и новым отчётам — в рамках часов поддержки.</li>
+</ul>
+  </main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Fonotext</strong> — сервис речевой аналитики. Проект компании AXIIOM
+       (<a href="/" rel="noopener">axiiom.ru</a>). Лендинг и демо:
+       <a href="https://fonotext.ru/" rel="noopener">fonotext.ru</a>.</p>
+    <p>ООО «Аксиома», ИНН 7842223709, ОГРН 1247800067690. 192029, г. Санкт-Петербург, ул. Профессора Качалова, д. 15А, литера А.</p>
+    <p>Пилот и демо: <a href="mailto:axiiom@ya.ru">axiiom@ya.ru</a>,
+       <a href="tel:+78129287478">+7 (812) 928-74-78</a>.
+       Коммерческие условия — по запросу.</p>
+  </div>
+</footer>
+</body>
+</html>

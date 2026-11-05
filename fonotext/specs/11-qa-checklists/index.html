@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11. QA-модуль: чек-листы оценки звонков с весами | Спецификация Fonotext</title>
+<meta name="description" content="Спецификация функции Fonotext: Чек-листы контроля качества. Сценарий работы, данные, интерфейс, метрики приёмки и ограничения.">
+<link rel="canonical" href="https://axiiom.ru/fonotext/specs/11-qa-checklists/">
+<link rel="icon" href="/fonotext/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonotext/assets/style.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AXIIOM — Fonotext">
+<meta property="og:title" content="11. QA-модуль: чек-листы оценки звонков с весами | Спецификация Fonotext">
+<meta property="og:description" content="Спецификация функции Fonotext: Чек-листы контроля качества. Сценарий работы, данные, интерфейс, метрики приёмки и ограничения.">
+<meta property="og:url" content="https://axiiom.ru/fonotext/specs/11-qa-checklists/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://axiiom.ru/og-image.png">
+</head>
+<body>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a href="/" class="brand">AXIIOM</a>
+    <nav class="crumbs" aria-label="Хлебные крошки">
+      <a href="/fonotext/">Fonotext</a><span aria-hidden="true">/</span><span>Спецификации / 11. QA-модуль: чек-листы оценки звонков с весами</span>
+    </nav>
+    <a href="https://fonotext.ru/" class="ext" rel="noopener">fonotext.ru — лендинг и демо</a>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar" aria-label="Навигация по документации"><section><h2>Обзор</h2><ul><li><a href="/fonotext/00-product-presentation/">Fonotext: презентация продукта</a></li><li><a href="/fonotext/14-chto-novogo-v1-1/">Что нового в Fonotext 1.1</a></li></ul></section><section><h2>Внедрение</h2><ul><li><a href="/fonotext/01-integration/">Интеграция и анкета подключения </a></li><li><a href="/fonotext/05-poc-plan/">План пилота Fonotext</a></li><li><a href="/fonotext/08-api/">API Fonotext</a></li></ul></section><section><h2>Технология</h2><ul><li><a href="/fonotext/02-architecture/">Архитектура Fonotext</a></li><li><a href="/fonotext/03-models/">Модели и качество распознавания </a></li><li><a href="/fonotext/04-hardware/">Мощности и оборудование </a></li></ul></section><section><h2>Эксплуатация</h2><ul><li><a href="/fonotext/07-deployment/">Поставка, SLA и развёртывание </a></li><li><a href="/fonotext/13-bezopasnost-i-152-fz/">Безопасность и 152-ФЗ </a></li></ul></section><section><h2>Спецификации функций</h2><ul><li><a href="/fonotext/specs/01-full-coverage/">Покрытие 100 % звонков</a></li><li><a href="/fonotext/specs/02-taxonomy-builder/">Конструктор таксономии</a></li><li><a href="/fonotext/specs/03-script-evidence/">Скрипты с доказательствами</a></li><li><a href="/fonotext/specs/04-archive/">Разбор архива</a></li><li><a href="/fonotext/specs/05-private-shard/">Выделенный шард</a></li><li><a href="/fonotext/specs/06-ask-your-calls/">Спроси свои звонки</a></li><li><a href="/fonotext/specs/07-quality-drift/">Контроль дрейфа качества</a></li><li><a href="/fonotext/specs/08-alerts-actions/">Оповещения и действия</a></li><li><a href="/fonotext/specs/09-integrations/">Интеграции (CRM, BI)</a></li><li><a href="/fonotext/specs/10-dashboards/">Дашборды</a></li><li><a href="/fonotext/specs/11-qa-checklists/" class="active">Чек-листы контроля качества</a></li><li><a href="/fonotext/specs/12-copilot/">Отчётный копилот</a></li></ul></section></aside>
+  <main id="main" class="doc">
+<h1 class="doc-title" id="11-qa-">11. QA-модуль: чек-листы оценки звонков с весами</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Статус</strong></td>
+<td>доступно (релиз v1.1)</td>
+</tr>
+<tr>
+<td><strong>Доступно</strong></td>
+<td>«Корпоративный» и «Приватный контур»</td>
+</tr>
+<tr>
+<td><strong>Зависимости</strong></td>
+<td><a href="/fonotext/specs/03-script-evidence/">03-script-evidence.md</a> (цитаты и таймкоды), <a href="/fonotext/specs/01-full-coverage/">01-full-coverage.md</a> (полный охват)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_1">Проблема</h2>
+<p>Оценка качества в контакт-центрах живёт в чек-листах Excel: супервайзер вручную слушает
+выборку звонков и проставляет баллы. Отсюда два дефицита — покрытие (единицы процентов
+звонков) и субъективность (два супервайзера ставят разные оценки одному звонку).</p>
+<h2 id="_2">Решение</h2>
+<p><strong>Чек-листы оценки, которые заполняются автоматически по каждому звонку:</strong></p>
+<ul>
+<li><strong>Чек-лист с весовыми коэффициентами.</strong> Каждому пункту — свой вес (обязательное
+  приветствие, выявление потребности, фиксация договорённостей, завершение). Итоговый балл
+  звонка — взвешенная сумма по тем же критериям, что приняты у службы качества.</li>
+<li><strong>Автоматическая разметка лучших и худших звонков.</strong> Система сама отбирает звонки для
+  разбора: образцовые — для базы знаний и обучения новых операторов, проблемные — в очередь
+  ручного контроля.</li>
+<li><strong>Доказательная база</strong> — как в контроле скриптов (<a href="/fonotext/specs/03-script-evidence/">спека 03</a>):
+  каждый пункт чек-листа подтверждён цитатой и таймкодом, спорную оценку оператор может
+  оспорить.</li>
+<li>Итоги QA попадают в дашборды (<a href="/fonotext/specs/10-dashboards/">спека 10</a>) и автоотчёты
+  (<a href="/fonotext/specs/12-copilot/">12-copilot.md</a>).</li>
+</ul>
+<h2 id="_3">Апелляции и калибровка</h2>
+<p>Оценка — не приговор без пересмотра; у оператора есть регламентированный цикл:</p>
+<ol>
+<li><strong>Апелляция.</strong> Оператор оспаривает оценку прямо из карточки звонка; спорный звонок
+   с цитатами и таймкодами уходит в очередь ручного контроля.</li>
+<li><strong>Разбор.</strong> Супервайзер выносит решение по тому же чек-листу — с теми же
+   доказательствами, что видела автоматика.</li>
+<li><strong>Калибровка.</strong> Решения по спорным звонкам фиксируются как эталонные и используются
+   для настройки правил и определений меток: автоматическая оценка сходится с позицией
+   службы качества, а не спорит с ней.</li>
+<li><strong>Пересчёт.</strong> Уточнённое определение метки применяется ко всем звонкам переклассификацией
+   без повторного распознавания (<a href="/fonotext/specs/01-full-coverage/">спека 01</a>) — исправление не ограничивается
+   одним звонком.</li>
+</ol>
+<p>Расхождение автоматической оценки с ручной фиксируется при внедрении на контрольной выборке
+и дальше отслеживается в отчёте о качестве.</p>
+<h2 id="_4">Как измеряем успех</h2>
+<ul>
+<li>Покрытие оценки качества: доля звонков, получивших балл (цель — 100 % вместо процентов).</li>
+<li>Сходимость автоматической оценки с ручной на контрольной выборке — фиксируется при внедрении.</li>
+</ul>
+<h2 id="_5">Как это устроено у нас</h2>
+<p>Оценка проводится по каждому поступившему звонку, по методике службы качества заказчика
+и с доказательствами по каждому пункту — цитата и таймкод на каждый сработавший критерий.</p>
+  </main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Fonotext</strong> — сервис речевой аналитики. Проект компании AXIIOM
+       (<a href="/" rel="noopener">axiiom.ru</a>). Лендинг и демо:
+       <a href="https://fonotext.ru/" rel="noopener">fonotext.ru</a>.</p>
+    <p>ООО «Аксиома», ИНН 7842223709, ОГРН 1247800067690. 192029, г. Санкт-Петербург, ул. Профессора Качалова, д. 15А, литера А.</p>
+    <p>Пилот и демо: <a href="mailto:axiiom@ya.ru">axiiom@ya.ru</a>,
+       <a href="tel:+78129287478">+7 (812) 928-74-78</a>.
+       Коммерческие условия — по запросу.</p>
+  </div>
+</footer>
+</body>
+</html>

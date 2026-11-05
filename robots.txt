@@ -22,6 +22,9 @@ Disallow: /docs/feature-map/
 # Публичная документация mock-services доступна для обхода и индексации
 Allow: /mock-services/
 
+# Публичная документация Fonotext доступна для обхода и индексации
+Allow: /fonotext/
+
 # Разрешаем основное
 Allow: /blog/
 Allow: /industries/
