@@ -5,7 +5,7 @@
 > дашборды и разбор архивов. Данные обрабатываются и хранятся в РФ (152-ФЗ).
 > Fonotext — проект компании AXIIOM.
 
-Лендинг и демо: https://fonotext.ru/
+Сайт проекта: https://fonotext.ru/
 Документация: https://axiiom.ru/fonotext/
 Репозиторий документации: https://github.com/rucorp/axiiom (каталог fonotext/)
 
