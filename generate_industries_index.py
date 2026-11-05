@@ -153,7 +153,7 @@ html = f'''<!DOCTYPE html>
       "foundingDate": "2004",
       "logo": "https://axiiom.ru/og-image.png",
       "address": [{{"@type": "PostalAddress","streetAddress": "192029, г. Санкт-Петербург, ул. Профессора Качалова, 15А","addressLocality": "Санкт-Петербург","addressCountry": "RU"}}],
-      "contactPoint": {{"@type": "ContactPoint","telephone": "+7-812-928-74-78","contactType": "customer service","email": "hello@axiiom.ru","availableLanguage": "Russian"}},
+      "contactPoint": {{"@type": "ContactPoint","telephone": "+7-812-928-74-78","contactType": "customer service","email": "axiiom@ya.ru","availableLanguage": "Russian"}},
       "sameAs": ["https://t.me/axiiom"]
     }}
     </script>

@@ -19,7 +19,7 @@ If you discover a security vulnerability, please report it **privately**. Do not
 open a public GitHub issue or discuss it publicly, as that may put users at
 risk.
 
-**Report to:** **hello@axiiom.ru**
+**Report to:** **axiiom@ya.ru**
 
 Please include:
 
@@ -44,7 +44,7 @@ following targets:
 | Remediation of lower-severity issues | best effort, scheduled with reporter |
 
 If you do not receive an acknowledgement within 72 hours, please send a follow-up
-email to **hello@axiiom.ru**.
+email to **axiiom@ya.ru**.
 
 ## Severity & Disclosure
 
@@ -56,6 +56,6 @@ email to **hello@axiiom.ru**.
 
 ## Contact
 
-Security contact: **hello@axiiom.ru**
+Security contact: **axiiom@ya.ru**
 Organization: ООО «Аксиома» (AXIIOM)
 Website: https://axiiom.ru

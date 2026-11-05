@@ -4,7 +4,7 @@ Need help with the AXIIOM website (ООО «Аксиома», [axiiom.ru](https:
 
 ## Get help
 
-* **General questions and contact** — email **hello@axiiom.ru** or use the
+* **General questions and contact** — email **axiiom@ya.ru** or use the
   contact form at [axiiom.ru](https://axiiom.ru).
 * **Bugs and issues** — open a ticket using the
   [Bug Report](https://github.com/bestdeejay-design/axiiom/issues/new?template=bug_report.yml)
@@ -12,7 +12,7 @@ Need help with the AXIIOM website (ООО «Аксиома», [axiiom.ru](https:
 * **Feature ideas** — use the
   [Feature Request](https://github.com/bestdeejay-design/axiiom/issues/new?template=feature_request.yml)
   template.
-* **Security vulnerabilities** — report privately to **hello@axiiom.ru** per
+* **Security vulnerabilities** — report privately to **axiiom@ya.ru** per
   [SECURITY.md](./SECURITY.md). Do not open a public issue for security issues.
 
 ## Before you ask

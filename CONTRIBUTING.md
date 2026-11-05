@@ -74,7 +74,7 @@ Use the GitHub issue templates:
 * **Feature request** — for new pages, demos, or tools.
 
 For security vulnerabilities, follow [SECURITY.md](./SECURITY.md) and report
-privately to **hello@axiiom.ru**. Do not open a public issue for security
+privately to **axiiom@ya.ru**. Do not open a public issue for security
 problems.
 
 ## Code of conduct
@@ -85,4 +85,4 @@ By participating, you agree to abide by our
 ## Maintainer
 
 Repository maintained by [@bestdeejay-design](https://github.com/bestdeejay-design)
-on behalf of ООО «Аксиома». Contact: **hello@axiiom.ru**.
+on behalf of ООО «Аксиома». Contact: **axiiom@ya.ru**.
