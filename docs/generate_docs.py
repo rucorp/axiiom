@@ -726,7 +726,7 @@ def build_page(doc):
 
         disclaimer = '''<div class="doc-disclaimer">
             <p>Данный документ является демонстрационным шаблоном и <strong>не является официальной проектной документацией</strong>. Материал иллюстрирует структуру и состав разделов, которые рекомендуется учитывать при разработке ИТ-архитектуры. Для получения полной версии шаблона или консультации по вашему проекту обращайтесь:</p>
-            <p><a href="mailto:admin@axiiom.ru">admin@axiiom.ru</a>&nbsp;|&nbsp;<a href="https://axiiom.ru">axiiom.ru</a></p>
+            <p><a href="mailto:axiiom@ya.ru">axiiom@ya.ru</a>&nbsp;|&nbsp;<a href="https://axiiom.ru">axiiom.ru</a></p>
         </div>'''
 
         content = f'''<div class="feature-page-hero">
@@ -797,7 +797,7 @@ def build_page(doc):
 
         disclaimer = '''<div class="doc-disclaimer">
             <p>Данный документ является демонстрационным шаблоном и <strong>не является официальной проектной документацией</strong>. Материал приведён в ознакомительных целях и не может использоваться в качестве юридической консультации. Для получения полной версии документа или консультации по вашему проекту обращайтесь:</p>
-            <p><a href="mailto:admin@axiiom.ru">admin@axiiom.ru</a>&nbsp;|&nbsp;<a href="https://axiiom.ru">axiiom.ru</a></p>
+            <p><a href="mailto:axiiom@ya.ru">axiiom@ya.ru</a>&nbsp;|&nbsp;<a href="https://axiiom.ru">axiiom.ru</a></p>
         </div>'''
 
         content = f'''<div class="feature-page-hero">
@@ -1040,7 +1040,7 @@ def build_page(doc):
 
             disclaimer = '''<div class="doc-disclaimer">
                 <p>Данный документ является демонстрационным материалом и <strong>не является официальной проектной документацией</strong>. Материал иллюстрирует структуру и состав концепции цифровой экосистемы университета. Для получения полной версии или консультации по вашему проекту обращайтесь:</p>
-                <p><a href="mailto:admin@axiiom.ru">admin@axiiom.ru</a>&nbsp;|&nbsp;<a href="https://axiiom.ru">axiiom.ru</a></p>
+                <p><a href="mailto:axiiom@ya.ru">axiiom@ya.ru</a>&nbsp;|&nbsp;<a href="https://axiiom.ru">axiiom.ru</a></p>
             </div>'''
 
             content = f'''<div class="feature-page-hero">
