@@ -167,6 +167,13 @@
         { name: 'UX платёжных мобильных приложений', path: '/blog/mobile-payment-ux/' },
         { name: 'Платформа лояльности — необходимость', path: '/blog/loyalty-platform-not-option-necessity/' },
         { separator: true },
+        { header: true, name: 'Перед выбором подрядчика' },
+        { name: 'Сколько стоит CRM под заказ', path: '/blog/skolko-stoit-crm/' },
+        { name: 'CRM или Excel', path: '/blog/crm-ili-excel/' },
+        { name: 'Как выбрать подрядчика', path: '/blog/kak-vybrat-podryadchika/' },
+        { name: 'Сколько стоит мобильное приложение', path: '/blog/skolko-stoit-mobilnoe-prilozhenie/' },
+        { name: 'Сколько стоит маркетплейс', path: '/blog/skolko-stoit-marketplejs/' },
+        { separator: true },
         { name: 'Все статьи →', path: '/blog/' }
       ]
     },

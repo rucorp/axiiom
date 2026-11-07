@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A0A0F">
+<script>try{var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<title>Интеграция 1С с сайтом и банком: как связать без боли | AXIIOM</title>
+<meta name="description" content="Как устроена интеграция 1С с сайтом, банком и складом: варианты, стоимость, ошибки и что делать, если API у 1С нет.">
+<link rel="canonical" href="https://axiiom.ru/blog/integraciya-1c-api/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://axiiom.ru/blog/integraciya-1c-api/">
+<meta property="og:title" content="Интеграция 1С с сайтом и банком: как связать без боли | AXIIOM">
+<meta property="og:description" content="Как устроена интеграция 1С с сайтом, банком и складом: варианты, стоимость, ошибки и что делать, если API у 1С нет.">
+<meta property="og:image" content="https://axiiom.ru/og/help/vneshniy-cto-malyy-biznes.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="AXIIOM">
+<meta property="article:published_time" content="2026-11-07">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://axiiom.ru/blog/integraciya-1c-api/">
+<meta name="twitter:title" content="Интеграция 1С с сайтом и банком: как связать без боли | AXIIOM">
+<meta name="twitter:description" content="Как устроена интеграция 1С с сайтом, банком и складом: варианты, стоимость, ошибки и что делать, если API у 1С нет.">
+<meta name="twitter:image" content="https://axiiom.ru/og/help/vneshniy-cto-malyy-biznes.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Интеграция 1С с сайтом и банком",
+      "description": "Как устроена интеграция 1С с сайтом, банком и складом: варианты, стоимость, ошибки и что делать, если API у 1С нет.",
+      "datePublished": "2026-11-08",
+      "dateModified": "2026-11-08",
+      "author": {
+        "@type": "Organization",
+        "name": "AXIIOM",
+        "url": "https://axiiom.ru/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "AXIIOM",
+        "url": "https://axiiom.ru/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://axiiom.ru/blog/integraciya-1c-api/"
+      },
+      "image": "https://axiiom.ru/og/help/integraciya-1c-api.png"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://axiiom.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Блог",
+          "item": "https://axiiom.ru/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Интеграция 1С с сайтом и банком",
+          "item": "https://axiiom.ru/blog/integraciya-1c-api/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261107">
+<link rel="stylesheet" href="/preloader.css?v=20261107">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+</head><body><noscript><div><img src="https://mc.yandex.ru/watch/109391253" style="position:absolute;left:-9999px" alt="" loading="lazy" decoding="async"></div></noscript>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
+<div id="preloader">
+<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<900){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},900-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})();setTimeout(function(){var q=document.getElementById('preloader');if(q){q.classList.add('hidden');setTimeout(function(){q.classList.add('hidden-done')},500)}},2500)/*preloader-fallback*/</script>
+<svg class="preloader-svg" viewBox="0 0 36 36" width="80" height="80"><rect class="pr1" x="2" y="2" width="14" height="14" rx="2"/><rect class="pr2" x="20" y="2" width="14" height="14" rx="2"/><rect class="pr3" x="2" y="20" width="14" height="14" rx="2"/><rect class="pr4" x="20" y="20" width="14" height="14" rx="2"/><circle class="pc" cx="27" cy="27" r="3"/></svg>
+</div>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="30" height="30" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/><rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/></svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить задачу</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню"><span></span><span></span><span></span></button>
+            </div>
+        </nav>
+    </div>
+</header>
+<div class="nav-overlay" id="navOverlay"><ul class="nav-links" id="mobileNav"></ul></div>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb"><div class="container"></div></nav>
+<main id="main">
+<section class="article-page">
+    <div class="container">
+        <div class="article-wrap">
+            <span class="art-date">8 ноября 2026 · AXIIOM</span>
+            <h1>Интеграция 1С с сайтом и банком</h1>
+            <div>
+<p>1С есть почти у всех, кто работает с товарами, услугами или финансами. И почти у всех она живёт отдельно от сайта, банка и складского учёта. Разберём, как их связать и почему это обычно сложнее, чем кажется.</p>
+<h2>Три способа интеграции</h2>
+<h3>Обмен файлами</h3>
+<p>Самый старый и самый дешёвый способ: выгрузка из одной системы, загрузка в другую, часто по расписанию. Работает, если данные не нужны в реальном времени. Минусы — данные всегда чуть устаревшие, а при сбое нужно понять, что именно не загрузилось.</p>
+<h3>Прямое подключение через API</h3>
+<p>Системы общаются запросами. Данные актуальны, можно реагировать на события. Минус в том, что у 1С настройка публикации API — отдельная работа, а иногда и отдельный человек.</p>
+<h3>Через промежуточный слой</h3>
+<p>Между системами ставится сервис, который умеет разговаривать с каждой: забирает, преобразует, отдаёт. Это дороже, но единственный вариант, когда систем несколько или API на одной стороне неудобный. Такой слой заодно становится местом, где живут повторы, очереди и логи.</p>
+<h2>Что обычно интегрируют</h2>
+<table><thead><tr><th>Направление</th><th>Что передаётся</th><th>Частота</th></tr></thead><tbody><tr><td>Сайт → 1С</td><td>Заказы, оплаты, статусы</td><td>По событию</td></tr><tr><td>1С → Сайт</td><td>Остатки, цены, номенклатура</td><td>От нескольких минут до часа</td></tr><tr><td>Банк → 1С</td><td>Выписки, поступления</td><td>Ежедневно</td></tr><tr><td>1С → Банк</td><td>Платёжные поручения</td><td>По необходимости</td></tr><tr><td>Склад → 1С</td><td>Поступления, списания, брак</td><td>По событию</td></tr><tr><td>1С → CRM</td><td>Контрагенты, счета, долги</td><td>Несколько раз в день</td></tr></tbody></table>
+<h2>Три ошибки, которые повторяются</h2>
+<h3>1. «Сначала сделаем, потом подумаем про сбои»</h3>
+<p>Интеграция без обработки ошибок ломается на первом же сетевом сбое. Причём ломается тихо: заказ не дошёл, но никто не заметил. Любая интеграция должна иметь журнал, повторные попытки и алерт при сбое.</p>
+<h3>2. Ожидание, что API само по себе документировано</h3>
+<p>Даже если у контрагента есть документация, она часто не соответствует реальности. Практика: интеграция проверяется на реальных данных, а не на примерах из документации.</p>
+<h3>3. Дубли заказов</h3>
+<p>Классическая проблема: клиент обновил страницу, и заказ ушёл дважды. Решается ключами идемпотентности — механизмом, который отсекает повторную отправку того же самого.</p>
+<h2>Ориентиры по стоимости</h2>
+<p>Односторонняя выгрузка (например, заказы с сайта в 1С) — от 300 тысяч рублей и 2–3 недели. Двусторонний обмен с очередями, логами и мониторингом — от 500–700 тысяч и 5–8 недель. Разница в цене именно в надёжности, а не в количестве полей.</p>
+<h2>Если API у 1С нет</h2>
+<p>Бывает, особенно в старых конфигурациях. Тогда варианты: доработка конфигурации под публикацию API, обмен через файлы с контролем, или промежуточный слой, который забирает данные напрямую из базы по стратегии «только чтение». Последнее допустимо только на копии и требует осторожности.</p>
+<h2>Как проверить, что интеграция жива</h2>
+<ul><li>В логах видно каждый обмен, а не только ошибки</li><li>При сбое приходит уведомление, а не выясняется через неделю</li><li>Есть отчёт о расхождениях: что не дошло и почему</li><li>Повторная отправка того же самого не создаёт дублей</li></ul>
+            </div>
+
+<div class="glass-card card-pad-md" style="margin-top:32px">
+<p class="label">Вопросы и ответы</p>
+<h3>Сколько стоит интеграция с 1С?</h3><p>От 300 тысяч рублей за односторонний обмен по событию. Двусторонний с надёжностью и мониторингом — от 500–700 тысяч.</p><h3>Можно ли обойтись без программиста 1С?</h3><p>Если API опубликовано и доступно — да, интеграция делается снаружи. Если нет — потребуется доработка конфигурации.</p><h3>Что будет, если интеграция упадёт ночью?</h3><p>При нормальной настройке — повторные попытки и алерт. Данные не теряются, обмен продолжится, когда система поднимется.</p><h3>Можно ли связать несколько систем сразу?</h3><p>Да, через промежуточный слой. Это правильный выбор, когда систем больше двух — иначе получается сетка, которую невозможно поддерживать.</p>
+</div>
+<div class="glass-card card-pad-md" style="margin-top:32px">
+<p class="label">Читайте также</p>
+<h3 style="font-size:1.1rem;margin-bottom:12px;color:var(--clr-heading)">Вам может пригодиться</h3>
+<ul style="padding-left:20px;margin:0">
+<li><a href="/services/integracii/" class="link-accent">Интеграции и API</a></li><li><a href="/mock-services/" class="link-accent">Mock Services — открытые моки платёжных API</a></li><li><a href="/blog/skolko-stoit-crm/" class="link-accent">Сколько стоит CRM под заказ</a></li><li><a href="/services/crm-erp/" class="link-accent">Разработка CRM и ERP</a></li>
+</ul>
+<p style="margin-top:16px;font-size:.85rem;color:var(--clr-muted)"><a href="/services/integracii/" class="link-accent">Интеграции и API — связать системы</a> · <a href="/projects/" class="link-accent">Портфолио AXIIOM</a></p>
+</div>
+        </div>
+    </div>
+</section>
+</main>
+
+<footer class="footer"><div class="container"><div id="footerCopy"></div></div></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-HFS4BDGTV4");</script>
+<script src="/metrika.js?v=20261107" defer></script>
+<script src="/config.js?v=20261107"></script>
+<script src="/nav.js?v=20261107"></script>
+<script>Nav.init({ cta: true, breadcrumbs: true });</script>
+<script src="/theme.js?v=20261107"></script>
+<script src="/preloader.js?v=20261107"></script>
+<script>
+(function(){var t=document.getElementById('navToggle');var o=document.getElementById('navOverlay');if(!t||!o)return;t.addEventListener('click',function(e){e.stopPropagation();o.classList.toggle('open');t.classList.toggle('active');document.body.style.overflow=o.classList.contains('open')?'hidden':'';});})();
+var reveals=document.querySelectorAll('.reveal');var ro=new IntersectionObserver(function(e){e.forEach(function(entry){if(entry.isIntersecting)entry.target.classList.add('visible');});},{threshold:.15});reveals.forEach(function(r){ro.observe(r);});
+</script>
+</body>
+</html>
