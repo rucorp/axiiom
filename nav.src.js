@@ -17,6 +17,21 @@
       ]
     },
     {
+      name: 'Услуги',
+      path: '/services/',
+      children: [
+        { header: true, name: 'Разработка' },
+        { name: 'Мобильные приложения', path: '/services/mobilnye-prilozheniya/' },
+        { separator: true },
+        { header: true, name: 'Смежное' },
+        { name: 'Отраслевые решения', path: '/industries/' },
+        { name: 'Помощь малому бизнесу', path: '/help/' },
+        { name: 'Калькулятор стоимости', path: '/calculator/' },
+        { separator: true },
+        { name: 'Все услуги →', path: '/services/' }
+      ]
+    },
+    {
       name: 'Решения',
       path: '/industries/',
       children: [
