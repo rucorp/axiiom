@@ -121,13 +121,15 @@
       name: 'Портфолио',
       path: '/projects/',
       children: [
-        { header: true, name: 'Избранные' },
-        { name: 'PadelPro — SAAS для падел-клубов', path: '/projects/#padelpro' },
-        { name: 'Каталог заведений', path: '/projects/#catalog' },
-        { name: 'Grand Hotel — бронирование', path: '/projects/#booking' },
-        { name: 'UniverID — экосистема вуза', path: '/projects/#univerid' },
-        { name: 'LOVII — платформа лояльности', path: '/projects/#lovii' },
-        { name: 'AMBAR — фудтех', path: '/projects/#ambar' },
+        { header: true, name: 'Продукты' },
+        { name: 'LOVII — локальный маркетплейс', path: '/projects/#lovii' },
+        { name: 'Fonotext — речевая аналитика', path: '/projects/#fonotext' },
+        { name: 'BRIIX — AI-маркетолог', path: '/projects/#briix' },
+        { name: 'UniverID — среда университета', path: '/projects/#univerid' },
+        { separator: true },
+        { header: true, name: 'Открытый код' },
+        { name: 'Mock Services — моки эквайринга', path: '/projects/#mock-services' },
+        { name: 'Agent Skills — навыки для ИИ', path: '/projects/#oss' },
         { separator: true },
         { name: 'Все проекты →', path: '/projects/' }
       ]
