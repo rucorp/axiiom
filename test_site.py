@@ -131,6 +131,7 @@ def build_page_registry(nav_path):
     reg["/docs"] = {"type": "docs-index", "name": "Документация"}
     reg["/demo/app"] = {"type": "demo-index", "name": "Демо"}
     reg["/projects"] = {"type": "projects-index", "name": "Портфолио"}
+    reg["/help"] = {"type": "help-index", "name": "Малому бизнесу"}
 
     for tp in tree_pages:
         url = tp["path"]
@@ -152,6 +153,8 @@ def build_page_registry(nav_path):
             ptype = "blog"
         elif parent == "/demo/app":
             ptype = "demo-sub"
+        elif parent == "/help":
+            ptype = "help"
         elif parent == "/projects":
             ptype = "projects"
         elif url.startswith("/projects"):
@@ -180,6 +183,10 @@ def build_page_registry(nav_path):
             ptype = "demo-index"
         elif url == "/projects":
             ptype = "projects-index"
+        elif url == "/help":
+            ptype = "help-index"
+        elif url.startswith("/help/"):
+            ptype = "help"
         elif url == "/calculator":
             ptype = "calculator"
         elif url == "/privacy" or url == "/terms":
@@ -365,6 +372,9 @@ def baseline(page_type):
 
     if page_type == "landing":
         b["breadcrumbs"] = "no"
+        b["content-marker"] = "required"
+
+    if page_type in ("help", "help-index"):
         b["content-marker"] = "required"
 
     if page_type in ("blog", "blog-index", "tool-sub", "tool-index", "industry-index", "demo-index", "projects-index", "projects", "calculator", "legal"):
@@ -570,6 +580,8 @@ def check_content_marker(content, page_type):
         "legal":          r'class\s*=\s*["\']legal["\']',
         "404":            r'class\s*=\s*["\']err["\']',
         "root":           r'hero',
+        "help":           r'help-hero',
+        "help-index":     r'help-hero',
         "projects":       r'projects|demo-grid',
         "projects-index": r'projects|demo-grid',
     }
@@ -955,7 +967,7 @@ def generate_report(pages, checks_map, timestamp=None, dynamic_results=None):
     # Sitemap grouped by section
     sections = {"landing": [], "industry": [], "tool-index": [], "tool-sub": [],
                 "blog": [], "docs": [], "demo-index": [], "demo-sub": [],
-                "calculator": [], "legal": [], "404": [], "other": [], "blog-index": [],
+                "calculator": [], "legal": [], "404": [], "other": [], "blog-index": [], "help": [],
                 "docs-index": [], "industry-index": []}
     for item in sitemap_items:
         t = item["type"]
@@ -967,10 +979,10 @@ def generate_report(pages, checks_map, timestamp=None, dynamic_results=None):
         "landing": "🏠 Главная", "industry": "🏭 Решения", "tool": "🔧 Инструменты",
         "blog": "📝 Блог", "docs": "📄 Документация",
         "demo": "🎮 Демо", "calculator": "🧮 Калькулятор",
-        "legal": "⚖️ Юридическое", "404": "⚠️ 404",
+        "legal": "⚖️ Юридическое", "404": "⚠️ 404", "help": "🤝 Малому бизнесу",
     }
 
-    for section_key in ["landing", "industry", "tool", "blog", "docs", "demo", "calculator", "legal", "404"]:
+    for section_key in ["landing", "industry", "tool", "blog", "docs", "demo", "help", "calculator", "legal", "404"]:
         items = sections.get(section_key, [])
         if not items:
             # Also check plural/base keys

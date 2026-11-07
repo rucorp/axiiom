@@ -65,6 +65,29 @@
       ]
     },
     {
+      name: 'Малому бизнесу',
+      path: '/help/',
+      rich: true,
+      children: [
+        { header: true, name: 'Помощь малому и микробизнесу' },
+        { name: 'Внешний технический директор', path: '/help/cto/',
+          desc: 'Технологическая картина целиком и ответственность за неё перед бизнесом',
+          badge: 'ретейнер' },
+        { name: 'Диагностика и аудит', path: '/help/diagnostika/',
+          desc: 'Карта техдолга, реестр рисков и план на 90/180/365 дней',
+          badge: '2–3 недели' },
+        { name: 'ИИ-трансформация за 90 дней', path: '/help/ai-transformaciya/',
+          desc: 'Пилоты с замером «до / после», регламенты и экономика внедрения',
+          badge: 'программа' },
+        { separator: true },
+        { name: 'Почему AXIIOM', path: '/help/#why' },
+        { name: 'Форматы работы', path: '/help/#formats' },
+        { name: 'FAQ', path: '/help/#faq' },
+        { separator: true },
+        { name: 'Все форматы помощи →', path: '/help/' }
+      ]
+    },
+    {
       name: 'Демо',
       path: '/demo/app/',
       children: [
@@ -255,6 +278,7 @@
         if (n.children && n.children.length > 0) {
           li.className = 'nav-has-dropdown';
           var ddClass = n.children.length > 15 ? 'nav-dropdown mega' : 'nav-dropdown';
+          if (n.rich) ddClass += ' nav-dropdown--rich';
           var dd = el('ul', { 'class': ddClass });
           for (var j = 0; j < n.children.length; j++) {
             var ch = n.children[j];
@@ -262,6 +286,12 @@
               dd.appendChild(el('li', { 'class': 'nav-dropdown-sep' }));
             } else if (ch.header) {
               dd.appendChild(el('li', { 'class': 'nav-dropdown-hdr' }, [el('span', {}, [tx(ch.name)])]));
+            } else if (ch.desc) {
+              var card = el('a', { href: ch.path, 'class': 'nav-dd-card' });
+              card.appendChild(el('span', { 'class': 'nav-dd-title' }, [tx(ch.name)]));
+              card.appendChild(el('span', { 'class': 'nav-dd-desc' }, [tx(ch.desc)]));
+              if (ch.badge) card.appendChild(el('span', { 'class': 'nav-dd-badge' }, [tx(ch.badge)]));
+              dd.appendChild(el('li', {}, [card]));
             } else {
               var cl = el('a', { href: ch.path }, [tx(ch.name)]);
               dd.appendChild(el('li', {}, [cl]));
@@ -281,6 +311,9 @@
 
       function renderNode(node) {
         var link = el('a', { href: node.path }, [tx(node.name)]);
+        if (node.desc) {
+          link.appendChild(el('span', { 'class': 'nav-sub-desc' }, [tx(node.desc)]));
+        }
         var match = self._activeSection();
         if (match && node.path === match.path) {
           link.className = 'nav-active';
