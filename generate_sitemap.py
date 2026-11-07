@@ -12,6 +12,8 @@
 from html.parser import HTMLParser
 from pathlib import Path
 import re
+import subprocess
+from datetime import date
 
 root = Path(__file__).resolve().parent
 
@@ -133,7 +135,19 @@ def freq(url: str) -> str:
         return "monthly"
     return "monthly"
 
+def lastmod(rel: str) -> str:
+    """Дата последнего git-коммита исходного файла страницы (YYYY-MM-DD)."""
+    try:
+        out = subprocess.run(
+            ["git", "log", "-1", "--format=%ad", "--date=short", "--", rel[1:]],
+            cwd=root, capture_output=True, text=True, check=True,
+        ).stdout.strip()
+    except (OSError, subprocess.CalledProcessError):
+        out = ""
+    return out if re.fullmatch(r"\d{4}-\d{2}-\d{2}", out) else date.today().isoformat()
+
 urls = sorted({url_of(p) for p in pages})
+page_by_url = {url_of(p): p for p in pages}
 lines = [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
@@ -142,6 +156,7 @@ for u in urls:
     lines += [
         "  <url>",
         "    <loc>" + u + "</loc>",
+        "    <lastmod>" + lastmod(page_by_url[u]) + "</lastmod>",
         "    <changefreq>" + freq(u) + "</changefreq>",
         "    <priority>" + str(prio(u)) + "</priority>",
         "  </url>",
