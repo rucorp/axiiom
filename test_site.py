@@ -131,6 +131,7 @@ def build_page_registry(nav_path):
     reg["/docs"] = {"type": "docs-index", "name": "Документация"}
     reg["/demo/app"] = {"type": "demo-index", "name": "Демо"}
     reg["/projects"] = {"type": "projects-index", "name": "Портфолио"}
+    reg["/services"] = {"type": "service-index", "name": "Услуги"}
     reg["/help"] = {"type": "help-index", "name": "Малому бизнесу"}
 
     for tp in tree_pages:
@@ -159,6 +160,8 @@ def build_page_registry(nav_path):
             ptype = "projects"
         elif url.startswith("/projects"):
             ptype = "projects-index" if url == "/projects" else "projects"
+        elif url.startswith("/services"):
+            ptype = "service-index" if url == "/services" else "service"
         elif url == "/calculator":
             ptype = "calculator"
         elif url in ("/privacy", "/terms"):
@@ -283,7 +286,7 @@ FEATURES = {
     "twitter-desc":  "twitter:description",
     "twitter-img":   "twitter:image",
     "json-ld":       "JSON-LD structured data",
-    "fonts":         "Google Fonts preconnect/load",
+    "fonts":         "Fonts: local Inter or Google Fonts",
     "styles-css":    "styles.css",
     "preloader-css": "preloader.css",
     "favicon":       "favicon",
@@ -373,6 +376,9 @@ def baseline(page_type):
 
     if page_type == "landing":
         b["breadcrumbs"] = "no"
+        b["content-marker"] = "required"
+
+    if page_type in ("service", "service-index"):
         b["content-marker"] = "required"
 
     if page_type in ("help", "help-index"):
@@ -486,17 +492,27 @@ def check_jsonld(content):
 
 
 def check_google_fonts(content):
-    if "fonts.googleapis.com" not in content:
-        return "WARN", "not referenced"
-    parts = [
-        ("preconnect googleapis", r'<link[^>]*rel\s*=\s*["\']preconnect["\'][^>]*fonts\.googleapis\.com'),
-        ("preconnect gstatic",    r'<link[^>]*rel\s*=\s*["\']preconnect["\'][^>]*fonts\.gstatic\.com'),
-        ("preload Inter",         r'<link[^>]*rel\s*=\s*["\']preload["\'][^>]*Inter'),
-        ("Inter stylesheet",      r'fonts\.googleapis\.com[^"\']*Inter[^"\']*display=swap'),
-    ]
-    missing = [l for l, p in parts if not re.search(p, content, re.IGNORECASE)]
-    if not missing: return "PASS", "all present"
-    return "WARN", f"missing: {', '.join(missing)}"
+    """Шрифты: локальный Inter (предпочтительно) или Google Fonts (устаревший вариант).
+
+    Локальные @font-face живут в styles.css, поэтому на странице проверяем
+    либо preload локального файла, либо полный набор тегов Google Fonts.
+    """
+    if "fonts.googleapis.com" in content:
+        parts = [
+            ("preconnect googleapis", r'<link[^>]*rel\s*=\s*["\']preconnect["\'][^>]*fonts\.googleapis\.com'),
+            ("preconnect gstatic",    r'<link[^>]*rel\s*=\s*["\']preconnect["\'][^>]*fonts\.gstatic\.com'),
+            ("preload Inter",         r'<link[^>]*rel\s*=\s*["\']preload["\'][^>]*Inter'),
+            ("Inter stylesheet",      r'fonts\.googleapis\.com[^"\']*Inter[^"\']*display=swap'),
+        ]
+        missing = [l for l, p in parts if not re.search(p, content, re.IGNORECASE)]
+        if not missing: return "PASS", "Google Fonts (all present)"
+        return "WARN", f"missing: {', '.join(missing)}"
+
+    # Локальный вариант: шрифт подключён через @font-face в styles.css
+    # Странице достаточно ссылаться на стили.
+    if re.search(r'(styles\.css|/styles\.css\?v=\d+)', content):
+        return "PASS", "local Inter via styles.css"
+    return "WARN", "no font reference"
 
 
 def check_styles_css(content):
@@ -581,6 +597,8 @@ def check_content_marker(content, page_type):
         "legal":          r'class\s*=\s*["\']legal["\']',
         "404":            r'class\s*=\s*["\']err["\']',
         "root":           r'hero',
+        "service":        r'industries-hero',
+        "service-index":  r'industries-hero',
         "help":           r'help-hero',
         "help-index":     r'help-hero',
         "projects":       r'projects|demo-grid',

@@ -17,6 +17,27 @@
       ]
     },
     {
+      name: 'Услуги',
+      path: '/services/',
+      children: [
+        { header: true, name: 'Разработка' },
+        { name: 'Мобильные приложения', path: '/services/mobilnye-prilozheniya/' },
+        { name: 'CRM и ERP', path: '/services/crm-erp/' },
+        { name: 'Маркетплейсы', path: '/services/marketplejsy/' },
+        { separator: true },
+        { header: true, name: 'Платформы' },
+        { name: 'Финтех-продукты', path: '/services/fintech/' },
+        { name: 'Интеграции и API', path: '/services/integracii/' },
+        { separator: true },
+        { header: true, name: 'Смежное' },
+        { name: 'Отраслевые решения', path: '/industries/' },
+        { name: 'Помощь малому бизнесу', path: '/help/' },
+        { name: 'Калькулятор стоимости', path: '/calculator/' },
+        { separator: true },
+        { name: 'Все услуги →', path: '/services/' }
+      ]
+    },
+    {
       name: 'Решения',
       path: '/industries/',
       children: [
@@ -145,6 +166,13 @@
         { name: '161-ФЗ: руководство для стартапов', path: '/blog/161-fz-guideline/' },
         { name: 'UX платёжных мобильных приложений', path: '/blog/mobile-payment-ux/' },
         { name: 'Платформа лояльности — необходимость', path: '/blog/loyalty-platform-not-option-necessity/' },
+        { separator: true },
+        { header: true, name: 'Перед выбором подрядчика' },
+        { name: 'Сколько стоит CRM под заказ', path: '/blog/skolko-stoit-crm/' },
+        { name: 'CRM или Excel', path: '/blog/crm-ili-excel/' },
+        { name: 'Как выбрать подрядчика', path: '/blog/kak-vybrat-podryadchika/' },
+        { name: 'Сколько стоит мобильное приложение', path: '/blog/skolko-stoit-mobilnoe-prilozhenie/' },
+        { name: 'Сколько стоит маркетплейс', path: '/blog/skolko-stoit-marketplejs/' },
         { separator: true },
         { name: 'Все статьи →', path: '/blog/' }
       ]
