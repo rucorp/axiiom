@@ -16,6 +16,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://axiiom.ru/blog/ai-transformaciya-90-dney/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://axiiom.ru/blog/diagnostika-tehdolga/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://axiiom.ru/blog/fintech-trends-2026/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -42,6 +52,11 @@
   </url>
   <url>
     <loc>https://axiiom.ru/blog/pci-dss-compliance/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://axiiom.ru/blog/vneshniy-cto-malyy-biznes/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -404,6 +419,26 @@
     <loc>https://axiiom.ru/fonotext/specs/12-copilot/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://axiiom.ru/help/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://axiiom.ru/help/ai-transformaciya/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://axiiom.ru/help/cto/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://axiiom.ru/help/diagnostika/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://axiiom.ru/industries/</loc>
