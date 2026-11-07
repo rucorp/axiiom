@@ -22,6 +22,12 @@
       children: [
         { header: true, name: 'Разработка' },
         { name: 'Мобильные приложения', path: '/services/mobilnye-prilozheniya/' },
+        { name: 'CRM и ERP', path: '/services/crm-erp/' },
+        { name: 'Маркетплейсы', path: '/services/marketplejsy/' },
+        { separator: true },
+        { header: true, name: 'Платформы' },
+        { name: 'Финтех-продукты', path: '/services/fintech/' },
+        { name: 'Интеграции и API', path: '/services/integracii/' },
         { separator: true },
         { header: true, name: 'Смежное' },
         { name: 'Отраслевые решения', path: '/industries/' },
