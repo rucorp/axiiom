@@ -309,6 +309,7 @@ FEATURES = {
     "content-marker":"Type-specific content section",
     "hero-svg":      "Hero SVG animation (if hero exists)",
     "links":         "No broken internal links",
+    "anchors":       "Hash links resolve to a real id on the target page",
 }
 
 
@@ -338,7 +339,7 @@ def baseline(page_type):
         "header", "desktop-nav", "nav-toggle", "footer", "footer-copy",
         "breadcrumbs", "cta-btn",
         "nav-js", "theme-js", "preloader-js", "gtag", "ym",
-        "nav-init", "content-marker", "hero-svg", "links",
+        "nav-init", "content-marker", "hero-svg", "links", "anchors",
     ]
     for f in ALL_REQUIRED:
         b[f] = "required"
@@ -696,6 +697,8 @@ def run_checks(page, baseline_map, all_pages_list):
                 result = check_hero_svg(content)
             elif feat == "links":
                 result = check_broken_links(content, page, all_pages_list)
+            elif feat == "anchors":
+                result = check_anchors(content, page, all_pages_list)
             else:
                 result = ("PASS", "unknown check")
         except Exception as e:
@@ -714,6 +717,106 @@ def run_checks(page, baseline_map, all_pages_list):
         checks.append({"feature": feat, "label": label, "status": status, "detail": detail})
 
     return checks
+
+
+
+# Pages whose content is generated from external markdown and whose anchors
+# come from a third-party renderer. Проверяем структуру, но не каждый якорь.
+ANCHOR_EXEMPT_PREFIXES = ("docs/srs", "docs/audit-as-is", "docs/business-model",
+                          "docs/estimation", "docs/feature-map", "docs/finops",
+                          "docs/otp-via-messengers", "docs/srs-docs", "docs/archive")
+
+
+def _resolve_page(url):
+    """Map a site path like '/projects/' to a file on disk."""
+    rel = url.strip("/")
+    cand = SITE_ROOT / rel if rel else SITE_ROOT
+    if cand.is_dir():
+        cand = cand / "index.html"
+    if not cand.exists():
+        alt = SITE_ROOT / rel / "index.html"
+        if alt.exists():
+            return alt
+    return cand if cand.exists() else None
+
+
+def check_anchors(content, page, all_pages):
+    """Every '#anchor' must resolve to an element with that id on the target page."""
+    current = page.get("url") or page.get("url_path") or ""
+    current_dir = current.rsplit("/", 1)[0] + "/" if "/" in current.strip("/") else "/"
+
+    rel_current = current.strip("/")
+    if any(rel_current.startswith(p) for p in ANCHOR_EXEMPT_PREFIXES):
+        return "PASS", "skipped (generated docs)"
+
+    checked, broken = 0, []
+    for m in re.finditer(r'href\s*=\s*["\']([^"\']*#[A-Za-z0-9_-]+)["\']', content):
+        href = m.group(1)
+        if href.startswith(("http://", "https://", "//", "mailto:", "tel:")):
+            continue
+        page_part, frag = href.split("#", 1)
+        if not page_part:
+            target_file = _resolve_page(current)
+        elif page_part.startswith("/"):
+            target_file = _resolve_page(page_part.split("?")[0])
+        else:
+            target_file = _resolve_page(current_dir + page_part.split("?")[0])
+
+        if target_file is None:
+            continue  # битые ссылки ловит check_broken_links
+
+        rel = target_file.relative_to(SITE_ROOT).as_posix()
+        if any(rel.startswith(p) for p in ANCHOR_EXEMPT_PREFIXES):
+            continue
+
+        checked += 1
+        try:
+            target_html = target_file.read_text("utf-8", errors="replace")
+        except OSError:
+            continue
+        if not re.search(rf'\bid=["\']{re.escape(frag)}["\']', target_html):
+            broken.append(href)
+
+    if broken:
+        detail = "; ".join(sorted(set(broken))[:5])
+        if len(set(broken)) > 5:
+            detail += f" ... +{len(set(broken)) - 5} more"
+        return "FAIL", f"{len(set(broken))} broken anchor(s): {detail}"
+    return "PASS", f"{checked} anchors ok"
+
+
+
+def check_nav_anchors(site_dir):
+    site_dir = Path(site_dir).resolve()
+    """Каждая ссылка из меню вида /path/#anchor должна находить свой id.
+
+    parse_tree() намеренно выбрасывает ссылки с "#" (они не страницы), поэтому
+    разбираем nav.js здесь отдельно — иначе якоря меню не проверяет никто.
+    Именно так шесть ссылок портфолио однажды попали в меню без целей.
+    """
+    nav_path = site_dir / "nav.js"
+    if not nav_path.exists():
+        return 0, []
+
+    raw = nav_path.read_text("utf-8")
+    paths = re.findall(r"""path:\s*(['"])(/[^'"]*#[^'"]*)\1""", raw)
+    anchors = sorted({m[1] for m in paths})
+
+    broken, checked = [], 0
+    for path in anchors:
+        page_part, frag = path.split("#", 1)
+        checked += 1
+        target = _resolve_page(page_part) if page_part else None
+        if target is None:
+            broken.append((path, "страница не найдена"))
+            continue
+        rel = target.relative_to(site_dir).as_posix()
+        if any(rel.startswith(pr) for pr in ANCHOR_EXEMPT_PREFIXES):
+            continue
+        html = target.read_text("utf-8", errors="replace")
+        if not re.search(rf'\bid=["\']{re.escape(frag)}["\']', html):
+            broken.append((path, f'нет id="{frag}" на {rel}'))
+    return checked, broken
 
 
 def check_broken_links(content, page, all_pages):
@@ -1149,6 +1252,24 @@ def main():
     output_path = Path(args.output)
     output_path.write_text(report)
     print(f"📄 Report: {output_path}")
+
+    # Якоря меню: TREE в nav.js не проходит через run_checks, проверяем отдельно
+    nav_checked, nav_broken = check_nav_anchors(site_dir)
+    nav_checks = []
+    if nav_broken:
+        detail = "; ".join(f"{p} ({why})" for p, why in nav_broken[:5])
+        if len(nav_broken) > 5:
+            detail += f" ... +{len(nav_broken) - 5} more"
+        nav_checks.append({"feature": "nav-anchors",
+                           "label": "Меню → якоря",
+                           "status": "FAIL",
+                           "detail": f"{len(nav_broken)} broken: {detail}"})
+    else:
+        nav_checks.append({"feature": "nav-anchors",
+                           "label": "Меню → якоря",
+                           "status": "PASS",
+                           "detail": f"{nav_checked} ссылок"})
+    checks_map.setdefault("/", []).extend(nav_checks)
 
     # Summary
     all_checks = [c for cl in checks_map.values() for c in cl]

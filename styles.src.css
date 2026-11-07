@@ -12,6 +12,9 @@
     --clr-hero-bg: #0A0A0F;
     --clr-accent: #D4A574;
     --clr-accent2: #8B9D83;
+    /* Высота шапки: padding 16+16 (.nav) + кнопка 36 (.btn-nav) */
+    --header-h: 68px;
+    --anchor-offset: calc(var(--header-h) + 12px);
 }
 
 [data-theme="light"] {
@@ -133,7 +136,14 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { font-size: 16px; scroll-behavior: smooth; }
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    /* Единый отступ под sticky-шапку для любого якоря на сайте.
+       scroll-margin-top работает только на элементах, которым он задан,
+       а scroll-padding-top на html — для всех целей сразу. */
+    scroll-padding-top: var(--anchor-offset);
+}
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -1187,7 +1197,6 @@ a.logo:hover::after { width: 100%; }
     padding: clamp(60px, 10vw, 110px) 0;
     text-align: center;
     position: relative;
-    scroll-margin-top: 80px;
 }
 
 .dark { background: var(--clr-bg-alt); }
@@ -2228,7 +2237,7 @@ a.logo:hover::after { width: 100%; }
 }
 
 /* Footer */
-.footer { padding: 40px 0 40px; position: relative; scroll-margin-top: 80px; }
+.footer { padding: 40px 0 40px; position: relative; }
 
 .footer-grid {
     display: grid;
@@ -2294,6 +2303,15 @@ a.logo:hover::after { width: 100%; }
     opacity: 0;
     transform: translateY(30px);
     transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+}
+
+/* Цель якоря не должна быть .reveal-элементом: при переходе по #hash браузер
+   ставит её к кромке экрана и она ещё 0.7s сползает вверх из-под шапки.
+   Если целью оказался .reveal — показываем его сразу, без сдвига. */
+.reveal:target {
+    opacity: 1;
+    transform: none;
+    transition: none;
 }
 
 .reveal.visible { opacity: 1; transform: translateY(0); }
