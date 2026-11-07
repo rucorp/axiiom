@@ -167,6 +167,24 @@ def strip_version_lines(md_text: str) -> str:
     return md_text
 
 
+def og_image(canonical: str) -> str:
+    """Путь к og:image страницы: персональная картинка og/fonotext/<name>.png.
+
+    Имя файла согласовано с generate_og_fonotext.py. Для служебной 404 —
+    общая карточка сайта.
+    """
+    if canonical.endswith("404.html"):
+        return f"{SITE}/og-image.png"
+    rel = canonical[len(BASE):].strip("/")
+    if rel == "":
+        name = "index"
+    elif rel == "specs":
+        name = "specs-index"
+    else:
+        name = rel.replace("/", "-")
+    return f"{SITE}/og/fonotext/{name}.png"
+
+
 def page_html(*, title: str, desc: str, canonical: str, body: str,
               active: str, crumb: str) -> str:
     nav_items = []
@@ -200,7 +218,9 @@ def page_html(*, title: str, desc: str, canonical: str, body: str,
 <meta property="og:description" content="{html_mod.escape(desc)}">
 <meta property="og:url" content="{SITE}{canonical}">
 <meta property="og:locale" content="ru_RU">
-<meta property="og:image" content="{SITE}/og-image.png">
+<meta property="og:image" content="{og_image(canonical)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{og_image(canonical)}">
 <script src="/metrika.js?v=20261105" defer></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
 <script>
