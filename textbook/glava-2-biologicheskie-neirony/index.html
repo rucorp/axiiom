@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+    <script>try{var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+    <title>Глава 2. Биологические нейроны и их модели | AXIIOM</title>
+    <meta name="description" content="Как устроен нейрон, модель Маккаллока — Питтса 1943 года, функции активации, импульсные потоки и квазибиологическая модель выживания нейрона.">
+    <link rel="canonical" href="https://axiiom.ru/textbook/glava-2-biologicheskie-neirony/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://axiiom.ru/textbook/glava-2-biologicheskie-neirony/">
+    <meta property="og:title" content="Глава 2. Биологические нейроны и их модели | AXIIOM">
+    <meta property="og:description" content="Как устроен нейрон, модель Маккаллока — Питтса 1943 года, функции активации, импульсные потоки и квазибиологическая модель выживания нейрона.">
+    <meta property="og:image" content="https://axiiom.ru/og/textbook/glava-2-biologicheskie-neirony.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="AXIIOM">
+    <meta property="article:published_time" content="2026-06-10">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://axiiom.ru/textbook/glava-2-biologicheskie-neirony/">
+    <meta name="twitter:title" content="Глава 2. Биологические нейроны и их модели | AXIIOM">
+    <meta name="twitter:description" content="Как устроен нейрон, модель Маккаллока — Питтса 1943 года, функции активации, импульсные потоки и квазибиологическая модель выживания нейрона.">
+    <meta name="twitter:image" content="https://axiiom.ru/og/textbook/glava-2-biologicheskie-neirony.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Глава 2. Биологические нейроны и их математические модели",
+      "description": "Как устроен нейрон, модель Маккаллока — Питтса 1943 года, функции активации, импульсные потоки и квазибиологическая модель выживания нейрона.",
+      "datePublished": "2026-11-10",
+      "dateModified": "2026-11-10",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Organization",
+        "name": "AXIIOM",
+        "url": "https://axiiom.ru/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "AXIIOM",
+        "url": "https://axiiom.ru/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://axiiom.ru/textbook/glava-2-biologicheskie-neirony/"
+      },
+      "image": "https://axiiom.ru/og/textbook/glava-2-biologicheskie-neirony.png"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://axiiom.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Учебник по ИИ",
+          "item": "https://axiiom.ru/textbook/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Глава 2. Биологические нейроны и их математические модели",
+          "item": "https://axiiom.ru/textbook/glava-2-biologicheskie-neirony/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+    <link rel="stylesheet" href="/styles.css?v=20261110">
+      <link rel="stylesheet" href="/preloader.css?v=20261110">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+
+<style>
+  .tb-code { background: var(--clr-surface, #14141c); border: 1px solid var(--clr-border, #2a2a36);
+             border-radius: 12px; padding: 16px 18px; margin: 18px 0; overflow-x: auto;
+             font: 500 .95rem/1.7 ui-monospace, SFMono-Regular, Menlo, monospace;
+             color: var(--clr-heading, #f2f2f7); }
+  .tb-source { font-size: .85rem; color: var(--clr-muted, #9a9aa8); border-left: 2px solid var(--clr-border, #2a2a36);
+               padding-left: 12px; margin: 18px 0; }
+  .tb-note { background: rgba(120, 120, 255, .08); border: 1px solid var(--clr-border, #2a2a36);
+             border-radius: 12px; padding: 16px 18px; margin: 22px 0; }
+  .tb-note h4 { margin: 0 0 8px; font-size: .95rem; letter-spacing: .04em; text-transform: uppercase;
+                color: var(--clr-muted, #9a9aa8); }
+  .article-wrap table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: .92rem; }
+  .article-wrap th, .article-wrap td { border: 1px solid var(--clr-border, #2a2a36);
+                                       padding: 9px 11px; text-align: left; vertical-align: top; }
+  .article-wrap th { background: rgba(255,255,255,.04); font-weight: 600; }
+  .tb-nav { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;
+            margin: 36px 0 0; padding-top: 20px; border-top: 1px solid var(--clr-border, #2a2a36); }
+  .tb-nav a { font-size: .92rem; }
+  .tb-toc { margin: 8px 0 0; padding-left: 20px; }
+  .tb-toc li { margin: 7px 0; }
+</style>
+</head>
+<body><noscript><div><img src="https://mc.yandex.ru/watch/109391253" style="position:absolute;left:-9999px" alt=""></div></noscript>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
+<div id="preloader">
+<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<900){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},900-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})();setTimeout(function(){var q=document.getElementById('preloader');if(q){q.classList.add('hidden');setTimeout(function(){q.classList.add('hidden-done')},500)}},2500)/*preloader-fallback*/</script>
+  <svg class="preloader-svg" viewBox="0 0 36 36" width="80" height="80">
+    <rect class="pr1" x="2" y="2" width="14" height="14" rx="2"/>
+    <rect class="pr2" x="20" y="2" width="14" height="14" rx="2"/>
+    <rect class="pr3" x="2" y="20" width="14" height="14" rx="2"/>
+    <rect class="pr4" x="20" y="20" width="14" height="14" rx="2"/>
+    <circle class="pc" cx="27" cy="27" r="3"/>
+  </svg>
+</div>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<main id="main">
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                    <rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/>
+                </svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"></div>
+</nav>
+<section class="article-page">
+    <div class="container">
+        <div class="article-wrap">
+            <span class="art-date">Учебник · 3 из 9</span>
+            <h1>Глава 2. Биологические нейроны и их математические модели</h1>
+            <div>
+<h2>2.1. Структура и функция биологического нейрона</h2>
+ <p>Нейрон — базовый функциональный элемент нервной системы. Он принимает импульсные сигналы на входы (через дендриты и синапсы) и генерирует один импульсный поток на выход (через аксон). Ключевые компоненты:</p>
+ <ul>
+ <li><strong>Дендриты</strong> — ветвистые отростки нейрона, принимающие сигналы от других нейронов через синапсы.</li>
+ <li><strong>Тело клетки (сома)</strong> — интегрирует поступающие сигналы и содержит ядро.</li>
+ <li><strong>Аксон</strong> — длинный отросток, по которому потенциал действия распространяется к другим нейронам или эффекторам.</li>
+ <li><strong>Синапсы</strong> — места контакта нейронов, где электрический импульс преобразуется в химический сигнал (выделение медиатора в синаптической щели) и обратно в электрический.</li>
+ <li><strong>Мембрана нейрона</strong> — осуществляет пространственную и временную суммацию воздействий, поддерживает внутриклеточный потенциал.</li>
+ <li><strong>Ионные каналы</strong> — белковые структуры в мембране, регулирующие прохождение ионов (Na⁺, K⁺, Ca²⁺, Cl⁻) и создающие электрический потенциал.</li>
+ </ul>
+ <p class="tb-source">Источник: архитектурные принципы из статьи Бахшиева А.В., Романова С.П. (article_0018.md, частично).</p>
+
+ <h2>2.2. Модель Маккаллока — Питтс (1943) — первая формальная модель</h2>
+ <p>Первая математическая модель нейрона представляет его как простой процессор с несколькими входами и одним выходом. Модель состоит из трёх функциональных блоков:</p>
+ <ul>
+ <li><strong>Локальная память</strong> — хранит веса синапсов (весовые множители, аналог чувствительности синаптических контактов).</li>
+ <li><strong>Блок суммирования</strong> — вычисляет взвешенную сумму входных сигналов.</li>
+ <li><strong>Блок нелинейного преобразования</strong> — пороговая функция «все или ничего».</li>
+ </ul>
+ <div class="tb-code">net = Σ (wᵢ × xᵢ)<br>
+Y = 1, если net > θ, иначе Y = 0</div>
+ <p>Где <strong>xᵢ</strong> — входной сигнал, <strong>wᵢ</strong> — вес синапса, <strong>net</strong> — взвешенная сумма входов, <strong>θ</strong> — порог активации, <strong>Y</strong> — выход (0 или 1).</p>
+ <p class="key-box">
+ <strong>Ограничение модели:</strong> бинарная активация не отражает аналоговую природу реальных нейронов, отсутствует временная суммация, нет учёта структуры дендритов.
+ </p>
+ <p class="tb-source">Источник: обзор моделей нейронов (obzor-sushchestvuyushchikh-modelej-nejronov.md).</p>
+
+ <h2>2.3. Функции активации — обзор</h2>
+ <table>
+ <tr><th>Функция</th><th>Описание</th><th>Применение</th></tr>
+ <tr><td>Пороговая бинарная (Хевисайда)</td><td>Y = 1, если net > θ, иначе Y = 0</td><td>Персептроны, простые сети</td></tr>
+ <tr><td>Пороговая биполярная (сигнатурная)</td><td>Y = −1 или Y = +1</td><td>Биполярные нейросети</td></tr>
+ <tr><td>Линейная</td><td>Y = k · net</td><td>Линейные сети, выходные слои RBF</td></tr>
+ <tr><td>Сигмоидальная логистическая</td><td>Y = 1 / (1 + e^(−net))</td><td>Многослойные сети, обратное распространение ошибки</td></tr>
+ <tr><td>Гиперболический тангенс</td><td>Y = tanh(net)</td><td>Многослойные перцептроны, симметричные выходы</td></tr>
+ <tr><td>Радиально-базисная (Гауссова)</td><td>Y = exp(−‖X − C‖² / (2·σ²))</td><td>RBF-сети, классификация, регрессия</td></tr>
+ <tr><td>Экспоненциальная</td><td>Y = e^(net) / Σ e^(netⱼ)</td><td>Вероятностные нейросети, выходные слои классификации</td></tr>
+ <tr><td>Квадратный корень</td><td>Y = √(Σ (xᵢ − cᵢ)²)</td><td>Сеть Кохонена, обучение без учителя</td></tr>
+ </table>
+ <p>Сигмоидальная функция обладает избирательной чувствительностью к сигналам разной интенсивности — наибольшая чувствительность вблизи порога, что соответствует биологическим данным. Производная логистической функции может быть выражена через её значение, что облегчает использование при обратном распространении ошибки.</p>
+ <p class="tb-source">Источник: обзор моделей нейронов (obzor-sushchestvuyushchikh-modelej-nejronov.md).</p>
+
+ <h2>2.4. Классификация моделей нейронов</h2>
+ <p>Нейроны классифицируются по трём основным критериям:</p>
+ <h3>По положению в топологии сети:</h3>
+ <ul>
+ <li><strong>Входные нейроны</strong> — принимают исходный вектор, передают сигнал на выход с возможным усилением/ослаблением.</li>
+ <li><strong>Выходные нейроны</strong> — формируют результат работы сети, могут выполнять вычислительные операции.</li>
+ <li><strong>Промежуточные нейроны</strong> — выполняют основные вычислительные операции сети.</li>
+ </ul>
+ <h3>По степени формализации (разработки математического описания):</h3>
+ <ul>
+ <li><strong>Формальные (абстрактные) нейроны</strong> — хорошо разработанное математическое описание, игнорируют многие свойства биологического прототипа.</li>
+ <li><strong>Физиологические нейроны</strong> — количественное описание поведения нейронов, порождённое экспериментами над биологическими нейронами.</li>
+ <li><strong>Феноменологические модели</strong> — не имеют строгой математической и опытной базы.</li>
+ </ul>
+ <h3>По аппаратной реализации:</h3>
+ <ul>
+ <li><strong>Цифровые модели</strong> — реализуются на микросхемах, сеть как единое целое, отдельные нейроны не выделяются как самостоятельные единицы.</li>
+ <li><strong>Аналоговые модели</strong> — воспроизводят пространственную и временную суммацию, рефрактерность, процессы переработки информации. Нейрон как устройство с непрерывно меняющимся состоянием.</li>
+ </ul>
+ <p class="tb-source">Источник: обзор моделей нейронов (obzor-sushchestvuyushchikh-modelej-nejronov.md).</p>
+
+ <h2>2.5. Формальные нейроны — развёрнутый обзор</h2>
+ <table>
+ <tr><th>Модель</th><th>Особенность</th><th>Применение</th></tr>
+ <tr><td>Маккаллок — Питтс</td><td>Пороговая активация, неизменные веса</td><td>Простые сети, перцептроны</td></tr>
+ <tr><td>Адалайн (Adaline)</td><td>Сигнатурная функция активации, градиентное обучение весов</td><td>Адаптивная фильтрация, классификация</td></tr>
+ <tr><td>Нейрон Паде</td><td>Обобщение адалайн для нелинейной интерполяции</td><td>Практически не используется</td></tr>
+ <tr><td>Квадратичный сумматор</td><td>Вычисляет полином второго порядка от входов</td><td>Классификация многомерных нормальных распределений</td></tr>
+ <tr><td>Сигма-пи нейроны</td><td>Функция активации — полином степени N</td><td>Обобщение линейных и квадратичных функций</td></tr>
+ <tr><td>Instar / Outstar (Гроссберг)</td><td>Адаптация весов к входным и выходным сигналам</td><td>Классификация, обучение с и без учителя</td></tr>
+ <tr><td>Нейрон Хебба</td><td>Правило обучения: wᵢ ∝ xᵢ · y (одновременная активация усиливает связь)</td><td>Самоорганизация, ассоциативная память</td></tr>
+ <tr><td>WTA (Winner-Takes-All)</td><td>Конкуренция нейронов, активен только один с максимальным ui</td><td>Самоорганизация, кластеризация</td></tr>
+ </table>
+ <p class="tb-source">Источник: обзор моделей нейронов (obzor-sushchestvuyushchikh-modelej-nejronov.md).</p>
+
+ <h2>2.6. Физиологические модели нейронов</h2>
+ <table>
+ <tr><th>Модель</th><th>Описание</th><th>Особенности</th></tr>
+ <tr><td>Пороговый интегратор (leaky integrate-and-fire)</td><td>Суммация синаптических токов по закону Ома, генерация спайка при превышении порога</td><td>Не воспроизводит форму спайка, адаптацию, спонтанную активность</td></tr>
+ <tr><td>Ходжкин — Хаксли</td><td>Три типа ионного тока: натриевый, калиевый, утечки (хлор); модель гигантского аксона кальмара</td><td>Классическая модель потенциала действия, не рассматривает синаптический аппарат детально</td></tr>
+ <tr><td>Корковый пирамидный нейрон с шумом</td><td>Более полный набор ионных каналов, цветной шум (Ornstein-Uhlenbeck) для синаптического тока</td><td>Воспроизводит адаптацию и спонтанную активность, близка к нейрону зрительной коры крысы</td></tr>
+ <tr><td>Коннор — Уолтер — МакКаун</td><td>Дополнительный ток IA по сравнению с Ходжиным-Хакслем</td><td>Более широкий диапазон частот вспышек активности</td></tr>
+ <tr><td>Морис — Лекар (ML)</td><td>Упрощённая Ходжкин-Хаксли, две переменные (калий и кальций)</td><td>Генерация спайков, режим невосприимчивости; нельзя описать хаотические колебания</td></tr>
+ <tr><td>ФитцХью — Нагумо (FHN)</td><td>Две переменные: быстрая u (потенциал), медленная v; спиральные волны</td><td>Аналитически изучена, используется для описания волн в активных средах</td></tr>
+ <tr><td>Хиндмарш — Розе (2D и 3D)</td><td>Закон Кирхгофа для мембранного потенциала как суммы ионных токов</td><td>Качественное описание экспериментальных ситуаций</td></tr>
+ <tr><td>Спайковая модель отклика (SRM)</td><td>Параметры зависят от времени последнего спайка, моделирует рефрактерность</td><td>Обобщение порогового интегратора</td></tr>
+ <tr><td>Уилсон — Кован</td><td>Модель среднего поля: переменные числа возбуждённых и тормозных нейронов</td><td>Операции с ансамблями нейронов</td></tr>
+ </table>
+ <p class="tb-source">Источник: обзор моделей нейронов (obzor-sushchestvuyushchikh-modelej-nejronov.md).</p>
+
+ <h2>2.7. Феноменологические модели</h2>
+ <p><strong>Бионический нейрон В.Б. Вальцева:</strong> имеет входы возбуждения, регуляции, памяти, торможения и запрета. Состояние определяется потенциалом и порогом. Порог покоя — постоянное значение. Потенциал ограничен Pmin ≤ 0 и Pmax > 0. Вход памяти изменяет коэффициент обученности µ (0–1), который определяет значимость вклада вклада в общий потенциал. Обучение увеличивает µ на ∆µ⁺ = 0.2 при условиях: на вход поступил сигнал, сигнал подкреплён входом возбуждения, порог меньше порога покоя.</p>
+ <p class="tb-source">Источник: обзор моделей нейронов (obzor-sushchestvuyushchikh-modelej-nejronov.md).</p>
+
+ <h2>2.8. От формального к импульсному нейрону (Бахшиев, Романов)</h2>
+ <p>Разработка велась в четыре этапа:</p>
+ <ol>
+ <li><strong>Универсальная модель формального нейрона</strong> — входные сигналы x₁…xₘ, весовые функции w₁…wₘ, выход y, мембранный потенциал u, порог θ, функция активации F.</li>
+ <li><strong>Нейрон со структурной организацией мембраны</strong> — потенциала участка мембраны зависит от среднего значения потенциала подключённых участков. Минимальным функциональным элементом считается не нейрон, а участок мембраны.</li>
+ <li><strong>Раздельное вычисление вкладов в мембранный потенциал</strong> — введение «ионных механизмов» (абстракций ионных каналов), позволяющих независимую обработку возбуждающих и тормозных сигналов с разными постоянными времени.</li>
+ <li><strong>Переход к импульсной модели</strong> — входы и выходы становятся импульсными (0 или 1), порог константа близкая к 0, функция активации — пороговая с гистерезисом. Воспроизводятся деполяризация, скачок потенциала, гиперполяризация, остаточная деполяризация.</li>
+ </ol>
+ <p>Преимущество импульсной обмена: локализация информации во времени, экономия энергии при аппаратной реализации (нейроны большей частью в состоянии покоя). Проблема: автоматизация формирования структуры мембраны и связей.</p>
+ <p class="tb-source">Источник: статья «От модели формального нейрона к импульсному нейрону» (ot-formalnogo-k-impulsnomu-nejronu.md).</p>
+
+ <h2>2.9. Модель импульсных потоков в естественном нейроне</h2>
+ <p>Предложена система дифференциальных уравнений, описывающая аналоговое преобразование импульсных потоков:</p>
+ <ul>
+ <li>На входы поступают импульсные потоки, в синапсах преобразуются в аналоговые величины (выделение и распад медиатора в синаптической щели).</li>
+ <li>Входные и выходные сигналы равны нулю в отсутствии импульса и константе на время действия импульса.</li>
+ <li>Мембрана сомы и дендритов — набор пар ионных механизмов деполяризации и гиперполяризации.</li>
+ <li>Выходные сигналы ионных механизмов — обобщённый аналоговый вклад во внутриклеточный потенциал.</li>
+ <li>Синапсы изменяют деятельность ионных механизмов (моделируют изменение концентрации ионов под воздействием внешнего сигнала).</li>
+ <li>Тип ионного механизма определяется знаком выходного сигнала: положительный — деполяризующее влияние, отрицательный — гиперполяризующее.</li>
+ </ul>
+ <p>Преимущества модели: произвольная структура дендритного аппарата, эффект пресинаптического торможения, не требует настройки внутренних параметров в процессе функционирования.</p>
+ <p class="tb-source">Источник: Бахшиев А.В., Романов С.П. (article_0018.md, частично).</p>
+
+ <h2>2.10. Предыстория импульсного нейрона (аналоговая модель Романова)</h2>
+ <p>В 70-х годах С.П. Романов разработал физическую аналоговую модель нейрона на операционных усилителях. Основные постулаты:</p>
+ <ul>
+ <li>Модель нейрона должна содержать динамику, т.е. обеспечивать не только пространственную, но и временную суммацию сигналов.</li>
+ <li>Нейроны должен представлять собой сущности, обменивающиеся импульсами между собой, внутри осуществляющие аналоговое преобразование.</li>
+ <li>Необходимо сохранить некоторые специфические особенности синаптической передачи, например, тот факт, что передача сигнала происходит не мгновенно; существует пресинаптическое торможение; активный синапс приводит к нарушению некоторого равновесного состояния мембраны.</li>
+ <li>Равновесное состояние мембраны обеспечивается несколькими противодействующими друг другу процессами.</li>
+ <li>Эффективность взаимодействия между нейронами должна настраиваться через добавление/удаление синапсов, а не корректировку параметра-веса синапса.</li>
+ <li>Структура мембраны нейрона должна иметь настраиваемую структуру, отражающую некоторые реальные особенности нейрона.</li>
+ <li>Порог активации нейрона отсутствует или фиксирован.</li>
+ <li>Модель нейрона должна воспроизводить некоторые основные паттерны поведения в ответ на возбуждающие и тормозящие воздействия, присущие реальным нейронам.</li>
+ </ul>
+ <p>Аналоговая схема использовала интеграторы и управляемые ключи для моделирования синаптического аппарата, RC-цепочки для натриевого и калиевого насосов, операционные усилители для суммирования ВПСП/ТПСП и генерации потенциала действия.</p>
+ <p class="tb-source">Источник: «Предыстория импульсного нейрона» (predystoriya-impulsnogo-nejrona.md).</p>
+
+ <h2>2.11. Нейрон как квазибиологический организм (модель выживания)</h2>
+ <p>Нейрон рассматривается как организм, нуждающийся в питании. Базовые параметры:</p>
+ <ul>
+ <li><strong>Энергетический резерв клетки E</strong> — нейрон расходует энергию на генерацию импульсов. При избытке энергии способен делиться, при потере всего запаса — погибает.</li>
+ <li><strong>Износ нейрона H</strong> — определяет эффективность функционирования. Увеличение износа (старение) снижает эффективность расхода энергии. Генерация импульса приводит к функциональному обновлению (снижению износа).</li>
+ <li><strong>Самочувствие Q</strong> — определяется по величине и тенденции внутренних резервов питания.</li>
+ </ul>
+ <p><strong>Основные свойства модели:</strong></p>
+ <ol>
+ <li>Нейрон нуждается в питании — без него погибает.</li>
+ <li>Нейрон стареет — с возрастом растут потребности в питании.</li>
+ <li>Разряд снижает возраст и потребности.</li>
+ <li>Между нейронами образуются связи для оптимизации функциональных состояний.</li>
+ <li>Разряд требует дополнительных расходов питания, зависящих от частоты генерации.</li>
+ <li>У нейрона есть внутренние резервы питания («самочувствие»).</li>
+ </ol>
+ <p><strong>Интегральные характеристики сети:</strong></p>
+ <ul>
+ <li>Суммарный износ системы = сумма износов всех нейронов.</li>
+ <li>Суммарное самочувствие = сумма самочувствий всех нейронов.</li>
+ <li>Суммарный расход энергии = сумма расходов каждого нейрона.</li>
+ <li>Сеть стремится минимизировать частоту разрядов и суммарный износ, находя оптимальную частоту генерации импульсов.</li>
+ </ul>
+ <p><strong>Бета-ансамбли:</strong> любая последовательность связанных нейронов со связями Gs больше порога — бета-ансамбль. Ансамбль — группа нейронов с полной картиной связей (каждый с каждым). Параметр «мощность» ансамбля — суммарное Gs всех нейронов.</p>
+ <div class="tb-note"><h4>Главный вывод</h4>
+ <p>Интеллектуальные свойства сети возникают не из сложности отдельного нейрона, а из организации энергетически выгодных связей между нейронами. Структура сети и её информационные свойства определяются функционированием её элементов — нейронов.</p></div>
+ <p class="tb-source">Источник: «Моделирование выживания нейрона» (modelirovanie-vyzhivaniya-nejrona.md).</p>
+
+ <h2>2.12. Биоподобные нейронные сети для управления роботами</h2>
+ <p>Концепция применения биоподобных моделей нейронных сетей для управления робототехническими системами включает два взаимно дополняющих подхода:</p>
+ <ol>
+ <li><strong>Заимствование информации о нейронных структурах</strong> с известной морфологией и функцией, построение их моделей и применение полученных знаний для решения аналогичных задач в управлении техническими системами.</li>
+ <li><strong>Разработка нейросетевых архитектур</strong> на основе накопленных знаний о принципах организации биологических НС с последующим поиском сходства или расхождения с реальностью и коррекцией моделей.</li>
+ </ol>
+ <p>В основе концепции — разработка нейросетевой системы управления, воспринимающей информацию от сенсоров и замкнутой на среду через эффекторы. Решение только одной частной задачи (например, распознавание образов) резко сужает контекст использования информации.</p>
+ <table>
+ <tr><th>Уровень</th><th>Назначение</th></tr>
+ <tr><td>RCN (Regulatory Control Network)</td><td>Сеть регулятора: предоставляет информацию о текущем положении объекта управления и обеспечивает переход в заданное положение</td></tr>
+ <tr><td>PCN (Position Control Network)</td><td>Сеть позиционирования: запоминает и воспроизводит конкретные положения элементов исполнительной системы</td></tr>
+ <tr><td>TCN (Trajectory Control Network)</td><td>Сеть управления движением по траектории: моделирует сложные траектории движения</td></tr>
+ </table>
+ <p class="tb-source">Источник: «Концепция применения биоподобных моделей нейронных сетей» (kontseptsiya-biopodobnyh-ns.md).</p>
+            </div>
+            <div class="glass-card card-pad-md" style="margin-top:32px">
+                <p class="label">AXIIOM</p>
+                <h3 style="font-size:1.15rem;margin:8px 0 10px">Разрабатываем финтех-продукты и ИИ-решения</h3>
+                <p style="margin:0 0 14px">Сайты, мобильные приложения, платёжные интеграции и внедрение ИИ — от стратегии до поддержки.</p>
+                <p style="margin:0"><a class="link-accent" href="https://axiiom.ru/">Перейти на axiiom.ru →</a> &nbsp;·&nbsp; <a class="link-accent" href="https://axiiom.ru/#contact">Обсудить проект</a></p>
+            </div>
+            <nav class="tb-nav"><a href="/textbook/">Содержание</a><a href="/textbook/glava-1-teoreticheskie-osnovy/">← Глава 1. Теоретические основы искусственного интеллекта</a><a href="/textbook/glava-3-neironnye-seti/">Глава 3. Нейронные сети и архитектуры памяти →</a></nav>
+        </div>
+    </div>
+</section>
+</main>
+<footer class="footer">
+    <div class="container">
+        <div id="footerCopy"></div>
+    </div>
+</footer>
+<script src="/config.js?v=20261110"></script>
+<script src="/nav.js?v=20261110"></script>
+<script>Nav.init({ cta: true, breadcrumbs: true });</script>
+<script src="/theme.js?v=20261110"></script>
+<script>
+(function() {
+
+    var header = document.getElementById('header');
+    window.addEventListener('scroll', function() {
+        header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+})();
+</script>
+<script src="/metrika.js?v=20261110" defer></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
+
+  <script src="/preloader.js?v=20261110"></script>
+
+<script>
+(function() {
+  var t = document.getElementById('navToggle');
+  var o = document.getElementById('navOverlay');
+  if (!t || !o) return;
+  t.addEventListener('click', function(e) {
+    e.stopPropagation();
+    o.classList.toggle('open');
+    t.classList.toggle('active');
+    document.body.style.overflow = o.classList.contains('open') ? 'hidden' : '';
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+    <script>try{var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+    <title>Глава 1. Теоретические основы ИИ | AXIIOM</title>
+    <meta name="description" content="Символьный и связистский подходы к ИИ, «сильный» и «слабый» интеллект, кризис идей и почему для прорыва нужна новая теория сложных систем.">
+    <link rel="canonical" href="https://axiiom.ru/textbook/glava-1-teoreticheskie-osnovy/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://axiiom.ru/textbook/glava-1-teoreticheskie-osnovy/">
+    <meta property="og:title" content="Глава 1. Теоретические основы ИИ | AXIIOM">
+    <meta property="og:description" content="Символьный и связистский подходы к ИИ, «сильный» и «слабый» интеллект, кризис идей и почему для прорыва нужна новая теория сложных систем.">
+    <meta property="og:image" content="https://axiiom.ru/og/textbook/glava-1-teoreticheskie-osnovy.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="AXIIOM">
+    <meta property="article:published_time" content="2026-06-10">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://axiiom.ru/textbook/glava-1-teoreticheskie-osnovy/">
+    <meta name="twitter:title" content="Глава 1. Теоретические основы ИИ | AXIIOM">
+    <meta name="twitter:description" content="Символьный и связистский подходы к ИИ, «сильный» и «слабый» интеллект, кризис идей и почему для прорыва нужна новая теория сложных систем.">
+    <meta name="twitter:image" content="https://axiiom.ru/og/textbook/glava-1-teoreticheskie-osnovy.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Глава 1. Теоретические основы искусственного интеллекта",
+      "description": "Символьный и связистский подходы к ИИ, «сильный» и «слабый» интеллект, кризис идей и почему для прорыва нужна новая теория сложных систем.",
+      "datePublished": "2026-11-10",
+      "dateModified": "2026-11-10",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Organization",
+        "name": "AXIIOM",
+        "url": "https://axiiom.ru/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "AXIIOM",
+        "url": "https://axiiom.ru/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://axiiom.ru/textbook/glava-1-teoreticheskie-osnovy/"
+      },
+      "image": "https://axiiom.ru/og/textbook/glava-1-teoreticheskie-osnovy.png"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://axiiom.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Учебник по ИИ",
+          "item": "https://axiiom.ru/textbook/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Глава 1. Теоретические основы искусственного интеллекта",
+          "item": "https://axiiom.ru/textbook/glava-1-teoreticheskie-osnovy/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+    <link rel="stylesheet" href="/styles.css?v=20261110">
+      <link rel="stylesheet" href="/preloader.css?v=20261110">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+
+<style>
+  .tb-code { background: var(--clr-surface, #14141c); border: 1px solid var(--clr-border, #2a2a36);
+             border-radius: 12px; padding: 16px 18px; margin: 18px 0; overflow-x: auto;
+             font: 500 .95rem/1.7 ui-monospace, SFMono-Regular, Menlo, monospace;
+             color: var(--clr-heading, #f2f2f7); }
+  .tb-source { font-size: .85rem; color: var(--clr-muted, #9a9aa8); border-left: 2px solid var(--clr-border, #2a2a36);
+               padding-left: 12px; margin: 18px 0; }
+  .tb-note { background: rgba(120, 120, 255, .08); border: 1px solid var(--clr-border, #2a2a36);
+             border-radius: 12px; padding: 16px 18px; margin: 22px 0; }
+  .tb-note h4 { margin: 0 0 8px; font-size: .95rem; letter-spacing: .04em; text-transform: uppercase;
+                color: var(--clr-muted, #9a9aa8); }
+  .article-wrap table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: .92rem; }
+  .article-wrap th, .article-wrap td { border: 1px solid var(--clr-border, #2a2a36);
+                                       padding: 9px 11px; text-align: left; vertical-align: top; }
+  .article-wrap th { background: rgba(255,255,255,.04); font-weight: 600; }
+  .tb-nav { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;
+            margin: 36px 0 0; padding-top: 20px; border-top: 1px solid var(--clr-border, #2a2a36); }
+  .tb-nav a { font-size: .92rem; }
+  .tb-toc { margin: 8px 0 0; padding-left: 20px; }
+  .tb-toc li { margin: 7px 0; }
+</style>
+</head>
+<body><noscript><div><img src="https://mc.yandex.ru/watch/109391253" style="position:absolute;left:-9999px" alt=""></div></noscript>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
+<div id="preloader">
+<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<900){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},900-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})();setTimeout(function(){var q=document.getElementById('preloader');if(q){q.classList.add('hidden');setTimeout(function(){q.classList.add('hidden-done')},500)}},2500)/*preloader-fallback*/</script>
+  <svg class="preloader-svg" viewBox="0 0 36 36" width="80" height="80">
+    <rect class="pr1" x="2" y="2" width="14" height="14" rx="2"/>
+    <rect class="pr2" x="20" y="2" width="14" height="14" rx="2"/>
+    <rect class="pr3" x="2" y="20" width="14" height="14" rx="2"/>
+    <rect class="pr4" x="20" y="20" width="14" height="14" rx="2"/>
+    <circle class="pc" cx="27" cy="27" r="3"/>
+  </svg>
+</div>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<main id="main">
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                    <rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/>
+                </svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"></div>
+</nav>
+<section class="article-page">
+    <div class="container">
+        <div class="article-wrap">
+            <span class="art-date">Учебник · 2 из 9</span>
+            <h1>Глава 1. Теоретические основы искусственного интеллекта</h1>
+            <div>
+<h2>1.1. Что значит работать в области ИИ</h2>
+ <p>Главный вопрос, с которого начинается любое серьезное исследование в области ИИ: что значит работать в этой области? Как следует осуществлять исследования и реализовывать их результаты на практике?</p>
+ <p>Специалист в своей области, начиная с какого-то момента, начинает задаваться подобными вопросами. Это не просто поддержание сложившегося стиля деятельности — это осознанный подход к выбору методов и целей.</p>
+ <p class="tb-source">Источник: Потапов А.С., «Современные тенденции и перспективы области искусственного интеллекта», 1-й семинар (article_0039.md).</p>
+
+ <h2>1.2. «Карта» области ИИ: секции современных конференций</h2>
+ <p>На последней международной объединенной конференции по искусственному интеллекту (проводимой с 1969 года) были следующие секции:</p>
+ <ul>
+ <li>Agent-based and Multiagent Systems</li>
+ <li>Constraints, Satisfiability, and Search</li>
+ <li>Knowledge Representation, Reasoning, and Logic</li>
+ <li>Machine Learning</li>
+ <li>Multidisciplinary Topics and Applications</li>
+ <li>Natural-Language Processing</li>
+ <li>Planning and Scheduling</li>
+ <li>Robotics and Vision</li>
+ <li>Uncertainty in AI</li>
+ <li>Web and Knowledge-based Information Systems</li>
+ </ul>
+ <p>Проблемы поиска, представления знаний и машинного обучения — это традиционные базовые проблемы ИИ. Производные от них проблемы — проблемы планирования, неопределенности. Немного в стороне, но не менее значимые вопросы — язык и зрение. Немного странно, что отсутствует в качестве топика проблема управления. Видимо, она растворилась в планировании и робототехнике.</p>
+ <div class="tb-note"><h4>Важное наблюдение</h4>
+ <p>Всем этим разделам искусственного интеллекта — несколько десятков лет. Таковые области ИИ уже были, по крайней мере, 30 лет назад. Из относительно нового можно заметить лишь мультиагентные системы и веб, которые являются не столько подходами, сколько областями приложений.</p></div>
+ <p class="tb-source">Источник: Потапов А.С., 1-й семинар (article_0039.md).</p>
+
+ <h2>1.3. Базовые проблемы ИИ</h2>
+ <p>Базовые проблемы — проблемы поиска, представления знаний и машинного обучения. Производные проблемы — планирование, неопределенность, язык и зрение.</p>
+ <table>
+ <tr><th>Уровень</th><th>Проблемы</th><th>Статус</th></tr>
+ <tr><td>Базовый</td><td>Поиск, представление знаний, машинное обучение</td><td>Несколько десятилетий</td></tr>
+ <tr><td>Производный</td><td>Планирование, неопределенность, язык, зрение</td><td>Несколько десятилетий</td></tr>
+ <tr><td>Отдельные области приложений</td><td>Мультиагентные системы, веб</td><td>Относительно новые, не подходы, а области применения</td></tr>
+ </table>
+ <p class="tb-source">Источник: Потапов А.С., 1-й семинар (article_0039.md).</p>
+
+ <h2>1.4. Кризис идей в ИИ: почему новые идеи не появляются?</h2>
+ <p>Складывается впечатление, что все основные идеи были высказаны в 60–70-е годы. В 80–90-е годы эти идеи уточнялись и доводились до конкретных алгоритмов. А в первом десятилетии нового тысячелетия на базе этих алгоритмов строятся сложные прикладные системы.</p>
+ <p>На примере области машинного обучения: из более или менее новых методов сейчас большой популярностью пользуется AdaBoost. Идея метода крайне проста: берем некоторый метод классификации, решаем с его помощью задачу распознавания образов, затем берем те образы, которые классифицированы неправильно, и увеличиваем их вес — сосредотачиваем внимание классификатора на сложных примерах. Никакой серьезной теории за ним не стоит.</p>
+ <p>Уровень методов поиска, представления знаний, обучения остается очень низким, и без принципиально новых теоретических решений этот уровень не поднять.</p>
+ <div class="tb-note"><h4>Главный вывод</h4>
+ <p>Для прорыва в ИИ нужна не новая библиотека, а новая теория построения сложных систем — от общих схем к конкретике и обратно.</p></div>
+ <p class="tb-source">Источник: Потапов А.С., 1-й семинар (article_0039.md).</p>
+
+ <h2>1.5. «Сильный» и «слабый» ИИ</h2>
+ <ul>
+ <li><strong>Слабый ИИ (narrow AI)</strong> — системы, решающие конкретные задачи (распознавание, перевод, управление). Они не обладают самосознанием и не могут переносить навыки между областями.</li>
+ <li><strong>Сильный ИИ (general AI)</strong> — гипотетическая система с интеллектом уровня человека или выше, способная к обобщению и самообучению.</li>
+ </ul>
+ <p>На сегодняшний день созданы только системы слабого ИИ. Путь к сильному ИИ блокирован теоретическими и практическими проблемами, обсуждаемыми в Главе 8.</p>
+ <p class="tb-source">Источник: материалы семинаров.</p>
+
+ <h2>1.6. Может ли машина мыслить? Ограничения алгоритмического ИИ</h2>
+ <p>На 14-м семинаре обсуждались ключевые вопросы алгоритмической реализации интеллекта:</p>
+ <ul>
+ <li><strong>Хьюберт Дрейфус</strong> — «Алхимия и искусственный интеллект», «Чего не могут вычислительные машины». Верно ли его мнение?</li>
+ <li><strong>Роже Пенроуз</strong> — «Новый ум короля», «Тени разума». Насколько прав Пенроуз?</li>
+ <li><strong>Джон Сёрл</strong> — парадокс «Китайская комната»: манипуляция символами не равна пониманию. О чем говорит этот парадокс?</li>
+ <li><strong>Теорема Гёделя</strong> — накладывает ли она какие-то ограничения на возможности алгоритмического ИИ?</li>
+ <li>Нужна ли новая математика для создания ИИ?</li>
+ </ul>
+ <p class="tb-source">Источник: Потапов А.С., «Возможна ли алгоритмическая реализация интеллекта, и каковы ее ограничения», 14-й семинар (article_0075.md).</p>
+
+ <h2>1.7. Лимиты картезианской парадигмы причинно-следственной связи (Неверов)</h2>
+ <p>Картезианская парадигма причинно-следственной связи считается её сторонниками единственной материалистической научной парадигмой, основой подлинно научной методологии. При этом не делается попыток выяснить пределы её применимости, полагается, что никаких пределов нет.</p>
+ <p>А.С. Неверов пытается показать, что картезианская парадигма «причинно-следственной связи» предполагает ограничения её научного, материалистического, объективного применения заведомо, в силу её самой.</p>
+ <p>Основной довод: в картезианской парадигме и «следствие и причина», и «связь» — это одно и то же, разные точки зрения на одно и то же. Однако в результате мы рассчитываем получить полную картезианскую модель — различить между собой «следствие», «причину» и «связь» следствия с причиной.</p>
+ <p>Получить полную картезианскую модель в рамках одной конкретной ПСС невозможно. Возможно получить что-нибудь одно: или «следствие» с «причиной», или «связь» между ними.</p>
+ <p>Таким образом, картезианская парадигма, претендуя быть научной, должна разделить две разные цели:</p>
+ <ul>
+ <li>установления фактов, явлений, событий;</li>
+ <li>установления закономерностей.</li>
+ </ul>
+ <p>Именно в разнице целей, обеспечить достижение которых должна научная парадигма, кроются лимиты картезианства.</p>
+ <p class="tb-source">Источник: Неверов А.С., «Лимиты картезианской парадигмы причинно-следственной связи» (article_0100.md, частично).</p>
+
+ <h2>1.8. Машина Тьюринга и самовоспроизводящиеся автомати (Александров)</h2>
+ <p>На 45-м семинаре профессор В.В. Александров — доктор технологических наук, профессор, заслуженный деятель науки и техники РФ, лауреат премии Джона фон Неймана — выступил с докладом «От машины Тьюринга к самовоспроизводящимся автоматам Гёте».</p>
+ <p>Доклад посвящен эволюции концепций автоматов — от универсальной машины Тьюринга к самовоспроизводящимся системам. Это один из важнейших теоретических контекстов для понимания границ машинного интеллекта.</p>
+ <p class="tb-source">Источник: Александров В.В., 45-й семинар (article_0150.md).</p>
+
+ <h2>1.9. Бионический подход и кризисы парадигм</h2>
+ <p>В искусственном интеллекте происходит периодическое обращение к бионическому направлению. Это обычно случается, когда исследователи чувствуют серьезные проблемы текущей парадигмы, решения которых не могут найти в рамках технического подхода. Исследователи пытаются почерпнуть идеи в живой природе.</p>
+ <p>На примере изменения отношения к искусственным нейронным сетям хорошо видны кризисы парадигм в ИИ. И сейчас именно в бионическом подходе появляются разнообразные новые концепции:</p>
+ <ul>
+ <li>нейроглиальные сети,</li>
+ <li>искусственные иммунные системы,</li>
+ <li>генетические сети,</li>
+ <li>роевой интеллект и так далее.</li>
+ </ul>
+ <p>Технический подход не может похвастаться таким изобилием новых направлений. Сторонники бионического подхода могут надеяться, что именно здесь будет найдено решение имеющихся проблем. Однако имитация биологических систем все же заменяется более эффективными (для искусственных систем) техническими решениями.</p>
+ <p class="tb-source">Источник: Потапов А.С., 1-й семинар (article_0039.md).</p>
+
+ <h2>1.10. Необходимость новой теории сложных систем</h2>
+ <p>Имеющиеся теории разрабатывались для очень упрощенных постановок задач. Так, задача обучения зачастую сводится к задаче распознавания образов по однородным описаниям объектов (векторам признаков) в условиях малого числа классов. Хотя необходимость разработки теории построения «сложных» систем распознавания отмечалась еще в 1970-х гг., до сих пор в этой области толком ничего не сделано.</p>
+ <p>Кроме того, основным упрощением при постановке задач построения интеллектуальных систем является жесткое разделение задач на подзадачи. На глобальном уровне это означает, что задачи поиска, обучения и преобразования информации разделяются искусственно, что ограничивает возможность создания действительно интегральных интеллектуальных систем.</p>
+ <div class="tb-note"><h4>Вывод главы</h4>
+ <p>Базовые проблемы ИИ (поиск, представление знаний, машинное обучение) существуют несколько десятилетий без принципиально новых идей. Для прорыва нужна новая теория построения сложных интеллектуальных систем, объединяющая нисходящий метод (от общих схем к конкретике) и восходящий метод (обобщение прикладного опыта).</p></div>
+ <p class="tb-source">Источник: Потапов А.С., 1-й семинар (article_0039.md).</p>
+            </div>
+            <div class="glass-card card-pad-md" style="margin-top:32px">
+                <p class="label">AXIIOM</p>
+                <h3 style="font-size:1.15rem;margin:8px 0 10px">Разрабатываем финтех-продукты и ИИ-решения</h3>
+                <p style="margin:0 0 14px">Сайты, мобильные приложения, платёжные интеграции и внедрение ИИ — от стратегии до поддержки.</p>
+                <p style="margin:0"><a class="link-accent" href="https://axiiom.ru/">Перейти на axiiom.ru →</a> &nbsp;·&nbsp; <a class="link-accent" href="https://axiiom.ru/#contact">Обсудить проект</a></p>
+            </div>
+            <nav class="tb-nav"><a href="/textbook/">Содержание</a><a href="/textbook/vvedenie/">← Введение</a><a href="/textbook/glava-2-biologicheskie-neirony/">Глава 2. Биологические нейроны и их математические модели →</a></nav>
+        </div>
+    </div>
+</section>
+</main>
+<footer class="footer">
+    <div class="container">
+        <div id="footerCopy"></div>
+    </div>
+</footer>
+<script src="/config.js?v=20261110"></script>
+<script src="/nav.js?v=20261110"></script>
+<script>Nav.init({ cta: true, breadcrumbs: true });</script>
+<script src="/theme.js?v=20261110"></script>
+<script>
+(function() {
+
+    var header = document.getElementById('header');
+    window.addEventListener('scroll', function() {
+        header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+})();
+</script>
+<script src="/metrika.js?v=20261110" defer></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
+
+  <script src="/preloader.js?v=20261110"></script>
+
+<script>
+(function() {
+  var t = document.getElementById('navToggle');
+  var o = document.getElementById('navOverlay');
+  if (!t || !o) return;
+  t.addEventListener('click', function(e) {
+    e.stopPropagation();
+    o.classList.toggle('open');
+    t.classList.toggle('active');
+    document.body.style.overflow = o.classList.contains('open') ? 'hidden' : '';
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+    <script>try{var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+    <title>Глава 8. Философия и этика ИИ | AXIIOM</title>
+    <meta name="description" content="Лимиты картезианской парадигмы, может ли машина мыслить, психические явления и мозг, нарушения мышления, этика ИИ и кодекс разработчика.">
+    <link rel="canonical" href="https://axiiom.ru/textbook/glava-8-filosofiya-etika/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://axiiom.ru/textbook/glava-8-filosofiya-etika/">
+    <meta property="og:title" content="Глава 8. Философия и этика ИИ | AXIIOM">
+    <meta property="og:description" content="Лимиты картезианской парадигмы, может ли машина мыслить, психические явления и мозг, нарушения мышления, этика ИИ и кодекс разработчика.">
+    <meta property="og:image" content="https://axiiom.ru/og/textbook/glava-8-filosofiya-etika.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="AXIIOM">
+    <meta property="article:published_time" content="2026-06-10">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://axiiom.ru/textbook/glava-8-filosofiya-etika/">
+    <meta name="twitter:title" content="Глава 8. Философия и этика ИИ | AXIIOM">
+    <meta name="twitter:description" content="Лимиты картезианской парадигмы, может ли машина мыслить, психические явления и мозг, нарушения мышления, этика ИИ и кодекс разработчика.">
+    <meta name="twitter:image" content="https://axiiom.ru/og/textbook/glava-8-filosofiya-etika.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Глава 8. Философские и этические аспекты ИИ",
+      "description": "Лимиты картезианской парадигмы, может ли машина мыслить, психические явления и мозг, нарушения мышления, этика ИИ и кодекс разработчика.",
+      "datePublished": "2026-11-10",
+      "dateModified": "2026-11-10",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Organization",
+        "name": "AXIIOM",
+        "url": "https://axiiom.ru/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "AXIIOM",
+        "url": "https://axiiom.ru/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://axiiom.ru/textbook/glava-8-filosofiya-etika/"
+      },
+      "image": "https://axiiom.ru/og/textbook/glava-8-filosofiya-etika.png"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://axiiom.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Учебник по ИИ",
+          "item": "https://axiiom.ru/textbook/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Глава 8. Философские и этические аспекты ИИ",
+          "item": "https://axiiom.ru/textbook/glava-8-filosofiya-etika/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+    <link rel="stylesheet" href="/styles.css?v=20261110">
+      <link rel="stylesheet" href="/preloader.css?v=20261110">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+
+<style>
+  .tb-code { background: var(--clr-surface, #14141c); border: 1px solid var(--clr-border, #2a2a36);
+             border-radius: 12px; padding: 16px 18px; margin: 18px 0; overflow-x: auto;
+             font: 500 .95rem/1.7 ui-monospace, SFMono-Regular, Menlo, monospace;
+             color: var(--clr-heading, #f2f2f7); }
+  .tb-source { font-size: .85rem; color: var(--clr-muted, #9a9aa8); border-left: 2px solid var(--clr-border, #2a2a36);
+               padding-left: 12px; margin: 18px 0; }
+  .tb-note { background: rgba(120, 120, 255, .08); border: 1px solid var(--clr-border, #2a2a36);
+             border-radius: 12px; padding: 16px 18px; margin: 22px 0; }
+  .tb-note h4 { margin: 0 0 8px; font-size: .95rem; letter-spacing: .04em; text-transform: uppercase;
+                color: var(--clr-muted, #9a9aa8); }
+  .article-wrap table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: .92rem; }
+  .article-wrap th, .article-wrap td { border: 1px solid var(--clr-border, #2a2a36);
+                                       padding: 9px 11px; text-align: left; vertical-align: top; }
+  .article-wrap th { background: rgba(255,255,255,.04); font-weight: 600; }
+  .tb-nav { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;
+            margin: 36px 0 0; padding-top: 20px; border-top: 1px solid var(--clr-border, #2a2a36); }
+  .tb-nav a { font-size: .92rem; }
+  .tb-toc { margin: 8px 0 0; padding-left: 20px; }
+  .tb-toc li { margin: 7px 0; }
+</style>
+</head>
+<body><noscript><div><img src="https://mc.yandex.ru/watch/109391253" style="position:absolute;left:-9999px" alt=""></div></noscript>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
+<div id="preloader">
+<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<900){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},900-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})();setTimeout(function(){var q=document.getElementById('preloader');if(q){q.classList.add('hidden');setTimeout(function(){q.classList.add('hidden-done')},500)}},2500)/*preloader-fallback*/</script>
+  <svg class="preloader-svg" viewBox="0 0 36 36" width="80" height="80">
+    <rect class="pr1" x="2" y="2" width="14" height="14" rx="2"/>
+    <rect class="pr2" x="20" y="2" width="14" height="14" rx="2"/>
+    <rect class="pr3" x="2" y="20" width="14" height="14" rx="2"/>
+    <rect class="pr4" x="20" y="20" width="14" height="14" rx="2"/>
+    <circle class="pc" cx="27" cy="27" r="3"/>
+  </svg>
+</div>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<main id="main">
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                    <rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/>
+                </svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"></div>
+</nav>
+<section class="article-page">
+    <div class="container">
+        <div class="article-wrap">
+            <span class="art-date">Учебник · 9 из 9</span>
+            <h1>Глава 8. Философские и этические аспекты ИИ</h1>
+            <div>
+<h2>8.1. Лимиты картезианской парадигмы причинно-следственной связи (Неверов)</h2>
+ <p>Картезианская парадигма причинно-следственной связи считается её сторонниками единственной материалистической научной парадигмой, основой подлинно научной методологии. При этом не делается попыток выяснить пределы её применимости, полагается, что никаких пределов нет.</p>
+ <p>А.С. Неверов пытается показать, что картезианская парадигма «причинно-следственной связи» предполагает ограничения её научного, материалистического, объективного применения заведомо, в силу её самой.</p>
+ <p>Основной довод: в картезианской парадигме и «следствие и причина», и «связь» — это одно и то же, разные точки зрения на одно и то же. Однако в результате мы рассчитываем получить полную картезианскую модель — различить между собой «следствие», «причину» и «связь» следствия с причиной.</p>
+ <p>Получить полную картезианскую модель в рамках одной конкретной ПСС невозможно. Возможно получить что-нибудь одно: или «следствие» с «причиной», или «связь» между ними.</p>
+ <p>Таким образом, картезианская парадигма, претендуя быть научной, должна разделить две разные цели:</p>
+ <ul>
+ <li>установления фактов, явлений, событий;</li>
+ <li>установления закономерностей.</li>
+ </ul>
+ <p>Именно в разнице целей, обеспечить достижение которых должна научная парадигма, кроются лимиты картезианства.</p>
+ <p class="tb-source">Источник: Неверов А.С., «Лимиты картезианской парадигмы причинно-следственной связи» (article_0100.md, частично). Также в Главе 1, раздел 1.7.</p>
+
+ <h2>8.2. Может ли машина мыслить?</h2>
+ <p>На 14-м семинаре А.С. Потапов выступил с докладом «Возможна ли алгоритмическая реализация интеллекта, и каковы ее ограничения». Обсуждались ключевые вопросы:</p>
+ <ul>
+ <li><strong>Хьюберт Дрейфус</strong> — «Алхимия и искусственный интеллект», «Чего не могут вычислительные машины». Верно ли его мнение?</li>
+ <li><strong>Роже Пенроуз</strong> — «Новый ум короля», «Тени разума». Насколько прав Пенроуз?</li>
+ <li><strong>Джон Сёрл</strong> — парадокс «Китайская комната»: манипуляция символами не равна пониманию. О чем говорит этот парадокс?</li>
+ <li><strong>Теорема Гёделя</strong> — накладывает ли она какие-то ограничения на возможности алгоритмического ИИ?</li>
+ <li>Нужна ли новая математика для создания ИИ?</li>
+ </ul>
+ <p class="tb-source">Источник: Потапов А.С., 14-й семинар (article_0075.md). Также в Главе 1, раздел 1.6.</p>
+
+ <h2>8.3. Психические явления и мозг (Меклер)</h2>
+ <p>На 28-м семинаре А.А. Меклер выступил с докладом «Психические явления как отражение системных мозговых процессов». Подход к пониманию сознания через объективные нейрофизиологические механизмы.</p>
+ <p class="tb-source">Источник: Меклер А.А., 28-й семинар (article_0113.md).</p>
+
+ <h2>8.4. Нарушения мышления (Чередникова)</h2>
+ <p>Информационная теория мышления Л.М. Веккера применима к пониманию нарушений при шизофрении и органических заболеваниях мозга — показывает границы когнитивной обработки информации.</p>
+ <p>Материалы семинаров 37 и 39 доступны в архиве:</p>
+ <ul>
+ <li>seminarAI_37_schizo.ppt — презентация семинара 37 (Чередникова)</li>
+ <li>seminarAI_39_schizo2.wma — аудиозапись семинара 39 (Чередникова)</li>
+ </ul>
+ <p class="tb-source">Источник: архив файлов семинаров (категория «Семинарные материалы»).</p>
+
+ <h2>8.5. Миф теории информации (Соломатин)</h2>
+ <p>Критический анализ теории информации с позиций физиологии высшей нервной деятельности — теория информации не исчерпывает все аспекты обработки информации мозгом.</p>
+ <p>Материалы семинара 30 доступны в архиве:</p>
+ <ul>
+ <li>seminarAI_30_inform_myth.wma — аудиозапись семинара 30 (Соломатин)</li>
+ </ul>
+ <p class="tb-source">Источник: архив файлов семинаров (категория «Семинарные материалы»).</p>
+
+ <h2>8.6. Специализация программ и интерпретативное поведение (Худобахшов)</h2>
+ <p>Материалы семинара 40 доступны в архиве:</p>
+ <ul>
+ <li>seminarAI_40_spec_ai.pdf — презентация семинара 40 (Худобахшов)</li>
+ </ul>
+ <p class="tb-source">Источник: архив файлов семинаров (категория «Семинарные материалы»).</p>
+
+ <h2>8.7. Аффект, ошибки и конфликты (Четвериков)</h2>
+ <p>Материалы семинара 44 доступны в архиве:</p>
+ <ul>
+ <li>seminarAI_44_affect.pdf — презентация семинара 44 (Четвериков)</li>
+ </ul>
+ <p class="tb-source">Источник: архив файлов семинаров (категория «Семинарные материалы»).</p>
+
+ <h2>8.8. Этика и ответственность в разработке ИИ</h2>
+ <p>Разработка интеллектуальных систем несет этическую ответственность перед обществом. Ключевые вопросы:</p>
+ <ul>
+ <li>Безопасность ИИ — как гарантировать, что система не причинит вред?</li>
+ <li>Выравнивание (alignment) — как обеспечить соответствие целей ИИ ценностям человека?</li>
+ <li>Ответственность — кто несет ответственность за решения, принятые автономной системой?</li>
+ <li>Прозрачность — можно ли объяснить решения нейросети?</li>
+ </ul>
+ <div class="tb-note"><h4>Этический кодекс разработчика ИИ</h4>
+ <ul>
+ <li>Система должна быть безопасной для людей и общества.</li>
+ <li>Цели системы должны быть понятны и согласованы с человеческими ценностями.</li>
+ <li>Решения системы должны быть объяснимы и аудируемы.</li>
+ <li>Разработчик несет ответственность за последствия применения системы.</li>
+ </ul></div>
+
+ <h2>8.9. Вывод главы</h2>
+ <div class="tb-note"><h4>Главный вывод</h4>
+ <p>Философские основания ИИ требуют осознания лимитов картезианской парадигмы, ограничений алгоритмического интеллекта (Дрейфус, Пенроуз, Сёрл, Гёдель), связи психических явлений с мозговыми процессами (Меклер) и этической ответственности разработчиков. Теория информации не исчерпывает все аспекты обработки информации мозгом (Соломатин).</p></div>
+ <p class="tb-source">Источник: статьи Неверова (article_0100.md), Потапова (article_0075.md), Меклера (article_0113.md), файлы семинаров из архива.</p>
+            </div>
+            <div class="glass-card card-pad-md" style="margin-top:32px">
+                <p class="label">AXIIOM</p>
+                <h3 style="font-size:1.15rem;margin:8px 0 10px">Разрабатываем финтех-продукты и ИИ-решения</h3>
+                <p style="margin:0 0 14px">Сайты, мобильные приложения, платёжные интеграции и внедрение ИИ — от стратегии до поддержки.</p>
+                <p style="margin:0"><a class="link-accent" href="https://axiiom.ru/">Перейти на axiiom.ru →</a> &nbsp;·&nbsp; <a class="link-accent" href="https://axiiom.ru/#contact">Обсудить проект</a></p>
+            </div>
+            <nav class="tb-nav"><a href="/textbook/">Содержание</a><a href="/textbook/glava-7-instrumenty/">← Глава 7. Инструменты разработки ИИ</a><a href="/textbook/materialy/">Материалы →</a></nav>
+        </div>
+    </div>
+</section>
+</main>
+<footer class="footer">
+    <div class="container">
+        <div id="footerCopy"></div>
+    </div>
+</footer>
+<script src="/config.js?v=20261110"></script>
+<script src="/nav.js?v=20261110"></script>
+<script>Nav.init({ cta: true, breadcrumbs: true });</script>
+<script src="/theme.js?v=20261110"></script>
+<script>
+(function() {
+
+    var header = document.getElementById('header');
+    window.addEventListener('scroll', function() {
+        header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+})();
+</script>
+<script src="/metrika.js?v=20261110" defer></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
+
+  <script src="/preloader.js?v=20261110"></script>
+
+<script>
+(function() {
+  var t = document.getElementById('navToggle');
+  var o = document.getElementById('navOverlay');
+  if (!t || !o) return;
+  t.addEventListener('click', function(e) {
+    e.stopPropagation();
+    o.classList.toggle('open');
+    t.classList.toggle('active');
+    document.body.style.overflow = o.classList.contains('open') ? 'hidden' : '';
+  });
+})();
+</script>
+</body>
+</html>

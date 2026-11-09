@@ -132,6 +132,7 @@ def build_page_registry(nav_path):
     reg["/demo/app"] = {"type": "demo-index", "name": "Демо"}
     reg["/projects"] = {"type": "projects-index", "name": "Портфолио"}
     reg["/help"] = {"type": "help-index", "name": "Малому бизнесу"}
+    reg["/textbook"] = {"type": "textbook-index", "name": "Учебник по ИИ"}
 
     for tp in tree_pages:
         url = tp["path"]
@@ -151,6 +152,8 @@ def build_page_registry(nav_path):
             ptype = "docs"
         elif parent == "/blog" or parent_name == "Статьи":
             ptype = "blog"
+        elif parent == "/textbook":
+            ptype = "textbook"
         elif parent == "/demo/app":
             ptype = "demo-sub"
         elif parent == "/help":
@@ -185,6 +188,8 @@ def build_page_registry(nav_path):
             ptype = "projects-index"
         elif url == "/help":
             ptype = "help-index"
+        elif url == "/textbook":
+            ptype = "textbook-index"
         elif url.startswith("/help/"):
             ptype = "help"
         elif url == "/calculator":
@@ -572,6 +577,8 @@ def check_content_marker(content, page_type):
         "tool-sub":       r'tool-page',
         "tool-index":     r'tools-hero',
         "blog":           r'article-page',
+        "textbook":       r'article-page',
+        "textbook-index": r'article-page',
         "blog-index":     r'blog',
         "docs":           r'docs-article|<section',
         "docs-index":     r'<section',

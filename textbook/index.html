@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+    <script>try{var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+    <title>Учебник по искусственному интеллекту | AXIIOM</title>
+    <meta name="description" content="Открытый учебник по ИИ: модели нейрона, нейронные сети, память и обучение, распознавание образов, робототехника, этика. Восемь глав, глоссарий, вопросы.">
+    <link rel="canonical" href="https://axiiom.ru/textbook/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://axiiom.ru/textbook/">
+    <meta property="og:title" content="Учебник по искусственному интеллекту | AXIIOM">
+    <meta property="og:description" content="Открытый учебник по ИИ: модели нейрона, нейронные сети, память и обучение, распознавание образов, робототехника, этика. Восемь глав, глоссарий, вопросы.">
+    <meta property="og:image" content="https://axiiom.ru/og/textbook/index.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="AXIIOM">
+    <meta property="article:published_time" content="2026-06-10">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://axiiom.ru/textbook/">
+    <meta name="twitter:title" content="Учебник по искусственному интеллекту | AXIIOM">
+    <meta name="twitter:description" content="Открытый учебник по ИИ: модели нейрона, нейронные сети, память и обучение, распознавание образов, робототехника, этика. Восемь глав, глоссарий, вопросы.">
+    <meta name="twitter:image" content="https://axiiom.ru/og/textbook/index.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Учебник по искусственному интеллекту",
+      "description": "Открытый учебник по ИИ: модели нейрона, нейронные сети, память и обучение, распознавание образов, робототехника, этика. Восемь глав, глоссарий, вопросы.",
+      "datePublished": "2026-11-10",
+      "dateModified": "2026-11-10",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Organization",
+        "name": "AXIIOM",
+        "url": "https://axiiom.ru/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "AXIIOM",
+        "url": "https://axiiom.ru/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://axiiom.ru/textbook/"
+      },
+      "image": "https://axiiom.ru/og/textbook/index.png"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://axiiom.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Учебник по ИИ",
+          "item": "https://axiiom.ru/textbook/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Учебник по искусственному интеллекту",
+          "item": "https://axiiom.ru/textbook/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+    <link rel="stylesheet" href="/styles.css?v=20261110">
+      <link rel="stylesheet" href="/preloader.css?v=20261110">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+
+<style>
+  .tb-code { background: var(--clr-surface, #14141c); border: 1px solid var(--clr-border, #2a2a36);
+             border-radius: 12px; padding: 16px 18px; margin: 18px 0; overflow-x: auto;
+             font: 500 .95rem/1.7 ui-monospace, SFMono-Regular, Menlo, monospace;
+             color: var(--clr-heading, #f2f2f7); }
+  .tb-source { font-size: .85rem; color: var(--clr-muted, #9a9aa8); border-left: 2px solid var(--clr-border, #2a2a36);
+               padding-left: 12px; margin: 18px 0; }
+  .tb-note { background: rgba(120, 120, 255, .08); border: 1px solid var(--clr-border, #2a2a36);
+             border-radius: 12px; padding: 16px 18px; margin: 22px 0; }
+  .tb-note h4 { margin: 0 0 8px; font-size: .95rem; letter-spacing: .04em; text-transform: uppercase;
+                color: var(--clr-muted, #9a9aa8); }
+  .article-wrap table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: .92rem; }
+  .article-wrap th, .article-wrap td { border: 1px solid var(--clr-border, #2a2a36);
+                                       padding: 9px 11px; text-align: left; vertical-align: top; }
+  .article-wrap th { background: rgba(255,255,255,.04); font-weight: 600; }
+  .tb-nav { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;
+            margin: 36px 0 0; padding-top: 20px; border-top: 1px solid var(--clr-border, #2a2a36); }
+  .tb-nav a { font-size: .92rem; }
+  .tb-toc { margin: 8px 0 0; padding-left: 20px; }
+  .tb-toc li { margin: 7px 0; }
+</style>
+</head>
+<body><noscript><div><img src="https://mc.yandex.ru/watch/109391253" style="position:absolute;left:-9999px" alt=""></div></noscript>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
+<div id="preloader">
+<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<900){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},900-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})();setTimeout(function(){var q=document.getElementById('preloader');if(q){q.classList.add('hidden');setTimeout(function(){q.classList.add('hidden-done')},500)}},2500)/*preloader-fallback*/</script>
+  <svg class="preloader-svg" viewBox="0 0 36 36" width="80" height="80">
+    <rect class="pr1" x="2" y="2" width="14" height="14" rx="2"/>
+    <rect class="pr2" x="20" y="2" width="14" height="14" rx="2"/>
+    <rect class="pr3" x="2" y="20" width="14" height="14" rx="2"/>
+    <rect class="pr4" x="20" y="20" width="14" height="14" rx="2"/>
+    <circle class="pc" cx="27" cy="27" r="3"/>
+  </svg>
+</div>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<main id="main">
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                    <rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/>
+                </svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"></div>
+</nav>
+<section class="article-page">
+    <div class="container">
+        <div class="article-wrap">
+            <span class="art-date">Открытый учебник</span>
+            <h1>Учебник по искусственному интеллекту</h1>
+            <div>
+<p>Учебник по искусственному интеллекту: от математических моделей биологического нейрона до когнитивных архитектур, систем распознавания образов и группового управления роботами. Материал собран из научных семинаров и публикаций исследовательской группы, авторство указано в каждом разделе.</p>
+<p>Изложение охватывает четыре линии: нейрофизиологическую (модели нейрона, импульсные потоки, модели выживания), когнитивную (память, обучение, когнитивные архитектуры), прикладную (распознавание образов, автоматное программирование, координация роботов, инструменты разработки) и философско-методологическую (границы алгоритмической реализуемости интеллекта, этика ИИ).</p>
+<h2>Содержание</h2>
+<ul class="tb-toc">
+        <li><a href="/textbook/vvedenie/">Введение</a></li>
+        <li><a href="/textbook/glava-1-teoreticheskie-osnovy/">Глава 1. Теоретические основы искусственного интеллекта</a></li>
+        <li><a href="/textbook/glava-2-biologicheskie-neirony/">Глава 2. Биологические нейроны и их математические модели</a></li>
+        <li><a href="/textbook/glava-3-neironnye-seti/">Глава 3. Нейронные сети и архитектуры памяти</a></li>
+        <li><a href="/textbook/glava-4-obuchenie-pamyat/">Глава 4. Обучение, память и ассоциации</a></li>
+        <li><a href="/textbook/glava-5-raspoznavanie-obrazov/">Глава 5. Распознавание образов и компьютерное зрение</a></li>
+        <li><a href="/textbook/glava-6-robototehnika/">Глава 6. Робототехника и автоматное программирование</a></li>
+        <li><a href="/textbook/glava-7-instrumenty/">Глава 7. Инструменты разработки ИИ</a></li>
+        <li><a href="/textbook/glava-8-filosofiya-etika/">Глава 8. Философские и этические аспекты ИИ</a></li>
+        <li><a href="/textbook/materialy/">Материалы: литература, вопросы, глоссарий</a></li>
+</ul>
+<h2>Как читать</h2>
+<p>Главы независимы, но выстроены в логическом порядке: сначала формальные основы и модели нейрона, затем сети и память, потом прикладные разделы, и в конце — философия и этика. Для быстрого входа начните с <a href="/textbook/glava-2-biologicheskie-neirony/">главы 2</a> — там разобрана модель Маккаллока — Питтса и её ограничения.</p>
+<h2>Авторы материалов</h2>
+<p>А.С. Потапов, А.В. Бахшиев, В.А. Ляховецкий, В.Ф. Соломатин, А.С. Неверов, А.А. Шалыто, В.В. Александров, А. Редозубов, Д. Ерусалимчик, М.В. Безобразов, Т.В. Чередникова, А.А. Меклер и другие исследователи.</p>
+            </div>
+            <div class="glass-card card-pad-md" style="margin-top:32px">
+                <p class="label">AXIIOM</p>
+                <h3 style="font-size:1.15rem;margin:8px 0 10px">Разрабатываем финтех-продукты и ИИ-решения</h3>
+                <p style="margin:0 0 14px">Сайты, мобильные приложения, платёжные интеграции и внедрение ИИ — от стратегии до поддержки.</p>
+                <p style="margin:0"><a class="link-accent" href="https://axiiom.ru/">Перейти на axiiom.ru →</a> &nbsp;·&nbsp; <a class="link-accent" href="https://axiiom.ru/#contact">Обсудить проект</a></p>
+            </div>
+            <nav class="tb-nav"><a href="/textbook/vvedenie/">С первой главы →</a></nav>
+        </div>
+    </div>
+</section>
+</main>
+<footer class="footer">
+    <div class="container">
+        <div id="footerCopy"></div>
+    </div>
+</footer>
+<script src="/config.js?v=20261110"></script>
+<script src="/nav.js?v=20261110"></script>
+<script>Nav.init({ cta: true, breadcrumbs: true });</script>
+<script src="/theme.js?v=20261110"></script>
+<script>
+(function() {
+
+    var header = document.getElementById('header');
+    window.addEventListener('scroll', function() {
+        header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+})();
+</script>
+<script src="/metrika.js?v=20261110" defer></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
+
+  <script src="/preloader.js?v=20261110"></script>
+
+<script>
+(function() {
+  var t = document.getElementById('navToggle');
+  var o = document.getElementById('navOverlay');
+  if (!t || !o) return;
+  t.addEventListener('click', function(e) {
+    e.stopPropagation();
+    o.classList.toggle('open');
+    t.classList.toggle('active');
+    document.body.style.overflow = o.classList.contains('open') ? 'hidden' : '';
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" equations="Открытый академический учебник по искусственному интеллекту: теоретические основы, нейроны, нейросети, память, обучение, компьютерное зрение, робототехника, философские и этические аспекты. На основе открытых исследований и семинарских материалов с указанием авторства.">
+<meta name="keywords" content="искусственный интеллект, учебник, нейроны, нейросети, память, обучение, компьютерное зрение, робототехника, этика ИИ, 자동ное программирование, академический">
+<meta name="author" content="Открытый учебник на базе первоисточников исследований и семинаров">
+<meta name="language" content="ru">
+<link rel="canonical" href="index.html">
+<title>Искусственный интеллект: от биологических нейронов к когнитивным системам — учебник</title>
+<style>
+/* ============================================================
+ Дизайн-система: академический учебник
+ Элегантная типографика, приглушённая палитра, минимализм
+ ============================================================ */
+:root {
+ /* Светлая тема — академическая */
+ --bg-page: #fafaf7;
+ --bg-surface: #ffffff;
+ --bg-sidebar: #f5f3f0;
+ --bg-right: #f2f0ec;
+ --text-main: #1a1817;
+ --text-muted: #5c5752;
+ --text-link: #3d4a5c;
+ --border: #d8d4ce;
+ --accent: #4a5568;
+ --accent-hover: #2d3440;
+ --code-bg: #f1eee9;
+ --quote-bg: #f4f2ee;
+ --quote-border: #8c8174;
+ --nav-hover: #efece8;
+ --nav-active: #e8e4dd;
+ --shadow: none;
+ --font-serif: "Cambria", "Georgia", "Times New Roman", "Noto Serif", serif;
+ --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+ --font-mono: "Courier New", "Liberation Mono", monospace;
+ --radius: 0;
+ --line-height-body: 1.75;
+ --line-height-tight: 1.4;
+}
+
+[data-theme="dark"] {
+ --bg-page: #121210;
+ --bg-surface: #1a1816;
+ --bg-sidebar: #1a1816;
+ --bg-right: #1a1816;
+ --text-main: #e7e2da;
+ --text-muted: #9c9489;
+ --text-link: #b8c0c9;
+ --border: #3a3632;
+ --accent: #b8c0c9;
+ --accent-hover: #d1d8e0;
+ --code-bg: #252220;
+ --quote-bg: #1f1d1a;
+ --quote-border: #5c544a;
+ --nav-hover: #252220;
+ --nav-active: #2d2a26;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+ font-family: var(--font-serif);
+ background: var(--bg-page);
+ color: var(--text-main);
+ line-height: var(--line-height-body);
+ transition: background 0.3s, color 0.3s;
+}
+a { color: var(--text-link); text-decoration: none; border-bottom: 1px solid transparent; }
+a:hover { color: var(--accent-hover); border-bottom-color: var(--accent-hover); }
+strong { color: var(--text-main); font-weight: 600; }
+
+h1 {
+ font-family: var(--font-serif);
+ font-size: 2rem;
+ margin: 2rem 0 1rem;
+ border-bottom: 2px solid var(--border);
+ padding-bottom: 0.5rem;
+ font-weight: 700;
+ letter-spacing: -0.01em;
+ color: var(--text-main);
+}
+h2 {
+ font-family: var(--font-serif);
+ font-size: 1.5rem;
+ margin: 2.2rem 0 0.9rem;
+ border-bottom: 1px solid var(--border);
+ padding-bottom: 0.4rem;
+ font-weight: 600;
+ color: var(--text-main);
+}
+h3 {
+ font-family: var(--font-serif);
+ font-size: 1.25rem;
+ margin: 1.8rem 0 0.8rem;
+ font-weight: 600;
+ color: var(--text-main);
+}
+h4 {
+ font-family: var(--font-sans);
+ font-size: 1rem;
+ margin: 1.4rem 0 0.6rem;
+ font-weight: 500;
+ color: var(--text-muted);
+ text-transform: uppercase;
+ letter-spacing: 0.05em;
+}
+p { margin: 0.85rem 0; text-align: justify; }
+ul, ol { margin: 0.85rem 0 0.85rem 1.75rem; }
+li { margin: 0.35rem 0; }
+blockquote {
+ margin: 1.4rem 0;
+ padding: 1rem 1.5rem;
+ border-left: 3px solid var(--quote-border);
+ background: var(--quote-bg);
+ font-style: italic;
+ color: var(--text-main);
+ font-size: 0.95em;
+}
+.citation {
+ font-family: var(--font-sans);
+ font-size: 0.78rem;
+ color: var(--text-muted);
+ font-style: normal;
+ margin-top: 0.3rem;
+ display: block;
+ text-align: left;
+}
+.code-block {
+ background: var(--code-bg);
+ border: 1px solid var(--border);
+ border-radius: var(--radius);
+ padding: 1rem 1.25rem;
+ margin: 1.25rem 0;
+ overflow-x: auto;
+ font-family: var(--font-mono);
+ font-size: 0.85em;
+ line-height: 1.55;
+}
+.key-box {
+ background: var(--quote-bg);
+ border: 1px solid var(--border);
+ border-left: 4px solid var(--accent);
+ padding: 1rem 1.25rem;
+ margin: 1.25rem 0;
+ border-radius: var(--radius);
+}
+.key-box h4 { margin-top: 0; color: var(--text-main); font-size: 0.95rem; text-transform: none; letter-spacing: normal; }
+.question-box {
+ background: var(--bg-page);
+ border: 1px solid var(--border);
+ border-radius: var(--radius);
+ padding: 1.1rem 1.25rem;
+ margin: 1.25rem 0;
+}
+.question-box h4 { margin-top: 0; color: var(--text-main); font-size: 0.95rem; text-transform: none; letter-spacing: normal; }
+.reference-item {
+ margin: 0.55rem 0;
+ padding: 0.65rem 0.9rem;
+ background: var(--bg-surface);
+ border: 1px solid var(--border);
+ border-radius: var(--radius);
+ font-size: 0.88em;
+ text-align: left;
+}
+.reference-item::before { content: "[" counter(ref) "] "; counter-increment: ref; font-weight: 700; color: var(--accent); }
+.glossary-item {
+ margin: 0.45rem 0;
+ padding: 0.55rem 0;
+ border-bottom: 1px solid var(--border);
+ font-size: 0.92em;
+}
+.glossary-item:last-child { border-bottom: none; }
+.glossary-item .term {
+ font-weight: 600;
+ color: var(--accent);
+ font-family: var(--font-sans);
+ font-size: 0.88em;
+}
+.glossary-item .term::after { content: " — "; font-weight: 400; color: var(--text-muted); }
+.status-badge {
+ font-family: var(--font-sans);
+ font-size: 0.7rem;
+ padding: 0.05em 0.3em;
+ border-radius: 1px;
+ background: var(--border);
+ color: var(--text-muted);
+ margin-left: 0.35em;
+ font-weight: 500;
+ border: 1px solid var(--border);
+}
+.status-complete { background: #e8f0e8; color: #2d5a2d; border-color: #a8c0a8; }
+.status-partial { background: #f7ede0; color: #7a5a1a; border-color: #d9c39a; }
+
+/* Переключатель темы — встроен в заголовок */
+.theme-toggle {
+ background: transparent;
+ border: 1px solid var(--border);
+ color: var(--text-muted);
+ padding: 0.4em 0.8em;
+ border-radius: var(--radius);
+ cursor: pointer;
+ font-family: var(--font-sans);
+ font-size: 0.75rem;
+ margin-top: 0.8rem;
+ transition: background 0.2s, border-color 0.2s, color 0.2s;
+ display: inline-block;
+}
+.theme-toggle:hover { border-color: var(--accent-hover); color: var(--accent-hover); background: var(--nav-hover); }
+
+/* Заголовок */
+header {
+ background: var(--bg-sidebar);
+ border-bottom: 1px solid var(--border);
+ padding: 1.75rem 2rem;
+ z-index: 100;
+}
+header h1 { font-size: 1.75rem; margin: 0; border: none; font-weight: 700; letter-spacing: -0.01em; }
+header p.subtitle { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.45rem; font-family: var(--font-sans); }
+
+/* Макет в три колонки — надёжный Flexbox */
+.wrapper {
+ display: flex;
+ flex-direction: column;
+ min-height: 100vh;
+ max-width: 1500px;
+ margin: 0 auto;
+ gap: 0;
+}
+.top-row {
+ display: flex;
+ gap: 0;
+ flex: 1;
+ min-height: 0;
+}
+nav.left {
+ flex: 0 0 250px;
+ background: var(--bg-sidebar);
+ border-right: 1px solid var(--border);
+ padding: 1.75rem 1.25rem;
+ overflow-y: auto;
+ position: sticky;
+ top: 0;
+ height: calc(100vh - 140px);
+ box-sizing: border-box;
+ min-height: 0;
+}
+main.center {
+ flex: 1;
+ background: var(--bg-surface);
+ padding: 2.5rem 3.5rem;
+ overflow-y: auto;
+ border-left: 1px solid var(--border);
+ border-right: 1px solid var(--border);
+ box-sizing: border-box;
+ min-height: 0;
+}
+aside.right {
+ flex: 0 0 270px;
+ background: var(--bg-right);
+ border-left: 1px solid var(--border);
+ padding: 1.75rem 1.25rem;
+ overflow-y: auto;
+ position: sticky;
+ top: 0;
+ height: calc(100vh - 140px);
+ box-sizing: border-box;
+ font-size: 0.86rem;
+ min-height: 0;
+}
+
+/* Аннотация */
+.abstract {
+ background: var(--bg-page);
+ border: 1px solid var(--border);
+ border-radius: var(--radius);
+ padding: 1.75rem;
+ margin: 1.75rem 0;
+ font-size: 0.95em;
+}
+.abstract h3 { margin-top: 0; font-size: 1.1rem; }
+
+/* Титул */
+.title-block {
+ text-align: center;
+ padding: 3rem 0;
+ border-bottom: 2px solid var(--border);
+ margin-bottom: 2rem;
+}
+.title-block h1 { border: none; font-size: 2.6rem; margin-bottom: 1rem; font-weight: 700; letter-spacing: -0.02em; }
+.title-block .subtitle { font-family: var(--font-sans); font-size: 1.2rem; color: var(--text-muted); display: block; margin-bottom: 1.5rem; }
+.title-block .meta { font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-muted); margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1.5rem; text-align: left; max-width: 650px; margin-left: auto; margin-right: auto; }
+.title-block .meta p { margin: 0.55em 0; text-align: left; }
+
+/* Навигация слева */
+nav.left h3 {
+ font-family: var(--font-sans);
+ font-size: 0.72rem;
+ text-transform: uppercase;
+ letter-spacing: 0.12em;
+ color: var(--text-muted);
+ margin: 1.75rem 0 0.8rem;
+ padding-bottom: 0.5rem;
+ border-bottom: 1px solid var(--border);
+ font-weight: 600;
+}
+nav.left h3:first-child { margin-top: 0; border: none; }
+nav.left ul { list-style: none; padding: 0; }
+nav.left li { margin: 0.2rem 0; }
+nav.left a {
+ display: block;
+ padding: 0.5em 0.75em;
+ border-radius: var(--radius);
+ color: var(--text-main);
+ font-family: var(--font-sans);
+ font-size: 0.85rem;
+ transition: background 0.15s, color 0.15s;
+ border: 1px solid transparent;
+}
+nav.left a:hover { background: var(--nav-hover); color: var(--accent-hover); border-color: var(--border); text-decoration: none; }
+nav.left a.active { background: var(--nav-active); color: var(--accent-hover); font-weight: 600; border-color: var(--accent-hover); }
+
+/* Правая панель */
+aside.right h3 {
+ font-family: var(--font-sans);
+ font-size: 0.72rem;
+ text-transform: uppercase;
+ letter-spacing: 0.12em;
+ color: var(--text-muted);
+ margin-top: 1.75rem;
+ margin-bottom: 0.75rem;
+ border-bottom: 1px solid var(--border);
+ padding-bottom: 0.4rem;
+ font-weight: 600;
+}
+aside.right h3:first-child { margin-top: 0; border: none; }
+aside.right ul { list-style: none; padding: 0; }
+#sectionToc { max-height: 42vh; overflow-y: auto; padding-right: 0.3em; }
+aside.right li { margin: 0.4rem 0; font-size: 0.84rem; }
+aside.right a { color: var(--text-link); border-bottom: 1px solid transparent; }
+aside.right a:hover { color: var(--accent-hover); border-bottom-color: var(--accent-hover); }
+
+aside.right .quote {
+ background: var(--quote-bg);
+ border-left: 3px solid var(--quote-border);
+ padding: 0.9em 1.1em;
+ margin: 1.1em 0;
+ border-radius: var(--radius);
+ font-style: italic;
+ font-size: 0.84em;
+ color: var(--text-main);
+}
+aside.right .quote .author {
+ display: block;
+ margin-top: 0.55em;
+ font-style: normal;
+ font-weight: 600;
+ font-size: 0.78em;
+ color: var(--text-muted);
+ font-family: var(--font-sans);
+}
+
+aside.right .footnotes h3 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin-top: 1.75rem; margin-bottom: 0.75rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; font-weight: 600; }
+aside.right .footnote {
+ font-family: var(--font-sans);
+ font-size: 0.78rem;
+ color: var(--text-muted);
+ margin: 0.7em 0;
+ padding-left: 0.9em;
+ border-left: 2px solid var(--border);
+ line-height: 1.5;
+}
+
+/* Таблицы — академический стиль */
+table {
+ width: 100%;
+ border-collapse: collapse;
+ margin: 1.1rem 0;
+ font-size: 0.9em;
+}
+table th {
+ text-align: left;
+ padding: 0.65rem 0.85rem;
+ border-bottom: 2px solid var(--border);
+ font-weight: 600;
+ color: var(--text-main);
+ font-family: var(--font-sans);
+ font-size: 0.82em;
+ text-transform: uppercase;
+ letter-spacing: 0.04em;
+}
+table td {
+ padding: 0.65rem 0.85rem;
+ border-bottom: 1px solid var(--border);
+ vertical-align: top;
+}
+table tr:last-child td { border-bottom: none; }
+
+/* Адаптив */
+@media (max-width: 1024px) {
+ .top-row {
+ flex-direction: column;
+ height: auto;
+ }
+ nav.left, aside.right {
+ position: static;
+ height: auto;
+ border: none;
+ overflow-y: visible;
+ min-height: auto;
+ }
+ nav.left { border-bottom: 1px solid var(--border); }
+ aside.right { border-top: 1px solid var(--border); }
+ main.center {
+ border-left: none;
+ border-right: none;
+ padding: 1.75rem 2rem;
+ }
+}
+
+/* Анкор сноски */
+.footnote-anchor {
+ font-family: var(--font-sans);
+ font-size: 0.7em;
+ vertical-align: super;
+ color: var(--accent);
+ font-weight: 700;
+}
+</style>
+<!-- Open Graph -->
+<meta property="og:title" content="Искусственный интеллект: от биологических нейронов к когнитивным системам — открытый учебник">
+<meta property="og:description" content="Открытый академический учебник по ИИ: теоретические основы, нейроны, нейросети, память, обучение, компьютерное зрение, робототехника, философские и этические аспекты.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+
+<!-- Structured data: EducationalOccupation / Book -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "Искусственный интеллект: от биологических нейронов к когнитивным системам",
+  "author": {
+    "@type": "Organization",
+    "name": "Открытый учебник на базе первоисточников исследований и семинарских материалов"
+  },
+  "description": "Открытый академический учебник по искусственному интеллекту с объяснениями, формулами, таблицами и сравнениями.",
+  "inLanguage": "ru",
+  "isAccessibleForFree": true,
+  "about": {
+    "@type": "Thing",
+    "name": "Искусственный интеллект"
+  }
+}
+</script>
+</head>
+<body>
+
+<div class="wrapper">
+ <header>
+ <h1>Искусственный интеллект: от биологических нейронов к когнитивным системам</h1>
+ <p class="subtitle">Учебник академического уровня на основе открытых исследований и семинарских материалов</p>
+ <button class="theme-toggle" id="themeToggle" title="Сменить тему оформления">Тёмная тема</button>
+ </header>
+
+ <div class="top-row">
+ <nav class="left" id="leftNav">
+ <h3>Оглавление</h3>
+ <ul>
+ <li><a href="#title" class="nav-link">Титульная страница</a></li>
+ <li><a href="#abstract" class="nav-link">Аннотация</a></li>
+ <li><a href="#intro" class="nav-link">Введение</a></li>
+ <li><a href="#ch1" class="nav-link">Глава 1. Теоретические основы ИИ</a></li>
+ <li><a href="#ch2" class="nav-link">Глава 2. Биологические нейроны и их модели</a></li>
+ <li><a href="#ch3" class="nav-link">Глава 3. Нейронные сети и архитектуры памяти</a></li>
+ <li><a href="#ch4" class="nav-link">Глава 4. Обучение, память и ассоциации</a></li>
+ <li><a href="#ch5" class="nav-link">Глава 5. Распознавание образов и компьютерное зрение</a></li>
+ <li><a href="#ch6" class="nav-link">Глава 6. Робототехника и автоматное программирование</a></li>
+ <li><a href="#ch7" class="nav-link">Глава 7. Инструменты разработки</a></li>
+ <li><a href="#ch8" class="nav-link">Глава 8. Философские и этические аспекты ИИ</a></li>
+ <li><a href="#conclusion" class="nav-link">Заключение</a></li>
+ <li><a href="#references" class="nav-link">Список литературы</a></li>
+ <li><a href="#questions" class="nav-link">Контрольные вопросы</a></li>
+ <li><a href="#glossary" class="nav-link">Глоссарий терминов</a></li>
+ </ul>
+
+ </nav>
+
+ <main class="center" id="centerContent">
+
+ <!-- Титул -->
+ <section id="title">
+ <div class="title-block">
+ <h1>Искусственный интеллект: от биологических нейронов к когнитивным системам</h1>
+ <span class="subtitle">Учебник академического уровня на основе открытых исследований и семинарских материалов</span>
+ <div class="meta">
+ <p><strong>Подготовлено на базе:</strong> открытые исследования и семинарские материалы (91 статья, материалы 46 семинаров)</p>
+ <p><strong>Авторы первоисточников:</strong> А.С. Потапов, А.В. Бахшиев, В.А. Ляховецкий, В.Ф. Соломатин, А.С. Неверов, А.А. Шалыто, В.В. Александров, А. Редозубов, Д. Ерусалимчик, М.В. Безобразов, Т.В. Чередникова, А.А. Меклер и другие</p>
+ <p><strong>Формат:</strong> открытый учебник, три колонки, поддержка тёмной и светлой тем</p>
+ <p><strong>Статус:</strong> версия 1.0, опубликовано на GitHub Pages</p>
+ </div>
+ </div>
+ </section>
+
+ <!-- Аннотация -->
+ <section id="abstract">
+ <div class="abstract">
+ <h3>Аннотация</h3>
+ <p>Учебник представляет собой систематическое изложение теоретических и прикладных основ искусственного интеллекта, собранное на базе открытых исследований и семинарских материалов. Материал охватывает широкий спектр тем: от математических моделей отдельного нейрона и архитектур нейронных сетей до философских и этических аспектов создания интеллектуальных систем.</p>
+ <p>Каждая глава сопровождается ссылками на первоисточники — полные тексты статей, презентации и аудиозаписи семинаров хранятся в разделе «Архив первоисточников» этого репозитория. Учебник предназначен для студентов, исследователей и разработчиков, которые хотят получить основательное представление о теории и практике ИИ на основе отечественных и зарубежных исследований.</p>
+ </div>
+ </section>
+
+ <!-- Введение -->
+ <section id="intro">
+ <h1>Введение</h1>
+ <p>Искусственный интеллект (ИИ) — одна из наиболее быстро развивающихся и одновременно наиболее дискуссионных областей современной науки и техники. Несмотря на десятилетия исследований, фундаментальные вопросы — что такое интеллект, можно ли его формализовать алгоритмически, каковы границы вычислительных машин — остаются открытыми.</p>
+ <p>Цель настоящего учебника — дать систематизированный обзор теоретических основ ИИ, опираясь на открытые исследования и семинарские материалы: статьи, материалы семинаров, инструменты разработки и архивные документы.</p>
+ <p><strong>Задачи учебника:</strong></p>
+ <ol>
+ <li>Дать представление о главных парадигмах ИИ (символьном и связистском подходах).</li>
+ <li>Разобрать математические модели биологических и искусственных нейронов.</li>
+ <li>Исследовать архитектуры нейронных сетей и механизмы памяти.</li>
+ <li>Рассмотреть методы обучения, распознавания образов и компьютерного зрения.</li>
+ <li>Описать подходы к робототехнике и автоматному программированию.</li>
+ <li>Знакомить с инструментами разработки (RDK, Neuro Modeler, NMSDK).</li>
+ <li>Обсудить философские и этические проблемы ИИ.</li>
+ </ol>
+ <div class="key-box">
+ <h4>Методология</h4>
+ <p>Учебник построен на первоисточниках: статьях и материалах семинаров. Все идеи цитируются с указанием авторства. Полные тексты первоисточников доступны в разделе «Архив первоисточников» этого репозитория.</p>
+ </div>
+ </section>
+
+ <!-- Глава 1 -->
+ <section id="ch1">
+ <h1>Глава 1. Теоретические основы искусственного интеллекта</h1>
+
+ <h2 id="s1-1">1.1. Что значит работать в области ИИ</h2>
+ <p>Главный вопрос, с которого начинается любое серьезное исследование в области ИИ: что значит работать в этой области? Как следует осуществлять исследования и реализовывать их результаты на практике?</p>
+ <p>Специалист в своей области, начиная с какого-то момента, начинает задаваться подобными вопросами. Это не просто поддержание сложившегося стиля деятельности — это осознанный подход к выбору методов и целей.</p>
+ <p class="citation">Источник: Потапов А.С., «Современные тенденции и перспективы области искусственного интеллекта», 1-й семинар (article_0039.md).</p>
+
+ <h2 id="s1-2">1.2. «Карта» области ИИ: секции современных конференций</h2>
+ <p>На последней международной объединенной конференции по искусственному интеллекту (проводимой с 1969 года) были следующие секции:</p>
+ <ul>
+ <li>Agent-based and Multiagent Systems</li>
+ <li>Constraints, Satisfiability, and Search</li>
+ <li>Knowledge Representation, Reasoning, and Logic</li>
+ <li>Machine Learning</li>
+ <li>Multidisciplinary Topics and Applications</li>
+ <li>Natural-Language Processing</li>
+ <li>Planning and Scheduling</li>
+ <li>Robotics and Vision</li>
+ <li>Uncertainty in AI</li>
+ <li>Web and Knowledge-based Information Systems</li>
+ </ul>
+ <p>Проблемы поиска, представления знаний и машинного обучения — это традиционные базовые проблемы ИИ. Производные от них проблемы — проблемы планирования, неопределенности. Немного в стороне, но не менее значимые вопросы — язык и зрение. Немного странно, что отсутствует в качестве топика проблема управления. Видимо, она растворилась в планировании и робототехнике.</p>
+ <div class="key-box">
+ <h4>Важное наблюдение</h4>
+ <p>Всем этим разделам искусственного интеллекта — несколько десятков лет. Таковые области ИИ уже были, по крайней мере, 30 лет назад. Из относительно нового можно заметить лишь мультиагентные системы и веб, которые являются не столько подходами, сколько областями приложений.</p>
+ </div>
+ <p class="citation">Источник: Потапов А.С., 1-й семинар (article_0039.md).</p>
+
+ <h2 id="s1-3">1.3. Базовые проблемы ИИ</h2>
+ <p>Базовые проблемы — проблемы поиска, представления знаний и машинного обучения. Производные проблемы — планирование, неопределенность, язык и зрение.</p>
+ <table>
+ <tr><th>Уровень</th><th>Проблемы</th><th>Статус</th></tr>
+ <tr><td>Базовый</td><td>Поиск, представление знаний, машинное обучение</td><td>Несколько десятилетий</td></tr>
+ <tr><td>Производный</td><td>Планирование, неопределенность, язык, зрение</td><td>Несколько десятилетий</td></tr>
+ <tr><td>Отдельные области приложений</td><td>Мультиагентные системы, веб</td><td>Относительно новые, не подходы, а области применения</td></tr>
+ </table>
+ <p class="citation">Источник: Потапов А.С., 1-й семинар (article_0039.md).</p>
+
+ <h2 id="s1-4">1.4. Кризис идей в ИИ: почему новые идеи не появляются?</h2>
+ <p>Складывается впечатление, что все основные идеи были высказаны в 60–70-е годы. В 80–90-е годы эти идеи уточнялись и доводились до конкретных алгоритмов. А в первом десятилетии нового тысячелетия на базе этих алгоритмов строятся сложные прикладные системы.</p>
+ <p>На примере области машинного обучения: из более или менее новых методов сейчас большой популярностью пользуется AdaBoost. Идея метода крайне проста: берем некоторый метод классификации, решаем с его помощью задачу распознавания образов, затем берем те образы, которые классифицированы неправильно, и увеличиваем их вес — сосредотачиваем внимание классификатора на сложных примерах. Никакой серьезной теории за ним не стоит.</p>
+ <p>Уровень методов поиска, представления знаний, обучения остается очень низким, и без принципиально новых теоретических решений этот уровень не поднять.</p>
+ <div class="key-box">
+ <h4>Главный вывод</h4>
+ <p>Для прорыва в ИИ нужна не новая библиотека, а новая теория построения сложных систем — от общих схем к конкретике и обратно.</p>
+ </div>
+ <p class="citation">Источник: Потапов А.С., 1-й семинар (article_0039.md).</p>
+
+ <h2 id="s1-5">1.5. «Сильный» и «слабый» ИИ</h2>
+ <ul>
+ <li><strong>Слабый ИИ (narrow AI)</strong> — системы, решающие конкретные задачи (распознавание, перевод, управление). Они не обладают самосознанием и не могут переносить навыки между областями.</li>
+ <li><strong>Сильный ИИ (general AI)</strong> — гипотетическая система с интеллектом уровня человека или выше, способная к обобщению и самообучению.</li>
+ </ul>
+ <p>На сегодняшний день созданы только системы слабого ИИ. Путь к сильному ИИ блокирован теоретическими и практическими проблемами, обсуждаемыми в Главе 8.</p>
+ <p class="citation">Источник: материалы семинаров.</p>
+
+ <h2 id="s1-6">1.6. Может ли машина мыслить? Ограничения алгоритмического ИИ</h2>
+ <p>На 14-м семинаре обсуждались ключевые вопросы алгоритмической реализации интеллекта:</p>
+ <ul>
+ <li><strong>Хьюберт Дрейфус</strong> — «Алхимия и искусственный интеллект», «Чего не могут вычислительные машины». Верно ли его мнение?</li>
+ <li><strong>Роже Пенроуз</strong> — «Новый ум короля», «Тени разума». Насколько прав Пенроуз?</li>
+ <li><strong>Джон Сёрл</strong> — парадокс «Китайская комната»: манипуляция символами не равна пониманию. О чем говорит этот парадокс?</li>
+ <li><strong>Теорема Гёделя</strong> — накладывает ли она какие-то ограничения на возможности алгоритмического ИИ?</li>
+ <li>Нужна ли новая математика для создания ИИ?</li>
+ </ul>
+ <p class="citation">Источник: Потапов А.С., «Возможна ли алгоритмическая реализация интеллекта, и каковы ее ограничения», 14-й семинар (article_0075.md).</p>
+
+ <h2 id="s1-7">1.7. Лимиты картезианской парадигмы причинно-следственной связи (Неверов)</h2>
+ <p>Картезианская парадигма причинно-следственной связи считается её сторонниками единственной материалистической научной парадигмой, основой подлинно научной методологии. При этом не делается попыток выяснить пределы её применимости, полагается, что никаких пределов нет.</p>
+ <p>А.С. Неверов пытается показать, что картезианская парадигма «причинно-следственной связи» предполагает ограничения её научного, материалистического, объективного применения заведомо, в силу её самой.</p>
+ <p>Основной довод: в картезианской парадигме и «следствие и причина», и «связь» — это одно и то же, разные точки зрения на одно и то же. Однако в результате мы рассчитываем получить полную картезианскую модель — различить между собой «следствие», «причину» и «связь» следствия с причиной.</p>
+ <p>Получить полную картезианскую модель в рамках одной конкретной ПСС невозможно. Возможно получить что-нибудь одно: или «следствие» с «причиной», или «связь» между ними.</p>
+ <p>Таким образом, картезианская парадигма, претендуя быть научной, должна разделить две разные цели:</p>
+ <ul>
+ <li>установления фактов, явлений, событий;</li>
+ <li>установления закономерностей.</li>
+ </ul>
+ <p>Именно в разнице целей, обеспечить достижение которых должна научная парадигма, кроются лимиты картезианства.</p>
+ <p class="citation">Источник: Неверов А.С., «Лимиты картезианской парадигмы причинно-следственной связи» (article_0100.md, частично).</p>
+
+ <h2 id="s1-8">1.8. Машина Тьюринга и самовоспроизводящиеся автомати (Александров)</h2>
+ <p>На 45-м семинаре профессор В.В. Александров — доктор технологических наук, профессор, заслуженный деятель науки и техники РФ, лауреат премии Джона фон Неймана — выступил с докладом «От машины Тьюринга к самовоспроизводящимся автоматам Гёте».</p>
+ <p>Доклад посвящен эволюции концепций автоматов — от универсальной машины Тьюринга к самовоспроизводящимся системам. Это один из важнейших теоретических контекстов для понимания границ машинного интеллекта.</p>
+ <p class="citation">Источник: Александров В.В., 45-й семинар (article_0150.md).</p>
+
+ <h2 id="s1-9">1.9. Бионический подход и кризисы парадигм</h2>
+ <p>В искусственном интеллекте происходит периодическое обращение к бионическому направлению. Это обычно случается, когда исследователи чувствуют серьезные проблемы текущей парадигмы, решения которых не могут найти в рамках технического подхода. Исследователи пытаются почерпнуть идеи в живой природе.</p>
+ <p>На примере изменения отношения к искусственным нейронным сетям хорошо видны кризисы парадигм в ИИ. И сейчас именно в бионическом подходе появляются разнообразные новые концепции:</p>
+ <ul>
+ <li>нейроглиальные сети,</li>
+ <li>искусственные иммунные системы,</li>
+ <li>генетические сети,</li>
+ <li>роевой интеллект и так далее.</li>
+ </ul>
+ <p>Технический подход не может похвастаться таким изобилием новых направлений. Сторонники бионического подхода могут надеяться, что именно здесь будет найдено решение имеющихся проблем. Однако имитация биологических систем все же заменяется более эффективными (для искусственных систем) техническими решениями.</p>
+ <p class="citation">Источник: Потапов А.С., 1-й семинар (article_0039.md).</p>
+
+ <h2 id="s1-10">1.10. Необходимость новой теории сложных систем</h2>
+ <p>Имеющиеся теории разрабатывались для очень упрощенных постановок задач. Так, задача обучения зачастую сводится к задаче распознавания образов по однородным описаниям объектов (векторам признаков) в условиях малого числа классов. Хотя необходимость разработки теории построения «сложных» систем распознавания отмечалась еще в 1970-х гг., до сих пор в этой области толком ничего не сделано.</p>
+ <p>Кроме того, основным упрощением при постановке задач построения интеллектуальных систем является жесткое разделение задач на подзадачи. На глобальном уровне это означает, что задачи поиска, обучения и преобразования информации разделяются искусственно, что ограничивает возможность создания действительно интегральных интеллектуальных систем.</p>
+ <div class="key-box">
+ <h4>Вывод главы</h4>
+ <p>Базовые проблемы ИИ (поиск, представление знаний, машинное обучение) существуют несколько десятилетий без принципиально новых идей. Для прорыва нужна новая теория построения сложных интеллектуальных систем, объединяющая нисходящий метод (от общих схем к конкретике) и восходящий метод (обобщение прикладного опыта).</p>
+ </div>
+ <p class="citation">Источник: Потапов А.С., 1-й семинар (article_0039.md).</p>
+ </section>
+
+ <!-- Глава 2 -->
+ <section id="ch2">
+ <h1>Глава 2. Биологические нейроны и их математические модели</h1>
+
+ <h2 id="s2-1">2.1. Структура и функция биологического нейрона</h2>
+ <p>Нейрон — базовый функциональный элемент нервной системы. Он принимает импульсные сигналы на входы (через дендриты и синапсы) и генерирует один импульсный поток на выход (через аксон). Ключевые компоненты:</p>
+ <ul>
+ <li><strong>Дендриты</strong> — ветвистые отростки нейрона, принимающие сигналы от других нейронов через синапсы.</li>
+ <li><strong>Тело клетки (сома)</strong> — интегрирует поступающие сигналы и содержит ядро.</li>
+ <li><strong>Аксон</strong> — длинный отросток, по которому потенциал действия распространяется к другим нейронам или эффекторам.</li>
+ <li><strong>Синапсы</strong> — места контакта нейронов, где электрический импульс преобразуется в химический сигнал (выделение медиатора в синаптической щели) и обратно в электрический.</li>
+ <li><strong>Мембрана нейрона</strong> — осуществляет пространственную и временную суммацию воздействий, поддерживает внутриклеточный потенциал.</li>
+ <li><strong>Ионные каналы</strong> — белковые структуры в мембране, регулирующие прохождение ионов (Na⁺, K⁺, Ca²⁺, Cl⁻) и создающие электрический потенциал.</li>
+ </ul>
+ <p class="citation">Источник: архитектурные принципы из статьи Бахшиева А.В., Романова С.П. (article_0018.md, частично).</p>
+
+ <h2 id="s2-2">2.2. Модель Маккаллока — Питтс (1943) — первая формальная модель</h2>
+ <p>Первая математическая модель нейрона представляет его как простой процессор с несколькими входами и одним выходом. Модель состоит из трёх функциональных блоков:</p>
+ <ul>
+ <li><strong>Локальная память</strong> — хранит веса синапсов (весовые множители, аналог чувствительности синаптических контактов).</li>
+ <li><strong>Блок суммирования</strong> — вычисляет взвешенную сумму входных сигналов.</li>
+ <li><strong>Блок нелинейного преобразования</strong> — пороговая функция «все или ничего».</li>
+ </ul>
+ <div class="code-block">
+net = Σ (wᵢ × xᵢ)<br>
+Y = 1, если net > θ, иначе Y = 0
+ </div>
+ <p>Где <strong>xᵢ</strong> — входной сигнал, <strong>wᵢ</strong> — вес синапса, <strong>net</strong> — взвешенная сумма входов, <strong>θ</strong> — порог активации, <strong>Y</strong> — выход (0 или 1).</p>
+ <p class="key-box">
+ <strong>Ограничение модели:</strong> бинарная активация не отражает аналоговую природу реальных нейронов, отсутствует временная суммация, нет учёта структуры дендритов.
+ </p>
+ <p class="citation">Источник: обзор моделей нейронов (obzor-sushchestvuyushchikh-modelej-nejronov.md).</p>
+
+ <h2 id="s2-3">2.3. Функции активации — обзор</h2>
+ <table>
+ <tr><th>Функция</th><th>Описание</th><th>Применение</th></tr>
+ <tr><td>Пороговая бинарная (Хевисайда)</td><td>Y = 1, если net > θ, иначе Y = 0</td><td>Персептроны, простые сети</td></tr>
+ <tr><td>Пороговая биполярная (сигнатурная)</td><td>Y = −1 или Y = +1</td><td>Биполярные нейросети</td></tr>
+ <tr><td>Линейная</td><td>Y = k · net</td><td>Линейные сети, выходные слои RBF</td></tr>
+ <tr><td>Сигмоидальная логистическая</td><td>Y = 1 / (1 + e^(−net))</td><td>Многослойные сети, обратное распространение ошибки</td></tr>
+ <tr><td>Гиперболический тангенс</td><td>Y = tanh(net)</td><td>Многослойные перцептроны, симметричные выходы</td></tr>
+ <tr><td>Радиально-базисная (Гауссова)</td><td>Y = exp(−‖X − C‖² / (2·σ²))</td><td>RBF-сети, классификация, регрессия</td></tr>
+ <tr><td>Экспоненциальная</td><td>Y = e^(net) / Σ e^(netⱼ)</td><td>Вероятностные нейросети, выходные слои классификации</td></tr>
+ <tr><td>Квадратный корень</td><td>Y = √(Σ (xᵢ − cᵢ)²)</td><td>Сеть Кохонена, обучение без учителя</td></tr>
+ </table>
+ <p>Сигмоидальная функция обладает избирательной чувствительностью к сигналам разной интенсивности — наибольшая чувствительность вблизи порога, что соответствует биологическим данным. Производная логистической функции может быть выражена через её значение, что облегчает использование при обратном распространении ошибки.</p>
+ <p class="citation">Источник: обзор моделей нейронов (obzor-sushchestvuyushchikh-modelej-nejronov.md).</p>
+
+ <h2 id="s2-4">2.4. Классификация моделей нейронов</h2>
+ <p>Нейроны классифицируются по трём основным критериям:</p>
+ <h3>По положению в топологии сети:</h3>
+ <ul>
+ <li><strong>Входные нейроны</strong> — принимают исходный вектор, передают сигнал на выход с возможным усилением/ослаблением.</li>
+ <li><strong>Выходные нейроны</strong> — формируют результат работы сети, могут выполнять вычислительные операции.</li>
+ <li><strong>Промежуточные нейроны</strong> — выполняют основные вычислительные операции сети.</li>
+ </ul>
+ <h3>По степени формализации (разработки математического описания):</h3>
+ <ul>
+ <li><strong>Формальные (абстрактные) нейроны</strong> — хорошо разработанное математическое описание, игнорируют многие свойства биологического прототипа.</li>
+ <li><strong>Физиологические нейроны</strong> — количественное описание поведения нейронов, порождённое экспериментами над биологическими нейронами.</li>
+ <li><strong>Феноменологические модели</strong> — не имеют строгой математической и опытной базы.</li>
+ </ul>
+ <h3>По аппаратной реализации:</h3>
+ <ul>
+ <li><strong>Цифровые модели</strong> — реализуются на микросхемах, сеть как единое целое, отдельные нейроны не выделяются как самостоятельные единицы.</li>
+ <li><strong>Аналоговые модели</strong> — воспроизводят пространственную и временную суммацию, рефрактерность, процессы переработки информации. Нейрон как устройство с непрерывно меняющимся состоянием.</li>
+ </ul>
+ <p class="citation">Источник: обзор моделей нейронов (obzor-sushchestvuyushchikh-modelej-nejronov.md).</p>
+
+ <h2 id="s2-5">2.5. Формальные нейроны — развёрнутый обзор</h2>
+ <table>
+ <tr><th>Модель</th><th>Особенность</th><th>Применение</th></tr>
+ <tr><td>Маккаллок — Питтс</td><td>Пороговая активация, неизменные веса</td><td>Простые сети, перцептроны</td></tr>
+ <tr><td>Адалайн (Adaline)</td><td>Сигнатурная функция активации, градиентное обучение весов</td><td>Адаптивная фильтрация, классификация</td></tr>
+ <tr><td>Нейрон Паде</td><td>Обобщение адалайн для нелинейной интерполяции</td><td>Практически не используется</td></tr>
+ <tr><td>Квадратичный сумматор</td><td>Вычисляет полином второго порядка от входов</td><td>Классификация многомерных нормальных распределений</td></tr>
+ <tr><td>Сигма-пи нейроны</td><td>Функция активации — полином степени N</td><td>Обобщение линейных и квадратичных функций</td></tr>
+ <tr><td>Instar / Outstar (Гроссберг)</td><td>Адаптация весов к входным и выходным сигналам</td><td>Классификация, обучение с и без учителя</td></tr>
+ <tr><td>Нейрон Хебба</td><td>Правило обучения: wᵢ ∝ xᵢ · y (одновременная активация усиливает связь)</td><td>Самоорганизация, ассоциативная память</td></tr>
+ <tr><td>WTA (Winner-Takes-All)</td><td>Конкуренция нейронов, активен только один с максимальным ui</td><td>Самоорганизация, кластеризация</td></tr>
+ </table>
+ <p class="citation">Источник: обзор моделей нейронов (obzor-sushchestvuyushchikh-modelej-nejronov.md).</p>
+
+ <h2 id="s2-6">2.6. Физиологические модели нейронов</h2>
+ <table>
+ <tr><th>Модель</th><th>Описание</th><th>Особенности</th></tr>
+ <tr><td>Пороговый интегратор (leaky integrate-and-fire)</td><td>Суммация синаптических токов по закону Ома, генерация спайка при превышении порога</td><td>Не воспроизводит форму спайка, адаптацию, спонтанную активность</td></tr>
+ <tr><td>Ходжкин — Хаксли</td><td>Три типа ионного тока: натриевый, калиевый, утечки (хлор); модель гигантского аксона кальмара</td><td>Классическая модель потенциала действия, не рассматривает синаптический аппарат детально</td></tr>
+ <tr><td>Корковый пирамидный нейрон с шумом</td><td>Более полный набор ионных каналов, цветной шум (Ornstein-Uhlenbeck) для синаптического тока</td><td>Воспроизводит адаптацию и спонтанную активность, близка к нейрону зрительной коры крысы</td></tr>
+ <tr><td>Коннор — Уолтер — МакКаун</td><td>Дополнительный ток IA по сравнению с Ходжиным-Хакслем</td><td>Более широкий диапазон частот вспышек активности</td></tr>
+ <tr><td>Морис — Лекар (ML)</td><td>Упрощённая Ходжкин-Хаксли, две переменные (калий и кальций)</td><td>Генерация спайков, режим невосприимчивости; нельзя описать хаотические колебания</td></tr>
+ <tr><td>ФитцХью — Нагумо (FHN)</td><td>Две переменные: быстрая u (потенциал), медленная v; спиральные волны</td><td>Аналитически изучена, используется для описания волн в активных средах</td></tr>
+ <tr><td>Хиндмарш — Розе (2D и 3D)</td><td>Закон Кирхгофа для мембранного потенциала как суммы ионных токов</td><td>Качественное описание экспериментальных ситуаций</td></tr>
+ <tr><td>Спайковая модель отклика (SRM)</td><td>Параметры зависят от времени последнего спайка, моделирует рефрактерность</td><td>Обобщение порогового интегратора</td></tr>
+ <tr><td>Уилсон — Кован</td><td>Модель среднего поля: переменные числа возбуждённых и тормозных нейронов</td><td>Операции с ансамблями нейронов</td></tr>
+ </table>
+ <p class="citation">Источник: обзор моделей нейронов (obzor-sushchestvuyushchikh-modelej-nejronov.md).</p>
+
+ <h2 id="s2-7">2.7. Феноменологические модели</h2>
+ <p><strong>Бионический нейрон В.Б. Вальцева:</strong> имеет входы возбуждения, регуляции, памяти, торможения и запрета. Состояние определяется потенциалом и порогом. Порог покоя — постоянное значение. Потенциал ограничен Pmin ≤ 0 и Pmax > 0. Вход памяти изменяет коэффициент обученности µ (0–1), который определяет значимость вклада вклада в общий потенциал. Обучение увеличивает µ на ∆µ⁺ = 0.2 при условиях: на вход поступил сигнал, сигнал подкреплён входом возбуждения, порог меньше порога покоя.</p>
+ <p class="citation">Источник: обзор моделей нейронов (obzor-sushchestvuyushchikh-modelej-nejronov.md).</p>
+
+ <h2 id="s2-8">2.8. От формального к импульсному нейрону (Бахшиев, Романов)</h2>
+ <p>Разработка велась в четыре этапа:</p>
+ <ol>
+ <li><strong>Универсальная модель формального нейрона</strong> — входные сигналы x₁…xₘ, весовые функции w₁…wₘ, выход y, мембранный потенциал u, порог θ, функция активации F.</li>
+ <li><strong>Нейрон со структурной организацией мембраны</strong> — потенциала участка мембраны зависит от среднего значения потенциала подключённых участков. Минимальным функциональным элементом считается не нейрон, а участок мембраны.</li>
+ <li><strong>Раздельное вычисление вкладов в мембранный потенциал</strong> — введение «ионных механизмов» (абстракций ионных каналов), позволяющих независимую обработку возбуждающих и тормозных сигналов с разными постоянными времени.</li>
+ <li><strong>Переход к импульсной модели</strong> — входы и выходы становятся импульсными (0 или 1), порог константа близкая к 0, функция активации — пороговая с гистерезисом. Воспроизводятся деполяризация, скачок потенциала, гиперполяризация, остаточная деполяризация.</li>
+ </ol>
+ <p>Преимущество импульсной обмена: локализация информации во времени, экономия энергии при аппаратной реализации (нейроны большей частью в состоянии покоя). Проблема: автоматизация формирования структуры мембраны и связей.</p>
+ <p class="citation">Источник: статья «От модели формального нейрона к импульсному нейрону» (ot-formalnogo-k-impulsnomu-nejronu.md).</p>
+
+ <h2 id="s2-9">2.9. Модель импульсных потоков в естественном нейроне</h2>
+ <p>Предложена система дифференциальных уравнений, описывающая аналоговое преобразование импульсных потоков:</p>
+ <ul>
+ <li>На входы поступают импульсные потоки, в синапсах преобразуются в аналоговые величины (выделение и распад медиатора в синаптической щели).</li>
+ <li>Входные и выходные сигналы равны нулю в отсутствии импульса и константе на время действия импульса.</li>
+ <li>Мембрана сомы и дендритов — набор пар ионных механизмов деполяризации и гиперполяризации.</li>
+ <li>Выходные сигналы ионных механизмов — обобщённый аналоговый вклад во внутриклеточный потенциал.</li>
+ <li>Синапсы изменяют деятельность ионных механизмов (моделируют изменение концентрации ионов под воздействием внешнего сигнала).</li>
+ <li>Тип ионного механизма определяется знаком выходного сигнала: положительный — деполяризующее влияние, отрицательный — гиперполяризующее.</li>
+ </ul>
+ <p>Преимущества модели: произвольная структура дендритного аппарата, эффект пресинаптического торможения, не требует настройки внутренних параметров в процессе функционирования.</p>
+ <p class="citation">Источник: Бахшиев А.В., Романов С.П. (article_0018.md, частично).</p>
+
+ <h2 id="s2-10">2.10. Предыстория импульсного нейрона (аналоговая модель Романова)</h2>
+ <p>В 70-х годах С.П. Романов разработал физическую аналоговую модель нейрона на операционных усилителях. Основные постулаты:</p>
+ <ul>
+ <li>Модель нейрона должна содержать динамику, т.е. обеспечивать не только пространственную, но и временную суммацию сигналов.</li>
+ <li>Нейроны должен представлять собой сущности, обменивающиеся импульсами между собой, внутри осуществляющие аналоговое преобразование.</li>
+ <li>Необходимо сохранить некоторые специфические особенности синаптической передачи, например, тот факт, что передача сигнала происходит не мгновенно; существует пресинаптическое торможение; активный синапс приводит к нарушению некоторого равновесного состояния мембраны.</li>
+ <li>Равновесное состояние мембраны обеспечивается несколькими противодействующими друг другу процессами.</li>
+ <li>Эффективность взаимодействия между нейронами должна настраиваться через добавление/удаление синапсов, а не корректировку параметра-веса синапса.</li>
+ <li>Структура мембраны нейрона должна иметь настраиваемую структуру, отражающую некоторые реальные особенности нейрона.</li>
+ <li>Порог активации нейрона отсутствует или фиксирован.</li>
+ <li>Модель нейрона должна воспроизводить некоторые основные паттерны поведения в ответ на возбуждающие и тормозящие воздействия, присущие реальным нейронам.</li>
+ </ul>
+ <p>Аналоговая схема использовала интеграторы и управляемые ключи для моделирования синаптического аппарата, RC-цепочки для натриевого и калиевого насосов, операционные усилители для суммирования ВПСП/ТПСП и генерации потенциала действия.</p>
+ <p class="citation">Источник: «Предыстория импульсного нейрона» (predystoriya-impulsnogo-nejrona.md).</p>
+
+ <h2 id="s2-11">2.11. Нейрон как квазибиологический организм (модель выживания)</h2>
+ <p>Нейрон рассматривается как организм, нуждающийся в питании. Базовые параметры:</p>
+ <ul>
+ <li><strong>Энергетический резерв клетки E</strong> — нейрон расходует энергию на генерацию импульсов. При избытке энергии способен делиться, при потере всего запаса — погибает.</li>
+ <li><strong>Износ нейрона H</strong> — определяет эффективность функционирования. Увеличение износа (старение) снижает эффективность расхода энергии. Генерация импульса приводит к функциональному обновлению (снижению износа).</li>
+ <li><strong>Самочувствие Q</strong> — определяется по величине и тенденции внутренних резервов питания.</li>
+ </ul>
+ <p><strong>Основные свойства модели:</strong></p>
+ <ol>
+ <li>Нейрон нуждается в питании — без него погибает.</li>
+ <li>Нейрон стареет — с возрастом растут потребности в питании.</li>
+ <li>Разряд снижает возраст и потребности.</li>
+ <li>Между нейронами образуются связи для оптимизации функциональных состояний.</li>
+ <li>Разряд требует дополнительных расходов питания, зависящих от частоты генерации.</li>
+ <li>У нейрона есть внутренние резервы питания («самочувствие»).</li>
+ </ol>
+ <p><strong>Интегральные характеристики сети:</strong></p>
+ <ul>
+ <li>Суммарный износ системы = сумма износов всех нейронов.</li>
+ <li>Суммарное самочувствие = сумма самочувствий всех нейронов.</li>
+ <li>Суммарный расход энергии = сумма расходов каждого нейрона.</li>
+ <li>Сеть стремится минимизировать частоту разрядов и суммарный износ, находя оптимальную частоту генерации импульсов.</li>
+ </ul>
+ <p><strong>Бета-ансамбли:</strong> любая последовательность связанных нейронов со связями Gs больше порога — бета-ансамбль. Ансамбль — группа нейронов с полной картиной связей (каждый с каждым). Параметр «мощность» ансамбля — суммарное Gs всех нейронов.</p>
+ <div class="key-box">
+ <h4>Главный вывод</h4>
+ <p>Интеллектуальные свойства сети возникают не из сложности отдельного нейрона, а из организации энергетически выгодных связей между нейронами. Структура сети и её информационные свойства определяются функционированием её элементов — нейронов.</p>
+ </div>
+ <p class="citation">Источник: «Моделирование выживания нейрона» (modelirovanie-vyzhivaniya-nejrona.md).</p>
+
+ <h2 id="s2-12">2.12. Биоподобные нейронные сети для управления роботами</h2>
+ <p>Концепция применения биоподобных моделей нейронных сетей для управления робототехническими системами включает два взаимно дополняющих подхода:</p>
+ <ol>
+ <li><strong>Заимствование информации о нейронных структурах</strong> с известной морфологией и функцией, построение их моделей и применение полученных знаний для решения аналогичных задач в управлении техническими системами.</li>
+ <li><strong>Разработка нейросетевых архитектур</strong> на основе накопленных знаний о принципах организации биологических НС с последующим поиском сходства или расхождения с реальностью и коррекцией моделей.</li>
+ </ol>
+ <p>В основе концепции — разработка нейросетевой системы управления, воспринимающей информацию от сенсоров и замкнутой на среду через эффекторы. Решение только одной частной задачи (например, распознавание образов) резко сужает контекст использования информации.</p>
+ <table>
+ <tr><th>Уровень</th><th>Назначение</th></tr>
+ <tr><td>RCN (Regulatory Control Network)</td><td>Сеть регулятора: предоставляет информацию о текущем положении объекта управления и обеспечивает переход в заданное положение</td></tr>
+ <tr><td>PCN (Position Control Network)</td><td>Сеть позиционирования: запоминает и воспроизводит конкретные положения элементов исполнительной системы</td></tr>
+ <tr><td>TCN (Trajectory Control Network)</td><td>Сеть управления движением по траектории: моделирует сложные траектории движения</td></tr>
+ </table>
+ <p class="citation">Источник: «Концепция применения биоподобных моделей нейронных сетей» (kontseptsiya-biopodobnyh-ns.md).</p>
+ </section>
+
+ <!-- Глава 3 -->
+ <section id="ch3">
+ <h1>Глава 3. Нейронные сети и архитектуры памяти</h1>
+
+ <h2 id="s3-1">3.1. Многоуровневая модель памяти (Бахшиев)</h2>
+ <p>Память организована иерархически — от сенсорных данных к абстрактным концепциям. Модель состоит из трёх основных модулей:</p>
+ <ol>
+ <li><strong>Модуль запоминания и распознавания отдельных объектов</strong> — сенсорные данные поступают в этот модуль, где происходит обработка информации и мультисенсорная интеграция. На этом этапе происходит последовательное обобщённое накопление информации о входных паттернах.</li>
+ <li><strong>Модуль создания ассоциаций «часть/целое»</strong> — связывает объекты, компоненты, пространственные и временные отношения. Эти ассоциации — простые отношения между целым паттерном, его компонентами, пространственными отношениями между объектами, временными отношениями (причинно-следственные эффекты) и всеми их комбинациями. В общем случае в этом модуле создается динамическая 3D-модель среды.</li>
+ <li><strong>Модуль создания общих концепций (вербальная память)</strong> — происходит перенос от паттернов к абстрактным концепциям и их обобщению.</li>
+ </ol>
+ <div class="key-box">
+ <h4>Результат</h4>
+ <p>Все эти модули представляют многоуровневые системы с последовательным обобщением хранящихся данных как в восходящем, так и в нисходящем направлении. Создается динамическая 3D-модель среды, построенная на сети интегрирующих ассоциирующих связей.</p>
+ </div>
+ <p class="citation">Источник: Бахшиев А.В., «Pattern processing of information systems using prospects for compound objects recognition» (article_0019.md).</p>
+
+ <h2 id="s3-2">3.2. Архитектура памяти: уровни и нейронные ансамбли</h2>
+ <p>Каждый уровень памяти организован множеством нейронов, формирующих ансамбли. Каждый ансамбль отвечает за свой паттерн.</p>
+ <p>Выходной уровень для предыдущего модуля является входным уровнем для текущего модуля. Далее M уровней интегрируют информацию. Каждый уровень памяти организован количеством нейронов, которые формируют ансамбли Aj,i, каждый из которых имеет свой паттерн.</p>
+ <p>Набор интегрирующих ассоциативных связей (ассоциации снизу) Ej,i между ансамблями, созданными нейронами более низких уровней, и связями с нейронами более высоких уровней. Связи Fj,i от нейронов высоких уровней к нейронам низких уровней организуются для возможности восстановления указанной информации.</p>
+ <p>Для восстановления паттерн-информации необходимо стимулировать ансамбль этого паттерна управляющими входами Ri. Информация считывается со всех активных ансамблей всех уровней.</p>
+ <p>Предложенная модель обработки паттерн-информации имеет следующие преимущества:</p>
+ <ul>
+ <li>Последовательное многоуровневое обобщение, позволяющее хранить и использовать информацию о запомненных паттернах целиком.</li>
+ <li>Наличие восходящих и нисходящих связей, позволяющих восстанавливать как обобщенную, так и детальную паттерн-информацию.</li>
+ <li>Возможность добавления новых уровней (контекстов) обработки информации без изменения системы.</li>
+ <li>Использование динамической модели нейрона позволяет обрабатывать поток данных сенсорных систем в реальном времени.</li>
+ </ul>
+ <p>Рассматриваемая структура может быть эффективна при создании динамической модели среды робота, распознавании сложных объектов и создании интерфейсов человек-робот. Кроме того, эти системы могут использоваться для получения обобщенной видеоинформации.</p>
+ <p class="citation">Источник: Бахшиев А.В. (article_0019.md).</p>
+
+ <h2 id="s3-3">3.3. Искусственные когнитивные системы в робототехнике (Станкевич)</h2>
+ <p>На 24-м семинаре к.т.н. Станкевич Л.А. (ФТК, СПбГПУ) выступил с докладом «Искусственные когнитивные системы в робототехнике». Содержание доклада:</p>
+ <ol>
+ <li>Искусственный интеллект и когнитивная наука</li>
+ <li>Когнитивистский и эмерджентный подходы</li>
+ <li>Когнитивные архитектуры</li>
+ <li>Гибридные когнитивные системы</li>
+ <li>Средства реализации когнитивных систем</li>
+ <li>Примеры применения в робототехнике</li>
+ </ol>
+ <table>
+ <tr><th>Подход</th><th>Суть</th></tr>
+ <tr><td>Когнитивистский</td><td>Интеллект как обработка символов и представлений</td></tr>
+ <tr><td>Эмерджентный</td><td>Интеллект возникает из взаимодействия простых элементов</td></tr>
+ <tr><td>Когнитивные архитектуры</td><td>Готовые фреймворки для построения интеллектуальных агентов</td></tr>
+ <tr><td>Гибридные системы</td><td>Сочетание символьного и нейросетевого подходов</td></tr>
+ </table>
+ <p class="citation">Источник: Станкевич Л.А., 24-й семинар (article_0122.md).</p>
+
+ <h2 id="s3-4">3.4. Эволюция и «сильный» ИИ (Анисимов)</h2>
+ <p>На 16-м семинаре Валерий Анисимов выступил с докладом «Эволюция биологических систем и проблема построения». Рассматривались следующие вопросы:</p>
+ <ul>
+ <li>Как представляло себе «сильный» ИИ первое поколение кибернетиков и программистов (50-е, 60-е годы прошлого века)?</li>
+ <li>Основные типы систем ИИ, реализованные на сегодняшний день</li>
+ <li>Основные причины, препятствующие появлению «сильного» ИИ</li>
+ <li>Факторы, способствующие эволюции земной биоты в сторону усложнения и её «поумнению»</li>
+ <li>Основные принципы построения оптимального «сильного» ИИ</li>
+ <li>Интеллект эволюции — аппаратная база</li>
+ <li>Минимальная сложность реально функционирующих биологических систем обработки информации</li>
+ <li>Общие принципы функционирования генных и нейронных сетей</li>
+ <li>Схематический пример простой системы ИИ, построенной на дискретных элементах</li>
+ <li>Логические игры как удобный пример для тестирования концепции обучения иерархической эволюционирующей системы ИИ «с нуля»</li>
+ <li>Чувства и эмоции как средства оптимизации управления</li>
+ </ul>
+ <div class="key-box">
+ <h4>Основные принципы построения «сильного» ИИ по Анисимову</h4>
+ <ul>
+ <li>Интеллект эволюционирует — аппаратная база определяет возможности.</li>
+ <li>Минимальная сложность биологической системы обработки информации — отправная точка.</li>
+ <li>Общие принципы функционирования генных и нейронных сетей сходны.</li>
+ <li>Логические игры — полигон для тестирования эволюционирующих систем «с нуля».</li>
+ </ul>
+ </div>
+ <p class="citation">Источник: Анисимов В., 16-й семинар (article_0092.md).</p>
+
+ <h2 id="s3-5">3.5. Нейрокогнитивная среда Neuro Modeler</h2>
+ <p>Neuro Modeler — среда моделирования нейронных систем с произвольной структурной организацией. Нейрон считается основным функциональным элементом нервной системы, осуществляющим преобразование потоков импульсов, поступающих на его входы, в один поток импульсов на выходе.</p>
+ <h3>Функциональная схема преобразования импульсных потоков в нейроне</h3>
+ <ul>
+ <li>Последовательности импульсов распространяются по выходным волокнам других нейронов (аксонам) без затухания.</li>
+ <li>Воздействие на нейрон происходит в местах сближения волокон с мембраной нейрона — синапсах.</li>
+ <li>Синапсы расположены на теле нейрона и дендритах — многочисленных коротких отростках.</li>
+ <li>В синапсах осуществляется преобразование импульсов в аналоговую величину, вызывающую изменение внутриклеточного потенциала нейрона.</li>
+ <li>Мембрана нейрона осуществляет пространственную и временную суммацию поступающих воздействий.</li>
+ <li>Если величина внутриклеточного потенциала превышает порог, в низкопороговой зоне нейрона формируется потенциал действия (импульс), который распространяется по аксону без затухания.</li>
+ </ul>
+ <p>Величина внутриклеточного потенциала определяется функционированием ионных каналов в мембране нейрона, осуществляющих транспорт ионов различного вида внутрь или наружу клетки. Данный механизм можно представить в виде двух структур: одна накапливает отрицательную величину, другая — положительную, их сумма определяет внутриклеточный потенциал.</p>
+ <p>Синапсы, вызывающие ослабление первой функции, называются возбуждающими, а второй — тормозными.</p>
+ <h3>Программная реализация</h3>
+ <ul>
+ <li>Полная система уравнений, описывающая нейрон, нелинейна и меняется в зависимости от числа синапсов и количества моделируемых дендритов.</li>
+ <li>В качестве численного метода для решения систем уравнений выбран метод серединной точки из семейства одношаговых методов Рунге-Кутты.</li>
+ <li>Язык программирования: C++ (Borland C++ Builder 5).</li>
+ <li>Программа разбита на вычислительную часть и подсистему интерфейса взаимодействия с пользователем.</li>
+ <li>Вычислительное ядро реализовано в виде объектно-ориентированной библиотеки в ANSI стандарте C++.</li>
+ </ul>
+ <h3>Классы ядра Neuro Modeler (16 классов)</h3>
+ <table>
+ <tr><th>Категория классов</th><th>Описание</th></tr>
+ <tr><td>Базовое ядро</td><td>Механизмы организации нейронной сети: размещение объектов в памяти, пространство имён, структура связей, управление процессом счёта</td></tr>
+ <tr><td>Абстракции сети</td><td>Иерархия абстрактных классов, определяющих общие свойства и методы для типов элементов нейронной сети</td></tr>
+ <tr><td>Блоки</td><td>Несамостоятельные функциональные блоки элементов сети (синапс, мембрана, генераторный механизм)</td></tr>
+ <tr><td>Элементы сети</td><td>Классы, описывающие элементы сети (нейрон, афферентный нейрон, нервное волокно, нейронная сеть)</td></tr>
+ </table>
+ <p>Модель исследуемой системы управления предоставляется программе в виде файла с описанием структуры модели на языке описания. Транслятор языка является частью ядра.</p>
+ <p>Экспериментальные исследования показали, что исходная математическая модель достаточно полно описывает процессы преобразования импульсных потоков в нейроне и демонстрирует качественно верные реакции, присущие естественным нейронным структурам.</p>
+ <p class="citation">Источник: «Neuro Modeler - среда моделирования нейронных систем» (article_0021.md, частично).</p>
+
+ <h2 id="s3-6">3.6. Биоподобные нейронные сети для управления робототехническими системами</h2>
+ <p>Концепция применения биоподобных моделей нейронных сетей для управления робототехническими системами включает два взаимно дополняющих подхода:</p>
+ <ol>
+ <li><strong>Заимствование информации о нейронных структурах</strong> с известной морфологией и функцией, построение их моделей и применение полученных знаний для решения аналогичных задач в управлении техническими системами.</li>
+ <li><strong>Разработка нейросетевых архитектур</strong> на основе накопленных знаний о принципах организации биологических НС с последующим поиском сходства или расхождения с реальностью и коррекцией моделей.</li>
+ </ol>
+ <p>В основе концепции — разработка нейросетевой системы управления, воспринимающей информацию от сенсоров и замкнутой на среду через эффекторы. Решение только одной частной задачи (например, распознавание образов) резко сужает контекст использования информации.</p>
+ <table>
+ <tr><th>Уровень</th><th>Назначение</th></tr>
+ <tr><td>RCN (Regulatory Control Network)</td><td>Сеть регулятора: предоставляет информацию о текущем положении объекта управления и обеспечивает переход в заданное положение</td></tr>
+ <tr><td>PCN (Position Control Network)</td><td>Сеть позиционирования: запоминает и воспроизводит конкретные положения элементов исполнительной системы</td></tr>
+ <tr><td>TCN (Trajectory Control Network)</td><td>Сеть управления движением по траектории: моделирует сложные траектории движения</td></tr>
+ </table>
+ <p class="citation">Источник: «Концепция применения биоподобных моделей нейронных сетей» (kontseptsiya-biopodobnyh-ns.md).</p>
+
+ <h2 id="s3-7">3.7. Вывод главы</h2>
+ <div class="key-box">
+ <h4>Главный вывод</h4>
+ <p>Память в нейросетях организована иерархически — от сенсорных данных к абстрактным концепциям. Каждый уровень образует нейронные ансамбли, связи между которыми позволяют восстанавливать образы по частичным признакам и обобщать их в концепции. Когнитивные архитектуры могут быть когнитивистскими, эмерджентными и гибридными. Для практического моделирования созданы специализированные среды (Neuro Modeler) с объектно-ориентированной архитектурой на 16 классах.</p>
+ </div>
+ <p class="citation">Источник: статьи Бахшиева (article_0019.md), Станкевича (article_0122.md), Анисимова (article_0092.md), Neuro Modeler (article_0021.md).</p>
+ </section>
+
+ <!-- Глава 4 -->
+ <section id="ch4">
+ <h1>Глава 4. Обучение, память и ассоциации</h1>
+
+ <h2 id="s4-1">4.1. Кратковременная память человека (Ляховецкий)</h2>
+ <p>На 5-м семинаре к.т.н. Ляховецкий В.А. (лаб. Физиологии движений ИФ РАН им. И.П. Павлова) выступил с докладом «Кратковременная память человека».</p>
+ <p>В основе моделей информационных процессов, протекающих в кратковременной памяти человека, часто лежит стек или искусственная нейронная сеть. В зависимости от типа модели для достижения подобия между свойствами модели и некоторыми свойствами памяти используют различные приемы. Модели различного типа позволяют качественно объяснить такие психологические феномены, как:</p>
+ <ul>
+ <li>небольшая емкость кратковременной памяти;</li>
+ <li>различная емкость памяти человека в зависимости от решаемой задачи (воспроизведение / узнавание);</li>
+ <li>способность человека совершать ошибки при воспроизведении запомненного и знать, что ошибка совершена;</li>
+ <li>способность человека совершать повторные ошибки.</li>
+ </ul>
+ <p>Моделирование процессов, происходящих при тренировке памяти (заучивание материала, обучению запоминанию), сопряжено с большими сложностями. Отчасти потому, что в психофизиологическом опыте чрезвычайно сложно выявить, какие именно признаки объектов окружающего мира «отбираются» для сохранения в памяти человека и как меняется состав этих признаков при тренировке.</p>
+ <p class="citation">Источник: Ляховецкий В.А., 5-й семинар (article_0035.md).</p>
+
+ <h2 id="s4-2">4.2. Векторное и позиционное кодирование движений</h2>
+ <p>В докладе Ляховецкого рассмотрена методика изучения кратковременной моторной памяти человека, позволяющая исследовать роль различных признаков (координаты рабочей точки / характеристики вектора движения) при запоминании последовательности движений левой и правой руки.</p>
+ <p>На основе анализа результатов опытов можно заключить, что:</p>
+ <ul>
+ <li>при работе правой руки превалирует систему <strong>векторного кодирования</strong> (запоминаются направление и длина перемещения);</li>
+ <li>при запоминании движений левой руки одновременно применяются и система векторного, и система позиционного кодирования.</li>
+ </ul>
+ <p>На базе математического аппарата нейронных сетей типа гетероассоциативная память была разработана модель, позволяющая воспроизвести распределения ошибок при однократном воспроизведении запомненной последовательности движений левой и правой руки. При моделировании запоминания движений правой руки использовалось векторное кодирование, при моделировании запоминания движений левой руки — и позиционное, и векторное кодирование.</p>
+ <p>Предложенная нейросетевая модель не в состоянии количественно объяснить более сложные явления — динамику обучения при долговременной тренировке, влияние правил организации последовательности движений на качество запоминания. По-видимому, для совершенствования модели необходимо проведение дополнительных психологических опытов, направленные на формализацию внутренних представлений последовательности движений.</p>
+ <p class="citation">Источник: Ляховецкий В.А., 5-й семинар (article_0035.md).</p>
+
+ <h2 id="s4-3">4.3. Простая модель памяти: система с дифференцированной информацией (Неверов)</h2>
+ <p>А.С. Неверов предложил «простую модель памяти» — «систему с дифференцированной информацией», основанную на модели системы с управлением способом обратной связи («системы с управлением О.С.»).</p>
+ <p>Представления об объективности систем основаны на сопоставлении фактов двух родов: фактов, свидетельствующих существование систем, и фактов, свидетельствующих неравенство среды и системы. Такими фактами являются факты о связях. Материалистическое понимание систем — взгляд на систему с точки зрения её связей.</p>
+ <p>Особенность «скрытой» связи — её характер и природа противоположны характеру и природе связей среды и системы. Если среда имеет беспорядочный характер, хаотическую природу, то возникновение системы — проявление «скрытой» связи противоположного характера, иной природы — упорядоченной, закономерной связи.</p>
+ <p>Фундаментальный механизм управления — управление способом обратной связи. Простейшая модель его — «контур управления», «контур обратной связи». Это модель сложной системы из двух подсистем. Постоянная иерархия (одна из подсистем управляющая, а другая — управляемая) обеспечена противоположным характером связей.</p>
+ <p>«Система с управлением О.С.» развивается в «систему с дифференцированной информацией» по тем же причинам, по которым возникает sama. Постоянная иерархия подсистем служит основой дальнейшего развития сложной системы.</p>
+ <p>В ходе продолжительного развития происходит согласование, синхронизация проявлений каждой подсистемы. В результате во взаимодействии проявляется гиперцикл — цикл циклов. Цикличность сложной системы сочетается с цикличностью каждой подсистемы в единой общей цикличности.</p>
+ <p>В «системе с дифференцированной информацией» могут возникать временные иерархии подсистем — временное прекращение циклического взаимодействия подсистем при сохранении каждой подсистемой её собственной цикличности.</p>
+ <p>Возможно всего 4 варианта временной иерархии подсистем, каждым из которых может быть представлено одно из проявлений памяти:</p>
+ <table>
+ <tr><th>Проявление памяти</th><th>Временная иерархия подсистем</th><th>Частные случаи моделей</th></tr>
+ <tr><td>Забывание</td><td>«В» - «П» - «Н» - «Л»</td><td>Универсальная машина Тьюринга, модель ультрастабильности Эшби</td></tr>
+ <tr><td>Внимание</td><td>«П» - «Н» - «Л» - «В»</td><td>Модель канала связи Шеннона-Уивера (математическая теория связи)</td></tr>
+ <tr><td>Вспоминание</td><td>«Н» - «Л» - «В» - «П»</td><td>Системы автоматического управления, теория игр, теория измерений, теория катастроф</td></tr>
+ <tr><td>Узнавание</td><td>«Л» - «В» - «П» - «Н»</td><td>Программное управление, распознавание образов, прогноз</td></tr>
+ </table>
+ <p class="citation">Источник: Неверов А.С., «Простая модель памяти: сложная система с дифференцированной информацией» (prostaia-model-pamyati-5-9.md, prostaia-model-pamyati-5-10.md).</p>
+
+ <h2 id="s4-4">4.4. Модель Фрейда — Юнга (Неверов)</h2>
+ <p>А.С. Неверовпредложил «модель Фрейда — Юнга» как одну из удачных попыток познать и смоделировать психические явления.</p>
+ <h3>Модель Фрейда</h3>
+ <ul>
+ <li>Разделение всех психических явлений на сознание и «бессознательное».</li>
+ <li>Классификация здесь одновременно является принципом классификации — в одной формуле.</li>
+ <li>Фрейд отказался от моделирования сознательных психических явлений вообще, чтобы избежать «модели моделирования», «отражения отражением самого себя».</li>
+ <li>Модель Фрейда — иерархия психических явлений: сознание относительно самостоятельно, но не может существовать без связей с «бессознательным».</li>
+ <li>Выделены «Оно», «Я», «Сверх-Я».</li>
+ </ul>
+ <h3>Модель Юнга</h3>
+ <ul>
+ <li>Юнг дополнил модель Фрейда идеей о четырёх дифференцированных психических функциях: мышление, интуиция (предчувствие, бессознательное восприятие), чувство, ощущение.</li>
+ <li>«Дифференцированные» потому, что каждая из них нисколько не совпадает с каждой из остальных трёх.</li>
+ <li>Человек может обладать только одной дифференцированной психической функцией — какой-то из четырёх перечисленных.</li>
+ <li>Юнг ввёл представление о «психологических типах» через типы функционирования сознания.</li>
+ <li>Модель Фрейда — «структурная», модель Юнга — «структурно-функциональная».</li>
+ </ul>
+ <div class="key-box">
+ <h4>Ключевой момент модели Юнга</h4>
+ <p>Все четыре психические функции не могут проявляться нераздельно, недифференцированно, «все вместе». Это создает парадоксальность оснований модели, которая раскрывает смысл положения Фрейда об относительной самостоятельности сознания.</p>
+ </div>
+ <p class="citation">Источник: Неверов А.С., «Набросок модели Фрейда-Юнга» (nabrosok-modeli-freyd-yunga.md).</p>
+
+ <h2 id="s4-5">4.5. Ассоциативная память и голограммная аналогия (Соломатин)</h2>
+ <p>Структуры ассоциативной памяти строятся на аналогии между свойствами голограмм и свойствами следов памяти в мозгу:</p>
+ <ul>
+ <li>В голограмме каждая часть содержит информацию о целом.</li>
+ <li>Аналогично, след памяти распределён по сети — повреждение части не уничтожает воспоминание полностью.</li>
+ <li>Это основа для устойчивых к шумам и повреждениям систем памяти.</li>
+ </ul>
+ <p class="citation">Источник: Соломатин В.Ф., 24-й семинар (article_0112.md).</p>
+
+ <h2 id="s4-6">4.6. Информационная модель волновой активности мозга (Редозубов)</h2>
+ <p>На 46-м семинаре Алексей Редозубов выступил с докладом «Информационная модель волновой активности мозга. Механизм распределенной голографической памяти в волновых нейронных сетях».</p>
+ <p>Механизм распределённой голографической памяти в волновых нейронных сетях — память не локализуется в одном месте, а распределяется по всей сети волновых взаимодействий нейронов.</p>
+ <p class="citation">Источник: Редозубов А., 46-й семинар (article_0151.md).</p>
+
+ <h2 id="s4-7">4.7. Вывод главы</h2>
+ <div class="key-box">
+ <h4>Главный вывод</h4>
+ <p>Память в интеллектуальных системах может моделироваться на разных уровнях: от гетероассоциативных нейросетей (Ляховецкий) и систем с дифференцированной информацией (Неверов) до голографических волновых моделей (Редозубов) и ассоциативной памяти на основе голограммной аналогии (Соломатин). Ключевой insight — память не локализуется в одном месте, а распределяется по сети связей между элементами.</p>
+ </div>
+ <p class="citation">Источник: статьи Ляховецкого (article_0035.md), Неверова (prostaia-model-pamyati-5-9.md, nabrosok-modeli-freyd-yunga.md), Соломатина (article_0112.md), Редозубова (article_0151.md).</p>
+ </section>
+
+ <!-- Глава 5 -->
+ <section id="ch5">
+ <h1>Глава 5. Распознавание образов и компьютерное зрение</h1>
+
+ <h2 id="s5-1">5.1. Проблема обучения в системах компьютерного зрения (Потапов)</h2>
+ <p>На 9-м семинаре А.С. Потапов выступил с докладом «Проблема обучения в системах компьютерного зрения». Содержание доклада:</p>
+ <ol>
+ <li>Тенденции в области компьютерного зрения по материалам симпозиума «Defense, security and sensing 2010».</li>
+ <li>Проблема обучения и индуктивного вывода.</li>
+ <li>Байесовский критерий выбора гипотез.</li>
+ <li>Принцип минимальной длины описания.</li>
+ <li>Проблема анализа изображений как пример задачи индуктивного вывода.</li>
+ <li>Проблема выбора представлений изображений в системах компьютерного зрения. «Сильное» обучение как автоматический выбор представлений.</li>
+ <li>Принцип репрезентационной минимальной длины описания.</li>
+ <li>Примеры обучения в задачах сегментации и выбора локальных признаков как адаптации к предметной области.</li>
+ </ol>
+ <p class="citation">Источник: Потапов А.С., 9-й семинар (article_0061.md).</p>
+
+ <h2 id="s5-2">5.2. Байесовский критерий выбора гипотез</h2>
+ <p>Байесовский критерий используется для выбора наиболее вероятной гипотезы на основе данных. Это один из фундаментальных подходов к решению задачи обучения и индуктивного вывода в компьютерном зрении.</p>
+ <p class="citation">Источник: Потапов А.С., 9-й семинар (article_0061.md).</p>
+
+ <h2 id="s5-3">5.3. Принцип минимальной длины описания (MDL)</h2>
+ <p>Лучшая модель — та, которая сжимает данные максимально. Принцип минимальной длины описания применяется к выбору представлений изображений в системах компьютерного зрения.</p>
+ <h3>Принцип репрезентационной минимальной длины описания</h3>
+ <p>Расширение принципа MDL на выбор представлений — автоматический подбор наилучшего способа кодирования изображений для задачи распознавания.</p>
+ <p class="citation">Источник: Потапов А.С., 9-й семинар (article_0061.md).</p>
+
+ <h2 id="s5-4">5.4. Теория разумных систем: сравнение образов (Безобразов)</h2>
+ <p>М.В. Безобразов разработал оригинальный алгоритм сравнения образов в рамках «Теории разумных систем». Цель — создание подробного описания алгоритма функционирования любой разумной системы.</p>
+ <h3>Определение образа</h3>
+ <p>Образ — это подмножество некоего изначального множества. Каждый элемент множества Органа Чувств (ОЧ) имеет двоичную природу — либо активен, либо нет (0 или 1). Например, орган зрения человека — это множество около 180 млн клеток — нейронов сетчатки. Когда мы видим конкретный образ, активируется часть нейронов из этого множества.</p>
+ <h3>Мера близости элементов образа</h3>
+ <p>Каждый элемент множества Органа Чувств является отдельным образом. Мера сравнения двух образов основана на совокупной мере похожести (близости) активных элементов этих образов. Мера похожести элементов носит ассоциативный характер — более похожи элементы, которые чаще активировались вместе:</p>
+ <div class="code-block">
+Б (Эт;Эл) = КОтл / КОт
+ </div>
+ <p>Где:<br>
+ <strong>Б (Эт;Эл)</strong> — близость элемента Эт и Эл.<br>
+ <strong>КОтл</strong> — кол-во образов из памяти П, в которых присутствовали оба элемента Эт и Эл.<br>
+ <strong>КОт</strong> — количество образов, в которых присутствовал элемент Эт.</p>
+ <h3>Пример вычисления</h3>
+ <p>Множество органа чувств состоит из 3 элементов. В памяти содержится 4 образа:</p>
+ <table>
+ <tr><td>Образ 1</td><td>1</td><td>0</td><td>1</td></tr>
+ <tr><td>Образ 2</td><td>0</td><td>1</td><td>1</td></tr>
+ <tr><td>Образ 3</td><td>1</td><td>0</td><td>1</td></tr>
+ <tr><td>Образ 4</td><td>1</td><td>1</td><td>1</td></tr>
+ </table>
+ <p>Рассчитаем близость первого и третьего элемента Б(1,3). Всего в памяти 1 элемент активизировался 3 раза. Одновременно 1 и 3 элемент активизировались 3 раза.<br>
+ Б(1,3) = 3/3 = 1.</p>
+ <p>Матрица близости элементов:</p>
+ <table>
+ <tr><th>Элемент</th><th>1</th><th>2</th><th>3</th></tr>
+ <tr><td>1</td><td>1</td><td>0,33</td><td>1</td></tr>
+ <tr><td>2</td><td>0,5</td><td>1</td><td>1</td></tr>
+ <tr><td>3</td><td>0,75</td><td>0,5</td><td>1</td></tr>
+ </table>
+ <h3>Коэффициент сравнения образов</h3>
+ <p>Степень похожести образов выражается как средняя близость активных элементов в обоих образах:</p>
+ <div class="code-block">
+С (От, Ол) = Σ Σ Б (а, г) / (Ат × Ол)
+ </div>
+ <p>Где:<br>
+ <strong>С</strong> — мера сравнения и близости двух образов.<br>
+ <strong>От</strong> — образ Т.<br>
+ <strong>Ол</strong> — образ Л.<br>
+ <strong>Ат</strong> и <strong>Ал</strong> — количество активных элементов в образах От и Ол.<br>
+ <strong>Б (а, г)</strong> — близость элементов а и г.</p>
+ <p>Если в каждом образе по 10 активных элементов, суммируется 100 близостей. Потом сумма делится на 100. Коэффициент сравнения двух разных образов — средняя близость активных элементов данных образов.</p>
+ <p><strong>Свойства операции сравнения образов:</strong></p>
+ <ul>
+ <li>Операция вычисления похожести элементов образов не является коммутативной: Б (Эт;Эл) ≠ Б (Эл;Эт).</li>
+ <li>Операция вычисления похожести самих образов тоже не коммутативна: С (От, Ол) ≠ С (Ол, От).</li>
+ <li>Результаты вычисления полностью зависят от опыта субъекта — нет никакой априорной, изначальной метрики.</li>
+ <li>При работе с графическими образами важную роль играет выбор метода бинаризации изображений.</li>
+ <li>Качество распознавания зависит от количества образов в памяти и от сложности образов (размерности множества элементов образа).</li>
+ </ul>
+ <p class="citation">Источник: Безобразов М.В., «Формализация алгоритма сравнения образов в рамках Теории разумных систем» (article_0093.md, частично).</p>
+
+ <h2 id="s5-5">5.5. Модель зрительного внимания (Пименов)</h2>
+ <p>На 8-м семинаре В.Ю. Пименов выступил с докладом «Методика повышения быстродействия сопоставления изображений с использованием модели системы зрительного внимания». Содержание доклада:</p>
+ <ol>
+ <li>Проблема сопоставления изображений в задачах навигации мобильных роботов.</li>
+ <li>Избыточность контрольных точек и методика ее устранения для повышения быстродействия.</li>
+ <li>Функция заметности ключевых точек на основе модели системы зрительного внимания.</li>
+ <li>Результаты экспериментальной проверки.</li>
+ </ol>
+ <p class="citation">Источник: Пименов В.Ю., 8-й семинар (article_0060.md).</p>
+
+ <h2 id="s5-6">5.6. Вывод главы</h2>
+ <div class="key-box">
+ <h4>Главный вывод</h4>
+ <p>Распознавание образов в компьютерном зрении опирается на байесовский критерий выбора гипотез, принцип минимальной длины описания и теорию разумных систем Безобразова с некоммутативной мерой близости элементов. Модель зрительного внимания Пименова позволяет устранить избыточность контрольных точек при сопоставлении изображений для навигации роботов.</p>
+ </div>
+ <p class="citation">Источник: статьи Потапова (article_0061.md), Безобразова (article_0093.md), Пименова (article_0060.md).</p>
+ </section>
+
+ <!-- Глава 6 -->
+ <section id="ch6">
+ <h1>Глава 6. Робототехника и автоматное программирование</h1>
+
+ <h2 id="s6-1">6.1. Автоматное программирование (Шалыто)</h2>
+ <p>На 7-м семинаре А.А. Шалыто выступил с докладом «Автоматное программирование».</p>
+ <p><strong>Автоматное программирование</strong> — подход к разработке программных систем со сложным поведением, основанный на модели автоматизированного объекта управления (расширении конечного автомата), в качестве которого может выступать как произвольный физический объект, так и математическая функция.</p>
+ <p>Рассматриваются достоинства автоматного программирования как вручную, так и при генерации автоматов методами генетического программирования. Приводятся примеры использования данного подхода во встраиваемых системах.</p>
+ <div class="key-box">
+ <h4>Ключевая идея</h4>
+ <p>Объект управления моделируется как конечный автомат. Поведение системы описывается через состояния, переходы между состояниями и действия, выполняемые в каждом состоянии.</p>
+ </div>
+ <p class="citation">Источник: Шалыто А.А., 7-й семинар (article_0050.md).</p>
+
+ <h2 id="s6-2">6.2. Формальная модель конечного автомата</h2>
+ <p>Конечный автомат формально определяется как кортеж M = (Q, Σ, δ, q₀, F), где:</p>
+ <ul>
+ <li><strong>Q</strong> — конечное множество состояний;</li>
+ <li><strong>Σ</strong> — конечное множество входных символов (алфавит);</li>
+ <li><strong>δ</strong> — функция перехода: δ: Q × Σ → Q;</li>
+ <li><strong>q₀</strong> — начальное состояние (q₀ ∈ Q);</li>
+ <li><strong>F</strong> — множество конечных (принимающих) состояний (F ⊆ Q).</li>
+ </ul>
+ <p>Применение автоматного программирования позволяет разрабатывать системы со сложным поведением без необходимости явной настройки большого числа параметров — структура поведения вытекает из топологии автомата.</p>
+
+ <h2 id="s6-3">6.3. Координация группы роботов с подкреплением (Ерусалимчик, Каминка)</h2>
+ <p>Дан Ерусалимчик и Галь Каминка (университет Бар-Илан, Израиль) разработали подход обучения с подкреплением для выбора алгоритма координации группы автономных роботов. Работа выполнялась в рамках магистерской диссертации и публиковалась на конференциях IAS-10, AAMAS-09, ALA-09 и ICRA-10.</p>
+ <p>Подход не только демонстрирует хорошие результаты экспериментов, но и аналитически обоснован.</p>
+ <h3>Индекс Эффективности (EI)</h3>
+ <div class="code-block">
+EI = оценка скорости затрат ресурсов на координацию
+ </div>
+ <p>Функция награды (Индекс Эффективности, EI) помогает:</p>
+ <ul>
+ <li>сократить время и ресурсы, расходуемые на координацию;</li>
+ <li>максимизировать время между конфликтами, которые требуют координации.</li>
+ </ul>
+ <p>Эта награда вычисляется через оценку скорости, с которой методы координации тратят ресурсы.</p>
+ <h3>Экспериментальная проверка</h3>
+ <ul>
+ <li>Обучение с подкреплением без состояний — подходит для динамичных сред.</li>
+ <li>Реальные роботы AIBO и виртуальная среда симуляции роботов — задача фуражирования.</li>
+ <li>Дискретный симулятор — лабиринт с узкими коридорами, перемещение от одной цели к другой.</li>
+ <li>Виртуальные агенты в среде коммерческого симулятора высокой реалистичности VR-Forces.</li>
+ </ul>
+ <div class="key-box">
+ <h4>Вывод</h4>
+ <p>При определенных допущениях задача пространственной координации может моделироваться как игра в матричном виде, в которой выгоды для робота неизвестны заранее, но они могут быть получены с помощью Индекса Эффективности. Использование обучения с подкреплением приводит роботов к максимальному балансу.</p>
+ </div>
+ <p class="citation">Источник: Ерусалимчик Д., Каминка Г., «Обучение координации с подкреплением группы роботов» (article_0055.md).</p>
+
+ <h2 id="s6-4">6.4. Автоматное управление мобильными роботами</h2>
+ <p>На 8-м семинаре рассматривалось применение автоматного программирования для построения систем управления мобильными роботами. Содержание доклада:</p>
+ <ol>
+ <li>Применение автоматного программирования для построения систем управления мобильными роботами.</li>
+ <li>Система управления малоразмерным беспилотным вертолётом.</li>
+ <li>Разработка стенда для проверки алгоритмов автоматного управления мобильными роботами.</li>
+ <li>Применение генетических алгоритмов для синтеза систем управления мобильными роботами.</li>
+ </ol>
+ <p class="citation">Источник: 8-й семинар (article_0059.md).</p>
+
+ <h2 id="s6-5">6.5. Вывод главы</h2>
+ <div class="key-box">
+ <h4>Главный вывод</h4>
+ <p>Автоматное программирование позволяет разрабатывать системы со сложным поведением на основе модели конечного автомата. Координация групп роботов может быть оптимизирована через обучение с подкреплением с функцией награды (Индекс Эффективности), которая минимизирует затраты ресурсов на координацию.</p>
+ </div>
+ <p class="citation">Источник: статьи Шалыто (article_0050.md), Ерусалимчика и Каминки (article_0055.md), 8-й семинар (article_0059.md).</p>
+ </section>
+
+ <!-- Глава 7 -->
+ <section id="ch7">
+ <h1>Глава 7. Инструменты разработки ИИ</h1>
+
+ <p>Архив материалов содержит около 130 загружаемых файлов, организованных в несколько категорий. Полный индекс доступен в разделе «Индекс загружаемых файлов» (файлы семинаров).</p>
+
+ <h2 id="s7-1">7.1. Neuro Modeler — среда моделирования нейронных сетей</h2>
+ <p>Neuro Modeler — среда моделирования нейронных систем с произвольной структурной организацией (подробно в Главе 3, раздел 3.5). Доступные файлы:</p>
+ <table>
+ <tr><th>Файл</th><th>Описание</th></tr>
+ <tr><td>NeuroModeler_1.2.5.zip</td><td>Основная версия среды</td></tr>
+ <tr><td>NeuroModeler_1.2.5_exe.zip</td><td>Исполняемая версия среды</td></tr>
+ <tr><td>NeuroModeler_UserManual.pdf</td><td>Руководство пользователя</td></tr>
+ <tr><td>NeuroModelerSdk.exe</td><td>SDK для разработки</td></tr>
+ <tr><td>NeuroModelerTestProjects_1.0.zip</td><td>Тестовые проекты</td></tr>
+ </table>
+ <p class="citation">Источник: (категория «Нейросети и нейромоделирование»).</p>
+
+ <h2 id="s7-2">7.2. RDK — Robotics Development Kit</h2>
+ <p>RDK — набор инструментов для разработки роботизированных систем. Доступные документы:</p>
+ <table>
+ <tr><th>Файл</th><th>Описание</th></tr>
+ <tr><td>RDK.DocumentsList.Ru.doc</td><td>Перечень документов RDK</td></tr>
+ <tr><td>RDK.FileStructure.Ru.doc</td><td>Структура файлов RDK</td></tr>
+ <tr><td>RDK.Purposes.Ru.doc</td><td>Назначение RDK</td></tr>
+ <tr><td>RDK.QuickStart.ComponentDevelopment.Ru.doc</td><td>Быстрый старт разработки компонентов</td></tr>
+ <tr><td>RDK.QuickStart.UsingToProject.Ru.doc</td><td>Использование RDK в проекте</td></tr>
+ <tr><td>rdk_ailabru_srconly.rar</td><td>Исходные коды RDK</td></tr>
+ </table>
+ <p class="citation">Источник: (категория «RDK»).</p>
+
+ <h2 id="s7-3">7.3. NMSDK и MySDK</h2>
+ <p>Две библиотеки для разработки нейросетевых и кибернетических систем.</p>
+ <table>
+ <tr><th>Библиотека</th><th>Файлы</th></tr>
+ <tr><td>NMSDK</td><td>nmsdk.zip, NMSDK_ProgrammersGuide.pdf, nmsdk_ailabru_full.rar, nmsdk_ailabru_minimum.rar, nmsdk_ailabru_srconly.rar, nmsdk_demo_exe.zip, nmsdk_demo_source.zip</td></tr>
+ <tr><td>MySDK</td><td>MySDK3.zip, MySDK_ProgrammersGuide.pdf, mysdk_ailabru_full.rar, mysdk_ailabru_srconly.rar</td></tr>
+ </table>
+ <p>Варианты дистрибутивов: полная версия, минимальная, только исходные коды, демо-версии.</p>
+ <p class="citation">Источник: (категория «Нейросети и нейромоделирование», «RDK»).</p>
+
+ <h2 id="s7-4">7.4. Прочие инструменты и утилиты</h2>
+ <table>
+ <tr><th>Файл</th><th>Описание</th></tr>
+ <tr><td>NeuMarker.zip, NeuMarker_Setup.exe</td><td>Инструмент разметки данных</td></tr>
+ <tr><td>BaseAIConcept.doc</td><td>Концепция базового ИИ</td></tr>
+ <tr><td>MDL_book.pdf</td><td>Книга по принципу минимальной длины описания</td></tr>
+ <tr><td>Shalyto_AutomatProg.ppt</td><td>Презентация по автоматному программированию</td></tr>
+ <tr><td>solomatin_nonmathemac.ppt</td><td>Презентация Соломатина</td></tr>
+ <tr><td>SeminarIntro.ppt</td><td>Вступительная презентация семинаров</td></tr>
+ <tr><td>webinarAI-29-UAI.exe</td><td>Вебинар по универсальному искусственному интеллекту</td></tr>
+ </table>
+ <p class="citation">Источник: (категория «Семинарные и веб materials», «Документация и концепции ИИ»).</p>
+
+ <h2 id="s7-5">7.5. Математические и бионевроподобные модели</h2>
+ <table>
+ <tr><th>Файл</th><th>Описание</th></tr>
+ <tr><td>bakhromanov_modeling_biological_neuron.pdf</td><td>Моделирование биологического нейрона (Бахшиев, Романов)</td></tr>
+ <tr><td>Bakhshiev_NeuronLifeModeling.pdf</td><td>Моделирование жизни нейрона (Бахшиев)</td></tr>
+ <tr><td>BakhshievMemoryModelStructure.pdf</td><td>Структура модели памяти (Бахшиев)</td></tr>
+ <tr><td>BakhshievRomanov_spb_2009.pdf</td><td>Доклад Бахшиева и Романова (2009)</td></tr>
+ <tr><td>BakhshievSlizunGundelakh_NeuronModelsOverview.pdf</td><td>Обзор моделей нейронов (Бахшиев, Слизун, Гунделах)</td></tr>
+ <tr><td>NeuronActivityModel.pdf</td><td>Модель активности нейрона</td></tr>
+ <tr><td>NeuronLife.zip</td><td>Модель жизни нейрона</td></tr>
+ <tr><td>RomanovSP_IonPipePropertyModeling.pdf</td><td>Модель ионных каналов (Романов)</td></tr>
+ <tr><td>RomanovSP_Report2010-03-11.pdf</td><td>Доклад Романова (2010)</td></tr>
+ <tr><td>Redozubov_BrainModel.doc</td><td>Модель мозга (Редозубов)</td></tr>
+ </table>
+ <p class="citation">Источник: (категория «Нейросети и нейромоделирование»).</p>
+
+ <h2 id="s7-6">7.6. Семинарные материалы (аудио и презентации)</h2>
+ <p>Архив содержит материалы 46 семинаров :</p>
+ <ul>
+ <li><strong>Аудиозаписи (MP3/WMA):</strong> семинары 1-46, включая выступления Потапова, Бахшиева, Ляховецкого, Редозубова, Александрова, Шалыто и других авторов.</li>
+ <li><strong>Презентации (PPT/PPTX):</strong> семинары 8-46, включая материалы по автоматному программированию, когнитивным системам, глубинному обучению, АГИ, машинному зрению.</li>
+ </ul>
+ <p>Примеры файлов:<br>
+ seminarAI_1_Potapov.mp3, seminarAI_2_Anisimov.mp3, seminarAI_5_Lyakhovetskii.mp3,<br>
+ seminarAI_8_presentation_shalito.zip, seminarAI_9_potapov.mp3,<br>
+ seminarAI_24_CogSysRob.ppt, seminarAI_25_Aleksandrov.pptx,<br>
+ seminarAI_33_DeepL.ppt, seminarAI_34_AGI.ppt, seminarAI_46_mem_neur.pptx.</p>
+ <p class="citation">Источник: (категория «Семинарные материалы»).</p>
+
+ <h2 id="s7-7">7.7. Статистика по типам файлов</h2>
+ <table>
+ <tr><th>Тип файла</th><td>Количество</td></tr>
+ <tr><td>PDF</td><td>~25 файлов</td></tr>
+ <tr><td>PPT/PPTX</td><td>~25 файлов</td></tr>
+ <tr><td>WMA</td><td>~20 файлов</td></tr>
+ <tr><td>MP3</td><td>~9 файлов</td></tr>
+ <tr><td>ZIP/RAR</td><td>~15 файлов</td></tr>
+ <tr><td>DOC</td><td>~8 файлов</td></tr>
+ <tr><td>EXE</td><td>2 файла</td></tr>
+ </table>
+ <p class="citation">Источник: архив первоисточников</p>
+
+ <h2 id="s7-8">7.8. Вывод главы</h2>
+ <div class="key-box">
+ <h4>Главный вывод</h4>
+ <p>Архив материалов предоставляет широкий набор инструментов для разработки ИИ: от среды моделирования нейросетей Neuro Modeler и библиотек NMSDK/MySDK до набора инструментов робототехники RDK и семинарных материалов 46 встреч. Все инструменты доступны для скачивания из репозитория.</p>
+ </div>
+ <p class="citation">Источник: архив первоисточников</p>
+ </section>
+
+ <!-- Глава 8 -->
+ <section id="ch8">
+ <h1>Глава 8. Философские и этические аспекты ИИ</h1>
+
+ <h2 id="s8-1">8.1. Лимиты картезианской парадигмы причинно-следственной связи (Неверов)</h2>
+ <p>Картезианская парадигма причинно-следственной связи считается её сторонниками единственной материалистической научной парадигмой, основой подлинно научной методологии. При этом не делается попыток выяснить пределы её применимости, полагается, что никаких пределов нет.</p>
+ <p>А.С. Неверов пытается показать, что картезианская парадигма «причинно-следственной связи» предполагает ограничения её научного, материалистического, объективного применения заведомо, в силу её самой.</p>
+ <p>Основной довод: в картезианской парадигме и «следствие и причина», и «связь» — это одно и то же, разные точки зрения на одно и то же. Однако в результате мы рассчитываем получить полную картезианскую модель — различить между собой «следствие», «причину» и «связь» следствия с причиной.</p>
+ <p>Получить полную картезианскую модель в рамках одной конкретной ПСС невозможно. Возможно получить что-нибудь одно: или «следствие» с «причиной», или «связь» между ними.</p>
+ <p>Таким образом, картезианская парадигма, претендуя быть научной, должна разделить две разные цели:</p>
+ <ul>
+ <li>установления фактов, явлений, событий;</li>
+ <li>установления закономерностей.</li>
+ </ul>
+ <p>Именно в разнице целей, обеспечить достижение которых должна научная парадигма, кроются лимиты картезианства.</p>
+ <p class="citation">Источник: Неверов А.С., «Лимиты картезианской парадигмы причинно-следственной связи» (article_0100.md, частично). Также в Главе 1, раздел 1.7.</p>
+
+ <h2 id="s8-2">8.2. Может ли машина мыслить?</h2>
+ <p>На 14-м семинаре А.С. Потапов выступил с докладом «Возможна ли алгоритмическая реализация интеллекта, и каковы ее ограничения». Обсуждались ключевые вопросы:</p>
+ <ul>
+ <li><strong>Хьюберт Дрейфус</strong> — «Алхимия и искусственный интеллект», «Чего не могут вычислительные машины». Верно ли его мнение?</li>
+ <li><strong>Роже Пенроуз</strong> — «Новый ум короля», «Тени разума». Насколько прав Пенроуз?</li>
+ <li><strong>Джон Сёрл</strong> — парадокс «Китайская комната»: манипуляция символами не равна пониманию. О чем говорит этот парадокс?</li>
+ <li><strong>Теорема Гёделя</strong> — накладывает ли она какие-то ограничения на возможности алгоритмического ИИ?</li>
+ <li>Нужна ли новая математика для создания ИИ?</li>
+ </ul>
+ <p class="citation">Источник: Потапов А.С., 14-й семинар (article_0075.md). Также в Главе 1, раздел 1.6.</p>
+
+ <h2 id="s8-3">8.3. Психические явления и мозг (Меклер)</h2>
+ <p>На 28-м семинаре А.А. Меклер выступил с докладом «Психические явления как отражение системных мозговых процессов». Подход к пониманию сознания через объективные нейрофизиологические механизмы.</p>
+ <p class="citation">Источник: Меклер А.А., 28-й семинар (article_0113.md).</p>
+
+ <h2 id="s8-4">8.4. Нарушения мышления (Чередникова)</h2>
+ <p>Информационная теория мышления Л.М. Веккера применима к пониманию нарушений при шизофрении и органических заболеваниях мозга — показывает границы когнитивной обработки информации.</p>
+ <p>Материалы семинаров 37 и 39 доступны в архиве:</p>
+ <ul>
+ <li>seminarAI_37_schizo.ppt — презентация семинара 37 (Чередникова)</li>
+ <li>seminarAI_39_schizo2.wma — аудиозапись семинара 39 (Чередникова)</li>
+ </ul>
+ <p class="citation">Источник: архив файлов семинаров (категория «Семинарные материалы»).</p>
+
+ <h2 id="s8-5">8.5. Миф теории информации (Соломатин)</h2>
+ <p>Критический анализ теории информации с позиций физиологии высшей нервной деятельности — теория информации не исчерпывает все аспекты обработки информации мозгом.</p>
+ <p>Материалы семинара 30 доступны в архиве:</p>
+ <ul>
+ <li>seminarAI_30_inform_myth.wma — аудиозапись семинара 30 (Соломатин)</li>
+ </ul>
+ <p class="citation">Источник: архив файлов семинаров (категория «Семинарные материалы»).</p>
+
+ <h2 id="s8-6">8.6. Специализация программ и интерпретативное поведение (Худобахшов)</h2>
+ <p>Материалы семинара 40 доступны в архиве:</p>
+ <ul>
+ <li>seminarAI_40_spec_ai.pdf — презентация семинара 40 (Худобахшов)</li>
+ </ul>
+ <p class="citation">Источник: архив файлов семинаров (категория «Семинарные материалы»).</p>
+
+ <h2 id="s8-7">8.7. Аффект, ошибки и конфликты (Четвериков)</h2>
+ <p>Материалы семинара 44 доступны в архиве:</p>
+ <ul>
+ <li>seminarAI_44_affect.pdf — презентация семинара 44 (Четвериков)</li>
+ </ul>
+ <p class="citation">Источник: архив файлов семинаров (категория «Семинарные материалы»).</p>
+
+ <h2 id="s8-8">8.8. Этика и ответственность в разработке ИИ</h2>
+ <p>Разработка интеллектуальных систем несет этическую ответственность перед обществом. Ключевые вопросы:</p>
+ <ul>
+ <li>Безопасность ИИ — как гарантировать, что система не причинит вред?</li>
+ <li>Выравнивание (alignment) — как обеспечить соответствие целей ИИ ценностям человека?</li>
+ <li>Ответственность — кто несет ответственность за решения, принятые автономной системой?</li>
+ <li>Прозрачность — можно ли объяснить решения нейросети?</li>
+ </ul>
+ <div class="key-box">
+ <h4>Этический кодекс разработчика ИИ</h4>
+ <ul>
+ <li>Система должна быть безопасной для людей и общества.</li>
+ <li>Цели системы должны быть понятны и согласованы с человеческими ценностями.</li>
+ <li>Решения системы должны быть объяснимы и аудируемы.</li>
+ <li>Разработчик несет ответственность за последствия применения системы.</li>
+ </ul>
+ </div>
+
+ <h2 id="s8-9">8.9. Вывод главы</h2>
+ <div class="key-box">
+ <h4>Главный вывод</h4>
+ <p>Философские основания ИИ требуют осознания лимитов картезианской парадигмы, ограничений алгоритмического интеллекта (Дрейфус, Пенроуз, Сёрл, Гёдель), связи психических явлений с мозговыми процессами (Меклер) и этической ответственности разработчиков. Теория информации не исчерпывает все аспекты обработки информации мозгом (Соломатин).</p>
+ </div>
+ <p class="citation">Источник: статьи Неверова (article_0100.md), Потапова (article_0075.md), Меклера (article_0113.md), файлы семинаров из архива.</p>
+ </section>
+
+ <!-- Заключение -->
+ <section id="conclusion">
+ <h1>Заключение</h1>
+ <p>Искусственный интеллект — область на стыке математики, информатики, нейробиологии и философии. Настоящий учебник даёт систематическое представление о её теоретических основах, опираясь на накопленный в архиве материал.</p>
+ <p>Главный вывод: принципиально новых идей в ИИ не появлялось давно, и для прорыва нужна новая теория построения сложных систем. Архив первоисточников, хранящийся в этом репозитории, предоставляет материал для дальнейших исследований и создания новых подходов к ИИ.</p>
+ <p>Учебник распространяется открыто и предназначен для студентов, исследователей и разработчиков, которые хотят создавать новое в области ИИ.</p>
+ </section>
+
+ <!-- Список литературы -->
+ <section id="references">
+ <h1>Список литературы</h1>
+ <p>Ниже приведены первоисточники, использованные при составлении учебника. Полные тексты статей хранятся в разделе «Архив первоисточников» этого репозитория (раздел «Архив первоисточников» этого репозитория).</p>
+ <div class="reference-item">Потапов А.С. Современные тенденции и перспективы области искусственного интеллекта. </div>
+ <div class="reference-item">Потапов А.С. Возможна ли алгоритмическая реализация интеллекта, и каковы её ограничения. </div>
+ <div class="reference-item">Бахшиев А.В., Романов С.П. Математическое моделирование процессов преобразования импульсных потоков в естественном нейроне.  (частично)</div>
+ <div class="reference-item">Бахшиев А. Pattern processing of information systems using prospects for compound objects recognition. // </div>
+ <div class="reference-item">Бахшиев А.В., Слизун, Гунделах. Обзор существующих моделей нейронов.  (частично)</div>
+ <div class="reference-item">Ляховецкий В.А. Кратковременная память человека. </div>
+ <div class="reference-item">Ляховецкий В.А. Модели заучивания пространственной информации при воспроизведении и узнавании. </div>
+ <div class="reference-item">Соломатин В.Ф. Разработка структур ассоциативной памяти на основе анализа аналогии между свойствами голограмм и свойствами следов памяти в мозгу. </div>
+ <div class="reference-item">Неверов А.С. Набросок модели Фрейда-Юнга.  (частично)</div>
+ <div class="reference-item">Неверов А.С. Лимиты картезианской парадигмы причинно-следственной связи.  (частично)</div>
+ <div class="reference-item">Неверов А.С. Заметки к докладу «Особенности активной среды». // </div>
+ <div class="reference-item">Неверов А.С. Простая память: сложная система с дифференцированной информацией.  (частично)</div>
+ <div class="reference-item">Шалыто А.А. Автоматное программирование. </div>
+ <div class="reference-item">Ерусалимчик Д., Каминка Г. Обучение координации с подкреплением группы роботов на основе измерения скорости затрат ресурсов. // </div>
+ <div class="reference-item">Редозубов А. Информационная модель волновой активности мозга. Механизм распределённой голографической памяти в волновых нейронных сетях. </div>
+ <div class="reference-item">Александров В.В. От машины Тьюринга к самовоспроизводящимся автоматам Гёте. </div>
+ <div class="reference-item">Станкевич Л.А. Искусственные когнитивные системы в робототехнике. </div>
+ <div class="reference-item">Анисимов В. Эволюция биологических систем и проблема построения «сильного» ИИ. </div>
+ <div class="reference-item">Меклер А.А. Психические явления как отражение системных мозговых процессов. </div>
+ <div class="reference-item">Безобразов М.В. Формализация алгоритма сравнения образов в рамках Теории разумных систем.  (частично)</div>
+ <div class="reference-item">Пименов В.Ю. Методика повышения быстродействия сопоставления изображений. </div>
+ <div class="reference-item">Архив загружаемых файлов. — ~130 файлов: презентации, аудиозаписи, архивы, документация.</div>
+ <div class="reference-item">Wiki проекта.</div>
+ <p style="font-size:0.82em; color:var(--text-muted); margin-top:1.2rem; font-family:var(--font-sans);">Примечание: статьи с пометкой «(частично)» доступны в репозитории не полностью из-за ограничений сервера репозитория при постраничной загрузке. Полные версии можно запросить у авторов или найти на оригинальном сайте.</p>
+ </section>
+
+ <!-- Контрольные вопросы -->
+ <section id="questions">
+ <h1>Контрольные вопросы</h1>
+
+ <div class="question-box">
+ <h4>Глава 1. Теоретические основы ИИ</h4>
+ <ol>
+ <li>В чём Принципальное различие между символьным и связистским подходами к ИИ?</li>
+ <li>Чем «слабый» ИИ отличается от «сильного»? Почему на сегодня созданы только системы слабого ИИ?</li>
+ <li>Почему, по мнению авторов семинаров , новые идеи в ИИ не появлялись давно?</li>
+ </ol>
+ </div>
+
+ <div class="question-box">
+ <h4>Глава 2. Биологические нейроны и их модели</h4>
+ <ol>
+ <li>Запишите формулу модели нейрона Маккаллока — Питтс. Что означает каждый символ?</li>
+ <li>Каковы основные ограничения бинарной модели активации?</li>
+ <li>В чём отличие модели импульсных потоков Бахшиева и Романова от классических моделей нейронов?</li>
+ <li>Какие основные свойства имеет нейрон в модели «выживания нейрона»?</li>
+ </ol>
+ </div>
+
+ <div class="question-box">
+ <h4>Глава 3. Нейронные сети и архитектуры памяти</h4>
+ <ol>
+ <li>Опишите три уровня многоуровневой модели памяти Бахшиева.</li>
+ <li>Чем отличаются когнитивистский, эмерджентный и гибридный подходы к когнитивным системам?</li>
+ <li>Какие принципы построения «сильного» ИИ выделяет Анисимов?</li>
+ </ol>
+ </div>
+
+ <div class="question-box">
+ <h4>Глава 4. Обучение, память и ассоциации</h4>
+ <ol>
+ <li>Чем отличается кодирование движений правой и левой руки по исследованиям Ляховецкого?</li>
+ <li>В чём суть голограммной аналогии в модели ассоциативной памяти Соломатина?</li>
+ <li>Какие четыре дифференцированные психические функции выделяет Юнг?</li>
+ </ol>
+ </div>
+
+ <div class="question-box">
+ <h4>Глава 5. Распознавание образов и компьютерное зрение</h4>
+ <ol>
+ <li>Запишите формулу близости элементов Безобразова. Что означает каждый член формулы?</li>
+ <li>Что такое принцип минимальной длины описания (MDL) и как он применяется в компьютерном зрении?</li>
+ <li>В чём суть модели зрительного внимания Пименова?</li>
+ </ol>
+ </div>
+
+ <div class="question-box">
+ <h4>Глава 6. Робототехника и автоматное программирование</h4>
+ <ol>
+ <li>В чём суть автоматного программирования по Шалыто?</li>
+ <li>Как работает Индекс Эффективности (EI) в методе координации роботов Ерусалимчика и Каминки?</li>
+ </ol>
+ </div>
+
+ <div class="question-box">
+ <h4>Глава 7. Инструменты разработки</h4>
+ <ol>
+ <li>Какие основные компоненты входят в ядро Neuro Modeler?</li>
+ <li>Какие документы входят в комплект RDK?</li>
+ </ol>
+ </div>
+
+ <div class="question-box">
+ <h4>Глава 8. Философские и этические аспекты ИИ</h4>
+ <ol>
+ <li>В чём главное ограничение картезианской парадигмы причинно-следственной связи по Неверову?</li>
+ <li>В чём суть парадокса «Китайская комната» Сёрла?</li>
+ <li>Почему теория информации не исчерпывает все аспекты обработки информации мозгом по Соломатину?</li>
+ </ol>
+ </div>
+ </section>
+
+ <!-- Глоссарий -->
+ <section id="glossary">
+ <h1>Глоссарий терминов</h1>
+ <div class="glossary-item"><span class="term">Искусственный интеллект (ИИ)</span>область науки и техники, занимающаяся созданием систем, способных выполнять задачи, для которых обычно требуется человеческий интеллект.</div>
+ <div class="glossary-item"><span class="term">Нейрон</span>базовый функциональный элемент нервной системы, принимающий импульсные сигналы на входы и генерирующий импульсный сигнал на выход.</div>
+ <div class="glossary-item"><span class="term">Синапс</span>место контакта между нейронами, где происходит передача сигнала от одного нейрона к другому.</div>
+ <div class="glossary-item"><span class="term">Функция активации</span>нелинейная функция, применяемая к взвешенной сумме входов нейрона для получения его выхода.</div>
+ <div class="glossary-item"><span class="term">Модель Маккаллока — Питтс</span>первая формальная модель нейрона (1943), представляющая его как пороговый логический элемент.</div>
+ <div class="glossary-item"><span class="term">Ассоциативная память</span>тип памяти, в котором информация восстанавливается по частичным признакам (образцу), а не по точному адресу.</div>
+ <div class="glossary-item"><span class="term">Когнитивная архитектура</span>фреймворк или модель, описывающая структуру и функционирование интеллектуальной системы.</div>
+ <div class="glossary-item"><span class="term">Автоматное программирование</span>подход к разработке программных систем на основе модели конечного автомата.</div>
+ <div class="glossary-item"><span class="term">Индекс Эффективности (EI)</span>функция награды в методе обучения с подкреплением для координации групп роботов.</div>
+ <div class="glossary-item"><span class="term">Принцип минимальной длины описания (MDL)</span>принцип выбора лучшей модели как той, которая сжимает данные максимально эффективно.</div>
+ <div class="glossary-item"><span class="term">Картезианская парадигма</span>научная парадигма, основанная на причинно-следственной связи и дедуктивном методе «от общего к частному».</div>
+ <div class="glossary-item"><span class="term">Парадокс «Китайская комната»</span>мысленный эксперимент Джона Сёрла, показывающий, что манипуляция символами не равна семантическому пониманию.</div>
+ </section>
+
+ </main>
+
+ <aside class="right" id="rightSidebar">
+ <h3>В этом разделе</h3>
+ <ul id="sectionToc"></ul>
+
+ </aside>
+ </div>
+ </div>
+
+<script>
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+ html.setAttribute('data-theme', 'dark');
+ themeToggle.textContent = 'Светлая тема';
+} else {
+ html.removeAttribute('data-theme');
+ themeToggle.textContent = 'Тёмная тема';
+}
+themeToggle.addEventListener('click', () => {
+ const isDark = html.getAttribute('data-theme') === 'dark';
+ if (isDark) {
+ html.removeAttribute('data-theme');
+ localStorage.setItem('theme', 'light');
+ themeToggle.textContent = 'Тёмная тема';
+ } else {
+ html.setAttribute('data-theme', 'dark');
+ localStorage.setItem('theme', 'dark');
+ themeToggle.textContent = 'Светлая тема';
+ }
+});
+
+const sectionToc = document.getElementById('sectionToc');
+let tocIndex = 0;
+document.querySelectorAll('main.center h2').forEach(h2 => {
+ if (!h2.id) h2.id = 'toc-' + (++tocIndex);
+ const li = document.createElement('li');
+ const a = document.createElement('a');
+ a.href = '#' + h2.id;
+ a.textContent = h2.textContent;
+ li.appendChild(a);
+ sectionToc.appendChild(li);
+});
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('main.center section');
+function highlightNav() {
+ if (!navLinks.length) return;
+ let current = '';
+ sections.forEach(section => {
+ const top = section.offsetTop;
+ const height = section.offsetHeight;
+ if (window.pageYOffset >= top - 150 && window.pageYOffset < top + height - 150) {
+ current = section.getAttribute('id');
+ }
+ });
+ navLinks.forEach(link => {
+ link.classList.remove('active');
+ if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+ });
+}
+window.addEventListener('scroll', highlightNav);
+highlightNav();
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+ anchor.addEventListener('click', function(e) {
+ e.preventDefault();
+ const target = document.querySelector(this.getAttribute('href'));
+ if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+ });
+});
+</script>
+</body>
+</html>
