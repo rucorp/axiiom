@@ -204,8 +204,8 @@
         .result a:hover{text-decoration:underline}
         @media(max-width:1023px){.nav-links--desktop{display:none}.btn-nav{display:none}.nav-overlay{display:flex;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(7,7,10,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);z-index:1001;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s ease}.nav-overlay.open{opacity:1;pointer-events:auto}.nav-links{flex-direction:column;align-items:center;gap:0}.nav-links li{opacity:0;transform:translateY(20px);transition:opacity .4s ease,transform .4s ease}.nav-overlay.open .nav-links li{opacity:1;transform:translateY(0)}.nav-links a{font-size:1.4rem;letter-spacing:1px;padding:14px 0;display:block;color:var(--clr-heading)}.nav-links a::after{display:none}.nav-links a:hover{color:var(--clr-muted)}.nav-toggle{display:flex}.hero-bg-svg{max-width:500px}.stats{gap:24px}.footer-grid{grid-template-columns:1fr;gap:36px}}
     </style>
-    <link rel="stylesheet" href="/styles.css?v=20261107">
-    <link rel="stylesheet" href="/preloader.css?v=20261107">
+    <link rel="stylesheet" href="/styles.css?v=20261110">
+    <link rel="stylesheet" href="/preloader.css?v=20261110">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
 </head>
@@ -395,6 +395,21 @@
                 <p class="case-step"><span>Решение:</span> Мобильная касса + BigData + SmartData-отчёты.</p>
                 <p class="case-result">100+ точек, +22% выручка, закрытие смены 30→3 мин.</p>
                 <a href="/projects/" class="btn btn-card">Все кейсы →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="textbook" class="section">
+    <div class="container">
+        <div class="glass-card card-pad-lg reveal" style="display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between">
+            <div style="flex:1 1 520px;min-width:280px">
+                <p class="label" style="margin-bottom:8px">Учебник</p>
+                <h2 style="margin:0 0 10px">Искусственный интеллект: от нейрона к когнитивным системам</h2>
+                <p class="text" style="margin:0">Открытый учебник: восемь глав о моделях нейрона, памяти и обучении, распознавании образов, робототехнике и этике ИИ. С авторством, первоисточниками и глоссарием.</p>
+            </div>
+            <div style="flex:0 0 auto">
+                <a href="/textbook/" class="btn">Читать учебник →</a>
             </div>
         </div>
     </div>
@@ -720,11 +735,11 @@ document.getElementById('demoForm').addEventListener('submit', (e) => {
     setTimeout(function() { btn.textContent = 'Отправить заявку'; btn.style.background = ''; btn.disabled = false; closeModal(); }, 2000);
 });
 </script>
-<script src="/config.js?v=20261107"></script>
-<script src="/nav.js?v=20261107"></script>
+<script src="/config.js?v=20261110"></script>
+<script src="/nav.js?v=20261110"></script>
 <script>Nav.init({ cta: true, breadcrumbs: false });</script>
-<script src="/theme.js?v=20261107"></script>
-<script src="/metrika.js?v=20261107" defer></script>
+<script src="/theme.js?v=20261110"></script>
+<script src="/metrika.js?v=20261110" defer></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -732,7 +747,7 @@ document.getElementById('demoForm').addEventListener('submit', (e) => {
   gtag('js', new Date());
   gtag('config', 'G-HFS4BDGTV4');
 </script>
-<script src="/preloader.js?v=20261107"></script>
+<script src="/preloader.js?v=20261110"></script>
 <script>
 (function() {
   var t = document.getElementById('navToggle');

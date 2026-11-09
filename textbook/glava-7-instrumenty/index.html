@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+    <script>try{var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+    <title>Глава 7. Инструменты разработки ИИ | AXIIOM</title>
+    <meta name="description" content="RDK, Neuro Modeler, NMSDK и MySDK: среда моделирования нейронных сетей, SDK с исходными кодами и каталог семинарских материалов.">
+    <link rel="canonical" href="https://axiiom.ru/textbook/glava-7-instrumenty/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://axiiom.ru/textbook/glava-7-instrumenty/">
+    <meta property="og:title" content="Глава 7. Инструменты разработки ИИ | AXIIOM">
+    <meta property="og:description" content="RDK, Neuro Modeler, NMSDK и MySDK: среда моделирования нейронных сетей, SDK с исходными кодами и каталог семинарских материалов.">
+    <meta property="og:image" content="https://axiiom.ru/og/textbook/glava-7-instrumenty.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="AXIIOM">
+    <meta property="article:published_time" content="2026-06-10">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://axiiom.ru/textbook/glava-7-instrumenty/">
+    <meta name="twitter:title" content="Глава 7. Инструменты разработки ИИ | AXIIOM">
+    <meta name="twitter:description" content="RDK, Neuro Modeler, NMSDK и MySDK: среда моделирования нейронных сетей, SDK с исходными кодами и каталог семинарских материалов.">
+    <meta name="twitter:image" content="https://axiiom.ru/og/textbook/glava-7-instrumenty.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Глава 7. Инструменты разработки ИИ",
+      "description": "RDK, Neuro Modeler, NMSDK и MySDK: среда моделирования нейронных сетей, SDK с исходными кодами и каталог семинарских материалов.",
+      "datePublished": "2026-11-10",
+      "dateModified": "2026-11-10",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Organization",
+        "name": "AXIIOM",
+        "url": "https://axiiom.ru/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "AXIIOM",
+        "url": "https://axiiom.ru/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://axiiom.ru/textbook/glava-7-instrumenty/"
+      },
+      "image": "https://axiiom.ru/og/textbook/glava-7-instrumenty.png"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://axiiom.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Учебник по ИИ",
+          "item": "https://axiiom.ru/textbook/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Глава 7. Инструменты разработки ИИ",
+          "item": "https://axiiom.ru/textbook/glava-7-instrumenty/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+    <link rel="stylesheet" href="/styles.css?v=20261110">
+      <link rel="stylesheet" href="/preloader.css?v=20261110">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+
+<style>
+  .tb-code { background: var(--clr-surface, #14141c); border: 1px solid var(--clr-border, #2a2a36);
+             border-radius: 12px; padding: 16px 18px; margin: 18px 0; overflow-x: auto;
+             font: 500 .95rem/1.7 ui-monospace, SFMono-Regular, Menlo, monospace;
+             color: var(--clr-heading, #f2f2f7); }
+  .tb-source { font-size: .85rem; color: var(--clr-muted, #9a9aa8); border-left: 2px solid var(--clr-border, #2a2a36);
+               padding-left: 12px; margin: 18px 0; }
+  .tb-note { background: rgba(120, 120, 255, .08); border: 1px solid var(--clr-border, #2a2a36);
+             border-radius: 12px; padding: 16px 18px; margin: 22px 0; }
+  .tb-note h4 { margin: 0 0 8px; font-size: .95rem; letter-spacing: .04em; text-transform: uppercase;
+                color: var(--clr-muted, #9a9aa8); }
+  .article-wrap table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: .92rem; }
+  .article-wrap th, .article-wrap td { border: 1px solid var(--clr-border, #2a2a36);
+                                       padding: 9px 11px; text-align: left; vertical-align: top; }
+  .article-wrap th { background: rgba(255,255,255,.04); font-weight: 600; }
+  .tb-nav { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;
+            margin: 36px 0 0; padding-top: 20px; border-top: 1px solid var(--clr-border, #2a2a36); }
+  .tb-nav a { font-size: .92rem; }
+  .tb-toc { margin: 8px 0 0; padding-left: 20px; }
+  .tb-toc li { margin: 7px 0; }
+</style>
+</head>
+<body><noscript><div><img src="https://mc.yandex.ru/watch/109391253" style="position:absolute;left:-9999px" alt=""></div></noscript>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
+<div id="preloader">
+<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<900){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},900-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})();setTimeout(function(){var q=document.getElementById('preloader');if(q){q.classList.add('hidden');setTimeout(function(){q.classList.add('hidden-done')},500)}},2500)/*preloader-fallback*/</script>
+  <svg class="preloader-svg" viewBox="0 0 36 36" width="80" height="80">
+    <rect class="pr1" x="2" y="2" width="14" height="14" rx="2"/>
+    <rect class="pr2" x="20" y="2" width="14" height="14" rx="2"/>
+    <rect class="pr3" x="2" y="20" width="14" height="14" rx="2"/>
+    <rect class="pr4" x="20" y="20" width="14" height="14" rx="2"/>
+    <circle class="pc" cx="27" cy="27" r="3"/>
+  </svg>
+</div>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<main id="main">
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                    <rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/>
+                </svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"></div>
+</nav>
+<section class="article-page">
+    <div class="container">
+        <div class="article-wrap">
+            <span class="art-date">Учебник · 8 из 9</span>
+            <h1>Глава 7. Инструменты разработки ИИ</h1>
+            <div>
+<p>Архив материалов содержит около 130 загружаемых файлов, организованных в несколько категорий. Полный индекс доступен в разделе «Индекс загружаемых файлов» (файлы семинаров).</p>
+
+ <h2>7.1. Neuro Modeler — среда моделирования нейронных сетей</h2>
+ <p>Neuro Modeler — среда моделирования нейронных систем с произвольной структурной организацией (подробно в Главе 3, раздел 3.5). Доступные файлы:</p>
+ <table>
+ <tr><th>Файл</th><th>Описание</th></tr>
+ <tr><td>NeuroModeler_1.2.5.zip</td><td>Основная версия среды</td></tr>
+ <tr><td>NeuroModeler_1.2.5_exe.zip</td><td>Исполняемая версия среды</td></tr>
+ <tr><td>NeuroModeler_UserManual.pdf</td><td>Руководство пользователя</td></tr>
+ <tr><td>NeuroModelerSdk.exe</td><td>SDK для разработки</td></tr>
+ <tr><td>NeuroModelerTestProjects_1.0.zip</td><td>Тестовые проекты</td></tr>
+ </table>
+ <p class="tb-source">Источник: (категория «Нейросети и нейромоделирование»).</p>
+
+ <h2>7.2. RDK — Robotics Development Kit</h2>
+ <p>RDK — набор инструментов для разработки роботизированных систем. Доступные документы:</p>
+ <table>
+ <tr><th>Файл</th><th>Описание</th></tr>
+ <tr><td>RDK.DocumentsList.Ru.doc</td><td>Перечень документов RDK</td></tr>
+ <tr><td>RDK.FileStructure.Ru.doc</td><td>Структура файлов RDK</td></tr>
+ <tr><td>RDK.Purposes.Ru.doc</td><td>Назначение RDK</td></tr>
+ <tr><td>RDK.QuickStart.ComponentDevelopment.Ru.doc</td><td>Быстрый старт разработки компонентов</td></tr>
+ <tr><td>RDK.QuickStart.UsingToProject.Ru.doc</td><td>Использование RDK в проекте</td></tr>
+ <tr><td>rdk_ailabru_srconly.rar</td><td>Исходные коды RDK</td></tr>
+ </table>
+ <p class="tb-source">Источник: (категория «RDK»).</p>
+
+ <h2>7.3. NMSDK и MySDK</h2>
+ <p>Две библиотеки для разработки нейросетевых и кибернетических систем.</p>
+ <table>
+ <tr><th>Библиотека</th><th>Файлы</th></tr>
+ <tr><td>NMSDK</td><td>nmsdk.zip, NMSDK_ProgrammersGuide.pdf, nmsdk_ailabru_full.rar, nmsdk_ailabru_minimum.rar, nmsdk_ailabru_srconly.rar, nmsdk_demo_exe.zip, nmsdk_demo_source.zip</td></tr>
+ <tr><td>MySDK</td><td>MySDK3.zip, MySDK_ProgrammersGuide.pdf, mysdk_ailabru_full.rar, mysdk_ailabru_srconly.rar</td></tr>
+ </table>
+ <p>Варианты дистрибутивов: полная версия, минимальная, только исходные коды, демо-версии.</p>
+ <p class="tb-source">Источник: (категория «Нейросети и нейромоделирование», «RDK»).</p>
+
+ <h2>7.4. Прочие инструменты и утилиты</h2>
+ <table>
+ <tr><th>Файл</th><th>Описание</th></tr>
+ <tr><td>NeuMarker.zip, NeuMarker_Setup.exe</td><td>Инструмент разметки данных</td></tr>
+ <tr><td>BaseAIConcept.doc</td><td>Концепция базового ИИ</td></tr>
+ <tr><td>MDL_book.pdf</td><td>Книга по принципу минимальной длины описания</td></tr>
+ <tr><td>Shalyto_AutomatProg.ppt</td><td>Презентация по автоматному программированию</td></tr>
+ <tr><td>solomatin_nonmathemac.ppt</td><td>Презентация Соломатина</td></tr>
+ <tr><td>SeminarIntro.ppt</td><td>Вступительная презентация семинаров</td></tr>
+ <tr><td>webinarAI-29-UAI.exe</td><td>Вебинар по универсальному искусственному интеллекту</td></tr>
+ </table>
+ <p class="tb-source">Источник: (категория «Семинарные и веб materials», «Документация и концепции ИИ»).</p>
+
+ <h2>7.5. Математические и бионевроподобные модели</h2>
+ <table>
+ <tr><th>Файл</th><th>Описание</th></tr>
+ <tr><td>bakhromanov_modeling_biological_neuron.pdf</td><td>Моделирование биологического нейрона (Бахшиев, Романов)</td></tr>
+ <tr><td>Bakhshiev_NeuronLifeModeling.pdf</td><td>Моделирование жизни нейрона (Бахшиев)</td></tr>
+ <tr><td>BakhshievMemoryModelStructure.pdf</td><td>Структура модели памяти (Бахшиев)</td></tr>
+ <tr><td>BakhshievRomanov_spb_2009.pdf</td><td>Доклад Бахшиева и Романова (2009)</td></tr>
+ <tr><td>BakhshievSlizunGundelakh_NeuronModelsOverview.pdf</td><td>Обзор моделей нейронов (Бахшиев, Слизун, Гунделах)</td></tr>
+ <tr><td>NeuronActivityModel.pdf</td><td>Модель активности нейрона</td></tr>
+ <tr><td>NeuronLife.zip</td><td>Модель жизни нейрона</td></tr>
+ <tr><td>RomanovSP_IonPipePropertyModeling.pdf</td><td>Модель ионных каналов (Романов)</td></tr>
+ <tr><td>RomanovSP_Report2010-03-11.pdf</td><td>Доклад Романова (2010)</td></tr>
+ <tr><td>Redozubov_BrainModel.doc</td><td>Модель мозга (Редозубов)</td></tr>
+ </table>
+ <p class="tb-source">Источник: (категория «Нейросети и нейромоделирование»).</p>
+
+ <h2>7.6. Семинарные материалы (аудио и презентации)</h2>
+ <p>Архив содержит материалы 46 семинаров :</p>
+ <ul>
+ <li><strong>Аудиозаписи (MP3/WMA):</strong> семинары 1-46, включая выступления Потапова, Бахшиева, Ляховецкого, Редозубова, Александрова, Шалыто и других авторов.</li>
+ <li><strong>Презентации (PPT/PPTX):</strong> семинары 8-46, включая материалы по автоматному программированию, когнитивным системам, глубинному обучению, АГИ, машинному зрению.</li>
+ </ul>
+ <p>Примеры файлов:<br>
+ seminarAI_1_Potapov.mp3, seminarAI_2_Anisimov.mp3, seminarAI_5_Lyakhovetskii.mp3,<br>
+ seminarAI_8_presentation_shalito.zip, seminarAI_9_potapov.mp3,<br>
+ seminarAI_24_CogSysRob.ppt, seminarAI_25_Aleksandrov.pptx,<br>
+ seminarAI_33_DeepL.ppt, seminarAI_34_AGI.ppt, seminarAI_46_mem_neur.pptx.</p>
+ <p class="tb-source">Источник: (категория «Семинарные материалы»).</p>
+
+ <h2>7.7. Статистика по типам файлов</h2>
+ <table>
+ <tr><th>Тип файла</th><td>Количество</td></tr>
+ <tr><td>PDF</td><td>~25 файлов</td></tr>
+ <tr><td>PPT/PPTX</td><td>~25 файлов</td></tr>
+ <tr><td>WMA</td><td>~20 файлов</td></tr>
+ <tr><td>MP3</td><td>~9 файлов</td></tr>
+ <tr><td>ZIP/RAR</td><td>~15 файлов</td></tr>
+ <tr><td>DOC</td><td>~8 файлов</td></tr>
+ <tr><td>EXE</td><td>2 файла</td></tr>
+ </table>
+ <p class="tb-source">Источник: архив первоисточников</p>
+
+ <h2>7.8. Вывод главы</h2>
+ <div class="tb-note"><h4>Главный вывод</h4>
+ <p>Архив материалов предоставляет широкий набор инструментов для разработки ИИ: от среды моделирования нейросетей Neuro Modeler и библиотек NMSDK/MySDK до набора инструментов робототехники RDK и семинарных материалов 46 встреч. Все инструменты доступны для скачивания из репозитория.</p></div>
+ <p class="tb-source">Источник: архив первоисточников</p>
+            </div>
+            <div class="glass-card card-pad-md" style="margin-top:32px">
+                <p class="label">AXIIOM</p>
+                <h3 style="font-size:1.15rem;margin:8px 0 10px">Разрабатываем финтех-продукты и ИИ-решения</h3>
+                <p style="margin:0 0 14px">Сайты, мобильные приложения, платёжные интеграции и внедрение ИИ — от стратегии до поддержки.</p>
+                <p style="margin:0"><a class="link-accent" href="https://axiiom.ru/">Перейти на axiiom.ru →</a> &nbsp;·&nbsp; <a class="link-accent" href="https://axiiom.ru/#contact">Обсудить проект</a></p>
+            </div>
+            <nav class="tb-nav"><a href="/textbook/">Содержание</a><a href="/textbook/glava-6-robototehnika/">← Глава 6. Робототехника и автоматное программирование</a><a href="/textbook/glava-8-filosofiya-etika/">Глава 8. Философские и этические аспекты ИИ →</a></nav>
+        </div>
+    </div>
+</section>
+</main>
+<footer class="footer">
+    <div class="container">
+        <div id="footerCopy"></div>
+    </div>
+</footer>
+<script src="/config.js?v=20261110"></script>
+<script src="/nav.js?v=20261110"></script>
+<script>Nav.init({ cta: true, breadcrumbs: true });</script>
+<script src="/theme.js?v=20261110"></script>
+<script>
+(function() {
+
+    var header = document.getElementById('header');
+    window.addEventListener('scroll', function() {
+        header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+})();
+</script>
+<script src="/metrika.js?v=20261110" defer></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
+
+  <script src="/preloader.js?v=20261110"></script>
+
+<script>
+(function() {
+  var t = document.getElementById('navToggle');
+  var o = document.getElementById('navOverlay');
+  if (!t || !o) return;
+  t.addEventListener('click', function(e) {
+    e.stopPropagation();
+    o.classList.toggle('open');
+    t.classList.toggle('active');
+    document.body.style.overflow = o.classList.contains('open') ? 'hidden' : '';
+  });
+})();
+</script>
+</body>
+</html>

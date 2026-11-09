@@ -21,6 +21,7 @@ EXCLUDE_PARTS = (
     ".git", "node_modules", "docs/archive", "docs/source", "docs/additional",
     "docs/references", "docs/SRS-main", "_github",
     "docs/visualizations", "docs/feature-map-viz", "docs/feature-map",
+    "tools/textbook",  # снимок-исходник учебника: не контент, в индексе не нужен
 )
 EXCLUDE_FILES = {"test-report.html", "404.html", "feature-map.html"}  # служебные/noindex/визуализации
 

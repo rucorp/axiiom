@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+    <script>try{var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+    <title>Глава 5. Распознавание образов и зрение | AXIIOM</title>
+    <meta name="description" content="Байесовский критерий и принцип минимальной длины описания, теория разумных систем Безобразова, модель зрительного внимания и сети глубокого обучения.">
+    <link rel="canonical" href="https://axiiom.ru/textbook/glava-5-raspoznavanie-obrazov/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://axiiom.ru/textbook/glava-5-raspoznavanie-obrazov/">
+    <meta property="og:title" content="Глава 5. Распознавание образов и зрение | AXIIOM">
+    <meta property="og:description" content="Байесовский критерий и принцип минимальной длины описания, теория разумных систем Безобразова, модель зрительного внимания и сети глубокого обучения.">
+    <meta property="og:image" content="https://axiiom.ru/og/textbook/glava-5-raspoznavanie-obrazov.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="AXIIOM">
+    <meta property="article:published_time" content="2026-06-10">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://axiiom.ru/textbook/glava-5-raspoznavanie-obrazov/">
+    <meta name="twitter:title" content="Глава 5. Распознавание образов и зрение | AXIIOM">
+    <meta name="twitter:description" content="Байесовский критерий и принцип минимальной длины описания, теория разумных систем Безобразова, модель зрительного внимания и сети глубокого обучения.">
+    <meta name="twitter:image" content="https://axiiom.ru/og/textbook/glava-5-raspoznavanie-obrazov.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Глава 5. Распознавание образов и компьютерное зрение",
+      "description": "Байесовский критерий и принцип минимальной длины описания, теория разумных систем Безобразова, модель зрительного внимания и сети глубокого обучения.",
+      "datePublished": "2026-11-10",
+      "dateModified": "2026-11-10",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Organization",
+        "name": "AXIIOM",
+        "url": "https://axiiom.ru/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "AXIIOM",
+        "url": "https://axiiom.ru/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://axiiom.ru/textbook/glava-5-raspoznavanie-obrazov/"
+      },
+      "image": "https://axiiom.ru/og/textbook/glava-5-raspoznavanie-obrazov.png"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://axiiom.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Учебник по ИИ",
+          "item": "https://axiiom.ru/textbook/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Глава 5. Распознавание образов и компьютерное зрение",
+          "item": "https://axiiom.ru/textbook/glava-5-raspoznavanie-obrazov/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+    <link rel="stylesheet" href="/styles.css?v=20261110">
+      <link rel="stylesheet" href="/preloader.css?v=20261110">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+
+<style>
+  .tb-code { background: var(--clr-surface, #14141c); border: 1px solid var(--clr-border, #2a2a36);
+             border-radius: 12px; padding: 16px 18px; margin: 18px 0; overflow-x: auto;
+             font: 500 .95rem/1.7 ui-monospace, SFMono-Regular, Menlo, monospace;
+             color: var(--clr-heading, #f2f2f7); }
+  .tb-source { font-size: .85rem; color: var(--clr-muted, #9a9aa8); border-left: 2px solid var(--clr-border, #2a2a36);
+               padding-left: 12px; margin: 18px 0; }
+  .tb-note { background: rgba(120, 120, 255, .08); border: 1px solid var(--clr-border, #2a2a36);
+             border-radius: 12px; padding: 16px 18px; margin: 22px 0; }
+  .tb-note h4 { margin: 0 0 8px; font-size: .95rem; letter-spacing: .04em; text-transform: uppercase;
+                color: var(--clr-muted, #9a9aa8); }
+  .article-wrap table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: .92rem; }
+  .article-wrap th, .article-wrap td { border: 1px solid var(--clr-border, #2a2a36);
+                                       padding: 9px 11px; text-align: left; vertical-align: top; }
+  .article-wrap th { background: rgba(255,255,255,.04); font-weight: 600; }
+  .tb-nav { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;
+            margin: 36px 0 0; padding-top: 20px; border-top: 1px solid var(--clr-border, #2a2a36); }
+  .tb-nav a { font-size: .92rem; }
+  .tb-toc { margin: 8px 0 0; padding-left: 20px; }
+  .tb-toc li { margin: 7px 0; }
+</style>
+</head>
+<body><noscript><div><img src="https://mc.yandex.ru/watch/109391253" style="position:absolute;left:-9999px" alt=""></div></noscript>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
+<div id="preloader">
+<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<900){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},900-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})();setTimeout(function(){var q=document.getElementById('preloader');if(q){q.classList.add('hidden');setTimeout(function(){q.classList.add('hidden-done')},500)}},2500)/*preloader-fallback*/</script>
+  <svg class="preloader-svg" viewBox="0 0 36 36" width="80" height="80">
+    <rect class="pr1" x="2" y="2" width="14" height="14" rx="2"/>
+    <rect class="pr2" x="20" y="2" width="14" height="14" rx="2"/>
+    <rect class="pr3" x="2" y="20" width="14" height="14" rx="2"/>
+    <rect class="pr4" x="20" y="20" width="14" height="14" rx="2"/>
+    <circle class="pc" cx="27" cy="27" r="3"/>
+  </svg>
+</div>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<main id="main">
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                    <rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/>
+                </svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"></div>
+</nav>
+<section class="article-page">
+    <div class="container">
+        <div class="article-wrap">
+            <span class="art-date">Учебник · 6 из 9</span>
+            <h1>Глава 5. Распознавание образов и компьютерное зрение</h1>
+            <div>
+<h2>5.1. Проблема обучения в системах компьютерного зрения (Потапов)</h2>
+ <p>На 9-м семинаре А.С. Потапов выступил с докладом «Проблема обучения в системах компьютерного зрения». Содержание доклада:</p>
+ <ol>
+ <li>Тенденции в области компьютерного зрения по материалам симпозиума «Defense, security and sensing 2010».</li>
+ <li>Проблема обучения и индуктивного вывода.</li>
+ <li>Байесовский критерий выбора гипотез.</li>
+ <li>Принцип минимальной длины описания.</li>
+ <li>Проблема анализа изображений как пример задачи индуктивного вывода.</li>
+ <li>Проблема выбора представлений изображений в системах компьютерного зрения. «Сильное» обучение как автоматический выбор представлений.</li>
+ <li>Принцип репрезентационной минимальной длины описания.</li>
+ <li>Примеры обучения в задачах сегментации и выбора локальных признаков как адаптации к предметной области.</li>
+ </ol>
+ <p class="tb-source">Источник: Потапов А.С., 9-й семинар (article_0061.md).</p>
+
+ <h2>5.2. Байесовский критерий выбора гипотез</h2>
+ <p>Байесовский критерий используется для выбора наиболее вероятной гипотезы на основе данных. Это один из фундаментальных подходов к решению задачи обучения и индуктивного вывода в компьютерном зрении.</p>
+ <p class="tb-source">Источник: Потапов А.С., 9-й семинар (article_0061.md).</p>
+
+ <h2>5.3. Принцип минимальной длины описания (MDL)</h2>
+ <p>Лучшая модель — та, которая сжимает данные максимально. Принцип минимальной длины описания применяется к выбору представлений изображений в системах компьютерного зрения.</p>
+ <h3>Принцип репрезентационной минимальной длины описания</h3>
+ <p>Расширение принципа MDL на выбор представлений — автоматический подбор наилучшего способа кодирования изображений для задачи распознавания.</p>
+ <p class="tb-source">Источник: Потапов А.С., 9-й семинар (article_0061.md).</p>
+
+ <h2>5.4. Теория разумных систем: сравнение образов (Безобразов)</h2>
+ <p>М.В. Безобразов разработал оригинальный алгоритм сравнения образов в рамках «Теории разумных систем». Цель — создание подробного описания алгоритма функционирования любой разумной системы.</p>
+ <h3>Определение образа</h3>
+ <p>Образ — это подмножество некоего изначального множества. Каждый элемент множества Органа Чувств (ОЧ) имеет двоичную природу — либо активен, либо нет (0 или 1). Например, орган зрения человека — это множество около 180 млн клеток — нейронов сетчатки. Когда мы видим конкретный образ, активируется часть нейронов из этого множества.</p>
+ <h3>Мера близости элементов образа</h3>
+ <p>Каждый элемент множества Органа Чувств является отдельным образом. Мера сравнения двух образов основана на совокупной мере похожести (близости) активных элементов этих образов. Мера похожести элементов носит ассоциативный характер — более похожи элементы, которые чаще активировались вместе:</p>
+ <div class="tb-code">Б (Эт;Эл) = КОтл / КОт</div>
+ <p>Где:<br>
+ <strong>Б (Эт;Эл)</strong> — близость элемента Эт и Эл.<br>
+ <strong>КОтл</strong> — кол-во образов из памяти П, в которых присутствовали оба элемента Эт и Эл.<br>
+ <strong>КОт</strong> — количество образов, в которых присутствовал элемент Эт.</p>
+ <h3>Пример вычисления</h3>
+ <p>Множество органа чувств состоит из 3 элементов. В памяти содержится 4 образа:</p>
+ <table>
+ <tr><td>Образ 1</td><td>1</td><td>0</td><td>1</td></tr>
+ <tr><td>Образ 2</td><td>0</td><td>1</td><td>1</td></tr>
+ <tr><td>Образ 3</td><td>1</td><td>0</td><td>1</td></tr>
+ <tr><td>Образ 4</td><td>1</td><td>1</td><td>1</td></tr>
+ </table>
+ <p>Рассчитаем близость первого и третьего элемента Б(1,3). Всего в памяти 1 элемент активизировался 3 раза. Одновременно 1 и 3 элемент активизировались 3 раза.<br>
+ Б(1,3) = 3/3 = 1.</p>
+ <p>Матрица близости элементов:</p>
+ <table>
+ <tr><th>Элемент</th><th>1</th><th>2</th><th>3</th></tr>
+ <tr><td>1</td><td>1</td><td>0,33</td><td>1</td></tr>
+ <tr><td>2</td><td>0,5</td><td>1</td><td>1</td></tr>
+ <tr><td>3</td><td>0,75</td><td>0,5</td><td>1</td></tr>
+ </table>
+ <h3>Коэффициент сравнения образов</h3>
+ <p>Степень похожести образов выражается как средняя близость активных элементов в обоих образах:</p>
+ <div class="tb-code">С (От, Ол) = Σ Σ Б (а, г) / (Ат × Ол)</div>
+ <p>Где:<br>
+ <strong>С</strong> — мера сравнения и близости двух образов.<br>
+ <strong>От</strong> — образ Т.<br>
+ <strong>Ол</strong> — образ Л.<br>
+ <strong>Ат</strong> и <strong>Ал</strong> — количество активных элементов в образах От и Ол.<br>
+ <strong>Б (а, г)</strong> — близость элементов а и г.</p>
+ <p>Если в каждом образе по 10 активных элементов, суммируется 100 близостей. Потом сумма делится на 100. Коэффициент сравнения двух разных образов — средняя близость активных элементов данных образов.</p>
+ <p><strong>Свойства операции сравнения образов:</strong></p>
+ <ul>
+ <li>Операция вычисления похожести элементов образов не является коммутативной: Б (Эт;Эл) ≠ Б (Эл;Эт).</li>
+ <li>Операция вычисления похожести самих образов тоже не коммутативна: С (От, Ол) ≠ С (Ол, От).</li>
+ <li>Результаты вычисления полностью зависят от опыта субъекта — нет никакой априорной, изначальной метрики.</li>
+ <li>При работе с графическими образами важную роль играет выбор метода бинаризации изображений.</li>
+ <li>Качество распознавания зависит от количества образов в памяти и от сложности образов (размерности множества элементов образа).</li>
+ </ul>
+ <p class="tb-source">Источник: Безобразов М.В., «Формализация алгоритма сравнения образов в рамках Теории разумных систем» (article_0093.md, частично).</p>
+
+ <h2>5.5. Модель зрительного внимания (Пименов)</h2>
+ <p>На 8-м семинаре В.Ю. Пименов выступил с докладом «Методика повышения быстродействия сопоставления изображений с использованием модели системы зрительного внимания». Содержание доклада:</p>
+ <ol>
+ <li>Проблема сопоставления изображений в задачах навигации мобильных роботов.</li>
+ <li>Избыточность контрольных точек и методика ее устранения для повышения быстродействия.</li>
+ <li>Функция заметности ключевых точек на основе модели системы зрительного внимания.</li>
+ <li>Результаты экспериментальной проверки.</li>
+ </ol>
+ <p class="tb-source">Источник: Пименов В.Ю., 8-й семинар (article_0060.md).</p>
+
+ <h2>5.6. Вывод главы</h2>
+ <div class="tb-note"><h4>Главный вывод</h4>
+ <p>Распознавание образов в компьютерном зрении опирается на байесовский критерий выбора гипотез, принцип минимальной длины описания и теорию разумных систем Безобразова с некоммутативной мерой близости элементов. Модель зрительного внимания Пименова позволяет устранить избыточность контрольных точек при сопоставлении изображений для навигации роботов.</p></div>
+ <p class="tb-source">Источник: статьи Потапова (article_0061.md), Безобразова (article_0093.md), Пименова (article_0060.md).</p>
+            </div>
+            <div class="glass-card card-pad-md" style="margin-top:32px">
+                <p class="label">AXIIOM</p>
+                <h3 style="font-size:1.15rem;margin:8px 0 10px">Разрабатываем финтех-продукты и ИИ-решения</h3>
+                <p style="margin:0 0 14px">Сайты, мобильные приложения, платёжные интеграции и внедрение ИИ — от стратегии до поддержки.</p>
+                <p style="margin:0"><a class="link-accent" href="https://axiiom.ru/">Перейти на axiiom.ru →</a> &nbsp;·&nbsp; <a class="link-accent" href="https://axiiom.ru/#contact">Обсудить проект</a></p>
+            </div>
+            <nav class="tb-nav"><a href="/textbook/">Содержание</a><a href="/textbook/glava-4-obuchenie-pamyat/">← Глава 4. Обучение, память и ассоциации</a><a href="/textbook/glava-6-robototehnika/">Глава 6. Робототехника и автоматное программирование →</a></nav>
+        </div>
+    </div>
+</section>
+</main>
+<footer class="footer">
+    <div class="container">
+        <div id="footerCopy"></div>
+    </div>
+</footer>
+<script src="/config.js?v=20261110"></script>
+<script src="/nav.js?v=20261110"></script>
+<script>Nav.init({ cta: true, breadcrumbs: true });</script>
+<script src="/theme.js?v=20261110"></script>
+<script>
+(function() {
+
+    var header = document.getElementById('header');
+    window.addEventListener('scroll', function() {
+        header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+})();
+</script>
+<script src="/metrika.js?v=20261110" defer></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
+
+  <script src="/preloader.js?v=20261110"></script>
+
+<script>
+(function() {
+  var t = document.getElementById('navToggle');
+  var o = document.getElementById('navOverlay');
+  if (!t || !o) return;
+  t.addEventListener('click', function(e) {
+    e.stopPropagation();
+    o.classList.toggle('open');
+    t.classList.toggle('active');
+    document.body.style.overflow = o.classList.contains('open') ? 'hidden' : '';
+  });
+})();
+</script>
+</body>
+</html>

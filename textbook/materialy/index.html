@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+    <script>try{var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'');document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+    <title>Материалы: литература, вопросы, глоссарий | AXIIOM</title>
+    <meta name="description" content="Список первоисточников, контрольные вопросы по всем главам и глоссарий терминов: от нейрона и синапса до когнитивной архитектуры.">
+    <link rel="canonical" href="https://axiiom.ru/textbook/materialy/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://axiiom.ru/textbook/materialy/">
+    <meta property="og:title" content="Материалы: литература, вопросы, глоссарий | AXIIOM">
+    <meta property="og:description" content="Список первоисточников, контрольные вопросы по всем главам и глоссарий терминов: от нейрона и синапса до когнитивной архитектуры.">
+    <meta property="og:image" content="https://axiiom.ru/og/textbook/materialy.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="AXIIOM">
+    <meta property="article:published_time" content="2026-06-10">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://axiiom.ru/textbook/materialy/">
+    <meta name="twitter:title" content="Материалы: литература, вопросы, глоссарий | AXIIOM">
+    <meta name="twitter:description" content="Список первоисточников, контрольные вопросы по всем главам и глоссарий терминов: от нейрона и синапса до когнитивной архитектуры.">
+    <meta name="twitter:image" content="https://axiiom.ru/og/textbook/materialy.png">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Материалы: литература, вопросы, глоссарий",
+      "description": "Список первоисточников, контрольные вопросы по всем главам и глоссарий терминов: от нейрона и синапса до когнитивной архитектуры.",
+      "datePublished": "2026-11-10",
+      "dateModified": "2026-11-10",
+      "inLanguage": "ru",
+      "author": {
+        "@type": "Organization",
+        "name": "AXIIOM",
+        "url": "https://axiiom.ru/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "AXIIOM",
+        "url": "https://axiiom.ru/"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://axiiom.ru/textbook/materialy/"
+      },
+      "image": "https://axiiom.ru/og/textbook/materialy.png"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://axiiom.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Учебник по ИИ",
+          "item": "https://axiiom.ru/textbook/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Материалы: литература, вопросы, глоссарий",
+          "item": "https://axiiom.ru/textbook/materialy/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+    <link rel="stylesheet" href="/styles.css?v=20261110">
+      <link rel="stylesheet" href="/preloader.css?v=20261110">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+
+<style>
+  .tb-code { background: var(--clr-surface, #14141c); border: 1px solid var(--clr-border, #2a2a36);
+             border-radius: 12px; padding: 16px 18px; margin: 18px 0; overflow-x: auto;
+             font: 500 .95rem/1.7 ui-monospace, SFMono-Regular, Menlo, monospace;
+             color: var(--clr-heading, #f2f2f7); }
+  .tb-source { font-size: .85rem; color: var(--clr-muted, #9a9aa8); border-left: 2px solid var(--clr-border, #2a2a36);
+               padding-left: 12px; margin: 18px 0; }
+  .tb-note { background: rgba(120, 120, 255, .08); border: 1px solid var(--clr-border, #2a2a36);
+             border-radius: 12px; padding: 16px 18px; margin: 22px 0; }
+  .tb-note h4 { margin: 0 0 8px; font-size: .95rem; letter-spacing: .04em; text-transform: uppercase;
+                color: var(--clr-muted, #9a9aa8); }
+  .article-wrap table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: .92rem; }
+  .article-wrap th, .article-wrap td { border: 1px solid var(--clr-border, #2a2a36);
+                                       padding: 9px 11px; text-align: left; vertical-align: top; }
+  .article-wrap th { background: rgba(255,255,255,.04); font-weight: 600; }
+  .tb-nav { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;
+            margin: 36px 0 0; padding-top: 20px; border-top: 1px solid var(--clr-border, #2a2a36); }
+  .tb-nav a { font-size: .92rem; }
+  .tb-toc { margin: 8px 0 0; padding-left: 20px; }
+  .tb-toc li { margin: 7px 0; }
+</style>
+</head>
+<body><noscript><div><img src="https://mc.yandex.ru/watch/109391253" style="position:absolute;left:-9999px" alt=""></div></noscript>
+<a href="#main" class="skip-link">Перейти к содержанию</a>
+<div id="preloader">
+<script>(function(){var p=document.getElementById('preloader');if(!p)return;if(sessionStorage.getItem('_seen')){p.style.display='none';return}sessionStorage.setItem('_seen','1');var t=Date.now();p._start=t;setTimeout(function(){p.classList.add('_rdy')},500);window.addEventListener('load',function(){var e=Date.now()-t;if(e<900){setTimeout(function(){p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)},900-e)}else{p.classList.add('hidden');setTimeout(function(){p.classList.add('hidden-done')},500)}})})();setTimeout(function(){var q=document.getElementById('preloader');if(q){q.classList.add('hidden');setTimeout(function(){q.classList.add('hidden-done')},500)}},2500)/*preloader-fallback*/</script>
+  <svg class="preloader-svg" viewBox="0 0 36 36" width="80" height="80">
+    <rect class="pr1" x="2" y="2" width="14" height="14" rx="2"/>
+    <rect class="pr2" x="20" y="2" width="14" height="14" rx="2"/>
+    <rect class="pr3" x="2" y="20" width="14" height="14" rx="2"/>
+    <rect class="pr4" x="20" y="20" width="14" height="14" rx="2"/>
+    <circle class="pc" cx="27" cy="27" r="3"/>
+  </svg>
+</div>
+<div class="noise"></div>
+<div class="grid-overlay"></div>
+<div class="nav-overlay" id="navOverlay">
+    <ul class="nav-links" id="mobileNav"></ul>
+</div>
+<main id="main">
+<header class="header" id="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="logo">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                    <rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="20" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="2" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+                    <rect x="20" y="20" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="27" cy="27" r="3" fill="currentColor" opacity=".8"/>
+                </svg>
+                <span>AXIIOM</span>
+            </a>
+            <ul class="nav-links nav-links--desktop" id="desktopNav"></ul>
+            <div class="nav-actions">
+                <a href="/#contact" class="btn btn-nav" id="ctaBtn">Обсудить проект</a>
+                <button class="theme-btn" id="themeToggle" aria-label="Сменить тему">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+<nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container"></div>
+</nav>
+<section class="article-page">
+    <div class="container">
+        <div class="article-wrap">
+            <span class="art-date">Учебник · материалы</span>
+            <h1>Материалы: литература, вопросы, глоссарий</h1>
+            <div>
+<p>Ниже приведены первоисточники, использованные при составлении учебника. Полные тексты статей хранятся в разделе «Архив первоисточников» этого репозитория (раздел «Архив первоисточников» этого репозитория).</p>
+ <div class="reference-item">Потапов А.С. Современные тенденции и перспективы области искусственного интеллекта. </div>
+ <div class="reference-item">Потапов А.С. Возможна ли алгоритмическая реализация интеллекта, и каковы её ограничения. </div>
+ <div class="reference-item">Бахшиев А.В., Романов С.П. Математическое моделирование процессов преобразования импульсных потоков в естественном нейроне.  (частично)</div>
+ <div class="reference-item">Бахшиев А. Pattern processing of information systems using prospects for compound objects recognition. // </div>
+ <div class="reference-item">Бахшиев А.В., Слизун, Гунделах. Обзор существующих моделей нейронов.  (частично)</div>
+ <div class="reference-item">Ляховецкий В.А. Кратковременная память человека. </div>
+ <div class="reference-item">Ляховецкий В.А. Модели заучивания пространственной информации при воспроизведении и узнавании. </div>
+ <div class="reference-item">Соломатин В.Ф. Разработка структур ассоциативной памяти на основе анализа аналогии между свойствами голограмм и свойствами следов памяти в мозгу. </div>
+ <div class="reference-item">Неверов А.С. Набросок модели Фрейда-Юнга.  (частично)</div>
+ <div class="reference-item">Неверов А.С. Лимиты картезианской парадигмы причинно-следственной связи.  (частично)</div>
+ <div class="reference-item">Неверов А.С. Заметки к докладу «Особенности активной среды». // </div>
+ <div class="reference-item">Неверов А.С. Простая память: сложная система с дифференцированной информацией.  (частично)</div>
+ <div class="reference-item">Шалыто А.А. Автоматное программирование. </div>
+ <div class="reference-item">Ерусалимчик Д., Каминка Г. Обучение координации с подкреплением группы роботов на основе измерения скорости затрат ресурсов. // </div>
+ <div class="reference-item">Редозубов А. Информационная модель волновой активности мозга. Механизм распределённой голографической памяти в волновых нейронных сетях. </div>
+ <div class="reference-item">Александров В.В. От машины Тьюринга к самовоспроизводящимся автоматам Гёте. </div>
+ <div class="reference-item">Станкевич Л.А. Искусственные когнитивные системы в робототехнике. </div>
+ <div class="reference-item">Анисимов В. Эволюция биологических систем и проблема построения «сильного» ИИ. </div>
+ <div class="reference-item">Меклер А.А. Психические явления как отражение системных мозговых процессов. </div>
+ <div class="reference-item">Безобразов М.В. Формализация алгоритма сравнения образов в рамках Теории разумных систем.  (частично)</div>
+ <div class="reference-item">Пименов В.Ю. Методика повышения быстродействия сопоставления изображений. </div>
+ <div class="reference-item">Архив загружаемых файлов. — ~130 файлов: презентации, аудиозаписи, архивы, документация.</div>
+ <div class="reference-item">Wiki проекта.</div>
+ <p style="font-size:0.82em; color:var(--text-muted); margin-top:1.2rem; font-family:var(--font-sans);">Примечание: статьи с пометкой «(частично)» доступны в репозитории не полностью из-за ограничений сервера репозитория при постраничной загрузке. Полные версии можно запросить у авторов или найти на оригинальном сайте.</p>
+<h1>Контрольные вопросы</h1>
+
+ <div class="question-box">
+ <h4>Глава 1. Теоретические основы ИИ</h4>
+ <ol>
+ <li>В чём Принципальное различие между символьным и связистским подходами к ИИ?</li>
+ <li>Чем «слабый» ИИ отличается от «сильного»? Почему на сегодня созданы только системы слабого ИИ?</li>
+ <li>Почему, по мнению авторов семинаров , новые идеи в ИИ не появлялись давно?</li>
+ </ol>
+ </div>
+
+ <div class="question-box">
+ <h4>Глава 2. Биологические нейроны и их модели</h4>
+ <ol>
+ <li>Запишите формулу модели нейрона Маккаллока — Питтс. Что означает каждый символ?</li>
+ <li>Каковы основные ограничения бинарной модели активации?</li>
+ <li>В чём отличие модели импульсных потоков Бахшиева и Романова от классических моделей нейронов?</li>
+ <li>Какие основные свойства имеет нейрон в модели «выживания нейрона»?</li>
+ </ol>
+ </div>
+
+ <div class="question-box">
+ <h4>Глава 3. Нейронные сети и архитектуры памяти</h4>
+ <ol>
+ <li>Опишите три уровня многоуровневой модели памяти Бахшиева.</li>
+ <li>Чем отличаются когнитивистский, эмерджентный и гибридный подходы к когнитивным системам?</li>
+ <li>Какие принципы построения «сильного» ИИ выделяет Анисимов?</li>
+ </ol>
+ </div>
+
+ <div class="question-box">
+ <h4>Глава 4. Обучение, память и ассоциации</h4>
+ <ol>
+ <li>Чем отличается кодирование движений правой и левой руки по исследованиям Ляховецкого?</li>
+ <li>В чём суть голограммной аналогии в модели ассоциативной памяти Соломатина?</li>
+ <li>Какие четыре дифференцированные психические функции выделяет Юнг?</li>
+ </ol>
+ </div>
+
+ <div class="question-box">
+ <h4>Глава 5. Распознавание образов и компьютерное зрение</h4>
+ <ol>
+ <li>Запишите формулу близости элементов Безобразова. Что означает каждый член формулы?</li>
+ <li>Что такое принцип минимальной длины описания (MDL) и как он применяется в компьютерном зрении?</li>
+ <li>В чём суть модели зрительного внимания Пименова?</li>
+ </ol>
+ </div>
+
+ <div class="question-box">
+ <h4>Глава 6. Робототехника и автоматное программирование</h4>
+ <ol>
+ <li>В чём суть автоматного программирования по Шалыто?</li>
+ <li>Как работает Индекс Эффективности (EI) в методе координации роботов Ерусалимчика и Каминки?</li>
+ </ol>
+ </div>
+
+ <div class="question-box">
+ <h4>Глава 7. Инструменты разработки</h4>
+ <ol>
+ <li>Какие основные компоненты входят в ядро Neuro Modeler?</li>
+ <li>Какие документы входят в комплект RDK?</li>
+ </ol>
+ </div>
+
+ <div class="question-box">
+ <h4>Глава 8. Философские и этические аспекты ИИ</h4>
+ <ol>
+ <li>В чём главное ограничение картезианской парадигмы причинно-следственной связи по Неверову?</li>
+ <li>В чём суть парадокса «Китайская комната» Сёрла?</li>
+ <li>Почему теория информации не исчерпывает все аспекты обработки информации мозгом по Соломатину?</li>
+ </ol>
+ </div>
+<h1>Глоссарий терминов</h1>
+ <div class="glossary-item"><span class="term">Искусственный интеллект (ИИ)</span>область науки и техники, занимающаяся созданием систем, способных выполнять задачи, для которых обычно требуется человеческий интеллект.</div>
+ <div class="glossary-item"><span class="term">Нейрон</span>базовый функциональный элемент нервной системы, принимающий импульсные сигналы на входы и генерирующий импульсный сигнал на выход.</div>
+ <div class="glossary-item"><span class="term">Синапс</span>место контакта между нейронами, где происходит передача сигнала от одного нейрона к другому.</div>
+ <div class="glossary-item"><span class="term">Функция активации</span>нелинейная функция, применяемая к взвешенной сумме входов нейрона для получения его выхода.</div>
+ <div class="glossary-item"><span class="term">Модель Маккаллока — Питтс</span>первая формальная модель нейрона (1943), представляющая его как пороговый логический элемент.</div>
+ <div class="glossary-item"><span class="term">Ассоциативная память</span>тип памяти, в котором информация восстанавливается по частичным признакам (образцу), а не по точному адресу.</div>
+ <div class="glossary-item"><span class="term">Когнитивная архитектура</span>фреймворк или модель, описывающая структуру и функционирование интеллектуальной системы.</div>
+ <div class="glossary-item"><span class="term">Автоматное программирование</span>подход к разработке программных систем на основе модели конечного автомата.</div>
+ <div class="glossary-item"><span class="term">Индекс Эффективности (EI)</span>функция награды в методе обучения с подкреплением для координации групп роботов.</div>
+ <div class="glossary-item"><span class="term">Принцип минимальной длины описания (MDL)</span>принцип выбора лучшей модели как той, которая сжимает данные максимально эффективно.</div>
+ <div class="glossary-item"><span class="term">Картезианская парадигма</span>научная парадигма, основанная на причинно-следственной связи и дедуктивном методе «от общего к частному».</div>
+ <div class="glossary-item"><span class="term">Парадокс «Китайская комната»</span>мысленный эксперимент Джона Сёрла, показывающий, что манипуляция символами не равна семантическому пониманию.</div>
+            </div>
+            <div class="glass-card card-pad-md" style="margin-top:32px">
+                <p class="label">AXIIOM</p>
+                <h3 style="font-size:1.15rem;margin:8px 0 10px">Разрабатываем финтех-продукты и ИИ-решения</h3>
+                <p style="margin:0 0 14px">Сайты, мобильные приложения, платёжные интеграции и внедрение ИИ — от стратегии до поддержки.</p>
+                <p style="margin:0"><a class="link-accent" href="https://axiiom.ru/">Перейти на axiiom.ru →</a> &nbsp;·&nbsp; <a class="link-accent" href="https://axiiom.ru/#contact">Обсудить проект</a></p>
+            </div>
+            <nav class="tb-nav"><a href="/textbook/">Содержание</a><a href="/textbook/glava-8-filosofiya-etika/">← Глава 8</a></nav>
+        </div>
+    </div>
+</section>
+</main>
+<footer class="footer">
+    <div class="container">
+        <div id="footerCopy"></div>
+    </div>
+</footer>
+<script src="/config.js?v=20261110"></script>
+<script src="/nav.js?v=20261110"></script>
+<script>Nav.init({ cta: true, breadcrumbs: true });</script>
+<script src="/theme.js?v=20261110"></script>
+<script>
+(function() {
+
+    var header = document.getElementById('header');
+    window.addEventListener('scroll', function() {
+        header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+})();
+</script>
+<script src="/metrika.js?v=20261110" defer></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFS4BDGTV4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-HFS4BDGTV4');</script>
+
+  <script src="/preloader.js?v=20261110"></script>
+
+<script>
+(function() {
+  var t = document.getElementById('navToggle');
+  var o = document.getElementById('navOverlay');
+  if (!t || !o) return;
+  t.addEventListener('click', function(e) {
+    e.stopPropagation();
+    o.classList.toggle('open');
+    t.classList.toggle('active');
+    document.body.style.overflow = o.classList.contains('open') ? 'hidden' : '';
+  });
+})();
+</script>
+</body>
+</html>

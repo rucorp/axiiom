@@ -135,6 +135,26 @@
       ]
     },
     {
+      name: 'Учебник',
+      path: '/textbook/',
+      rich: true,
+      children: [
+        { header: true, name: 'Учебник по ИИ — 8 глав' },
+        { name: 'Введение', path: '/textbook/vvedenie/' },
+        { name: 'Глава 1. Теоретические основы', path: '/textbook/glava-1-teoreticheskie-osnovy/' },
+        { name: 'Глава 2. Нейроны и их модели', path: '/textbook/glava-2-biologicheskie-neirony/' },
+        { name: 'Глава 3. Сети и память', path: '/textbook/glava-3-neironnye-seti/' },
+        { name: 'Глава 4. Обучение и ассоциации', path: '/textbook/glava-4-obuchenie-pamyat/' },
+        { name: 'Глава 5. Распознавание образов', path: '/textbook/glava-5-raspoznavanie-obrazov/' },
+        { name: 'Глава 6. Робототехника', path: '/textbook/glava-6-robototehnika/' },
+        { name: 'Глава 7. Инструменты разработки', path: '/textbook/glava-7-instrumenty/' },
+        { name: 'Глава 8. Философия и этика', path: '/textbook/glava-8-filosofiya-etika/' },
+        { separator: true },
+        { name: 'Материалы и глоссарий →', path: '/textbook/materialy/' },
+        { name: 'Весь учебник →', path: '/textbook/' }
+      ]
+    },
+    {
       name: 'Блог',
       path: '/blog/',
       children: [
