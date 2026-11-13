@@ -3512,10 +3512,10 @@ input[type="color"].tool-input,
 /* Заголовок секции внутри страниц раздела */
 .help-lead {
     max-width: 760px;
+    margin: -4px auto 0;
     color: var(--clr-muted);
     font-size: 1.02rem;
     line-height: 1.7;
-    margin-top: -4px;
 }
 
 /* Таблица «задача → что получаете» */
