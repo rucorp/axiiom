@@ -3610,6 +3610,7 @@ input[type="color"].tool-input,
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
     margin-top: 40px;
+    text-align: left;
 }
 .help-scope > div { padding: 28px 26px; }
 .help-scope h3 {
@@ -3634,16 +3635,19 @@ input[type="color"].tool-input,
 .help-scope-no h3 i { color: var(--clr-faint); border: 1px solid var(--clr-border-hover); }
 .help-scope ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
 .help-scope li {
-    position: relative;
-    padding-left: 18px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    align-items: baseline;
+    padding-left: 0;
+    position: static;
     font-size: .9rem;
     line-height: 1.6;
     color: var(--clr-muted);
 }
 .help-scope li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
+    content: '—' / '';
+    position: static;
     color: var(--clr-faint);
 }
 
