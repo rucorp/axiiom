@@ -3544,6 +3544,7 @@ input[type="color"].tool-input,
 }
 .help-table td {
     padding: 16px 20px;
+    text-align: left;
     border-bottom: 1px solid var(--clr-border);
     color: var(--clr-muted);
     line-height: 1.6;
