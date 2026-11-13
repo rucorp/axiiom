@@ -826,6 +826,37 @@ def check_nav_anchors(site_dir):
     return checked, broken
 
 
+def check_styles_css_versions_help(site_dir):
+    """Кэш-бамп styles.css согласован внутри семейства help.
+
+    help/index.html однажды отстал от подстраниц (v=20261110 vs v=20261113),
+    из-за чего главная помощи держала устаревший кэш. Проверяем, что все
+    страницы help/* ссылаются на одну и ту же версию styles.css.
+    """
+    site_dir = Path(site_dir).resolve()
+    help_dir = site_dir / "help"
+    if not help_dir.is_dir():
+        return 0, []
+    versions = {}
+    for html in sorted(help_dir.glob("**/*.html")):
+        raw = html.read_text("utf-8", errors="replace")
+        found = re.findall(r'href=["\'][^"\']*?/styles\.css\?v=([^"\']+)["\']', raw)
+        rel = html.relative_to(site_dir).as_posix()
+        versions[rel] = found[0] if found else None
+    checked = len(versions)
+    present = {v for v in versions.values() if v}
+    if None in versions.values():
+        missing = [p for p, v in versions.items() if v is None]
+        return checked, [(p, "нет ссылки на styles.css?v=") for p in missing]
+    if len(present) > 1:
+        by_ver = {}
+        for p, v in versions.items():
+            by_ver.setdefault(v, []).append(p)
+        detail = "; ".join(f"v={v}: {', '.join(ps)}" for v, ps in sorted(by_ver.items()))
+        return checked, [("несогласованный кэш-бамп", detail)]
+    return checked, []
+
+
 def check_broken_links(content, page, all_pages):
     """Minimal broken link check: internal /path links against known pages."""
     known = set()
@@ -1277,6 +1308,22 @@ def main():
                            "status": "PASS",
                            "detail": f"{nav_checked} ссылок"})
     checks_map.setdefault("/", []).extend(nav_checks)
+
+    # Кэш-бамп styles.css внутри семейства help (help/*): версии должны совпадать
+    css_checked, css_broken = check_styles_css_versions_help(site_dir)
+    css_checks = []
+    if css_broken:
+        detail = "; ".join(f"{p} ({why})" for p, why in css_broken[:5])
+        css_checks.append({"feature": "help-styles-css-version",
+                           "label": "help: версии styles.css",
+                           "status": "FAIL",
+                           "detail": f"{len(css_broken)} расхождений: {detail}"})
+    else:
+        css_checks.append({"feature": "help-styles-css-version",
+                           "label": "help: версии styles.css",
+                           "status": "PASS",
+                           "detail": f"{css_checked} страниц, версия согласована"})
+    checks_map.setdefault("/", []).extend(css_checks)
 
     # Summary
     all_checks = [c for cl in checks_map.values() for c in cl]
